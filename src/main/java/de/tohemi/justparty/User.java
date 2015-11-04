@@ -1,4 +1,4 @@
-package de.tohemi.justparty;
+package main.java.de.tohemi.justparty;
 
 import java.util.Calendar;
 
