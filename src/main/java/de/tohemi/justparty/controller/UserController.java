@@ -1,4 +1,4 @@
-package main.java.de.tohemi.justparty;
+package main.java.de.tohemi.justparty.controller;
 
 /**
  * Created by Heiko on 04.11.2015.
