@@ -13,7 +13,8 @@ public class WelcomeController {
     @RequestMapping(method = RequestMethod.GET)
     public String printWelcomePage(ModelMap model)
     {
-        model.addAttribute("message","Hello Web!");
+        model.addAttribute("message","Herzlich Willkommen!");
+        model.addAttribute("discription","Hier entsteht 'justParty' für Sie!");
         return "welcomepage";
     }
 }
