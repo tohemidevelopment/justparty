@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!--
-TODO: chnage color of menu bar text to e.g. white or black because better to read or change green
+TODO: fill with content
 
 -->
 
@@ -15,11 +15,9 @@ TODO: chnage color of menu bar text to e.g. white or black because better to rea
   <head>
     <title>just Live, just Love, justParty</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Optional Bootstrap theme -->
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
   </head>
   <body>
 
@@ -33,7 +31,7 @@ TODO: chnage color of menu bar text to e.g. white or black because better to rea
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">LOGO</a>
+        <a class="navbar-brand" href="/" style="color: white;">LOGO</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -44,16 +42,16 @@ TODO: chnage color of menu bar text to e.g. white or black because better to rea
         </form>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Events <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">Events <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href='#'><span>Event Erstellen</span></a></li>
-              <li><a href='#'><span>Events Managen</span></a></li>
+              <li><a href='/createEvent'><span>Event Erstellen</span></a></li>
+              <li><a href='/manageEvent'><span>Events Managen</span></a></li>
               <li role="separator" class="divider"></li>
               <li><a href='#'><span>Einladungen zu Events</span></a></li>
             </ul>
           </li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Einstellungen <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href='#'><span>Profil anzeigen</span></a></li>
               <li><a href='#'><span>Ausloggen</span></a></li>
@@ -64,8 +62,8 @@ TODO: chnage color of menu bar text to e.g. white or black because better to rea
     </div><!-- /.container-fluid -->
   </nav>
 
-    <h2>${message}</h2>
-    <p>${description}</p>
+  <h2>${message}</h2>
+  <p>${description}</p>
 
   <!-- JS-Libraries requiered for Bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
