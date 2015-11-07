@@ -1,5 +1,6 @@
 package main.java.de.tohemi.justparty.controller;
 
+import main.java.de.tohemi.justparty.view_interface.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +15,7 @@ public class WelcomeController {
     public String printWelcomePage(ModelMap model)
     {
         model.addAttribute("message","Herzlich Willkommen!");
-        model.addAttribute("discription","Hier entsteht 'justParty' für Sie!");
-        return "welcomepage";
+        model.addAttribute("description","Hier entsteht 'justParty' f&uuml;r Sie!");
+        return LogicalViewNames.getNameWelcomePage();
     }
 }

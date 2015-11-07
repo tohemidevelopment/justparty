@@ -1,7 +1,7 @@
 package main.java.de.tohemi.justparty.controller;
 
-import main.java.de.tohemi.justparty.Event;
-import main.java.de.tohemi.justparty.User;
+import main.java.de.tohemi.justparty.datamodel.Event;
+import main.java.de.tohemi.justparty.datamodel.User;
 
 /**
  * Created by Heiko on 04.11.2015.
