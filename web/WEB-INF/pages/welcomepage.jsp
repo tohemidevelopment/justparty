@@ -54,7 +54,7 @@ TODO: fill with content
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href='#'><span>Profil anzeigen</span></a></li>
-              <li><a href='#'><span>Ausloggen</span></a></li>
+              <li><a href='#'><span>Log in</span></a></li>
             </ul>
           </li>
         </ul>
@@ -64,6 +64,70 @@ TODO: fill with content
 
   <h2>${message}</h2>
   <p>${description}</p>
+
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="img_chania.jpg" alt="Funktion 1">
+        <div class="carousel-caption">
+          <h3>justParty</h3>
+          <p>Die Plattform um alle deine Events zu Planen und zu organiesieren.</p>
+        </div>
+
+      </div>
+
+      <div class="item">
+        <img src="img_chania2.jpg" alt="Funktion 2">
+        <div class="carousel-caption">
+          <h3>Vielfältig</h3>
+          <p>Du hast die Möglichkeit verschiedenste Events zu erstellen.</p>
+        </div>
+
+      </div>
+
+      <div class="item">
+        <img src="img_flower.jpg" alt="Funktion 3">
+        <div class="carousel-caption">
+          <h3>Sozial</h3>
+          <p>Fast alle Einstellungen können du und deine Gäste zusammen treffen.</p>
+        </div>
+
+      </div>
+
+      <div class="item">
+        <img src="img_flower2.jpg" alt="Funktion 4">
+        <div class="carousel-caption">
+          <h3>Chania</h3>
+          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <p>Noch keinen Account?</p>
+  <a href="/register"><button value="Registrieren" >Registrieren</button></a>
+  <p>Schon einen Account?</p>
+  <a href="/login"><button value="Log In" >Log In</button></a>
 
   <!-- JS-Libraries requiered for Bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
