@@ -18,6 +18,16 @@ TODO: fill with content
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Optional Bootstrap theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <style>
+      img.mid {
+        display: block;
+        margin-left: auto;
+        margin-right: auto
+      }
+
+    </style>
+
   </head>
   <body>
 
@@ -54,16 +64,13 @@ TODO: fill with content
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href='#'><span>Profil anzeigen</span></a></li>
-              <li><a href='#'><span>Log in</span></a></li>
+              <li><a href='/login'><span>Log in</span></a></li>
             </ul>
           </li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-
-  <h2>${message}</h2>
-  <p>${description}</p>
 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -77,16 +84,16 @@ TODO: fill with content
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="img_chania.jpg" alt="Funktion 1">
+        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="justParty">
         <div class="carousel-caption">
           <h3>justParty</h3>
-          <p>Die Plattform um alle deine Events zu Planen und zu organiesieren.</p>
+          <p>Die Plattform um alle deine Events zu Planen und zu organisieren.</p>
         </div>
 
       </div>
 
       <div class="item">
-        <img src="img_chania2.jpg" alt="Funktion 2">
+        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="planen">
         <div class="carousel-caption">
           <h3>Vielfältig</h3>
           <p>Du hast die Möglichkeit verschiedenste Events zu erstellen.</p>
@@ -95,7 +102,7 @@ TODO: fill with content
       </div>
 
       <div class="item">
-        <img src="img_flower.jpg" alt="Funktion 3">
+        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="Funktion 3">
         <div class="carousel-caption">
           <h3>Sozial</h3>
           <p>Fast alle Einstellungen können du und deine Gäste zusammen treffen.</p>
@@ -104,10 +111,10 @@ TODO: fill with content
       </div>
 
       <div class="item">
-        <img src="img_flower2.jpg" alt="Funktion 4">
+        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="Funktion 4" style="">
         <div class="carousel-caption">
-          <h3>Chania</h3>
-          <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+          <h3>Einfach</h3>
+          <p>justParty ist einfach zu bedienen und hilft dir bei allen Entscheidungen</p>
         </div>
 
       </div>
@@ -124,11 +131,15 @@ TODO: fill with content
     </a>
   </div>
 
+  <h2 style="text-align: center;">${message}</h2>
+  <p style="text-align: center;">${description}</p>
+
+<div style="text-align: center;">
   <p>Noch keinen Account?</p>
   <a href="/register"><button value="Registrieren" >Registrieren</button></a>
   <p>Schon einen Account?</p>
   <a href="/login"><button value="Log In" >Log In</button></a>
-
+</div>
   <!-- JS-Libraries requiered for Bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
