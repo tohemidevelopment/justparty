@@ -9,6 +9,9 @@ public class EMail {
     public EMail(String email) {
         this.email = email;
         //TODO: validate email address
+        /*
+        Sollten wir da nicht einfach einen Checker anwenden? Weil ich wüsste nicht wozu eine eigene Klasse nötig ware..
+         */
     }
 
     @Override
