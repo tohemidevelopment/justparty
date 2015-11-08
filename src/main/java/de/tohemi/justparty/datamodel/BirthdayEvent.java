@@ -5,6 +5,7 @@ package main.java.de.tohemi.justparty.datamodel;
  */
 public class BirthdayEvent extends Event {
 
+    private String amazonWishlistLink;
     public BirthdayEvent(String name, User eventOwner) {
         super(name, eventOwner);
     }

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="192f2978-9284-426b-bc3b-77b90d009cea" name="Default" comment="removed classes EventOwner and Invitation">
-      <change type="DELETED" beforePath="C:\Users\Heiko\IdeaProjects\justParty\src\main\java\de\tohemi\justparty\datamodel\EventOwner.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Heiko\IdeaProjects\justParty\src\main\java\de\tohemi\justparty\datamodel\Invitation.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/Event.java" afterPath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/Event.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/User.java" afterPath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/User.java" />
+    <list default="true" id="192f2978-9284-426b-bc3b-77b90d009cea" name="Default" comment="edited BirthdayEvent and welcomepage.jsp">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/BirthdayEvent.java" afterPath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/BirthdayEvent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="justParty.iws" />
@@ -29,12 +27,129 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13315926">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JAVA/main.java.de.tohemi.justparty" pinned="false" current-in-tab="false">
+        <entry file="uml://JAVA/main.java.de.tohemi.justparty">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement>main.java.de.tohemi.justparty</OriginalElement>
+              <nodes>
+                <node x="872.0" y="701.0">main.java.de.tohemi.justparty.datamodel.User</node>
+                <node x="337.0" y="372.0">main.java.de.tohemi.justparty.datamodel.Event</node>
+                <node x="435.5" y="192.0">main.java.de.tohemi.justparty.datamodel.Person</node>
+                <node x="753.0" y="894.5">main.java.de.tohemi.justparty.controller.WelcomeController</node>
+                <node x="414.0" y="803.0">main.java.de.tohemi.justparty.datamodel.BirthdayEvent</node>
+                <node x="946.0" y="1225.5">main.java.de.tohemi.justparty.controller.UserController</node>
+                <node x="442.0" y="-8.5">main.java.de.tohemi.justparty.datamodel.EMail</node>
+                <node x="353.0" y="894.5">main.java.de.tohemi.justparty.controller.Controller</node>
+                <node x="639.5" y="1214.5">main.java.de.tohemi.justparty.controller.ManageEventController</node>
+                <node x="1223.0" y="460.0">main.java.de.tohemi.justparty.datamodel.ZipCode</node>
+                <node x="44.5" y="472.0">main.java.de.tohemi.justparty.controller.EventController</node>
+                <node x="73.0" y="654.5">main.java.de.tohemi.justparty.controller.DBController</node>
+                <node x="-0.5" y="1214.5">main.java.de.tohemi.justparty.controller.LoginController</node>
+                <node x="-37.5" y="915.0">main.java.de.tohemi.justparty.view_interface.LogicalViewNames</node>
+                <node x="319.5" y="1214.5">main.java.de.tohemi.justparty.controller.RegisterController</node>
+                <node x="760.5" y="439.0">main.java.de.tohemi.justparty.datamodel.Address</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="main.java.de.tohemi.justparty.datamodel.Event" target="main.java.de.tohemi.justparty.datamodel.User">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="main.java.de.tohemi.justparty.datamodel.Person" target="main.java.de.tohemi.justparty.datamodel.EMail">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="main.java.de.tohemi.justparty.controller.EventController" target="main.java.de.tohemi.justparty.datamodel.Event">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="main.java.de.tohemi.justparty.controller.EventController" target="main.java.de.tohemi.justparty.controller.DBController">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="main.java.de.tohemi.justparty.datamodel.User" target="main.java.de.tohemi.justparty.datamodel.Person">
+                  <point x="88.0" y="0.0" />
+                  <point x="1480.0" y="760.0" />
+                  <point x="1480.0" y="240.0" />
+                  <point x="84.5" y="0.0" />
+                </edge>
+                <edge source="main.java.de.tohemi.justparty.datamodel.Event" target="main.java.de.tohemi.justparty.datamodel.Address">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="main.java.de.tohemi.justparty.datamodel.User" target="main.java.de.tohemi.justparty.datamodel.Address">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="main.java.de.tohemi.justparty.datamodel.Address" target="main.java.de.tohemi.justparty.datamodel.ZipCode">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="main.java.de.tohemi.justparty.datamodel.BirthdayEvent" target="main.java.de.tohemi.justparty.datamodel.Event">
+                  <point x="0.0" y="-25.5" />
+                  <point x="0.0" y="148.0" />
+                </edge>
+                <edge source="main.java.de.tohemi.justparty.datamodel.Event" target="main.java.de.tohemi.justparty.datamodel.Person">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="0.9023166023166023" x="264.98202824133506" y="724.982028241335" />
+              <SelectedNodes />
+              <Categories>
+                <Category>Fields</Category>
+                <Category>Constructors</Category>
+                <Category>Methods</Category>
+                <Category>Properties</Category>
+                <Category>Inner Classes</Category>
+              </Categories>
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="welcomepage.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.68367344">
+              <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZipCode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/ZipCode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BirthdayEvent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/BirthdayEvent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+              <folding>
+                <element signature="e#231#232#0" expanded="true" />
+                <element signature="e#270#271#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -132,9 +247,10 @@
         <option value="$PROJECT_DIR$/web/WEB-INF/pages/register.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/RegisterController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/LoginController.java" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/Event.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/BirthdayEvent.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp" />
       </list>
     </option>
   </component>
@@ -224,11 +340,77 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="justParty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="justParty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WEB-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="justParty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="justParty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ressources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="justParty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="justParty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="justparty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view_interface" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -254,6 +436,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="justParty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="justParty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="justparty" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -266,7 +470,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$USER_HOME$/mysql-connector-java-5.1.37" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
@@ -722,7 +926,7 @@
       <workItem from="1446909076350" duration="1233000" />
       <workItem from="1446914618422" duration="3884000" />
       <workItem from="1446920589796" duration="1937000" />
-      <workItem from="1447006190833" duration="2217000" />
+      <workItem from="1447006190833" duration="4088000" />
     </task>
     <task id="LOCAL-00001" summary="add component-scan">
       <created>1446825995665</created>
@@ -790,11 +994,17 @@
       <option name="project" value="LOCAL" />
       <updated>1446917031677</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="removed classes EventOwner and Invitation">
+      <created>1447008429410</created>
+      <option name="number" value="00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1447008429410</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22191000" />
+    <option name="totallyTimeSpent" value="24062000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -802,7 +1012,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32843137" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11111111" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -854,7 +1064,8 @@
     <MESSAGE value="add createEvent and manageEvent in the menubar" />
     <MESSAGE value="change projekt" />
     <MESSAGE value="removed classes EventOwner and Invitation" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed classes EventOwner and Invitation" />
+    <MESSAGE value="edited BirthdayEvent and welcomepage.jsp" />
+    <option name="LAST_COMMIT_MESSAGE" value="edited BirthdayEvent and welcomepage.jsp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -915,6 +1126,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -930,6 +1144,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -945,6 +1160,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -960,6 +1178,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -975,6 +1194,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -990,6 +1212,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1005,6 +1228,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1013,13 +1237,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/BirthdayEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25211865">
-          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -1038,13 +1255,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/ZipCode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24460432">
@@ -1057,6 +1267,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="66" column="51" selection-start-line="66" selection-start-column="51" selection-end-line="66" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1064,6 +1275,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="65" column="91" selection-start-line="65" selection-start-column="91" selection-end-line="65" selection-end-column="91" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1086,6 +1298,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="18" column="53" selection-start-line="18" selection-start-column="53" selection-end-line="18" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1093,13 +1308,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.6675825">
-          <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1115,6 +1324,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2853717">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1132,6 +1342,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6522782">
           <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1139,6 +1352,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.81534773">
           <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1164,6 +1380,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5652174">
           <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1180,6 +1397,25 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="24" selection-start-line="8" selection-start-column="24" selection-end-line="8" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/BirthdayEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+          <folding>
+            <element signature="e#231#232#0" expanded="true" />
+            <element signature="e#270#271#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1202,10 +1438,100 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/User.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/ZipCode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13315926">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/main.java.de.tohemi.justparty">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>main.java.de.tohemi.justparty</OriginalElement>
+          <nodes>
+            <node x="872.0" y="701.0">main.java.de.tohemi.justparty.datamodel.User</node>
+            <node x="337.0" y="372.0">main.java.de.tohemi.justparty.datamodel.Event</node>
+            <node x="435.5" y="192.0">main.java.de.tohemi.justparty.datamodel.Person</node>
+            <node x="753.0" y="894.5">main.java.de.tohemi.justparty.controller.WelcomeController</node>
+            <node x="414.0" y="803.0">main.java.de.tohemi.justparty.datamodel.BirthdayEvent</node>
+            <node x="946.0" y="1225.5">main.java.de.tohemi.justparty.controller.UserController</node>
+            <node x="442.0" y="-8.5">main.java.de.tohemi.justparty.datamodel.EMail</node>
+            <node x="353.0" y="894.5">main.java.de.tohemi.justparty.controller.Controller</node>
+            <node x="639.5" y="1214.5">main.java.de.tohemi.justparty.controller.ManageEventController</node>
+            <node x="1223.0" y="460.0">main.java.de.tohemi.justparty.datamodel.ZipCode</node>
+            <node x="44.5" y="472.0">main.java.de.tohemi.justparty.controller.EventController</node>
+            <node x="73.0" y="654.5">main.java.de.tohemi.justparty.controller.DBController</node>
+            <node x="-0.5" y="1214.5">main.java.de.tohemi.justparty.controller.LoginController</node>
+            <node x="-37.5" y="915.0">main.java.de.tohemi.justparty.view_interface.LogicalViewNames</node>
+            <node x="319.5" y="1214.5">main.java.de.tohemi.justparty.controller.RegisterController</node>
+            <node x="760.5" y="439.0">main.java.de.tohemi.justparty.datamodel.Address</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="main.java.de.tohemi.justparty.datamodel.Event" target="main.java.de.tohemi.justparty.datamodel.User">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="main.java.de.tohemi.justparty.datamodel.Person" target="main.java.de.tohemi.justparty.datamodel.EMail">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="main.java.de.tohemi.justparty.controller.EventController" target="main.java.de.tohemi.justparty.datamodel.Event">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="main.java.de.tohemi.justparty.controller.EventController" target="main.java.de.tohemi.justparty.controller.DBController">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="main.java.de.tohemi.justparty.datamodel.User" target="main.java.de.tohemi.justparty.datamodel.Person">
+              <point x="88.0" y="0.0" />
+              <point x="1480.0" y="760.0" />
+              <point x="1480.0" y="240.0" />
+              <point x="84.5" y="0.0" />
+            </edge>
+            <edge source="main.java.de.tohemi.justparty.datamodel.Event" target="main.java.de.tohemi.justparty.datamodel.Address">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="main.java.de.tohemi.justparty.datamodel.User" target="main.java.de.tohemi.justparty.datamodel.Address">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="main.java.de.tohemi.justparty.datamodel.Address" target="main.java.de.tohemi.justparty.datamodel.ZipCode">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="main.java.de.tohemi.justparty.datamodel.BirthdayEvent" target="main.java.de.tohemi.justparty.datamodel.Event">
+              <point x="0.0" y="-25.5" />
+              <point x="0.0" y="148.0" />
+            </edge>
+            <edge source="main.java.de.tohemi.justparty.datamodel.Event" target="main.java.de.tohemi.justparty.datamodel.Person">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.9023166023166023" x="264.98202824133506" y="724.982028241335" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Constructors</Category>
+            <Category>Methods</Category>
+            <Category>Properties</Category>
+            <Category>Inner Classes</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.68367344">
+          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
           <folding />
         </state>
       </provider>

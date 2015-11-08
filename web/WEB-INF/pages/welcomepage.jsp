@@ -105,7 +105,7 @@ TODO: fill with content
         <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="Funktion 3">
         <div class="carousel-caption">
           <h3>Sozial</h3>
-          <p>Fast alle Einstellungen können du und deine Gäste zusammen treffen.</p>
+          <p>Fast alle Einstellungen können du und deine Gäste auf Wunsch gemeinsam treffen.</p>
         </div>
 
       </div>
