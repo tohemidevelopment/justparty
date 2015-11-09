@@ -15,3 +15,8 @@ nav{
 #navbar {
     background-color: #7FC7AF;
 }
+
+div.welcomepage#btns {
+    text-align: center;
+    margin-top: 20px;
+}

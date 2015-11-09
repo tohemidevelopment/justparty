@@ -20,6 +20,8 @@ public class WelcomeController {
         model.addAttribute(GeneralStrings.getAttTitle(),WelcomePageStrings.getTITLE());
         NavBarController.configureNavBar(model);
         model.addAttribute("description","Hier entsteht 'justParty' f&uuml;r Sie!");
+        model.addAttribute(GeneralStrings.getATT_REGITSTER_BTN(), GeneralStrings.getREGISTER_BTN());
+        model.addAttribute(GeneralStrings.getATT_LOGIN_BTN(), GeneralStrings.getLOGIN_BTN());
         return LogicalViewNames.getNameWelcomePage();
     }
 }

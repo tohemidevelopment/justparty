@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="192f2978-9284-426b-bc3b-77b90d009cea" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/GeneralStrings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/NavBarController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/NavBarStrings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/WelcomePageStrings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/GeneralStrings.java" afterPath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/GeneralStrings.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/WelcomeController.java" afterPath="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/WelcomeController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/justParty.iml" afterPath="$PROJECT_DIR$/justParty.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/res/default-theme/style.css" afterPath="$PROJECT_DIR$/web/res/default-theme/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp" afterPath="$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -36,7 +34,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/WelcomeController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+              <caret line="23" column="93" selection-start-line="23" selection-start-column="93" selection-end-line="23" selection-end-column="93" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -75,27 +73,36 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/GeneralStrings.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+              <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
               <folding>
-                <element signature="e#424#425#0" expanded="true" />
-                <element signature="e#455#456#0" expanded="true" />
-                <element signature="e#500#501#0" expanded="true" />
-                <element signature="e#535#536#0" expanded="true" />
-                <element signature="e#577#578#0" expanded="true" />
-                <element signature="e#609#610#0" expanded="true" />
-                <element signature="e#652#653#0" expanded="true" />
-                <element signature="e#685#686#0" expanded="true" />
+                <element signature="e#671#672#0" expanded="true" />
+                <element signature="e#702#703#0" expanded="true" />
+                <element signature="e#747#748#0" expanded="true" />
+                <element signature="e#782#783#0" expanded="true" />
+                <element signature="e#824#825#0" expanded="true" />
+                <element signature="e#856#857#0" expanded="true" />
+                <element signature="e#899#900#0" expanded="true" />
+                <element signature="e#932#933#0" expanded="true" />
+                <element signature="e#983#984#0" expanded="true" />
+                <element signature="e#1023#1024#0" expanded="true" />
+                <element signature="e#1069#1070#0" expanded="true" />
+                <element signature="e#1104#1105#0" expanded="true" />
+                <element signature="e#1151#1152#0" expanded="true" />
+                <element signature="e#1187#1188#0" expanded="true" />
+                <element signature="e#1230#1231#0" expanded="true" />
+                <element signature="e#1262#1263#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WelcomePageStrings.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WelcomePageStrings.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/WelcomePageStrings.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3109756">
-              <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
               <folding>
+                <element signature="e#339#340#0" expanded="true" />
                 <element signature="e#367#368#0" expanded="true" />
                 <element signature="e#407#408#0" expanded="true" />
                 <element signature="e#436#437#0" expanded="true" />
@@ -104,11 +111,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="welcomepage.jsp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="welcomepage.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5">
-              <caret line="52" column="84" selection-start-line="52" selection-start-column="67" selection-end-line="52" selection-end-column="84" />
+            <state vertical-scroll-proportion="0.2918455">
+              <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/res/default-theme/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -172,14 +189,14 @@
         <option value="$PROJECT_DIR$/web/WEB-INF/pages/createEvent.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/pages/register.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/pages/login.jsp" />
-        <option value="$PROJECT_DIR$/web/res/default-theme/style.css" />
         <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/NavBarAttributes.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/WelcomePageStrings.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/GeneralStrings.java" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/WelcomeController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/NavBarController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/NavBarStrings.java" />
+        <option value="$PROJECT_DIR$/web/res/default-theme/style.css" />
+        <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/WelcomeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/GeneralStrings.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp" />
       </list>
     </option>
   </component>
@@ -399,9 +416,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/jstl-1.2.jar!/" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -412,7 +429,11 @@
       <recent name="main.java.de.tohemi.justparty.viewinterface" />
       <recent name="de.tohemi.justparty" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\xce35l7\IdeaProjects\justparty\web\WEB-INF\lib" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\xce35l7\IdeaProjects\justparty\lib" />
       <recent name="C:\Users\xce35l7\IdeaProjects\justparty\web\res\default-theme" />
       <recent name="C:\Users\xce35l7\IdeaProjects\justparty\web\WEB-INF\pages" />
     </key>
@@ -934,7 +955,7 @@
       <workItem from="1446902876937" duration="3400000" />
       <workItem from="1446909076350" duration="1233000" />
       <workItem from="1446914618422" duration="2398000" />
-      <workItem from="1447056380896" duration="7190000" />
+      <workItem from="1447056380896" duration="9749000" />
     </task>
     <task id="LOCAL-00001" summary="add component-scan">
       <created>1446825995665</created>
@@ -1020,15 +1041,21 @@
       <option name="project" value="LOCAL" />
       <updated>1447059318423</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="start outsourcing String from View and Controller">
+      <created>1447063718804</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1447063718805</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23741000" />
+    <option name="totallyTimeSpent" value="26300000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1043,7 +1070,7 @@
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18123393" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18123393" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1085,7 +1112,8 @@
     <MESSAGE value="fix manageEventController" />
     <MESSAGE value="refactor directories" />
     <MESSAGE value="add resource mapping" />
-    <option name="LAST_COMMIT_MESSAGE" value="add resource mapping" />
+    <MESSAGE value="start outsourcing String from View and Controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="start outsourcing String from View and Controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1355,14 +1383,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1471,14 +1491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/res/default-theme/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/datamodel/BirthdayEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27642277">
@@ -1490,39 +1502,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/GeneralStrings.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.58739835">
+          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
           <folding>
-            <element signature="e#424#425#0" expanded="true" />
-            <element signature="e#455#456#0" expanded="true" />
-            <element signature="e#500#501#0" expanded="true" />
-            <element signature="e#535#536#0" expanded="true" />
-            <element signature="e#577#578#0" expanded="true" />
-            <element signature="e#609#610#0" expanded="true" />
-            <element signature="e#652#653#0" expanded="true" />
-            <element signature="e#685#686#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp">
+    <entry file="file://$PROJECT_DIR$/web/res/default-theme/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5">
-          <caret line="52" column="84" selection-start-line="52" selection-start-column="67" selection-end-line="52" selection-end-column="84" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/NavBarStrings.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/WelcomePageStrings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
           <folding>
-            <element signature="e#310#311#0" expanded="true" />
-            <element signature="e#343#344#0" expanded="true" />
-            <element signature="e#395#396#0" expanded="true" />
+            <element signature="e#339#340#0" expanded="true" />
+            <element signature="e#367#368#0" expanded="true" />
+            <element signature="e#407#408#0" expanded="true" />
             <element signature="e#436#437#0" expanded="true" />
           </folding>
         </state>
@@ -1531,7 +1536,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/controller/WelcomeController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <caret line="23" column="93" selection-start-line="23" selection-start-column="93" selection-end-line="23" selection-end-column="93" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1548,15 +1553,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/WelcomePageStrings.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/NavBarStrings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3109756">
-          <caret line="9" column="37" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
           <folding>
-            <element signature="e#367#368#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
+            <element signature="e#310#311#0" expanded="true" />
+            <element signature="e#343#344#0" expanded="true" />
+            <element signature="e#395#396#0" expanded="true" />
             <element signature="e#436#437#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/tohemi/justparty/view_interface/GeneralStrings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
+          <folding>
+            <element signature="e#671#672#0" expanded="true" />
+            <element signature="e#702#703#0" expanded="true" />
+            <element signature="e#747#748#0" expanded="true" />
+            <element signature="e#782#783#0" expanded="true" />
+            <element signature="e#824#825#0" expanded="true" />
+            <element signature="e#856#857#0" expanded="true" />
+            <element signature="e#899#900#0" expanded="true" />
+            <element signature="e#932#933#0" expanded="true" />
+            <element signature="e#983#984#0" expanded="true" />
+            <element signature="e#1023#1024#0" expanded="true" />
+            <element signature="e#1069#1070#0" expanded="true" />
+            <element signature="e#1104#1105#0" expanded="true" />
+            <element signature="e#1151#1152#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1230#1231#0" expanded="true" />
+            <element signature="e#1262#1263#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/pages/welcomepage.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2918455">
+          <caret line="8" column="64" selection-start-line="8" selection-start-column="64" selection-end-line="8" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1619,7 +1658,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
