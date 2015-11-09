@@ -24,6 +24,9 @@ public class WelcomeController extends Controller{
         model.addAttribute(GeneralStrings.getAttHeader(), WelcomePageStrings.getHEADER());
         model.addAttribute("description","Hier entsteht 'justParty' f&uuml;r Sie!");
         model.addAttribute(WelcomePageStrings.getATT_CAROUSEL_IMG1(), WelcomePageStrings.getCAROUSEL_IMG1());
+        model.addAttribute(WelcomePageStrings.getAttCarouselImg2(), WelcomePageStrings.getCarouselImg2());
+        model.addAttribute(WelcomePageStrings.getAttCarouselImg3(), WelcomePageStrings.getCarouselImg3());
+        model.addAttribute(WelcomePageStrings.getAttCarouselImg4(), WelcomePageStrings.getCarouselImg4());
         model.addAttribute(GeneralStrings.getATT_REGITSTER_BTN(), GeneralStrings.getREGISTER_BTN());
         model.addAttribute(GeneralStrings.getATT_LOGIN_BTN(), GeneralStrings.getLOGIN_BTN());
         return LogicalViewNames.getNameWelcomePage();

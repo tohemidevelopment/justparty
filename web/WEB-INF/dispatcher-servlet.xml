@@ -12,5 +12,5 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <mvc:resources mapping="/res/**" location="/res/default-theme/"/>
+    <!--<mvc:resources mapping="/res/**" location="/res/default-theme/"/>-->
 </beans>

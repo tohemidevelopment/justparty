@@ -138,8 +138,8 @@ TODO: fill with content
   </div>
 
 <div class="welcome" id="btnpanel">
-  <a href="/register"><button>${registerBtnText}</button></a>
-  <a href="/login"><button>${loginBtnText}</button></a>
+  <a href="/register"><button type="button" class="btn btn-lg btn-primary">${registerBtnText}</button></a>
+  <a href="/login"><button type="button" class="btn btn-lg btn-success">${loginBtnText}</button></a>
 </div>
 
   <!-- JS-Libraries requiered for Bootstrap -->
