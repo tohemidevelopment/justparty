@@ -58,9 +58,44 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<h1>Manage deine Events</h1>
-<p>Hier Können Sie Ihre Events Managen</p>
+<div class="container theme-showcase" role="main">
+    <div class="page-header">
+        <h1>Manage deine Events</h1>
+        <p>Hier Können Sie Ihre Events Managen</p>
+    </div>
 
+
+    <table class="table">
+        <thead>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#">Aktuelle Events</a></li>
+                <li role="presentation"><a href="#">Einladungen</a></li>
+                <li role="presentation"><a href="#">Eigene Events</a></li>
+                <li role="presentation"><a href="#">Absagen</a></li>
+                <li role="presentation"><a href="#">Frühere Events</a></li>
+            </ul>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td><button class="btn">Bearbeiten</button><button class="btn">Absagen</button></td>
+        </tr>
+        <tr>
+            <td>Event 2</td>
+            <td>21.10.2015</td>
+            <td><button class="btn">Annehmen</button><button class="btn">Noch unsicher</button><button class="btn">Absagen</button></td>
+        </tr>
+        <tr>
+            <td>Angenommenes Event</td>
+            <td>24.10.2015</td>
+            <td><button class="btn">Doch unsicher</button><button class="btn">Absagen</button></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
 <!-- JS-Libraries requiered for Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
