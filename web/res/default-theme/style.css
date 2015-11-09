@@ -8,6 +8,10 @@ body{
     font-family: Arial;
 }
 
+nav{
+    border: 0 !important;
+}
+
 #navbar {
     background-color: #7FC7AF;
 }

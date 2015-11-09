@@ -13,7 +13,7 @@ TODO: fill with content
 
 <html>
   <head>
-    <title>just Live, just Love, justParty</title>
+    <title>${title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Optional Bootstrap theme -->
@@ -28,7 +28,6 @@ TODO: fill with content
       }
 
     </style>
-
   </head>
   <body>
 
@@ -42,13 +41,16 @@ TODO: fill with content
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/" style="color: white;">LOGO</a>
+        <a class="navbar-brand" href="/" style="color: white;">
+            <!-- Placeholder -->
+            LOGO
+        </a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <form class="navbar-form navbar-left" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Suchen...">
+            <input type="text" class="form-control" placeholder="${searchPlaceholder}">
           </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
@@ -72,6 +74,9 @@ TODO: fill with content
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+
+  <h2 style="text-align: center;">${header1}</h2>
+  <p style="text-align: center;">${description}</p>
 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -131,9 +136,6 @@ TODO: fill with content
       <span class="sr-only">Next</span>
     </a>
   </div>
-
-  <h2 style="text-align: center;">${message}</h2>
-  <p style="text-align: center;">${description}</p>
 
 <div style="text-align: center;">
   <p>Werde jetzt Teil von justParty</p>
