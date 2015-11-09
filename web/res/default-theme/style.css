@@ -5,6 +5,9 @@ Time: 23:39
 */
 
 body{
-    background-color: blue;
     font-family: Arial;
+}
+
+#navbar {
+    background-color: #7FC7AF;
 }

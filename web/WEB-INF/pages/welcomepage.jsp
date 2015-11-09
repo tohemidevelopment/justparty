@@ -18,6 +18,7 @@ TODO: fill with content
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Optional Bootstrap theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/res/style.css">
 
     <style>
       img.mid {
@@ -32,7 +33,7 @@ TODO: fill with content
   <body>
 
   <nav class="navbar navbar-default">
-    <div class="container-fluid" style="background-color: green;">
+    <div class="container-fluid" id="navbar">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -135,11 +136,12 @@ TODO: fill with content
   <p style="text-align: center;">${description}</p>
 
 <div style="text-align: center;">
-  <p>Noch keinen Account?</p>
+  <p>Werde jetzt Teil von justParty</p>
   <a href="/register"><button value="Registrieren" >Registrieren</button></a>
   <p>Schon einen Account?</p>
   <a href="/login"><button value="Log In" >Log In</button></a>
 </div>
+
   <!-- JS-Libraries requiered for Bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
