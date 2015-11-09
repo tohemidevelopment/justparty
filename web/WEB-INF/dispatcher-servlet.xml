@@ -11,6 +11,13 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://justparty.heiko-faller.de:3306"/>
+        <property name="username" value="root"/>
+        <property name="password" value="admin"/>
+    </bean>
 
     <!--<mvc:resources mapping="/res/**" location="/res/default-theme/"/>-->
 </beans>
