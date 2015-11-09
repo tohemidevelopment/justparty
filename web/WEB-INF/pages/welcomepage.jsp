@@ -13,11 +13,12 @@ TODO: fill with content
 
 <html>
   <head>
-    <title>just Live, just Love, justParty</title>
+    <title>${title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Optional Bootstrap theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/res/style.css">
 
     <style>
       img.mid {
@@ -27,12 +28,11 @@ TODO: fill with content
       }
 
     </style>
-
   </head>
   <body>
 
   <nav class="navbar navbar-default">
-    <div class="container-fluid" style="background-color: green;">
+    <div class="container-fluid" id="navbar">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -41,13 +41,16 @@ TODO: fill with content
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/" style="color: white;">LOGO</a>
+        <a class="navbar-brand" href="/" style="color: white;">
+            <!-- Placeholder -->
+            LOGO
+        </a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <form class="navbar-form navbar-left" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Suchen...">
+            <input type="text" class="form-control" placeholder="${searchPlaceholder}">
           </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
@@ -71,6 +74,9 @@ TODO: fill with content
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+
+  <h2 style="text-align: center;">${header1}</h2>
+  <p style="text-align: center;">${description}</p>
 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -131,15 +137,11 @@ TODO: fill with content
     </a>
   </div>
 
-  <h2 style="text-align: center;">${message}</h2>
-  <p style="text-align: center;">${description}</p>
-
-<div style="text-align: center;">
-  <p>Noch keinen Account?</p>
-  <a href="/register"><button value="Registrieren" >Registrieren</button></a>
-  <p>Schon einen Account?</p>
-  <a href="/login"><button value="Log In" >Log In</button></a>
+<div class="welcome" id="btnpanel">
+  <a href="/register"><button>registerBtnText</button></a>
+  <a href="/login"><button>loginBtnText</button></a>
 </div>
+
   <!-- JS-Libraries requiered for Bootstrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

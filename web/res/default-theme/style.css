@@ -5,6 +5,17 @@ Time: 23:39
 */
 
 body{
-    background-color: blue;
     font-family: Arial;
+}
+
+nav{
+    border: 0 !important;
+}
+
+#navbar {
+    background-color: #7FC7AF;
+}
+
+div.welcome#btnpanel {
+    text-align: center;
 }
