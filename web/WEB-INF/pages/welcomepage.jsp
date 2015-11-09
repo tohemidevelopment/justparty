@@ -137,11 +137,9 @@ TODO: fill with content
     </a>
   </div>
 
-<div style="text-align: center;">
-  <p>Werde jetzt Teil von justParty</p>
-  <a href="/register"><button value="Registrieren" >Registrieren</button></a>
-  <p>Schon einen Account?</p>
-  <a href="/login"><button value="Log In" >Log In</button></a>
+<div class="welcome" id="btnpanel">
+  <a href="/register"><button>registerBtnText</button></a>
+  <a href="/login"><button>loginBtnText</button></a>
 </div>
 
   <!-- JS-Libraries requiered for Bootstrap -->

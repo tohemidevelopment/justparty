@@ -15,3 +15,7 @@ nav{
 #navbar {
     background-color: #7FC7AF;
 }
+
+div.welcome#btnpanel {
+    text-align: center;
+}
