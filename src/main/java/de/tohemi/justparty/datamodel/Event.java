@@ -14,7 +14,7 @@ public class Event {
     private Calendar begin;
     private Calendar end;
     private Address location;
-    private EventOwner eventOwner;
+    private User eventOwner;
     private List<Person> guests;
     private URL facebookLink;
     private URL googlePlusLink;
@@ -23,7 +23,7 @@ public class Event {
 
     public Event(String name, User eventOwner){
         this.name=name;
-        this.eventOwner=eventOwner.convertToEventOwner();
+        this.eventOwner=eventOwner;
     }
 
     public String getName() {

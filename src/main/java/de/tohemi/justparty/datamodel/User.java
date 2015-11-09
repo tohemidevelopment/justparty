@@ -5,7 +5,7 @@ import java.util.Calendar;
 /**
  * Created by Heiko on 04.11.2015.
  */
-public class User extends Person{
+public class User extends Person {
     private String name;
     //Zu Name: vor- und nachname getrennt oder zusammen?
     private Address address;
@@ -40,7 +40,4 @@ public class User extends Person{
         this.birthday = birthday;
     }
 
-    public EventOwner convertToEventOwner() {
-        return new EventOwner(this);
-    }
 }

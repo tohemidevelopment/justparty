@@ -22,9 +22,7 @@ public class LogicalViewNames {
         return register;
     }
 
-    public static String getNameEventManager() {
-        return eventManager;
-    }
+    public static String getNameEventManager() { return eventManager; }
 
     public static String getNameCreateEvent() {
         return nameCreateEvent;
