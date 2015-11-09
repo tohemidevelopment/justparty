@@ -1,7 +1,7 @@
 package main.java.de.tohemi.justparty.view_interface;
 
 /**
- * Created by Micha on 07.11.2015.
+ * Created by xce35l7 on 07.11.2015.
  */
 public class LogicalViewNames {
     private static String welcome = "welcomepage";

@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--
 TODO: fill with content
 
@@ -91,7 +90,7 @@ TODO: fill with content
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=712&h=450" alt="justParty">
+        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="justParty">
         <div class="carousel-caption">
           <h3>justParty</h3>
           <p>Die Plattform um alle deine Events zu Planen und zu organisieren.</p>
@@ -100,7 +99,7 @@ TODO: fill with content
       </div>
 
       <div class="item">
-        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=712&h=450" alt="planen">
+        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="planen">
         <div class="carousel-caption">
           <h3>Vielfältig</h3>
           <p>Du hast die Möglichkeit verschiedenste Events zu erstellen.</p>
@@ -109,7 +108,7 @@ TODO: fill with content
       </div>
 
       <div class="item">
-        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=712&h=450" alt="Funktion 3">
+        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="Funktion 3">
         <div class="carousel-caption">
           <h3>Sozial</h3>
           <p>Fast alle Einstellungen können du und deine Gäste auf Wunsch gemeinsam treffen.</p>
@@ -118,7 +117,7 @@ TODO: fill with content
       </div>
 
       <div class="item">
-        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=712&h=450" alt="Funktion 4" style="">
+        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="Funktion 4" style="">
         <div class="carousel-caption">
           <h3>Einfach</h3>
           <p>justParty ist einfach zu bedienen und hilft dir bei allen Entscheidungen</p>
@@ -138,9 +137,11 @@ TODO: fill with content
     </a>
   </div>
 
-<div class="welcomepage" id="btns">
-  <a href="/register"><button>${registerBtnText}</button></a>
-  <a href="/login"><button>${loginBtnText}</button></a>
+<div style="text-align: center;">
+  <p>Werde jetzt Teil von justParty</p>
+  <a href="/register"><button value="Registrieren" >Registrieren</button></a>
+  <p>Schon einen Account?</p>
+  <a href="/login"><button value="Log In" >Log In</button></a>
 </div>
 
   <!-- JS-Libraries requiered for Bootstrap -->
