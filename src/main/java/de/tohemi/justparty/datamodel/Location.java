@@ -11,6 +11,7 @@ public class Location {
         this.name = name;
         this.address = address;
         this.publicLocation = publicLocation;
+
     }
 
     private String name;
