@@ -90,7 +90,7 @@ TODO: fill with content
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="justParty">
+        <img class="mid" src="${carouselImg1}" alt="justParty">
         <div class="carousel-caption">
           <h3>justParty</h3>
           <p>Die Plattform um alle deine Events zu Planen und zu organisieren.</p>
@@ -99,7 +99,7 @@ TODO: fill with content
       </div>
 
       <div class="item">
-        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="planen">
+        <img class="mid" src="${carouselImg2}" alt="planen">
         <div class="carousel-caption">
           <h3>Vielfältig</h3>
           <p>Du hast die Möglichkeit verschiedenste Events zu erstellen.</p>
@@ -108,7 +108,7 @@ TODO: fill with content
       </div>
 
       <div class="item">
-        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="Funktion 3">
+        <img class="mid" src="${carouselImg3}" alt="Funktion 3">
         <div class="carousel-caption">
           <h3>Sozial</h3>
           <p>Fast alle Einstellungen können du und deine Gäste auf Wunsch gemeinsam treffen.</p>
@@ -117,7 +117,7 @@ TODO: fill with content
       </div>
 
       <div class="item">
-        <img class="mid" src="https://placeholdit.imgix.net/~text?txtsize=31&txt=Platzhalterbild&w=612&h=250" alt="Funktion 4" style="">
+        <img class="mid" src="${carouselImg4}" alt="Funktion 4" style="">
         <div class="carousel-caption">
           <h3>Einfach</h3>
           <p>justParty ist einfach zu bedienen und hilft dir bei allen Entscheidungen</p>
@@ -138,8 +138,8 @@ TODO: fill with content
   </div>
 
 <div class="welcome" id="btnpanel">
-  <a href="/register"><button>registerBtnText</button></a>
-  <a href="/login"><button>loginBtnText</button></a>
+  <a href="/register"><button>${registerBtnText}</button></a>
+  <a href="/login"><button>${loginBtnText}</button></a>
 </div>
 
   <!-- JS-Libraries requiered for Bootstrap -->

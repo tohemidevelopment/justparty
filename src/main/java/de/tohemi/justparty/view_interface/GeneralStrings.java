@@ -5,6 +5,7 @@ package main.java.de.tohemi.justparty.view_interface;
  */
 public class GeneralStrings {
     private final static String SLOGAN_1 = "just live, just love, justParty.";
+    private final static String ATT_WEBAPPTITLE = "webapp_title";
     private final static String WEBAPP_TITLE = "justParty";
     private final static String ATT_TITLE = "title";
     private final static String ATT_HEADER = "header1";
@@ -43,5 +44,9 @@ public class GeneralStrings {
 
     public static String getLOGIN_BTN() {
         return LOGIN_BTN;
+    }
+
+    public static String getATT_WEBAPPTITLE() {
+        return ATT_WEBAPPTITLE;
     }
 }
