@@ -13,7 +13,7 @@ public class Event {
     private String description;
     private Calendar begin;
     private Calendar end;
-    private Address location;
+    private Location location;
     private User eventOwner;
     private List<Person> guests;
     private URL facebookLink;
