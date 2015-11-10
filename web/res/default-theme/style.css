@@ -20,3 +20,8 @@ div.welcome#btnpanel {
     text-align: center;
     margin-top: 20px;
 }
+
+button.btn.btn-lg.btn-primary {
+    background: #7FC7AF;
+    border-color: #7FC7AF;
+}

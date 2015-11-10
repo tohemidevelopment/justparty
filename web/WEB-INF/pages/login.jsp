@@ -14,12 +14,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Optional Bootstrap theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/res/style.css">
     <title>${message}</title>
 </head>
 
 <body>
     <nav class="navbar navbar-default">
-        <div class="container-fluid" style="background-color: green;">
+        <div class="container-fluid" id="navbar">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -61,20 +62,20 @@
 
     <div class="container theme-showcase" role="main">
         <div class="page-header">
-            <h1 id="test">${message}</h1>
+            <h1 id="test">${login}</h1>
         </div>
-        <form method="get" action="/">
+        <form method="post" action="/">
             <table>
                 <tr>
-                    <td>Username: </td>
-                    <td><input type="text" value="" id="username" /></td>
+                    <td>${username}: </td>
+                    <td><input type="text" id="${username}" placeholder="${username}"/></td>
                 </tr>
                 <tr>
-                    <td>Passwort: </td>
-                    <td><input type="password" value="" id="password" /></td>
+                    <td>${password}: </td>
+                    <td><input type="password" id="${password}" placeholder="${password}"/></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Log in" /></td>
+                    <td><input type="submit" value="${login}" /></td>
                     <td></td>
                 </tr>
             </table>

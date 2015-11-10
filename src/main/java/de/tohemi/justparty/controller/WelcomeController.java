@@ -16,7 +16,7 @@ public class WelcomeController extends Controller{
     @RequestMapping(method = RequestMethod.GET)
     public String printWelcomePage(ModelMap model)
     {
-        setglobalVariables(model);
+        setglobalStrings(model);
         NavBarController.configureNavBar(model);
 
 
@@ -27,8 +27,6 @@ public class WelcomeController extends Controller{
         model.addAttribute(WelcomePageStrings.getAttCarouselImg2(), WelcomePageStrings.getCarouselImg2());
         model.addAttribute(WelcomePageStrings.getAttCarouselImg3(), WelcomePageStrings.getCarouselImg3());
         model.addAttribute(WelcomePageStrings.getAttCarouselImg4(), WelcomePageStrings.getCarouselImg4());
-        model.addAttribute(GeneralStrings.getATT_REGITSTER_BTN(), GeneralStrings.getREGISTER_BTN());
-        model.addAttribute(GeneralStrings.getATT_LOGIN_BTN(), GeneralStrings.getLOGIN_BTN());
         return LogicalViewNames.getNameWelcomePage();
     }
 

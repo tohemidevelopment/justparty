@@ -11,8 +11,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 
 public class Controller {
-    protected void setglobalVariables(ModelMap model){
+    protected void setglobalStrings(ModelMap model){
         model.addAttribute(GeneralStrings.getATT_WEBAPPTITLE(),GeneralStrings.getWebappTitle());
+        model.addAttribute(GeneralStrings.getATT_WEBAPPTITLE(),GeneralStrings.getWebappTitle());
+        model.addAttribute(GeneralStrings.getATT_REGITSTER(), GeneralStrings.getREGISTER());
+        model.addAttribute(GeneralStrings.getATT_LOGIN(), GeneralStrings.getLOGIN());
+        model.addAttribute(GeneralStrings.getATT_USERNAME(), GeneralStrings.getUSERNAME_STRING());
+        model.addAttribute(GeneralStrings.getATT_PASSWORD(), GeneralStrings.getPASSWORD_STRING());
     }
 
 }

@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/login")
-public class LoginController {@RequestMapping(method = RequestMethod.GET)
+public class LoginController extends Controller {@RequestMapping(method = RequestMethod.GET)
 public String printCreateEvent(ModelMap model)
 {
-    model.addAttribute("message","Log In");
+    setglobalStrings(model);
     return LogicalViewNames.getNameLogin();
 }
 
