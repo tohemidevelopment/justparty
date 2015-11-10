@@ -7,12 +7,11 @@ import java.util.Calendar;
  */
 public class User extends Person {
     private String name;
-    //Zu Name: vor- und nachname getrennt oder zusammen?
+    private String vorname;
     private Address address;
     private Calendar birthday;
 
     public User(EMail email) {
-
         super(email);
     }
 
@@ -22,6 +21,14 @@ public class User extends Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getVorname() {
+        return vorname;
+    }
+
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
     }
 
     public Address getAddress() {
