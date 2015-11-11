@@ -64,7 +64,7 @@
         <div class="page-header">
             <h1 id="test">${login}</h1>
         </div>
-        <form method="post" action="/">
+        <form method="post" action="/logingin">
             <table>
                 <tr>
                     <td>${username}: </td>

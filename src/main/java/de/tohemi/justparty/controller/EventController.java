@@ -1,5 +1,6 @@
 package main.java.de.tohemi.justparty.controller;
 
+import main.java.de.tohemi.justparty.database.controller.DBController;
 import main.java.de.tohemi.justparty.datamodel.Event;
 import main.java.de.tohemi.justparty.datamodel.User;
 import main.java.de.tohemi.justparty.view_interface.LogicalViewNames;

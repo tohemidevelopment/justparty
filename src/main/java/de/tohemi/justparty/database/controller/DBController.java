@@ -1,4 +1,4 @@
-package main.java.de.tohemi.justparty.controller;
+package main.java.de.tohemi.justparty.database.controller;
 
 import main.java.de.tohemi.justparty.datamodel.Event;
 import org.springframework.context.ApplicationContext;

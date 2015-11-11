@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/manageEvent")
 public class ManageEventController {
-        @RequestMapping(method = RequestMethod.GET)
-        public String printCreateEvent(ModelMap model)
-        {
-            model.addAttribute("message","Neues Event Erstellt!");
-            return LogicalViewNames.getNameEventManager();
-        }
+    @RequestMapping(method = RequestMethod.POST)
+    public String printCreateEvent(ModelMap model) {
+
+        return LogicalViewNames.getNameEventManager();
+    }
 
 }
 
