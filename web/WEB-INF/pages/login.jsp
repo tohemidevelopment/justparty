@@ -64,21 +64,23 @@
         <div class="page-header">
             <h1 id="test">${login}</h1>
         </div>
-        <form method="post" action="/logingin">
+        <form method="post" action="/perform_login">
             <table>
                 <tr>
                     <td>${username}: </td>
-                    <td><input type="text" id="${username}" placeholder="${username}"/></td>
+                    <td><input type="text" name="username" placeholder="${username}"/></td>
                 </tr>
                 <tr>
                     <td>${password}: </td>
-                    <td><input type="password" id="${password}" placeholder="${password}"/></td>
+                    <td><input type="password" name="password" placeholder="${password}"/></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="${login}" /></td>
+                    <td><input name="submit" type="submit" value="${login}" /></td>
                     <td></td>
                 </tr>
             </table>
+            <input type="hidden" name="${_csrf.parameterName}"
+                   value="${_csrf.token}" />
         </form>
     </div>
     <!-- JS-Libraries requiered for Bootstrap -->

@@ -23,6 +23,6 @@ public class EventController {
 
     DBController dbController= new DBController();
     public void createEvent(String name, User eventOwner){
-        dbController.insertEvent(new Event(name, eventOwner));
+        dbController.insertEvent(new Event(name, eventOwner), "");
     }
 }

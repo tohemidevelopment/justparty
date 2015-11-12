@@ -11,8 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/manageEvent")
 public class ManageEventController {
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.GET)
     public String printCreateEvent(ModelMap model) {
+
+        return LogicalViewNames.getNameEventManager();
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String createEvent(ModelMap model) {
 
         return LogicalViewNames.getNameEventManager();
     }

@@ -7,8 +7,8 @@ public class LogicalViewNames {
     private static String welcome = "welcomepage";
     private static String login = "login";
     private static String register = "register";
-    private static String eventManager = "eventManager";
-    private static String nameCreateEvent = "createEvent";
+    private static String eventManager = "user/eventManager";
+    private static String nameCreateEvent = "user/createEvent";
 
     public static String getNameWelcomePage() {
         return welcome;

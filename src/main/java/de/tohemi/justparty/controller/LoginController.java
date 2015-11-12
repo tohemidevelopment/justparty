@@ -13,13 +13,11 @@ import java.util.Map;
  * Created by Tom on 07.11.2015.
  */
 @org.springframework.stereotype.Controller
-@RequestMapping(value = "/logingin")
+@RequestMapping(value = "/login")
 public class LoginController extends Controller {
     @RequestMapping(method = RequestMethod.GET)
     public String printCreateEvent(@RequestParam Map<String,String> allRequestParams, ModelMap model) {
         setglobalStrings(model);
         return LogicalViewNames.getNameLogin();
     }
-
-
 }
