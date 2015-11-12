@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/register")
-public class RegisterController {
+public class RegisterController extends Controller {
     @RequestMapping(method = RequestMethod.GET)
     public String printCreateEvent(ModelMap model)
     {
+        setglobalStrings(model);
         model.addAttribute("message","Registrieren");
         return LogicalViewNames.getNameRegister();
     }

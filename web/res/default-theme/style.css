@@ -32,3 +32,7 @@ button.btn.btn-lg.btn-primary {
 #login_form {
     width: 30%;
 }
+
+#register_form {
+    width: 75%;
+}

@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -64,7 +65,11 @@
         <div class="page-header">
             <h1 id="test">${login}</h1>
         </div>
-
+        <core:if test="${not empty login_error}">
+            <div class="alert alert-danger" role="alert">
+                ${login_error}
+            </div>
+        </core:if>
         <form method="post" action="/perform_login" role="form" id="login_form">
             <div class="form-group">
                 <label for="usr">${username}: </label>
@@ -75,21 +80,6 @@
                 <input type="password" class="form-control" id="pwd" name="password" placeholder="${password}">
             </div>
             <input class="form-control" name="submit" type="submit" value="${login}" />
-            <!--
-            <table>
-                <tr>
-                    <td>${username}: </td>
-                    <td><input class="form-control" type="text" name="username" placeholder="${username}"/></td>
-                </tr>
-                <tr>
-                    <td>${password}: </td>
-                    <td><input class="form-control" type="password" name="password" placeholder="${password}"/></td>
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
-                    <td></td>
-                </tr>
-            </table>-->
             <input type="hidden" name="${_csrf.parameterName}"
                    value="${_csrf.token}" />
         </form>
