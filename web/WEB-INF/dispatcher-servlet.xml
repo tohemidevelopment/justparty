@@ -11,9 +11,8 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
-    <!--
-    irgendwas hat hier nicht funktioniert -> Server ging nicht mehr
-    <bean id="dataSource"
+
+    <!--<bean id="DBController"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://justparty.heiko-faller.de:3306"/>

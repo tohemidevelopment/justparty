@@ -2,6 +2,7 @@ package main.java.de.tohemi.justparty.controller;
 
 import main.java.de.tohemi.justparty.view_interface.GeneralStrings;
 import main.java.de.tohemi.justparty.view_interface.LogicalViewNames;
+import main.java.de.tohemi.justparty.view_interface.LoginStrings;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +17,10 @@ import java.util.Map;
 @RequestMapping(value = "/login")
 public class LoginController extends Controller {
     @RequestMapping(method = RequestMethod.GET)
-    public String printCreateEvent(@RequestParam Map<String,String> allRequestParams, ModelMap model) {
+    public String printCreateEvent(@RequestParam(value = "error", required = false) String error, ModelMap model) {
+        if (error != null) {
+            model.addAttribute(LoginStrings.getATT_LOGIN_ERROR(),LoginStrings.getLOGIN_ERROR());
+        }
         setglobalStrings(model);
         return LogicalViewNames.getNameLogin();
     }

@@ -3,6 +3,9 @@ User: Tom
 Date: 06.11.2015
 Time: 23:39
 */
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
+/* Bootstrap theme */
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css);
 
 body{
     font-family: Arial;
@@ -24,4 +27,8 @@ div.welcome#btnpanel {
 button.btn.btn-lg.btn-primary {
     background: #7FC7AF;
     border-color: #7FC7AF;
+}
+
+#login_form {
+    width: 30%;
 }

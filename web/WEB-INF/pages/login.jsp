@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tom
@@ -7,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -64,21 +64,32 @@
         <div class="page-header">
             <h1 id="test">${login}</h1>
         </div>
-        <form method="post" action="/perform_login">
+
+        <form method="post" action="/perform_login" role="form" id="login_form">
+            <div class="form-group">
+                <label for="usr">${username}: </label>
+                <input type="text" class="form-control" name="username" id="usr" placeholder="${username}">
+            </div>
+            <div class="form-group">
+                <label for="pwd">${password}: </label>
+                <input type="password" class="form-control" id="pwd" name="password" placeholder="${password}">
+            </div>
+            <input class="form-control" name="submit" type="submit" value="${login}" />
+            <!--
             <table>
                 <tr>
                     <td>${username}: </td>
-                    <td><input type="text" name="username" placeholder="${username}"/></td>
+                    <td><input class="form-control" type="text" name="username" placeholder="${username}"/></td>
                 </tr>
                 <tr>
                     <td>${password}: </td>
-                    <td><input type="password" name="password" placeholder="${password}"/></td>
+                    <td><input class="form-control" type="password" name="password" placeholder="${password}"/></td>
                 </tr>
                 <tr>
-                    <td><input name="submit" type="submit" value="${login}" /></td>
+                    <td colspan="2"></td>
                     <td></td>
                 </tr>
-            </table>
+            </table>-->
             <input type="hidden" name="${_csrf.parameterName}"
                    value="${_csrf.token}" />
         </form>

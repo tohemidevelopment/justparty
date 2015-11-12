@@ -13,16 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ManageEventController {
     @RequestMapping(method = RequestMethod.GET)
     public String printCreateEvent(ModelMap model) {
-
         return LogicalViewNames.getNameEventManager();
     }
-
-    @RequestMapping(method = RequestMethod.POST)
-    public String createEvent(ModelMap model) {
-
-        return LogicalViewNames.getNameEventManager();
-    }
-
 }
-
-
