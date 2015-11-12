@@ -20,7 +20,8 @@
         <property name="password" value="admin"/>
     </bean>-->
 
-    <mvc:resources mapping="/res/**" location="/res/default-theme/"/>
+    <mvc:resources mapping="/res/js/**" location="/res/js/"/>
+    <mvc:resources mapping="/res/**" location="/res/css/default-theme/"/>
     <mvc:annotation-driven />
 
 </beans>

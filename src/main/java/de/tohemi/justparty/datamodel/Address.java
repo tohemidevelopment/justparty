@@ -1,6 +1,6 @@
 package main.java.de.tohemi.justparty.datamodel;
 
-import main.java.de.tohemi.justparty.datamodel.ZipCode;
+import main.java.de.tohemi.justparty.datamodel.wrapper.ZipCode;
 
 /**
  * Created by Heiko on 04.11.2015.

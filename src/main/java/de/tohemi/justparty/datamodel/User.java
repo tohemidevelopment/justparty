@@ -1,5 +1,7 @@
 package main.java.de.tohemi.justparty.datamodel;
 
+import main.java.de.tohemi.justparty.datamodel.wrapper.EMail;
+
 import java.util.Calendar;
 
 /**

@@ -11,7 +11,7 @@
 <head>
     <title>Manage Events</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/res/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css">
 </head>
 <body>
 <c:url value="/j_spring_security_logout" var="logoutUrl"/>
@@ -19,11 +19,6 @@
     <input type="hidden" name="${_csrf.parameterName}"
            value="${_csrf.token}"/>
 </form>
-<script>
-    function logoutFormSubmit() {
-        document.getElementById("logoutForm").submit();
-    }
-</script>
 
 <nav class="navbar navbar-default">
     <div class="container-fluid" id="navbar">
@@ -36,7 +31,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="color: white;">LOGO</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/" style="color: white;">LOGO</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -50,8 +45,10 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false" style="color: white;">Events <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href='/createEvent'><span>Event Erstellen</span></a></li>
-                        <li><a href='/manageEvent'><span>Events Managen</span></a></li>
+                        <li><a href='${pageContext.request.contextPath}/createEvent'><span>Event Erstellen</span></a>
+                        </li>
+                        <li><a href='${pageContext.request.contextPath}/manageEvent'><span>Events Managen</span></a>
+                        </li>
                         <li role="separator" class="divider"></li>
                         <li><a href='#'><span>Einladungen zu Events</span></a></li>
                     </ul>
@@ -73,7 +70,7 @@
 
 <div class="container theme-showcase" role="main">
     <div class="page-header">
-        <h1>Manage deine Events</h1>
+        <h1>Manage Deine Events</h1>
 
         <p>Hier Können Sie Ihre Events Managen</p>
     </div>
@@ -123,5 +120,7 @@
 <!-- JS-Libraries requiered for Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- JS-Libraries requiered for justParty -->
+<script src="${pageContext.request.contextPath}/res/js/logout.js"></script>
 </body>
 </html>

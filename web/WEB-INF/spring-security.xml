@@ -9,26 +9,26 @@
       http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/manageEvent**" access="ROLE_USER" />
-        <intercept-url pattern="/createEvent**" access="ROLE_USER" />
+        <intercept-url pattern="/manageEvent**" access="ROLE_USER"/>
+        <intercept-url pattern="/createEvent**" access="ROLE_USER"/>
         <form-login
                 login-page="/login"
                 default-target-url="/manageEvent"
                 login-processing-url="/perform_login"
                 authentication-failure-url="/login?error"
                 username-parameter="username"
-                password-parameter="password" />
-        <logout logout-success-url="/" />
+                password-parameter="password"/>
+        <logout logout-success-url="/"/>
         <!-- enable csrf protection -->
         <csrf/>
     </http>
 
-       <authentication-manager>
-              <authentication-provider>
-                     <user-service>
-                            <user name="user1" password="q" authorities="ROLE_USER" />
-                     </user-service>
-              </authentication-provider>
-       </authentication-manager>
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="user1" password="q" authorities="ROLE_USER"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
 
 </beans:beans>

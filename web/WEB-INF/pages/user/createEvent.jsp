@@ -16,7 +16,11 @@
     <link rel="stylesheet" href="/res/style.css">
 </head>
 <body>
-
+<c:url value="/j_spring_security_logout" var="logoutUrl"/>
+<form action="${logoutUrl}" method="post" id="logoutForm">
+    <input type="hidden" name="${_csrf.parameterName}"
+           value="${_csrf.token}"/>
+</form>
 <nav class="navbar navbar-default">
     <div class="container-fluid" id="navbar">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -53,7 +57,7 @@
                        aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href='#'><span>Profil anzeigen</span></a></li>
-                        <li><a href='#'><span>Ausloggen</span></a></li>
+                        <li><a href='javascript:logoutFormSubmit()'><span>Ausloggen</span></a></li>
                     </ul>
                 </li>
             </ul>
@@ -67,19 +71,20 @@
     <div class="page-header">
         <h2>${message}</h2>
     </div>
-    <form method="get" action="/manageEvent">
-        <table>
-            <tr>
-                <td>Eventname: <input type="text" value="Eventname" id="event_name"/></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Erstellen"/></td>
-            </tr>
-        </table>
+    <form method="post" action="/createEvent" role="form" id="login_form">
+        <div class="form-group">
+            <label for="name">Name: </label>
+            <input type="text" class="form-control" name="event)name" id="name" placeholder="Eventname">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="submit" type="submit" value="Event erstellen"/>
+        </div>
     </form>
 </div>
 <!-- JS-Libraries requiered for Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- JS-Libraries requiered for justParty -->
+<script src="/res/js/logout.js"></script>
 </body>
 </html>

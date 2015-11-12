@@ -7,6 +7,7 @@ import main.java.de.tohemi.justparty.view_interface.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Heiko on 04.11.2015.
@@ -15,14 +16,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/createEvent")
 public class EventController {
     @RequestMapping(method = RequestMethod.GET)
-    public String printCreateEvent(ModelMap model)
-    {
-        model.addAttribute("message","Erstellen Sie ein neues Event");
+    public String printCreateEvent(ModelMap model) {
+        model.addAttribute("message", "Erstelle <strong>Dein</strong> Event!");
         return LogicalViewNames.getNameCreateEvent();
     }
 
-    DBController dbController= new DBController();
-    public void createEvent(String name, User eventOwner){
+    @RequestMapping(method = RequestMethod.POST)
+    public String createEvent(@RequestParam(value = "eventname")String name,@RequestParam(value = "user") User eventOwner, ModelMap model) {
+
+        //DB sollte hier im Controller nichts zu suchen haben! Hier nur Geschäftslogik aufrufen, die kann dann auf die DB zugreifen
+        DBController dbController = new DBController();
         dbController.insertEvent(new Event(name, eventOwner), "");
+        return LogicalViewNames.getNameEventManager();
     }
 }
