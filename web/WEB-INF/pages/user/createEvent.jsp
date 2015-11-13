@@ -16,8 +16,7 @@
     <link rel="stylesheet" href="/res/style.css">
 </head>
 <body>
-<c:url value="/j_spring_security_logout" var="logoutUrl"/>
-<form action="${logoutUrl}" method="post" id="logoutForm">
+<form action="/j_spring_security_logout" method="post" id="logoutForm">
     <input type="hidden" name="${_csrf.parameterName}"
            value="${_csrf.token}"/>
 </form>

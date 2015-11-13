@@ -23,7 +23,7 @@ public class WelcomeController extends Controller{
         model.addAttribute(WelcomePageStrings.getAttCarouselImg2(), WelcomePageStrings.getCarouselImg2());
         model.addAttribute(WelcomePageStrings.getAttCarouselImg3(), WelcomePageStrings.getCarouselImg3());
         model.addAttribute(WelcomePageStrings.getAttCarouselImg4(), WelcomePageStrings.getCarouselImg4());
-        return LogicalViewNames.getNameWelcomePage();
+      return LogicalViewNames.getNameWelcomePage();
     }
 
 
