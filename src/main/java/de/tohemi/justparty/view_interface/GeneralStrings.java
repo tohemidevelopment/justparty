@@ -10,7 +10,7 @@ public class GeneralStrings {
     private final static String ATT_TITLE = "title";
     private final static String ATT_HEADER = "header1";
     private final static String ATT_REGITSTER_BTN = "register";
-    private final static String REGISTER_BTN = "Register";
+    private final static String REGISTER_BTN = "Registrieren";
     private final static String ATT_LOGIN_BTN = "login";
     private final static String LOGIN_BTN = "Login";
     private final static String ATT_USERNAME = "username";
