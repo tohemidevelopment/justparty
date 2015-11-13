@@ -43,6 +43,7 @@
     </bean>
 
     <mvc:resources mapping="/res/js/**" location="/res/js/"/>
+    <mvc:resources mapping="/img/**" location="/res/img/default-theme/"/>
     <mvc:resources mapping="/res/**" location="/res/css/default-theme/"/>
     <mvc:annotation-driven />
 
