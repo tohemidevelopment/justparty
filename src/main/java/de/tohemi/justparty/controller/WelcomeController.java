@@ -19,10 +19,6 @@ public class WelcomeController extends Controller{
         setglobalStrings(model);
         NavBarController.configureNavBar(model);
 
-
-        model.addAttribute(GeneralStrings.getAttTitle(), WelcomePageStrings.getTITLE());
-        model.addAttribute(GeneralStrings.getAttHeader(), WelcomePageStrings.getHEADER());
-        model.addAttribute("description","Hier entsteht 'justParty' f&uuml;r Sie!");
         model.addAttribute(WelcomePageStrings.getATT_CAROUSEL_IMG1(), WelcomePageStrings.getCAROUSEL_IMG1());
         model.addAttribute(WelcomePageStrings.getAttCarouselImg2(), WelcomePageStrings.getCarouselImg2());
         model.addAttribute(WelcomePageStrings.getAttCarouselImg3(), WelcomePageStrings.getCarouselImg3());

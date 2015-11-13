@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!--
 TODO: fill with content
 
@@ -13,11 +14,9 @@ TODO: fill with content
 
 <html>
 <head>
-    <title>${title}</title>
+    <title><spring:message code="welcome.title"/> </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!-- Optional Bootstrap theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <meta charset="UTF-8"/>
     <link rel="stylesheet" href="/res/style.css">
 
     <style>
@@ -80,9 +79,9 @@ TODO: fill with content
     <!-- /.container-fluid -->
 </nav>
 
-<h2 style="text-align: center;">${header1}</h2>
+<h2 style="text-align: center;"><spring:message code="welcome.header1"/> </h2>
 
-<p style="text-align: center;">${description}</p>
+<p style="text-align: center;"><spring:message code="welcome.txt"/> </p>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -96,45 +95,45 @@ TODO: fill with content
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img class="mid" src="${carouselImg1}" alt="justParty">
+            <img class="mid" src="<spring:message code="welcome.car.1.imgsrc"/>" alt="justParty">
 
             <div class="carousel-caption">
-                <h3>justParty</h3>
+                <h3><spring:message code="welcome.car.1.header"/></h3>
 
-                <p>Die Plattform um alle deine Events zu Planen und zu organisieren.</p>
+                <p><spring:message code="welcome.car.1.txt"/></p>
             </div>
 
         </div>
 
         <div class="item">
-            <img class="mid" src="${carouselImg2}" alt="planen">
+            <img class="mid" src="<spring:message code="welcome.car.2.imgsrc"/>" alt="planen">
 
             <div class="carousel-caption">
-                <h3>Vielfältig</h3>
+                <h3><spring:message code="welcome.car.2.header"/></h3>
 
-                <p>Du hast die Möglichkeit verschiedenste Events zu erstellen.</p>
+                <p><spring:message code="welcome.car.2.txt"/></p>
             </div>
 
         </div>
 
         <div class="item">
-            <img class="mid" src="${carouselImg3}" alt="Funktion 3">
+            <img class="mid" src="<spring:message code="welcome.car.3.imgsrc"/>" alt="Funktion 3">
 
             <div class="carousel-caption">
-                <h3>Sozial</h3>
+                <h3><spring:message code="welcome.car.3.header"/></h3>
 
-                <p>Fast alle Einstellungen können du und deine Gäste auf Wunsch gemeinsam treffen.</p>
+                <p><spring:message code="welcome.car.3.txt"/></p>
             </div>
 
         </div>
 
         <div class="item">
-            <img class="mid" src="${carouselImg4}" alt="Funktion 4" style="">
+            <img class="mid" src="<spring:message code="welcome.car.4.imgsrc"/>" alt="Funktion 4" style="">
 
             <div class="carousel-caption">
-                <h3>Einfach</h3>
+                <h3><spring:message code="welcome.car.4.header"/></h3>
 
-                <p>justParty ist einfach zu bedienen und hilft dir bei allen Entscheidungen</p>
+                <p><spring:message code="welcome.car.4.txt"/></p>
             </div>
 
         </div>
@@ -151,12 +150,17 @@ TODO: fill with content
     </a>
 </div>
 
+<!--<a href="?lang=de">deutsch</a>
+<a href="?lang=en">en</a>
+
+Current Locale : ${pageContext.response.locale}-->
+
 <div class="welcome" id="btnpanel">
     <a href="/register">
-        <button type="button" class="btn btn-lg btn-primary">${register}</button>
+        <button type="button" class="btn btn-lg btn-primary"><spring:message code="welcome.registerbtn"/> </button>
     </a>
     <a href="/login">
-        <button type="button" class="btn btn-lg btn-primary">${login}</button>
+        <button type="button" class="btn btn-lg btn-primary"><spring:message code="welcome.loginbtn"/> </button>
     </a>
 </div>
 <!-- JS-Libraries requiered for Bootstrap -->
