@@ -14,7 +14,7 @@ TODO: fill with content
 
 <html>
 <head>
-    <title><spring:message code="welcome.title"/> </title>
+    <title><spring:message code="welcome.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="/res/style.css">
@@ -49,13 +49,15 @@ TODO: fill with content
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="<spring:message code="nav.searchplaceholder"/> ">
+                    <input type="text" class="form-control"
+                           placeholder="<spring:message code="nav.searchplaceholder"/> ">
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" style="color: white;"><spring:message code="nav.events"/> <span class="caret"></span></a>
+                       aria-expanded="false" style="color: white;"><spring:message code="nav.events"/> <span
+                            class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href='/createEvent'><span><spring:message code="nav.events.create"/> </span></a></li>
                         <li><a href='/manageEvent'><span><spring:message code="nav.events.manage"/> </span></a></li>
@@ -78,9 +80,9 @@ TODO: fill with content
     <!-- /.container-fluid -->
 </nav>
 
-<h2 style="text-align: center;"><spring:message code="welcome.header1"/> </h2>
+<h2 style="text-align: center;"><spring:message code="welcome.header1"/></h2>
 
-<p style="text-align: center;"><spring:message code="welcome.txt"/> </p>
+<p style="text-align: center;"><spring:message code="welcome.txt"/></p>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -156,10 +158,10 @@ Current Locale : ${pageContext.response.locale}-->
 
 <div class="welcome" id="btnpanel">
     <a href="/register">
-        <button type="button" class="btn btn-lg btn-primary"><spring:message code="welcome.registerbtn"/> </button>
+        <button type="button" class="btn btn-lg btn-primary"><spring:message code="welcome.registerbtn"/></button>
     </a>
     <a href="/login">
-        <button type="button" class="btn btn-lg btn-primary"><spring:message code="welcome.loginbtn"/> </button>
+        <button type="button" class="btn btn-lg btn-primary"><spring:message code="welcome.loginbtn"/></button>
     </a>
 </div>
 <!-- JS-Libraries requiered for Bootstrap -->

@@ -6,14 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+    <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/res/style.css">
-    <title>${message}</title>
+    <title><spring:message code="login.title"/></title>
 </head>
 
 <body>
@@ -60,7 +60,7 @@
 
     <div class="container theme-showcase" role="main">
         <div class="page-header">
-            <h1 id="test">${login}</h1>
+            <h1 id="test"><spring:message code="login.header1"/></h1>
         </div>
         <core:if test="${not empty login_error}">
             <div class="alert alert-danger" role="alert">
@@ -69,14 +69,14 @@
         </core:if>
         <form method="post" action="/perform_login" role="form" id="login_form">
             <div class="form-group">
-                <label for="usr">${username}: </label>
-                <input type="text" class="form-control" name="username" id="usr" placeholder="${username}">
+                <label for="usr"><spring:message code="login.label.username"/>:</label>
+                <input type="text" class="form-control" name="username" id="usr" placeholder="<spring:message code="login.placeholder.username"/>">
             </div>
             <div class="form-group">
-                <label for="pwd">${password}: </label>
-                <input type="password" class="form-control" id="pwd" name="password" placeholder="${password}">
+                <label for="pwd"><spring:message code="login.label.pw"/>:</label>
+                <input type="password" class="form-control" id="pwd" name="password" placeholder="<spring:message code="login.placeholder.pw"/>">
             </div>
-            <input class="form-control" name="submit" type="submit" value="${login}" />
+            <input class="form-control" name="submit" type="submit" value="<spring:message code="login.login"/>" />
             <input type="hidden" name="${_csrf.parameterName}"
                    value="${_csrf.token}" />
         </form>

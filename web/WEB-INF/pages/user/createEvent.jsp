@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tom
@@ -8,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Create Event</title>
+    <title><spring:message code="create.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/res/style.css">
 </head>
@@ -44,8 +45,6 @@
                     <ul class="dropdown-menu">
                         <li><a href='/createEvent'><span>Event Erstellen</span></a></li>
                         <li><a href='/manageEvent'><span>Events Managen</span></a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href='#'><span>Einladungen zu Events</span></a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
