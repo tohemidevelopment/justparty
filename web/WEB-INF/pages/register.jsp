@@ -1,4 +1,3 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tom
@@ -7,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title><spring:message code="register.title"/></title>
@@ -39,7 +40,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="<spring:message code="nav.searchplaceholder"/>">
+                    <input type="text" class="form-control"
+                           placeholder="<spring:message code="nav.searchplaceholder"/>">
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
@@ -75,10 +77,12 @@
     <div>
         <form method="post" action="/perform_registry" role="form" class="form-horizontal" id="register_form">
             <div class="form-group">
-                <label for="usr" class="control-label col-sm-2"><spring:message code="register.label.username"/>:</label>
+                <label for="usr" class="control-label col-sm-2"><spring:message
+                        code="register.label.username"/>:</label>
 
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="username" id="usr" placeholder="<spring:message code="register.placeholder.username"/>">
+                    <input type="text" class="form-control" name="username" id="usr"
+                           placeholder="<spring:message code="register.placeholder.username"/>"/>
                     <img src="http://twolske.bplaced.net/smily.png"/>
                 </div>
             </div>
@@ -86,7 +90,8 @@
                 <label for="email" class="control-label col-sm-2"><spring:message code="register.label.email"/>:</label>
 
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="email" id="email" placeholder="<spring:message code="register.placeholder.email"/>">
+                    <input type="text" class="form-control" name="email" id="email"
+                           placeholder="<spring:message code="register.placeholder.email"/>">
                     <img src="http://twolske.bplaced.net/smily.png"/>
                 </div>
             </div>
@@ -94,12 +99,14 @@
                 <label for="pwd" class="control-label col-sm-2"><spring:message code="register.label.pw"/>:</label>
 
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="pwd" name="password" placeholder="<spring:message code="register.placeholder.pw"/>">
+                    <input type="password" class="form-control" id="pwd" name="password"
+                           placeholder="<spring:message code="register.placeholder.pw"/>">
                     <img src="http://twolske.bplaced.net/smily.png"/>
                 </div>
             </div>
             <div class="form-group">
-                <label for="pwd2" class="control-label col-sm-2"><spring:message code="register.label.pw.repeat"/>:</label>
+                <label for="pwd2" class="control-label col-sm-2"><spring:message
+                        code="register.label.pw.repeat"/>:</label>
 
                 <div class="col-sm-10">
                     <input type="password" class="form-control" id="pwd2" name="password_repeat"
@@ -110,16 +117,20 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
-                        <label><input type="checkbox" name="terms"><spring:message code="register.label.acceptterms"/></label>
+                        <label><input type="checkbox" name="terms"><spring:message
+                                code="register.label.acceptterms"/></label>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <input class="form-control" style="width: 20%" name="submit" type="submit" value="<spring:message code="welcome.registerbtn"/> "/>
+                    <input class="form-control" style="width: 20%" name="submit" type="submit"
+                           value="<spring:message code="welcome.registerbtn"/> "/>
                 </div>
             </div>
         </form>
+
+
     </div>
 </div>
 

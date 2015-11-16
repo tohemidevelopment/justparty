@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EventController {
     @RequestMapping(method = RequestMethod.GET)
     public String printCreateEvent(ModelMap model) {
-        model.addAttribute("message", "Erstelle <strong>Dein</strong> Event!");
         return LogicalViewNames.getNameCreateEvent();
     }
 

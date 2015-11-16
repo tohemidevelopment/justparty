@@ -8,6 +8,9 @@ import java.util.Calendar;
  * Created by Heiko on 04.11.2015.
  */
 public class User extends Person {
+    //private String username;
+    //private String password;
+    //private String matchingPassword;
     private String name;
     private String vorname;
     private Address address;

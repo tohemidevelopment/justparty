@@ -12,19 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/")
-public class WelcomeController extends Controller{
+public class WelcomeController {
     @RequestMapping(method = RequestMethod.GET)
     public String printWelcomePage(ModelMap model)
     {
-        setglobalStrings(model);
-        NavBarController.configureNavBar(model);
-
-        model.addAttribute(WelcomePageStrings.getATT_CAROUSEL_IMG1(), WelcomePageStrings.getCAROUSEL_IMG1());
-        model.addAttribute(WelcomePageStrings.getAttCarouselImg2(), WelcomePageStrings.getCarouselImg2());
-        model.addAttribute(WelcomePageStrings.getAttCarouselImg3(), WelcomePageStrings.getCarouselImg3());
-        model.addAttribute(WelcomePageStrings.getAttCarouselImg4(), WelcomePageStrings.getCarouselImg4());
       return LogicalViewNames.getNameWelcomePage();
     }
-
-
 }

@@ -64,7 +64,7 @@
 
 <div class="container theme-showcase" role="main">
     <div class="page-header">
-        <h2>${message}</h2>
+        <h2><spring:message code="create.header1"/></h2>
     </div>
     <form method="post" action="/createEvent" role="form" id="login_form">
         <div class="form-group">

@@ -15,13 +15,12 @@ import java.util.Map;
  */
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/login")
-public class LoginController extends Controller {
+public class LoginController  {
     @RequestMapping(method = RequestMethod.GET)
     public String printCreateEvent(@RequestParam(value = "error", required = false) String error, ModelMap model) {
         if (error != null) {
             model.addAttribute(LoginStrings.getATT_LOGIN_ERROR(),LoginStrings.getLOGIN_ERROR());
         }
-        setglobalStrings(model);
         return LogicalViewNames.getNameLogin();
     }
 }
