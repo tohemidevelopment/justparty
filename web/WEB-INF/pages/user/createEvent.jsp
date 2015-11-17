@@ -70,11 +70,13 @@
     <form method="post" action="/createEvent" role="form" id="login_form">
         <div class="form-group">
             <label for="name">Name: </label>
-            <input type="text" class="form-control" name="event)name" id="name" placeholder="Eventname">
+            <input type="text" class="form-control" name="eventname" id="name" placeholder="Eventname">
         </div>
         <div class="form-group">
             <input class="form-control" name="submit" type="submit" value="Event erstellen"/>
         </div>
+        <input type="hidden" name="${_csrf.parameterName}"
+               value="${_csrf.token}"/>
     </form>
 </div>
 <!-- JS-Libraries requiered for Bootstrap -->

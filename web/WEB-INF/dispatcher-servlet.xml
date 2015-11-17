@@ -14,10 +14,10 @@
 
     <!--<bean id="DBController"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://justparty.heiko-faller.de:3306"/>
-        <property name="username" value="root"/>
-        <property name="password" value="admin"/>
+        <property eventname="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property eventname="url" value="jdbc:mysql://justparty.heiko-faller.de:3306"/>
+        <property eventname="username" value="root"/>
+        <property eventname="password" value="admin"/>
     </bean>-->
 
     <bean id="messageSource"

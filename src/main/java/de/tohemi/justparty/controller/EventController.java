@@ -1,9 +1,9 @@
 package de.tohemi.justparty.controller;
 
-import de.tohemi.justparty.database.controller.DBController;
-import de.tohemi.justparty.datamodel.Event;
-import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.businesslogic.EventCreator;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,11 +21,15 @@ public class EventController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String createEvent(@RequestParam(value = "eventname")String name,@RequestParam(value = "user") User eventOwner, ModelMap model) {
+    public String createEvent(@RequestParam(value = "eventname")String eventname, ModelMap model) {
 
-        //DB sollte hier im Controller nichts zu suchen haben! Hier nur Geschäftslogik aufrufen, die kann dann auf die DB zugreifen
-        DBController dbController = new DBController();
-        dbController.insertEvent(new Event(name, eventOwner), "");
-        return LogicalViewNames.getNameEventManager();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName(); //get logged in username
+        EventCreator eventCreator = new EventCreator();
+        if(eventCreator.createEvent(eventname, username))
+        {
+            return LogicalViewNames.getNameEventManager();
+        }
+        return LogicalViewNames.getNameErrorPage();
     }
 }

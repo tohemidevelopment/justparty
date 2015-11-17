@@ -1,6 +1,9 @@
 package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
+import de.tohemi.justparty.datamodel.wrapper.EMail;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -15,6 +18,25 @@ import java.sql.SQLException;
  * Created by Heiko on 04.11.2015.
  */
 public class DBController {
+    private static DBController instance;
+
+    public synchronized static DBController getInstance() {
+        if (instance == null)
+        {
+            return new DBController();
+        }
+        return instance;
+    }
+
+    public User getUser(String username) {
+        try {
+            return new User(new EMail("hi@f.fe"));
+        } catch (InvalidEmailException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void insertEvent(Event e, String statement){
 
         // Create a new application context. this processes the Spring config
