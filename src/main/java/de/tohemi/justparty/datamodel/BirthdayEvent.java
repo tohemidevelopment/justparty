@@ -1,4 +1,4 @@
-package main.java.de.tohemi.justparty.datamodel;
+package de.tohemi.justparty.datamodel;
 
 import java.net.URL;
 

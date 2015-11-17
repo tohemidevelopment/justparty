@@ -1,7 +1,6 @@
-package main.java.de.tohemi.justparty.datamodel;
+package de.tohemi.justparty.datamodel;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 

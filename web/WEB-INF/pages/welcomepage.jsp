@@ -64,7 +64,6 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href='#'><span>Profil anzeigen</span></a></li>
                         <li><a href='/login'><span>Log in</span></a></li>
                     </ul>
                 </li>

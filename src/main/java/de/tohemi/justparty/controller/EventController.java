@@ -1,9 +1,9 @@
-package main.java.de.tohemi.justparty.controller;
+package de.tohemi.justparty.controller;
 
-import main.java.de.tohemi.justparty.database.controller.DBController;
-import main.java.de.tohemi.justparty.datamodel.Event;
-import main.java.de.tohemi.justparty.datamodel.User;
-import main.java.de.tohemi.justparty.view_interface.LogicalViewNames;
+import de.tohemi.justparty.database.controller.DBController;
+import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.view_interface.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

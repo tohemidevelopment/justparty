@@ -32,7 +32,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/" style="color: white;">LOGO</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/" style="color: white;">
+                Logo Platzhalter
+            </a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -50,15 +52,12 @@
                         </li>
                         <li><a href='${pageContext.request.contextPath}/manageEvent'><span>Events Managen</span></a>
                         </li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href='#'><span>Einladungen zu Events</span></a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href='#'><span>Profil anzeigen</span></a></li>
                         <li><a href="javascript:logoutFormSubmit()"><span>Logout</span></a></li>
                     </ul>
                 </li>
@@ -71,9 +70,7 @@
 
 <div class="container theme-showcase" role="main">
     <div class="page-header">
-        <h1>Manage Deine Events</h1>
-
-        <p>Hier Können Sie Ihre Events Managen</p>
+        <h1><spring:message code="manager.header1"/> </h1>
     </div>
 
 

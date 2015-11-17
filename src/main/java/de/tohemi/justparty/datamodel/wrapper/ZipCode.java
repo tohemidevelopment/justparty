@@ -1,6 +1,6 @@
-package main.java.de.tohemi.justparty.datamodel.wrapper;
+package de.tohemi.justparty.datamodel.wrapper;
 
-import main.java.de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
+import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 
 import java.text.DecimalFormat;
 

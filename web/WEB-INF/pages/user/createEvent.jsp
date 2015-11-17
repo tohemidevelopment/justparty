@@ -29,7 +29,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="color: white;">LOGO</a>
+            <a class="navbar-brand" href="/" style="color: white;">
+                Logo Platzhalter
+            </a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -51,7 +53,6 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href='#'><span>Profil anzeigen</span></a></li>
                         <li><a href='javascript:logoutFormSubmit()'><span>Ausloggen</span></a></li>
                     </ul>
                 </li>

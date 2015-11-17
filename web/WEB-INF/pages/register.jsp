@@ -34,7 +34,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="color: white;">LOGO</a>
+            <a class="navbar-brand" href="/" style="color: white;">
+                Logo Platzhalter
+            </a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -51,15 +53,12 @@
                     <ul class="dropdown-menu">
                         <li><a href='/createEvent'><span>Event Erstellen</span></a></li>
                         <li><a href='/manageEvent'><span>Events Managen</span></a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href='#'><span>Einladungen zu Events</span></a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href='#'><span>Profil anzeigen</span></a></li>
                         <li><a href='/login'><span>Log in</span></a></li>
                     </ul>
                 </li>
@@ -72,7 +71,7 @@
 
 <div class="container theme-showcase" role="main">
     <div class="page-header">
-        <h1>${message}</h1>
+        <h1><spring:message code="register.header1"/></h1>
     </div>
     <div>
         <form method="post" action="/perform_registry" role="form" class="form-horizontal" id="register_form">

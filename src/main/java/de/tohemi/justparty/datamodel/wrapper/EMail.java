@@ -1,6 +1,6 @@
-package main.java.de.tohemi.justparty.datamodel.wrapper;
+package de.tohemi.justparty.datamodel.wrapper;
 
-import main.java.de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
+import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 
 /**
  * Created by xce35l7 on 07.11.2015.

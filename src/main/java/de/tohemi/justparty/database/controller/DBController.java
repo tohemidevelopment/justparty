@@ -1,6 +1,6 @@
-package main.java.de.tohemi.justparty.database.controller;
+package de.tohemi.justparty.database.controller;
 
-import main.java.de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.Event;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
