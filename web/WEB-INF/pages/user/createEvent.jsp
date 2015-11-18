@@ -10,12 +10,12 @@
 <html>
 <head>
     <title><spring:message code="create.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta lastName="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/res/style.css">
 </head>
 <body>
 <form action="/j_spring_security_logout" method="post" id="logoutForm">
-    <input type="hidden" name="${_csrf.parameterName}"
+    <input type="hidden" lastName="${_csrf.parameterName}"
            value="${_csrf.token}"/>
 </form>
 <nav class="navbar navbar-default">
@@ -72,13 +72,13 @@
     </div>
     <form method="post" action="/createEvent" role="form" id="login_form">
         <div class="form-group">
-            <label for="name">Name: </label>
-            <input type="text" class="form-control" name="eventname" id="name" placeholder="Eventname">
+            <label for="lastName">Name: </label>
+            <input type="text" class="form-control" lastName="eventname" id="lastName" placeholder="Eventname">
         </div>
         <div class="form-group">
-            <input class="form-control" name="submit" type="submit" value="Event erstellen"/>
+            <input class="form-control" lastName="submit" type="submit" value="Event erstellen"/>
         </div>
-        <input type="hidden" name="${_csrf.parameterName}"
+        <input type="hidden" lastName="${_csrf.parameterName}"
                value="${_csrf.token}"/>
     </form>
 </div>

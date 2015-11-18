@@ -11,13 +11,13 @@
 <html>
 <head>
     <title><spring:message code="manager.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta lastName="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css">
 </head>
 <body>
 <c:url value="/j_spring_security_logout" var="logoutUrl"/>
 <form action="${logoutUrl}" method="post" id="logoutForm">
-    <input type="hidden" name="${_csrf.parameterName}"
+    <input type="hidden" lastName="${_csrf.parameterName}"
            value="${_csrf.token}"/>
 </form>
 

@@ -11,7 +11,7 @@
 <html>
 <head>
     <title><spring:message code="register.title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta lastName="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/res/style.css">
     <style>
         .form-control {
@@ -83,7 +83,7 @@
                         code="register.label.username"/>:</label>
 
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="username" id="usr"
+                    <input type="text" class="form-control" lastName="username" id="usr"
                            placeholder="<spring:message code="register.placeholder.username"/>"/>
                     <img src="http://twolske.bplaced.net/smily.png"/>
                 </div>
@@ -92,7 +92,7 @@
                 <label for="email" class="control-label col-sm-2"><spring:message code="register.label.email"/>:</label>
 
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="email" id="email"
+                    <input type="text" class="form-control" lastName="email" id="email"
                            placeholder="<spring:message code="register.placeholder.email"/>">
                     <img src="http://twolske.bplaced.net/smily.png"/>
                 </div>
@@ -101,7 +101,7 @@
                 <label for="pwd" class="control-label col-sm-2"><spring:message code="register.label.pw"/>:</label>
 
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="pwd" name="password"
+                    <input type="password" class="form-control" id="pwd" lastName="password"
                            placeholder="<spring:message code="register.placeholder.pw"/>">
                     <img src="http://twolske.bplaced.net/smily.png"/>
                 </div>
@@ -111,7 +111,7 @@
                         code="register.label.pw.repeat"/>:</label>
 
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="pwd2" name="password_repeat"
+                    <input type="password" class="form-control" id="pwd2" lastName="password_repeat"
                            placeholder="<spring:message code="register.placeholder.pw.repeat"/>">
                     <img src="http://twolske.bplaced.net/smily.png"/>
                 </div>
@@ -119,25 +119,70 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
-                        <label><input type="checkbox" name="terms"><spring:message
+                        <label><input type="checkbox" lastName="terms"><spring:message
                                 code="register.label.acceptterms"/></label>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <input class="form-control" style="width: 20%" name="submit" type="submit"
+                    <input class="form-control" style="width: 20%" lastName="submit" type="submit"
                            value="<spring:message code="welcome.registerbtn"/> "/>
                 </div>
             </div>
+            <input type="hidden" lastName="${_csrf.parameterName}"
+                   value="${_csrf.token}"/>
         </form>
+        <!--
+        <form:form modelAttribute="user" method="POST" enctype="utf-8">
+            <tr>
+                <td><label>firstName
+                </label>
+                </td>
+                <td><form:input path="firstName" value="" /></td>
+                <form:errors path="firstName" element="div"/>
+            </tr>
+            <tr>
+                <td><label>lastName
+                </label>
+                </td>
+                <td><form:input path="lastName" value="" /></td>
+                <form:errors path="lastName" element="div" />
+            </tr>
+            <tr>
+                <td><label>email
+                </label>
+                </td>
+                <td><form:input path="email" value="" /></td>
+                <form:errors path="email" element="div" />
+            </tr>
+            <tr>
+                <td><label>password
+                </label>
+                </td>
+                <td><form:input path="password" value="" type="password" /></td>
+                <form:errors path="password" element="div" />
+            </tr>
+            <tr>
+                <td><label>confirmPass
+                </label>
+                </td>
+                <td><form:input path="matchingPassword" value="" type="password" /></td>
+                <form:errors element="div" />
+            </tr>
+            <button type="submit">submit
+            </button>
 
 
+
+            <input type="hidden" lastName="${_csrf.parameterName}"
+                   value="${_csrf.token}"/>
+        </form:form>-->
     </div>
 </div>
 
 <!-- JS-Libraries requiered for Bootstrap -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </body>
 </html>

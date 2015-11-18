@@ -11,7 +11,7 @@
 <html>
 <head>
     <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta lastName="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/res/style.css">
     <title><spring:message code="login.title"/></title>
 </head>
@@ -74,16 +74,16 @@
     <form method="post" action="/perform_login" role="form" id="login_form">
         <div class="form-group">
             <label for="usr"><spring:message code="login.label.username"/>:</label>
-            <input type="text" class="form-control" name="username" id="usr"
+            <input type="text" class="form-control" lastName="username" id="usr"
                    placeholder="<spring:message code="login.placeholder.username"/>">
         </div>
         <div class="form-group">
             <label for="pwd"><spring:message code="login.label.pw"/>:</label>
-            <input type="password" class="form-control" id="pwd" name="password"
+            <input type="password" class="form-control" id="pwd" lastName="password"
                    placeholder="<spring:message code="login.placeholder.pw"/>">
         </div>
-        <input class="form-control" name="submit" type="submit" value="<spring:message code="login.login"/>"/>
-        <input type="hidden" name="${_csrf.parameterName}"
+        <input class="form-control" lastName="submit" type="submit" value="<spring:message code="login.login"/>"/>
+        <input type="hidden" lastName="${_csrf.parameterName}"
                value="${_csrf.token}"/>
     </form>
     <spring:message code="login.havenoaccount"/><br>
