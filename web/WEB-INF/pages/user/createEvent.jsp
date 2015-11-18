@@ -30,7 +30,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="/" style="color: white;">
-                Logo Platzhalter
+                justParty
             </a>
         </div>
 

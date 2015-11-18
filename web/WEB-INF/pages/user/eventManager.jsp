@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="${pageContext.request.contextPath}/" style="color: white;">
-                Logo Platzhalter
+                justParty
             </a>
         </div>
 
