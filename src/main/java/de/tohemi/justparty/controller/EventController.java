@@ -23,10 +23,8 @@ public class EventController {
     @RequestMapping(method = RequestMethod.POST)
     public String createEvent(@RequestParam(value = "eventname")String eventname, ModelMap model) {
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName(); //get logged in username
         EventCreator eventCreator = new EventCreator();
-        if(eventCreator.createEvent(eventname, username))
+        if(eventCreator.createEvent(eventname))
         {
             return LogicalViewNames.getNameEventManager();
         }

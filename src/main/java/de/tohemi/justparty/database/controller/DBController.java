@@ -62,4 +62,10 @@ public class DBController {
             DataSourceUtils.releaseConnection(c, ds);
         }
     }
+
+    public boolean add(Event event) {
+        //add Event to database
+        //return true if successful
+        return false;
+    }
 }

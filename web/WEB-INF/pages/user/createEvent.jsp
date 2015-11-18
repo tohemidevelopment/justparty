@@ -67,6 +67,9 @@
     <div class="page-header">
         <h2><spring:message code="create.header1"/></h2>
     </div>
+    <div class="alert alert-info" role="alert">
+        Diese Seite ist noch in Bearbeitung und dient momentan nur der optischen Demonstration.
+    </div>
     <form method="post" action="/createEvent" role="form" id="login_form">
         <div class="form-group">
             <label for="name">Name: </label>

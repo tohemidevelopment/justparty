@@ -72,7 +72,9 @@
     <div class="page-header">
         <h1><spring:message code="manager.header1"/> </h1>
     </div>
-
+    <div class="alert alert-info" role="alert">
+        Diese Seite ist noch in Bearbeitung und dient momentan nur der optischen Demonstration.
+    </div>
 
     <table class="table">
         <thead>

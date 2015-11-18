@@ -73,6 +73,9 @@
     <div class="page-header">
         <h1><spring:message code="register.header1"/></h1>
     </div>
+    <div class="alert alert-info" role="alert">
+        Diese Seite ist noch in Bearbeitung und dient momentan nur der optischen Demonstration.
+    </div>
     <div>
         <form method="post" action="/perform_registry" role="form" class="form-horizontal" id="register_form">
             <div class="form-group">
