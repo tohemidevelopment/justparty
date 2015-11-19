@@ -133,7 +133,6 @@
             <input type="hidden" lastName="${_csrf.parameterName}"
                    value="${_csrf.token}"/>
         </form>
-        <!--
         <form:form modelAttribute="user" method="POST" enctype="utf-8">
             <tr>
                 <td><label>firstName
@@ -177,7 +176,7 @@
 
             <input type="hidden" lastName="${_csrf.parameterName}"
                    value="${_csrf.token}"/>
-        </form:form>-->
+        </form:form>
     </div>
 </div>
 

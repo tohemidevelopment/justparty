@@ -13,6 +13,9 @@ public class Person {
         this.email=email;
     }
 
+    public Person() {
+    }
+
     public String getEmail() {
         return email.toString();
     }

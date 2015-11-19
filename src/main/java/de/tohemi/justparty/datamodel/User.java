@@ -20,6 +20,10 @@ public class User extends Person {
         super(email);
     }
 
+    public User() {
+
+    }
+
     public String getLastName() {
         return lastName;
     }
