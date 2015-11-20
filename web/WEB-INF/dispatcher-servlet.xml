@@ -12,14 +12,6 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--<bean id="DBController"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property eventname="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property eventname="url" value="jdbc:mysql://justparty.heiko-faller.de:3306"/>
-        <property eventname="username" value="root"/>
-        <property eventname="password" value="admin"/>
-    </bean>-->
-
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="classpath:language/messages" />
