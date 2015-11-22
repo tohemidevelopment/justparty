@@ -12,7 +12,7 @@
     <title><spring:message code="welcome.title"/></title>
     <meta lastName="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="/res/style.css">
+    <link rel="stylesheet" href="res/style.css">
 
     <style>
         img.mid {
