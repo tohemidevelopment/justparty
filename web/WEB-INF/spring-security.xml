@@ -8,6 +8,8 @@
       http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
+    <beans:import resource="classpath:/WEB-INF/spring-database.xml" />
+
     <http auto-config="true">
         <intercept-url pattern="/manageEvent**" access="ROLE_USER"/>
         <intercept-url pattern="/createEvent**" access="ROLE_USER"/>
@@ -25,9 +27,15 @@
 
     <authentication-manager>
         <authentication-provider>
-            <user-service>
+            <jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query=
+                                       "select email,password, enabled from users where email=?"
+                               authorities-by-username-query=
+                                       "select username, role from user_roles where username =?  " />
+
+           <!-- <user-service>
                 <user name="demo" password="demo" authorities="ROLE_USER"/>
-            </user-service>
+            </user-service>-->
         </authentication-provider>
     </authentication-manager>
 
