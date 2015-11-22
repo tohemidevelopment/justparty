@@ -79,7 +79,7 @@
         </div>
         <div class="form-group">
             <label for="pwd"><spring:message code="login.label.pw"/>:</label>
-            <input type="password" class="form-control" name='password' id="pwd" lastName="password"
+            <input type="password" class="form-control" id="pwd" name="password" lastName="password"
                    placeholder="<spring:message code="login.placeholder.pw"/>">
         </div>
         <input class="form-control" lastName="submit" type="submit" value="<spring:message code="login.login"/>"/>
