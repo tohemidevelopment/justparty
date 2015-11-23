@@ -63,4 +63,20 @@ public class DBController {
         }
         return true;
     }
+
+    public boolean usernameAvailable(String username) {
+        //TODO: Implement
+        return false;
+    }
+
+    public boolean emailAvailable(String email) {
+        //TODO: Implement
+        return false;
+    }
+
+    public static boolean createUserInDB(User user, String hashPw)
+    {
+        //TODO: Implement
+        return false;
+    }
 }

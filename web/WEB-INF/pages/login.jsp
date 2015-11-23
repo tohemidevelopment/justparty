@@ -73,6 +73,11 @@
                 ${login_error}
         </div>
     </core:if>
+    <core:if test="${not empty alert_success}">
+        <div class="alert alert-success" role="alert">
+              <spring:message code="${alert_success}"/>
+        </div>
+    </core:if>
     <form method="post" action="/perform_login" role="form" id="login_form">
         <div class="form-group">
             <label for="usr"><spring:message code="login.label.username"/>:</label>
