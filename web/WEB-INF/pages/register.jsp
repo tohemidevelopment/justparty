@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title><spring:message code="register.title"/></title>
@@ -77,107 +78,88 @@
         Diese Seite ist noch in Bearbeitung und dient momentan nur der optischen Demonstration.
     </div>
     <div>
-        <form method="post" action="/perform_registry" role="form" class="form-horizontal" id="register_form">
-            <div class="form-group">
-                <label for="usr" class="control-label col-sm-2"><spring:message
-                        code="register.label.username"/>:</label>
-
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" lastName="username" id="usr"
-                           placeholder="<spring:message code="register.placeholder.username"/>"/>
-                    <img src="http://twolske.bplaced.net/smily.png"/>
-                </div>
-            </div>
+        <form method="post" action="/register" role="form" class="form-horizontal" id="register_form">
             <div class="form-group">
                 <label for="email" class="control-label col-sm-2"><spring:message code="register.label.email"/>:</label>
 
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" lastName="email" id="email"
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="email" id="email"
                            placeholder="<spring:message code="register.placeholder.email"/>">
-                    <img src="http://twolske.bplaced.net/smily.png"/>
+                </div>
+                <div class="col-sm-2">
+                    <c:choose>
+                        <c:when test="${not empty EMAIL}">
+                            <spring:message code="${EMAIL}"/>
+                        </c:when>
+                            <c:otherwise>
+                            <img src="http://twolske.bplaced.net/smily.png"/>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
             <div class="form-group">
                 <label for="pwd" class="control-label col-sm-2"><spring:message code="register.label.pw"/>:</label>
 
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="pwd" lastName="password"
+                <div class="col-sm-8">
+                    <input type="password" class="form-control" id="pwd" name="password"
                            placeholder="<spring:message code="register.placeholder.pw"/>">
-                    <img src="http://twolske.bplaced.net/smily.png"/>
+                </div>
+                <div class="col-sm-2">
+                    <c:choose>
+                        <c:when test="${not empty PASSWORD}">
+                            <spring:message code="${PASSWORD}"/>
+                        </c:when>
+                        <c:otherwise>
+                            <img src="http://twolske.bplaced.net/smily.png"/>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
             <div class="form-group">
                 <label for="pwd2" class="control-label col-sm-2"><spring:message
                         code="register.label.pw.repeat"/>:</label>
 
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="pwd2" lastName="password_repeat"
+                <div class="col-sm-8">
+                    <input type="password" class="form-control" id="pwd2" name="password_repeat"
                            placeholder="<spring:message code="register.placeholder.pw.repeat"/>">
-                    <img src="http://twolske.bplaced.net/smily.png"/>
+                </div>
+                <div class="col-sm-2">
+                    <c:choose>
+                        <c:when test="${not empty PASSWORD}">
+                        </c:when>
+                        <c:otherwise>
+                            <img src="http://twolske.bplaced.net/smily.png"/>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-offset-2 col-sm-8">
                     <div class="checkbox">
-                        <label><input type="checkbox" lastName="terms"><spring:message
+                        <label><input type="checkbox" name="terms"><spring:message
                                 code="register.label.acceptterms"/></label>
                     </div>
                 </div>
+                <div class="col-sm-2">
+                    <c:choose>
+                        <c:when test="${not empty TERMS}">
+                            <spring:message code="${TERMS}"/>
+                        </c:when>
+                        <c:otherwise>
+                            <img src="http://twolske.bplaced.net/smily.png"/>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <input class="form-control" style="width: 20%" lastName="submit" type="submit"
+                    <input class="form-control" style="width: 20%" name="submit" type="submit"
                            value="<spring:message code="welcome.registerbtn"/> "/>
                 </div>
             </div>
-            <input type="hidden" lastName="${_csrf.parameterName}"
+            <input type="hidden" name="${_csrf.parameterName}"
                    value="${_csrf.token}"/>
         </form>
-        <!--
-        <form:form modelAttribute="user" method="POST" enctype="utf-8">
-            <tr>
-                <td><label>firstName
-                </label>
-                </td>
-                <td><form:input path="firstName" value="" /></td>
-                <form:errors path="firstName" element="div"/>
-            </tr>
-            <tr>
-                <td><label>lastName
-                </label>
-                </td>
-                <td><form:input path="lastName" value="" /></td>
-                <form:errors path="lastName" element="div" />
-            </tr>
-            <tr>
-                <td><label>email
-                </label>
-                </td>
-                <td><form:input path="email" value="" /></td>
-                <form:errors path="email" element="div" />
-            </tr>
-            <tr>
-                <td><label>password
-                </label>
-                </td>
-                <td><form:input path="password" value="" type="password" /></td>
-                <form:errors path="password" element="div" />
-            </tr>
-            <tr>
-                <td><label>confirmPass
-                </label>
-                </td>
-                <td><form:input path="matchingPassword" value="" type="password" /></td>
-                <form:errors element="div" />
-            </tr>
-            <button type="submit">submit
-            </button>
-
-
-
-            <input type="hidden" lastName="${_csrf.parameterName}"
-                   value="${_csrf.token}"/>
-        </form:form>-->
     </div>
 </div>
 

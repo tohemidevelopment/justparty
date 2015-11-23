@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value = "/login")
 public class LoginController  {
     @RequestMapping(method = RequestMethod.GET)
-    public String printCreateEvent(@RequestParam(value = "error", required = false) String error, ModelMap model) {
+    public String printCreateEvent(@RequestParam(value = "error", required = false) String error,@RequestParam(value = "alert_success", required = false) String alert_success, ModelMap model) {
         if (error != null) {
             model.addAttribute("login_error","Ung&uuml;ltige Logindaten!");
+        }
+        if (alert_success != null){
+            System.out.println(alert_success);
+            model.addAttribute("alert_success", alert_success);
         }
         return LogicalViewNames.getNameLogin();
     }

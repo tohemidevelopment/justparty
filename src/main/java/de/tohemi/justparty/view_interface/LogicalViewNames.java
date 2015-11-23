@@ -10,6 +10,7 @@ public class LogicalViewNames {
     private final static String eventManager = "user/eventManager";
     private final static String nameCreateEvent = "user/createEvent";
     private final static String nameErrorPage = "error";
+    private final static String nameInfoPage = "infopage";
 
     public static String getNameWelcomePage() {
         return welcome;
@@ -33,5 +34,9 @@ public class LogicalViewNames {
 
     public static String getNameErrorPage() {
         return nameErrorPage;
+    }
+
+    public static String getNameInfoPage() {
+        return nameInfoPage;
     }
 }

@@ -14,7 +14,7 @@ public class EventCreator {
     public boolean createEvent(String eventname) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName(); //get logged in username
+        String username = auth.getName(); //get logged in username (=email)
         DBController dbController = DBController.getInstance();
         User user = new User(username);
         return dbController.add(new Event(eventname, user));
