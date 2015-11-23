@@ -80,25 +80,6 @@
     <div>
         <form method="post" action="/register" role="form" class="form-horizontal" id="register_form">
             <div class="form-group">
-                <label for="usr" class="control-label col-sm-2"><spring:message
-                        code="register.label.username"/>:</label>
-
-                <div class="col-sm-8">
-                    <input type="text" class="form-control" name="username" id="usr"
-                           placeholder="<spring:message code="register.placeholder.username"/>"/>
-                </div>
-                <div class="col-sm-2">
-                    <c:choose>
-                        <c:when test="${not empty USERNAME}">
-                            <spring:message code="${USERNAME}"/>
-                        </c:when>
-                        <c:otherwise>
-                            <img src="http://twolske.bplaced.net/smily.png"/>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
-            </div>
-            <div class="form-group">
                 <label for="email" class="control-label col-sm-2"><spring:message code="register.label.email"/>:</label>
 
                 <div class="col-sm-8">

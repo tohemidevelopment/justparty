@@ -8,7 +8,6 @@ import java.util.Calendar;
  * Created by Heiko on 04.11.2015.
  */
 public class User extends Person {
-    private String username;
     private String lastName;
     private String firstName;
     private Address address;
@@ -48,13 +47,5 @@ public class User extends Person {
 
     public void setBirthday(Calendar birthday) {
         this.birthday = birthday;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 }

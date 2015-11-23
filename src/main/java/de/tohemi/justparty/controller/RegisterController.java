@@ -18,10 +18,10 @@ public class RegisterController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/register")
-    public String performRegister(ModelMap model, @RequestParam(value = "username") String username, @RequestParam(value = "email") String email,
+    public String performRegister(ModelMap model, @RequestParam(value = "email") String email,
                                   @RequestParam(value = "password") String password, @RequestParam(value = "password_repeat") String matchingPassword) {
 
-        de.tohemi.justparty.businesslogic.Error error = new UserHandler().createUser(username, email, password, matchingPassword);
+        de.tohemi.justparty.businesslogic.Error error = new UserHandler().createUser( email, password, matchingPassword);
         if (error == null){
             model.addAttribute("alert_success", "alert.success.registration");
             return "redirect:" + LogicalViewNames.getNameLogin();
