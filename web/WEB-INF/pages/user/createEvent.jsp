@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/res/style.css">
 </head>
 <body>
-<form action="/j_spring_security_logout" method="post" id="logoutForm">
+<form action="/j_spring_security_logout?${_csrf.parameterName}=${_csrf.token}" method="post" id="logoutForm">
     <input type="hidden" lastName="${_csrf.parameterName}"
            value="${_csrf.token}"/>
 </form>
@@ -72,13 +72,13 @@
     </div>
     <form method="post" action="/createEvent" role="form" id="login_form">
         <div class="form-group">
-            <label for="lastName">Name: </label>
-            <input type="text" class="form-control" lastName="eventname" id="lastName" placeholder="Eventname">
+            <label for="name">Name: </label>
+            <input type="text" class="form-control" name="eventname" id="name" placeholder="Eventname">
         </div>
         <div class="form-group">
-            <input class="form-control" lastName="submit" type="submit" value="Event erstellen"/>
+            <input class="form-control" name="submit" type="submit" value="Event erstellen"/>
         </div>
-        <input type="hidden" lastName="${_csrf.parameterName}"
+        <input type="hidden" name="${_csrf.parameterName}"
                value="${_csrf.token}"/>
     </form>
 </div>

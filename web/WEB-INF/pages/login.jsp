@@ -8,12 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
     <meta lastName="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/res/style.css">
     <title><spring:message code="login.title"/></title>
+    <sec:csrfMetaTags/>
 </head>
 
 <body>
@@ -82,8 +84,8 @@
             <input type="password" class="form-control" id="pwd" name="password" lastName="password"
                    placeholder="<spring:message code="login.placeholder.pw"/>">
         </div>
-        <input class="form-control" lastName="submit" type="submit" value="<spring:message code="login.login"/>"/>
-        <input type="hidden" lastName="${_csrf.parameterName}"
+        <input class="form-control" name="submit" type="submit" value="<spring:message code="login.login"/>"/>
+        <input type="hidden" name="${_csrf.parameterName}"
                value="${_csrf.token}"/>
     </form>
     <spring:message code="login.havenoaccount"/><br>
