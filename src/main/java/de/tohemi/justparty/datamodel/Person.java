@@ -7,23 +7,24 @@ import de.tohemi.justparty.datamodel.wrapper.EMail;
  * Created by Heiko on 04.11.2015.
  */
 public class Person {
-    private EMail email;
+    private String email;
 
-    public Person(EMail email){
+    public Person(String email){
         this.email=email;
     }
 
     public String getEmail() {
-        return email.toString();
+        return email;
     }
 
     public void setEmail(EMail email) {
-        this.email = email;
+        this.email = email.toString();
     }
 
     public void setEmail(String email) {
         try {
-            this.email = new EMail(email);
+            new EMail(email); //TEST IF VALID
+            this.email =email;
         } catch (InvalidEmailException e) {
             e.printStackTrace();
         }
