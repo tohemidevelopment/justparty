@@ -42,21 +42,13 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" style="color: white;">Events <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href='/createEvent'><span>Event Erstellen</span></a></li>
-                        <li><a href='/manageEvent'><span>Events Managen</span></a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href='/login'><span>Log in</span></a></li>
-                    </ul>
-                </li>
+                <a class="navbar-brand" href="/register" style="color: white;">
+                    <spring:message code="nav.register"/>
+                </a>
+                <a class="navbar-brand" href="/" style="color: white;">
+                    <spring:message code="nav.whatis"/>
+                </a>
+
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -75,7 +67,7 @@
     </core:if>
     <core:if test="${not empty alert_success}">
         <div class="alert alert-success" role="alert">
-              <spring:message code="${alert_success}"/>
+            <spring:message code="${alert_success}"/>
         </div>
     </core:if>
     <form method="post" action="/perform_login" role="form" id="login_form">
