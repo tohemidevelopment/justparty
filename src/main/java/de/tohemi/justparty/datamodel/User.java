@@ -8,15 +8,12 @@ import java.util.Calendar;
  * Created by Heiko on 04.11.2015.
  */
 public class User extends Person {
-    //private String username;
-    private String password;
-    private String matchingPassword;
     private String lastName;
     private String firstName;
     private Address address;
     private Calendar birthday;
 
-    public User(EMail email) {
+    public User(String email) {
         super(email);
     }
 
@@ -50,25 +47,6 @@ public class User extends Person {
 
     public void setBirthday(Calendar birthday) {
         this.birthday = birthday;
-    }
-
-    //
-
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getMatchingPassword() {
-        return matchingPassword;
-    }
-
-    public void setMatchingPassword(String matchingPassword) {
-        this.matchingPassword = matchingPassword;
     }
 
 }
