@@ -87,10 +87,12 @@ public class DBController {
     }
 
     public boolean emailAvailable(String email) {
-        return false;
+        //TODO: Implement
+        return true;
     }
 
     public boolean createUserInDB(User user, String hash) {
+        //TODO: Implement
         return false;
     }
 }

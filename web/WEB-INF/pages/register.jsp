@@ -50,14 +50,6 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" style="color: white;">Events <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href='/createEvent'><span>Event Erstellen</span></a></li>
-                        <li><a href='/manageEvent'><span>Events Managen</span></a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href='/login'><span>Log in</span></a></li>
@@ -86,16 +78,11 @@
                     <input type="text" class="form-control" name="email" id="email"
                            placeholder="<spring:message code="register.placeholder.email"/>">
                 </div>
-                <div class="col-sm-2">
-                    <c:choose>
-                        <c:when test="${not empty EMAIL}">
-                            <spring:message code="${EMAIL}"/>
-                        </c:when>
-                            <c:otherwise>
-                            <img src="http://twolske.bplaced.net/smily.png"/>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
+                <c:if test="${not empty EMAIL}">
+                    <div class="col-sm-2">
+                        <spring:message code="${EMAIL}"/>
+                    </div>
+                </c:if>
             </div>
             <div class="form-group">
                 <label for="pwd" class="control-label col-sm-2"><spring:message code="register.label.pw"/>:</label>
@@ -104,16 +91,11 @@
                     <input type="password" class="form-control" id="pwd" name="password"
                            placeholder="<spring:message code="register.placeholder.pw"/>">
                 </div>
-                <div class="col-sm-2">
-                    <c:choose>
-                        <c:when test="${not empty PASSWORD}">
-                            <spring:message code="${PASSWORD}"/>
-                        </c:when>
-                        <c:otherwise>
-                            <img src="http://twolske.bplaced.net/smily.png"/>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
+                <c:if test="${not empty PASSWORD}">
+                    <div class="col-sm-2">
+                        <spring:message code="${PASSWORD}"/>
+                    </div>
+                </c:if>
             </div>
             <div class="form-group">
                 <label for="pwd2" class="control-label col-sm-2"><spring:message
@@ -123,33 +105,23 @@
                     <input type="password" class="form-control" id="pwd2" name="password_repeat"
                            placeholder="<spring:message code="register.placeholder.pw.repeat"/>">
                 </div>
-                <div class="col-sm-2">
-                    <c:choose>
-                        <c:when test="${not empty PASSWORD}">
-                        </c:when>
-                        <c:otherwise>
-                            <img src="http://twolske.bplaced.net/smily.png"/>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
+                <c:if test="${not empty PASSWORD}">
+                    <div class="col-sm-2">
+                    </div>
+                </c:if>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-8">
                     <div class="checkbox">
-                        <label><input type="checkbox" name="terms"><spring:message
+                        <label><input type="checkbox" name="terms" value=""><spring:message
                                 code="register.label.acceptterms"/></label>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <c:choose>
-                        <c:when test="${not empty TERMS}">
-                            <spring:message code="${TERMS}"/>
-                        </c:when>
-                        <c:otherwise>
-                            <img src="http://twolske.bplaced.net/smily.png"/>
-                        </c:otherwise>
-                    </c:choose>
-                </div>
+                <c:if test="${not empty TERMS}">
+                    <div class="col-sm-2">
+                        <spring:message code="${TERMS}"/>
+                    </div>
+                </c:if>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
