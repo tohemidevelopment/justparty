@@ -13,6 +13,10 @@ public class Person {
         this.email=email;
     }
 
+    public Person(EMail email){
+        this.email=email.toString();
+    }
+
     public String getEmail() {
         return email;
     }

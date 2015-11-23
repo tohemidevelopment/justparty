@@ -16,6 +16,9 @@ public class User extends Person {
     public User(String email) {
         super(email);
     }
+    public User(EMail email) {
+        super(email);
+    }
 
     public String getLastName() {
         return lastName;
