@@ -39,7 +39,7 @@ public class DBController {
     public boolean add(Event e) {
 
         // Create a new application context. this processes the Spring config
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-dataBase.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
         // Retrieve the data source from the application context
         DataSource ds = (DataSource) ctx.getBean("dataSource");
         // Open a database connection using Spring's DataSourceUtils
