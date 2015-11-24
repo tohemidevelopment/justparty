@@ -2,6 +2,7 @@ package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 
@@ -12,16 +13,13 @@ public class UserHandler {
 
     public static final int MIN_PASSWD_LENGTH = 4;
 
-    public de.tohemi.justparty.businesslogic.Error createUser(String email, String password, String matchingPassword, boolean acceptedTerms) {
+    public Error createUser(String email, String password, String matchingPassword, boolean acceptedTerms) {
         User user;
         try {
             user = new User(new EMail(email));
         } catch (InvalidEmailException e) {
             //log exception
             return new Error("register.error.email", ErrorType.EMAIL);
-        }
-        if(!DBController.getInstance().emailAvailable(user.getEmail())){
-            return new Error("register.error.email.taken", ErrorType.EMAIL);
         }
         if(!passwordValid(password, matchingPassword)) {
             return new Error("register.error.password", ErrorType.PASSWORD);
@@ -30,12 +28,22 @@ public class UserHandler {
         {
             return new Error("register.error.terms", ErrorType.TERMS);
         }
-        //Add User to DB
-        if (DBController.getInstance().createUserInDB(user, UserRoles.USER_ROLE, HashFunction.getHash(password)))
-        {
-            //Successful Registration
-            return null;
+        try {
+            if(DBController.getInstance().userIsRegistered(user.getEmail())){
+                return new Error("register.error.email.taken", ErrorType.EMAIL);
+            }
+            if(DBController.getInstance().changeToUser(user,HashFunction.getHash(password))){
+                return null;
+            }
+
+        } catch (UserNotFoundException e) {
+            if (DBController.getInstance().addUser(user, UserRoles.USER, HashFunction.getHash(password)))
+            {
+                return null;
+            }
         }
+        //Add User to DB
+
         return new Error("", null);
     }
 
