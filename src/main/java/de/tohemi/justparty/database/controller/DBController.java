@@ -1,10 +1,9 @@
 package de.tohemi.justparty.database.controller;
 
-import de.tohemi.justparty.businesslogic.UserRoles;
+import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
-import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
-import de.tohemi.justparty.datamodel.wrapper.EMail;
+import de.tohemi.justparty.datamodel.UserRoles;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -59,7 +58,7 @@ public class DBController {
         return null;
     }
 */
-    public boolean add(Event e) {
+    public boolean addEvent(Event e) {
 
         // Create a new application context. this processes the Spring config
         ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
@@ -85,6 +84,45 @@ public class DBController {
         return true;
     }
 
+    /**
+     * Returns true, if the given Email-Address is already used by a user.
+     * Returns false, if the Email-Address is in our DB but not used by a user.
+     * Throws UserNotFoundException, if the Email-Address is not in our DB
+     * @param email
+     * @return
+     */
+    public boolean userIsRegistered(String email)throws UserNotFoundException{
+        //TODO: Implement
+        // Create a new application context. this processes the Spring config
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
+        // Retrieve the data source from the application context
+        DataSource ds = (DataSource) ctx.getBean("dataSource");
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM user_roles WHERE email='" + email + "'");
+            ResultSet rs = ps.executeQuery();
+            if(!rs.next())
+            {
+                throw new UserNotFoundException();
+            }else{
+                rs.beforeFirst();
+            }
+            if(rs.next()){
+                if(rs.getString("role").equals(UserRoles.NONUSER))
+                    return false;
+            }
+        }catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+        }
+        finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+    @Deprecated
     public boolean emailAvailable(String email) {
         //TODO: Implement
         // Create a new application context. this processes the Spring config
@@ -112,7 +150,7 @@ public class DBController {
         return false;
     }
 
-    public boolean createUserInDB(User user, UserRoles userRole, String hash) {
+    public boolean addUser(User user, String userRole, String hash) {
         //TODO: Implement
         // Create a new application context. this processes the Spring config
         ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
@@ -120,10 +158,14 @@ public class DBController {
         DataSource ds = (DataSource) ctx.getBean("dataSource");
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
+
         try {
-            PreparedStatement ps = c.prepareStatement("INSERT INTO users (email,password,role) VALUE ('" + user.getEmail() + "', '" + hash + "','" + userRole.toString() + "')");
-            ps.executeUpdate();
-            ps.close();
+            PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email,password) VALUE ('" + user.getEmail() + "', '" + hash + "')");
+            PreparedStatement psUserRole = c.prepareStatement("INSERT INTO user_roles (role,Email) VALUE ('"+UserRoles.USER+"','"+user.getEmail()+"')");
+            psUser.executeUpdate();
+            psUser.close();
+            psUserRole.executeUpdate();
+            psUserRole.close();
             c.close();
             DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
@@ -137,11 +179,39 @@ public class DBController {
         }
         return true;
     }
-
+    public boolean changeToUser(User user, String hash) {
+        // Create a new application context. this processes the Spring config
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
+        // Retrieve the data source from the application context
+        DataSource ds = (DataSource) ctx.getBean("dataSource");
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psUser = c.prepareStatement("UPDATE users SET Password='" + hash + "' WHERE Email='"+user.getEmail()+"'");
+            PreparedStatement psUserRole = c.prepareStatement("UPDATE user_roles SET role='"+UserRoles.USER+"' WHERE Email='"+user.getEmail()+"';");
+            psUser.executeUpdate();
+            psUser.close();
+            psUserRole.executeUpdate();
+            psUserRole.close();
+            c.close();
+            DataSourceUtils.releaseConnection(c, ds);
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+            return false;
+        }
+        finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
     private void releaseConnection(DataSource ds, Connection c) {
         try {
             c.close();
         } catch (SQLException exp) {}
         DataSourceUtils.releaseConnection(c, ds);
     }
+
+
 }

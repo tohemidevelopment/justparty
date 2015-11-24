@@ -17,6 +17,6 @@ public class EventCreator {
         String username = auth.getName(); //get logged in username (=email)
         DBController dbController = DBController.getInstance();
         User user = new User(username);
-        return dbController.add(new Event(eventname, user));
+        return dbController.addEvent(new Event(eventname, user));
     }
 }
