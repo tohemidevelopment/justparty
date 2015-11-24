@@ -67,7 +67,6 @@ public class DBController {
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            // retrieve a list of three random cities
             PreparedStatement ps = c.prepareStatement("INSERT INTO events (name, email) VALUE ('" + e.getName() + "', '" + e.getEventOwner().getEmail() + "')");
             ps.executeUpdate();
             ps.close();
@@ -88,11 +87,55 @@ public class DBController {
 
     public boolean emailAvailable(String email) {
         //TODO: Implement
+        // Create a new application context. this processes the Spring config
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
+        // Retrieve the data source from the application context
+        DataSource ds = (DataSource) ctx.getBean("dataSource");
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM users WHERE email='" + email + "'");
+            ResultSet rs = ps.executeQuery();
+            if(rs.getInt("total")!=0)
+                return false;
+
+        }catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+            try {
+                c.close();
+            } catch (SQLException exp) {}
+            DataSourceUtils.releaseConnection(c, ds);
+            return false;
+        }
         return true;
     }
 
     public boolean createUserInDB(User user, String hash) {
         //TODO: Implement
-        return false;
+        // Create a new application context. this processes the Spring config
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
+        // Retrieve the data source from the application context
+        DataSource ds = (DataSource) ctx.getBean("dataSource");
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("INSERT INTO users (email,password) VALUE ('" + user.getEmail() + "', '" + hash + "')");
+            ps.executeUpdate();
+            ps.close();
+            c.close();
+            DataSourceUtils.releaseConnection(c, ds);
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+            try {
+                c.close();
+            } catch (SQLException exp) {}
+            DataSourceUtils.releaseConnection(c, ds);
+            return false;
+        }
+        return true;
     }
 }
