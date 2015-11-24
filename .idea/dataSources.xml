@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3135502254">
+  <component name="DataSourceManagerImpl" format="xml" hash="1620432371">
     <data-source source="LOCAL" name="MySQL - justParty_db@justparty.heiko-faller.de" uuid="76dbe5a7-677f-49db-8b30-4da6091eb340">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
