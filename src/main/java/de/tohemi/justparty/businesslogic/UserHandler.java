@@ -31,7 +31,7 @@ public class UserHandler {
             return new Error("register.error.terms", ErrorType.TERMS);
         }
         //Add User to DB
-        if (DBController.getInstance().createUserInDB(user, HashFunction.getHash(password)))
+        if (DBController.getInstance().createUserInDB(user, UserRoles.USER_ROLE, HashFunction.getHash(password)))
         {
             //Successful Registration
             return null;

@@ -27,13 +27,16 @@
 
     <authentication-manager>
         <authentication-provider>
+            <password-encoder ref="encoder"/>
             <jdbc-user-service data-source-ref="dataSource"
                                users-by-username-query=
                                        "select email,password, enabled from users where email=?"
                                authorities-by-username-query=
-                                       "select username, role from user_roles where username =?  " />
-
-            <password-encoder hash="bcrypt" />
+                                       "select email, role from users where email =?  " />
         </authentication-provider>
     </authentication-manager>
+
+    <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="10" />
+    </beans:bean>
 </beans:beans>

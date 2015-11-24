@@ -1,5 +1,6 @@
 package de.tohemi.justparty.database.controller;
 
+import de.tohemi.justparty.businesslogic.UserRoles;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
@@ -75,12 +76,11 @@ public class DBController {
         } catch (SQLException ex) {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
-            try {
-                c.close();
-            } catch (SQLException exp) {}
-            DataSourceUtils.releaseConnection(c, ds);
             return false;
+        }
+        finally {
+            // ignore failure closing connection
+            releaseConnection(ds, c);
         }
         return true;
     }
@@ -96,23 +96,23 @@ public class DBController {
         try {
             PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM users WHERE email='" + email + "'");
             ResultSet rs = ps.executeQuery();
-            if(rs.getInt("total")!=0)
-                return false;
+            if(rs.next())
+            {
+                return rs.getInt(1)== 0;
+            }
 
         }catch (SQLException ex) {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
             // ignore failure closing connection
-            try {
-                c.close();
-            } catch (SQLException exp) {}
-            DataSourceUtils.releaseConnection(c, ds);
-            return false;
         }
-        return true;
+        finally {
+            releaseConnection(ds, c);
+        }
+        return false;
     }
 
-    public boolean createUserInDB(User user, String hash) {
+    public boolean createUserInDB(User user, UserRoles userRole, String hash) {
         //TODO: Implement
         // Create a new application context. this processes the Spring config
         ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
@@ -121,7 +121,7 @@ public class DBController {
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("INSERT INTO users (email,password) VALUE ('" + user.getEmail() + "', '" + hash + "')");
+            PreparedStatement ps = c.prepareStatement("INSERT INTO users (email,password,role) VALUE ('" + user.getEmail() + "', '" + hash + "','" + userRole.toString() + "')");
             ps.executeUpdate();
             ps.close();
             c.close();
@@ -130,12 +130,18 @@ public class DBController {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
             // ignore failure closing connection
-            try {
-                c.close();
-            } catch (SQLException exp) {}
-            DataSourceUtils.releaseConnection(c, ds);
             return false;
         }
+        finally {
+            releaseConnection(ds, c);
+        }
         return true;
+    }
+
+    private void releaseConnection(DataSource ds, Connection c) {
+        try {
+            c.close();
+        } catch (SQLException exp) {}
+        DataSourceUtils.releaseConnection(c, ds);
     }
 }
