@@ -1,5 +1,7 @@
-package de.tohemi.justparty.businesslogic;
+package de.tohemi.justparty.businesslogic.user;
 
+import de.tohemi.justparty.businesslogic.*;
+import de.tohemi.justparty.businesslogic.Error;
 import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserRoles;
@@ -19,7 +21,7 @@ public class UserHandler {
             user = new User(new EMail(email));
         } catch (InvalidEmailException e) {
             //log exception
-            return new Error("register.error.email", ErrorType.EMAIL);
+            return new de.tohemi.justparty.businesslogic.Error("register.error.email", ErrorType.EMAIL);
         }
         if(!passwordValid(password, matchingPassword)) {
             return new Error("register.error.password", ErrorType.PASSWORD);

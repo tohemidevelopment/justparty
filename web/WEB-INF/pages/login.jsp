@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
     <div class="container-fluid" id="navbar">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -30,7 +30,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="color: white;">
+            <a class="navbar-brand" href="/">
                 justParty
             </a>
         </div>
@@ -42,10 +42,10 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <a class="navbar-brand" href="/register" style="color: white;">
+                <a class="navbar-brand" href="/register">
                     <spring:message code="nav.register"/>
                 </a>
-                <a class="navbar-brand" href="/" style="color: white;">
+                <a class="navbar-brand" href="/">
                     <spring:message code="nav.whatis"/>
                 </a>
 

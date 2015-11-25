@@ -20,10 +20,58 @@
             margin-left: auto;
             margin-right: auto
         }
-
     </style>
 </head>
 <body>
+<!--
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="javascript:void(0)">Brand</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="javascript:void(0)">Link</a></li>
+            <li><a href="javascript:void(0)">Link</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0)">Action</a></li>
+                    <li><a href="javascript:void(0)">Another action</a></li>
+                    <li><a href="javascript:void(0)">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="javascript:void(0)">Separated link</a></li>
+                </ul>
+            </li>
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:void(0)">Link</a></li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0)">Action</a></li>
+                    <li><a href="javascript:void(0)">Another action</a></li>
+                    <li><a href="javascript:void(0)">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="javascript:void(0)">Separated link</a></li>
+                </ul>
+            </li>
+        </ul>
+</nav>
+-->
+
 
 <nav class="navbar navbar-default">
     <div class="container-fluid" id="navbar">
@@ -36,7 +84,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="color: white;">
+            <a class="navbar-brand" href="/">
                 justParty
             </a>
         </div>
@@ -51,7 +99,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" style="color: white;"><spring:message code="nav.events"/> <span
+                       aria-expanded="false"><spring:message code="nav.events"/> <span
                             class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href='/createEvent'><span><spring:message code="nav.events.create"/> </span></a></li>
@@ -62,7 +110,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
+                       aria-expanded="false">Einstellungen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href='/login'><span>Log in</span></a></li>
                     </ul>
