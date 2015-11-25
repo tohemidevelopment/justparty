@@ -72,18 +72,38 @@
     <div class="page-header">
         <h1><spring:message code="manager.header1"/> </h1>
     </div>
-    <div class="alert alert-info" role="alert">
-        Diese Seite ist noch in Bearbeitung und dient momentan nur der optischen Demonstration.
+    <!-- alerts -->
+    <div>
+        <c:if test="${not empty alert_danger}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_danger}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_warning}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_warning}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_success}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_success}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_success}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_success}"/>
+            </div>
+        </c:if>
     </div>
 
     <table class="table">
         <thead>
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#">Aktuelle Events</a></li>
-            <li role="presentation"><a href="#">Einladungen</a></li>
-            <li role="presentation"><a href="#">Eigene Events</a></li>
-            <li role="presentation"><a href="#">Absagen</a></li>
-            <li role="presentation"><a href="#">Frühere Events</a></li>
+            <li role="presentation" class="active"><a href="javascript:showCurrentEvents()"><spring:message code="events.nav.current"/></a></li>
+            <li role="presentation"><a href="javascript:showInvitations()"><spring:message code="events.nav.invites"/></a></li>
+            <li role="presentation"><a href="javascript:showOwnedEvents()"><spring:message code="events.nav.owned"/></a></li>
+            <li role="presentation"><a href="javascript:showCanceldEvents()"><spring:message code="events.nav.canceled"/></a></li>
+            <li role="presentation"><a href="javascript:showPastEvents()"><spring:message code="events.nav.past"/></a></li>
         </ul>
         </thead>
         <tbody>
@@ -122,5 +142,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!-- JS-Libraries requiered for justParty -->
 <script src="${pageContext.request.contextPath}/res/js/logout.js"></script>
+<script src="${pageContext.request.contextPath}/res/js/events.js"></script>
 </body>
 </html>

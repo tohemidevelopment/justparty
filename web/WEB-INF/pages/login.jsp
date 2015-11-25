@@ -51,11 +51,29 @@
                 ${login_error}
         </div>
     </core:if>
-    <core:if test="${not empty alert_success}">
-        <div class="alert alert-success" role="alert">
-            <spring:message code="${alert_success}"/>
-        </div>
-    </core:if>
+    <!-- alerts -->
+    <div>
+        <c:if test="${not empty alert_danger}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_danger}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_warning}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_warning}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_success}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_success}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_success}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_success}"/>
+            </div>
+        </c:if>
+    </div>
     <form method="post" action="/perform_login" role="form" id="login_form">
         <div class="form-group">
             <label for="usr"><spring:message code="login.label.username"/>:</label>

@@ -67,8 +67,28 @@
     <div class="page-header">
         <h2><spring:message code="create.header1"/></h2>
     </div>
-    <div class="alert alert-info" role="alert">
-        Diese Seite ist noch in Bearbeitung und dient momentan nur der optischen Demonstration.
+    <!-- alerts -->
+    <div>
+        <c:if test="${not empty alert_danger}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_danger}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_warning}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_warning}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_success}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_success}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_success}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_success}"/>
+            </div>
+        </c:if>
     </div>
     <form method="post" action="/createEvent" role="form" id="login_form">
         <div class="form-group">

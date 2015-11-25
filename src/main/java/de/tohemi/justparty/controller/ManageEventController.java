@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ManageEventController {
     @RequestMapping(method = RequestMethod.GET)
     public String printCreateEvent(ModelMap model) {
+
+        model.addAttribute("alert_info", "alert.notimplyet");
+
+
+
+
         return LogicalViewNames.getNameEventManager();
     }
 }

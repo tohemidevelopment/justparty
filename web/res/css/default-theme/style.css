@@ -4,13 +4,11 @@ Date: 06.11.2015
 Time: 23:39
 */
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
-/* Bootstrap theme */
-/*@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css);*/
 
 
 body{
     font-family: Arial;
-
+    margin-top: 0;
 }
 
 div.welcome#btnpanel {
@@ -27,15 +25,10 @@ button.btn.btn-lg.btn-primary {
     width:30%;
 }
 
-#register_form {
-    width: 100%;
-}
-
-
-
+/* navbar customization*/
 .navbar-default {
     background-color: #7fc7af;
-    border:0;
+    border-color: #b5ead8;
 }
 .navbar-default .navbar-brand {
     color: #ffffff;
@@ -92,3 +85,5 @@ button.btn.btn-lg.btn-primary {
         background-color: #b5ead8;
     }
 }
+
+/**/

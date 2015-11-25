@@ -60,7 +60,8 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false" style="color: white;"><spring:message code="nav.settings"/><span class="caret"></span></a>
+                           aria-expanded="false" style="color: white;"><spring:message code="nav.settings"/><span
+                                class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="javascript:logoutFormSubmit()"><spring:message code="nav.logout"/></a></li>
                         </ul>
@@ -75,9 +76,34 @@
     </div>
 </nav>
 
-<h2 style="text-align: center;"><spring:message code="welcome.header1"/></h2>
-
-<p style="text-align: center;"><spring:message code="welcome.txt"/></p>
+<div class="container theme-showcase" role="main">
+    <div class="page-header" style="border:0; text-align: center;">
+        <h1><spring:message code="welcome.header1"/></h1>
+    </div>
+    <!-- alerts -->
+    <div>
+        <c:if test="${not empty alert_danger}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_danger}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_warning}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_warning}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_success}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_success}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_success}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_success}"/>
+            </div>
+        </c:if>
+    </div>
+</div>
 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -146,18 +172,8 @@
     </a>
 </div>
 
-<!--<a href="?lang=de">deutsch</a>
-<a href="?lang=en">en</a>
-
-Current Locale : ${pageContext.response.locale}-->
-
 <div class="welcome" id="btnpanel">
-    <a href="/register">
-        <button type="button" class="btn btn-lg btn-primary"><spring:message code="welcome.registerbtn"/></button>
-    </a>
-    <a href="/login">
-        <button type="button" class="btn btn-lg btn-primary"><spring:message code="welcome.loginbtn"/></button>
-    </a>
+    <a class="btn btn-lg btn-link" href="#"><spring:message code="nav.whatis"/> </a>
 </div>
 <!-- JS-Libraries requiered for Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
