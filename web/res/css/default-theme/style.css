@@ -5,18 +5,11 @@ Time: 23:39
 */
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
 /* Bootstrap theme */
-@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css);
+/*@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css);*/
+
 
 body{
     font-family: Arial;
-}
-nav{
-    border: 0 !important;
-}
-
-#navbar {
-
-    background: #7FC7AF;
 
 }
 
@@ -39,10 +32,10 @@ button.btn.btn-lg.btn-primary {
 }
 
 
-/*
+
 .navbar-default {
     background-color: #7fc7af;
-    border-color: #b5ead8;
+    border:0;
 }
 .navbar-default .navbar-brand {
     color: #ffffff;
@@ -99,4 +92,3 @@ button.btn.btn-lg.btn-primary {
         background-color: #b5ead8;
     }
 }
-*/

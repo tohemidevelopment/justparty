@@ -15,45 +15,31 @@
     <meta lastName="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/res/style.css">
     <title><spring:message code="login.title"/></title>
-    <sec:csrfMetaTags/>
 </head>
 
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid" id="navbar">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">
-                justParty
-            </a>
-        </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Suchen...">
-                </div>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <a class="navbar-brand" href="/register">
-                    <spring:message code="nav.register"/>
-                </a>
-                <a class="navbar-brand" href="/">
-                    <spring:message code="nav.whatis"/>
-                </a>
-
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">justParty</a>
     </div>
-    <!-- /.container-fluid -->
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="<spring:message code="nav.searchplaceholder"/>">
+            </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a class="navbar-brand" href="/register"><spring:message code="nav.register"/></a></li>
+        </ul>
+    </div>
 </nav>
 
 <div class="container theme-showcase" role="main">

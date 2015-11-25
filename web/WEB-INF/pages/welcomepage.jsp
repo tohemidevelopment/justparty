@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title><spring:message code="welcome.title"/></title>
@@ -23,7 +24,10 @@
     </style>
 </head>
 <body>
-<!--
+<form action="/j_spring_security_logout?${_csrf.parameterName}=${_csrf.token}" method="post" id="logoutForm">
+    <input type="hidden" lastName="${_csrf.parameterName}"
+           value="${_csrf.token}"/>
+</form>
 <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -32,94 +36,43 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="javascript:void(0)">Brand</a>
+        <a class="navbar-brand" href="/">justParty</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="javascript:void(0)">Link</a></li>
-            <li><a href="javascript:void(0)">Link</a></li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0)">Action</a></li>
-                    <li><a href="javascript:void(0)">Another action</a></li>
-                    <li><a href="javascript:void(0)">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="javascript:void(0)">Separated link</a></li>
-                </ul>
-            </li>
-        </ul>
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" class="form-control" placeholder="<spring:message code="nav.searchplaceholder"/>">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
         </form>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="javascript:void(0)">Link</a></li>
-            <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0)">Action</a></li>
-                    <li><a href="javascript:void(0)">Another action</a></li>
-                    <li><a href="javascript:void(0)">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="javascript:void(0)">Separated link</a></li>
-                </ul>
-            </li>
+            <c:choose>
+                <c:when test="${pageContext.request.userPrincipal.authenticated}">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false"><spring:message code="nav.events"/> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href='/createEvent'><span><spring:message code="nav.events.create"/></span></a>
+                            </li>
+                            <li><a href='/manageEvent'><span><spring:message code="nav.events.manage"/></span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false" style="color: white;"><spring:message code="nav.settings"/><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:logoutFormSubmit()"><spring:message code="nav.logout"/></a></li>
+                        </ul>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="/register"><spring:message code="nav.register"/></a></li>
+                    <li><a href="/login"><spring:message code="nav.login"/></a></li>
+                </c:otherwise>
+            </c:choose>
         </ul>
-</nav>
--->
-
-
-<nav class="navbar navbar-default">
-    <div class="container-fluid" id="navbar">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">
-                justParty
-            </a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control"
-                           placeholder="<spring:message code="nav.searchplaceholder"/> ">
-                </div>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false"><spring:message code="nav.events"/> <span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href='/createEvent'><span><spring:message code="nav.events.create"/> </span></a></li>
-                        <li><a href='/manageEvent'><span><spring:message code="nav.events.manage"/> </span></a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href='#'><span><spring:message code="nav.events.invitations"/> </span></a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Einstellungen <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href='/login'><span>Log in</span></a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container-fluid -->
 </nav>
 
 <h2 style="text-align: center;"><spring:message code="welcome.header1"/></h2>
@@ -209,5 +162,7 @@ Current Locale : ${pageContext.response.locale}-->
 <!-- JS-Libraries requiered for Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- JS-Libraries requiered for justParty -->
+<script src="/res/js/logout.js"></script>
 </body>
 </html>
