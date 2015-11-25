@@ -67,7 +67,9 @@ public class DBController {
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("INSERT INTO events (name, email) VALUE ('" + e.getName() + "', '" + e.getEventOwner().getEmail() + "')");
+            PreparedStatement ps = c.prepareStatement("INSERT INTO events (name, email) VALUE (?, ?)");
+            ps.setString(1,e.getName());
+            ps.setString(2,e.getEventOwner().getEmail());
             ps.executeUpdate();
             ps.close();
             c.close();
@@ -83,13 +85,12 @@ public class DBController {
         }
         return true;
     }
-
     /**
+     * @param email
+     * @return
      * Returns true, if the given Email-Address is already used by a user.
      * Returns false, if the Email-Address is in our DB but not used by a user.
      * Throws UserNotFoundException, if the Email-Address is not in our DB
-     * @param email
-     * @return
      */
     public boolean userIsRegistered(String email)throws UserNotFoundException{
         //TODO: Implement
@@ -100,7 +101,8 @@ public class DBController {
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM user_roles WHERE email='" + email + "'");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM user_roles WHERE email=?");
+            ps.setString(1,email);
             ResultSet rs = ps.executeQuery();
             if(!rs.next())
             {
@@ -122,6 +124,12 @@ public class DBController {
         }
         return true;
     }
+
+    /**
+     * Deprecated, use userIsRegistered instead.
+     * @param email
+     * @return
+     */
     @Deprecated
     public boolean emailAvailable(String email) {
         //TODO: Implement
@@ -132,7 +140,8 @@ public class DBController {
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM users WHERE email='" + email + "'");
+            PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM users WHERE email=?");
+            ps.setString(1,email);
             ResultSet rs = ps.executeQuery();
             if(rs.next())
             {
@@ -160,8 +169,12 @@ public class DBController {
         Connection c = DataSourceUtils.getConnection(ds);
 
         try {
-            PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email,password) VALUE ('" + user.getEmail() + "', '" + hash + "')");
-            PreparedStatement psUserRole = c.prepareStatement("INSERT INTO user_roles (role,Email) VALUE ('"+UserRoles.USER+"','"+user.getEmail()+"')");
+            PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email, password) VALUE (?, ?)");
+            PreparedStatement psUserRole = c.prepareStatement("INSERT INTO user_roles (role, Email) VALUE (?,?)");
+            psUser.setString(1, user.getEmail());
+            psUser.setString(2, hash);
+            psUserRole.setString(1, userRole);
+            psUserRole.setString(2, user.getEmail());
             psUser.executeUpdate();
             psUser.close();
             psUserRole.executeUpdate();
@@ -187,8 +200,12 @@ public class DBController {
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psUser = c.prepareStatement("UPDATE users SET Password='" + hash + "' WHERE Email='"+user.getEmail()+"'");
-            PreparedStatement psUserRole = c.prepareStatement("UPDATE user_roles SET role='"+UserRoles.USER+"' WHERE Email='"+user.getEmail()+"';");
+            PreparedStatement psUser = c.prepareStatement("UPDATE users SET Password=? WHERE Email=?");
+            PreparedStatement psUserRole = c.prepareStatement("UPDATE user_roles SET role=? WHERE Email=?");
+            psUser.setString(1, hash);
+            psUser.setString(2, user.getEmail());
+            psUserRole.setString(1, UserRoles.USER);
+            psUserRole.setString(2, user.getEmail());
             psUser.executeUpdate();
             psUser.close();
             psUserRole.executeUpdate();
