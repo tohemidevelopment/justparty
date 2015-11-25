@@ -1,4 +1,4 @@
-package de.tohemi.justparty.businesslogic;
+package de.tohemi.justparty.businesslogic.user;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

@@ -1,10 +1,8 @@
 package de.tohemi.justparty.database.controller;
 
-import de.tohemi.justparty.businesslogic.UserRoles;
+import de.tohemi.justparty.businesslogic.user.UserRoles;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
-import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
-import de.tohemi.justparty.datamodel.wrapper.EMail;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;

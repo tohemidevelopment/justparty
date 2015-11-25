@@ -7,12 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
     <meta lastName="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/res/style.css">
-    <title><spring:message code="error.title"/> </title>
+    <title><spring:message code="error.title"/></title>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -68,7 +69,18 @@
     <div class="page-header">
         <h1><spring:message code="error.header1"/></h1>
     </div>
-    <div class="alert alert-danger"><spring:message code="error.para1"/> </div>
+    <div class="alert alert-danger">
+        <c:if test="${not empty param.code}">
+            <strong>
+                <c:choose>
+                    <c:when test="${param.code==404}">
+                        Die Seite wurde nicht gefunden.
+                    </c:when>
+                </c:choose>
+            </strong>
+        </c:if>
+        <spring:message code="error.para1"/>
+    </div>
 </div>
 </body>
 </html>
