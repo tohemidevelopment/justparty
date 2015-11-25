@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
@@ -46,11 +46,11 @@
     <div class="page-header">
         <h1 id="test"><spring:message code="login.header1"/></h1>
     </div>
-    <core:if test="${not empty login_error}">
+    <c:if test="${not empty login_error}">
         <div class="alert alert-danger" role="alert">
                 ${login_error}
         </div>
-    </core:if>
+    </c:if>
     <!-- alerts -->
     <div>
         <c:if test="${not empty alert_danger}">

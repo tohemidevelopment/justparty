@@ -60,7 +60,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false" style="color: white;"><spring:message code="nav.settings"/><span
+                           aria-expanded="false"><spring:message code="nav.settings"/><span
                                 class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="javascript:logoutFormSubmit()"><spring:message code="nav.logout"/></a></li>
