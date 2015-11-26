@@ -11,7 +11,7 @@
 <html>
 <head>
     <title><spring:message code="manager.title"/></title>
-    <meta lastName="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css">
 </head>
 <body>

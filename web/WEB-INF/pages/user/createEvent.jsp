@@ -11,7 +11,7 @@
 <html>
 <head>
     <title><spring:message code="create.title"/></title>
-    <meta lastName="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/res/style.css">
 </head>
 <body>
