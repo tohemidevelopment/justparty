@@ -19,7 +19,8 @@
 
 <body>
 
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
@@ -37,9 +38,10 @@
             </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
-            <li><a class="navbar-brand" href="/register"><spring:message code="nav.register"/></a></li>
+            <li><a href="/register"><spring:message code="nav.register"/></a></li>
         </ul>
     </div>
+        </div>
 </nav>
 
 <div class="container theme-showcase" role="main">
@@ -68,9 +70,9 @@
                 <spring:message code="${alert_success}"/>
             </div>
         </c:if>
-        <c:if test="${not empty alert_success}">
-            <div class="alert alert-success" role="alert">
-                <spring:message code="${alert_success}"/>
+        <c:if test="${not empty alert_info}">
+            <div class="alert alert-info" role="alert">
+                <spring:message code="${alert_info}"/>
             </div>
         </c:if>
     </div>

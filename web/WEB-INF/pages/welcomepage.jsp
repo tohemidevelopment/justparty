@@ -28,51 +28,57 @@
     <input type="hidden" lastName="${_csrf.parameterName}"
            value="${_csrf.token}"/>
 </form>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">justParty</a>
-    </div>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">justParty</a>
+        </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="<spring:message code="nav.searchplaceholder"/>">
-            </div>
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-            <c:choose>
-                <c:when test="${pageContext.request.userPrincipal.authenticated}">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><spring:message code="nav.events"/> <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href='/createEvent'><span><spring:message code="nav.events.create"/></span></a>
-                            </li>
-                            <li><a href='/manageEvent'><span><spring:message code="nav.events.manage"/></span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false"><spring:message code="nav.settings"/><span
-                                class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:logoutFormSubmit()"><spring:message code="nav.logout"/></a></li>
-                        </ul>
-                    </li>
-                </c:when>
-                <c:otherwise>
-                    <li><a href="/register"><spring:message code="nav.register"/></a></li>
-                    <li><a href="/login"><spring:message code="nav.login"/></a></li>
-                </c:otherwise>
-            </c:choose>
-        </ul>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control"
+                           placeholder="<spring:message code="nav.searchplaceholder"/>">
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <c:choose>
+                    <c:when test="${pageContext.request.userPrincipal.authenticated}">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false"><spring:message code="nav.events"/> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href='/createEvent'><span><spring:message code="nav.events.create"/></span></a>
+                                </li>
+                                <li><a href='/manageEvent'><span><spring:message code="nav.events.manage"/></span></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false"><spring:message code="nav.settings"/><span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:logoutFormSubmit()"><spring:message code="nav.logout"/></a></li>
+                            </ul>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/register"><spring:message code="nav.register"/></a></li>
+                        <li><a href="/login"><spring:message code="nav.login"/></a></li>
+                    </c:otherwise>
+                </c:choose>
+            </ul>
+        </div>
     </div>
 </nav>
 
@@ -97,9 +103,9 @@
                 <spring:message code="${alert_success}"/>
             </div>
         </c:if>
-        <c:if test="${not empty alert_success}">
-            <div class="alert alert-success" role="alert">
-                <spring:message code="${alert_success}"/>
+        <c:if test="${not empty alert_info}">
+            <div class="alert alert-info" role="alert">
+                <spring:message code="${alert_info}"/>
             </div>
         </c:if>
     </div>
@@ -172,8 +178,17 @@
     </a>
 </div>
 
-<div class="welcome" id="btnpanel">
-    <a class="btn btn-lg btn-link" href="#"><spring:message code="nav.whatis"/> </a>
+<div class="container theme-showcase" role="main">
+    <div id="about">
+        <a class="btn btn-lg btn-link" href="#about">
+            <h2>
+                <spring:message code="nav.whatis"/>
+            </h2>
+        </a>
+    </div>
+    <div class="container" id="about-div">
+        <spring:message code="welcome.whatis.description"/>
+    </div>
 </div>
 <!-- JS-Libraries requiered for Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

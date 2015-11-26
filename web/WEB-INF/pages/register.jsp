@@ -23,26 +23,30 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">justParty</a>
-    </div>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">justParty</a>
+        </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="<spring:message code="nav.searchplaceholder"/>">
-            </div>
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login"><spring:message code="nav.login"/></a></li>
-        </ul>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control"
+                           placeholder="<spring:message code="nav.searchplaceholder"/>">
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><spring:message code="nav.login"/></a></li>
+            </ul>
+        </div>
     </div>
 </nav>
 
@@ -67,9 +71,9 @@
                 <spring:message code="${alert_success}"/>
             </div>
         </c:if>
-        <c:if test="${not empty alert_success}">
-            <div class="alert alert-success" role="alert">
-                <spring:message code="${alert_success}"/>
+        <c:if test="${not empty alert_info}">
+            <div class="alert alert-info" role="alert">
+                <spring:message code="${alert_info}"/>
             </div>
         </c:if>
     </div>
@@ -118,6 +122,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-8">
                     <div class="checkbox">
+
                         <label><input type="checkbox" name="terms" value=""><spring:message
                                 code="register.label.acceptterms"/></label>
                     </div>

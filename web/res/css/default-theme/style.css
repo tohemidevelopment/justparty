@@ -5,20 +5,26 @@ Time: 23:39
 */
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
 
-
 body{
     font-family: Arial;
     margin-top: 0;
+     padding-top: 70px;
 }
 
-div.welcome#btnpanel {
-    text-align: center;
-    margin-top: 20px;
+/*welcomepage
+about justparty */
+#about {
+    margin:20px 0 15px;
+    /*text-align: center;*/
+    width: 100%;
 }
 
-button.btn.btn-lg.btn-primary {
-    background: #7FC7AF;
-    border-color: #7FC7AF;
+#about a {
+    text-decoration: none;
+}
+
+#about-div {
+    padding-bottom: 40px;
 }
 
 #login_form {

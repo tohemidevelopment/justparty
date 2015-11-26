@@ -21,8 +21,8 @@
            value="${_csrf.token}"/>
 </form>
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid" id="navbar">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -89,9 +89,9 @@
                 <spring:message code="${alert_success}"/>
             </div>
         </c:if>
-        <c:if test="${not empty alert_success}">
-            <div class="alert alert-success" role="alert">
-                <spring:message code="${alert_success}"/>
+        <c:if test="${not empty alert_info}">
+            <div class="alert alert-info" role="alert">
+                <spring:message code="${alert_info}"/>
             </div>
         </c:if>
     </div>
