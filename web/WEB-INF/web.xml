@@ -21,7 +21,7 @@
         <param-value>/WEB-INF/spring-security.xml</param-value>
     </context-param>
     <!--<context-param>
-        <param-lastName>contextClass</param-lastName>
+        <param-name>contextClass</param-name>
         <param-value>
             org.springframework.web.context.support.AnnotationConfigWebApplicationContext
         </param-value>

@@ -16,7 +16,7 @@
 </head>
 <body>
 <form action="/j_spring_security_logout?${_csrf.parameterName}=${_csrf.token}" method="post" id="logoutForm">
-    <input type="hidden" lastName="${_csrf.parameterName}"
+    <input type="hidden" name="${_csrf.parameterName}"
            value="${_csrf.token}"/>
 </form>
 
