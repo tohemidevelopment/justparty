@@ -17,8 +17,9 @@
     <style>
         .form-control {
             display: inline;
-            width: 90%;
-            margin-right: 5px;
+        }
+        .control-label {
+            text-align: left !important;
         }
     </style>
 </head>
@@ -83,59 +84,55 @@
             <div class="form-group">
                 <label for="email" class="control-label col-sm-2"><spring:message code="register.label.email"/>:</label>
 
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <input type="text" class="form-control" name="email" id="email"
                            placeholder="<spring:message code="register.placeholder.email"/>">
                 </div>
                 <c:if test="${not empty EMAIL}">
-                    <div class="col-sm-2">
+                    <label class="control-label col-sm-2">
                         <spring:message code="${EMAIL}"/>
-                    </div>
+                    </label>
                 </c:if>
             </div>
             <div class="form-group">
                 <label for="pwd" class="control-label col-sm-2"><spring:message code="register.label.pw"/>:</label>
 
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <input type="password" class="form-control" id="pwd" name="password"
                            placeholder="<spring:message code="register.placeholder.pw"/>">
                 </div>
                 <c:if test="${not empty PASSWORD}">
-                    <div class="col-sm-2">
+                    <label class="control-label col-sm-2">
                         <spring:message code="${PASSWORD}"/>
-                    </div>
+                    </label>
                 </c:if>
             </div>
             <div class="form-group">
                 <label for="pwd2" class="control-label col-sm-2"><spring:message
                         code="register.label.pw.repeat"/>:</label>
 
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <input type="password" class="form-control" id="pwd2" name="password_repeat"
                            placeholder="<spring:message code="register.placeholder.pw.repeat"/>">
                 </div>
-                <c:if test="${not empty PASSWORD}">
-                    <div class="col-sm-2">
-                    </div>
-                </c:if>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-8">
+                <div class="col-sm-offset-2 col-sm-7">
                     <div class="checkbox">
 
-                        <label><input type="checkbox" name="terms" value=""><spring:message
+                        <label><input type="checkbox" name="terms"><spring:message
                                 code="register.label.acceptterms"/></label>
                     </div>
                 </div>
                 <c:if test="${not empty TERMS}">
-                    <div class="col-sm-2">
+                    <label class="control-label col-sm-2">
                         <spring:message code="${TERMS}"/>
-                    </div>
+                    </label>
                 </c:if>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <input class="form-control" style="width: 20%" name="submit" type="submit"
+                <div class="col-sm-offset-2 col-sm-2">
+                    <input class="form-control" name="submit" type="submit"
                            value="<spring:message code="welcome.registerbtn"/> "/>
                 </div>
             </div>
