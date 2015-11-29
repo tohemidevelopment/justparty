@@ -96,7 +96,7 @@
         </c:if>
     </div>
 
-    <table class="table">
+    <table class="table header-fixed">
         <thead>
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="javascript:showCurrentEvents()"><spring:message code="events.nav.current"/></a></li>
@@ -108,6 +108,153 @@
         </thead>
         <tbody>
         <tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
+            <td>Hosted Event 1</td>
+            <td>20.10.2015</td>
+            <td>
+                <button class="btn">Bearbeiten</button>
+                <button class="btn">Absagen</button>
+            </td>
+        </tr><tr>
             <td>Hosted Event 1</td>
             <td>20.10.2015</td>
             <td>
