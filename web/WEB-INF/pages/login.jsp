@@ -80,7 +80,7 @@
         <div class="form-group">
             <label for="usr"><spring:message code="login.label.username"/>:</label>
             <input type="text" class="form-control" name="username" id="usr"
-                   placeholder="<spring:message code="login.placeholder.username"/>">
+                   placeholder="<spring:message code="login.placeholder.username"/>"  autofocus="autofocus">
         </div>
         <div class="form-group">
             <label for="pwd"><spring:message code="login.label.pw"/>:</label>

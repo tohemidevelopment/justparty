@@ -1,9 +1,7 @@
 package de.tohemi.justparty.controller;
 
-import de.tohemi.justparty.businesslogic.EventCreator;
+import de.tohemi.justparty.businesslogic.EventsHandler;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,8 +21,8 @@ public class EventController {
     @RequestMapping(method = RequestMethod.POST)
     public String createEvent(@RequestParam(value = "eventname")String eventname, ModelMap model) {
 
-        EventCreator eventCreator = new EventCreator();
-        if(eventCreator.createEvent(eventname))
+        EventsHandler eventsHandler = new EventsHandler();
+        if(eventsHandler.createEvent(eventname))
         {
             return LogicalViewNames.getNameEventManager();
         }

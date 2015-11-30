@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css">
 </head>
 <body>
-<c:url value="/j_spring_security_logout" var="logoutUrl"/>
-<form action="${logoutUrl}" method="post" id="logoutForm">
+<form action="/j_spring_security_logout" method="post" id="logoutForm">
     <input type="hidden" name="${_csrf.parameterName}"
            value="${_csrf.token}"/>
 </form>
@@ -70,7 +69,7 @@
 
 <div class="container theme-showcase" role="main">
     <div class="page-header">
-        <h1><spring:message code="manager.header1"/> </h1>
+        <h1><spring:message code="manager.header1"/></h1>
     </div>
     <!-- alerts -->
     <div>
@@ -98,191 +97,67 @@
 
     <table class="table header-fixed">
         <thead>
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="javascript:showCurrentEvents()"><spring:message code="events.nav.current"/></a></li>
-            <li role="presentation"><a href="javascript:showInvitations()"><spring:message code="events.nav.invites"/></a></li>
-            <li role="presentation"><a href="javascript:showOwnedEvents()"><spring:message code="events.nav.owned"/></a></li>
-            <li role="presentation"><a href="javascript:showCanceldEvents()"><spring:message code="events.nav.canceled"/></a></li>
-            <li role="presentation"><a href="javascript:showPastEvents()"><spring:message code="events.nav.past"/></a></li>
-        </ul>
+        <tr>
+            <th>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="javascript:showCurrentEvents()"><spring:message
+                            code="manager.nav.current"/></a></li>
+                    <!--
+                    <li role="presentation"><a href="javascript:showInvitations()"><spring:message
+                            code="manager.nav.invites"/></a></li>
+                    <li role="presentation"><a href="javascript:showOwnedEvents()"><spring:message
+                            code="manager.nav.owned"/></a></li>
+                    <li role="presentation"><a href="javascript:showCanceldEvents()"><spring:message
+                            code="manager.nav.canceled"/></a></li>
+                    <li role="presentation"><a href="javascript:showPastEvents()"><spring:message
+                            code="manager.nav.past"/></a></li>-->
+                </ul>
+            </th>
+        </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr><tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Event 2</td>
-            <td>21.10.2015</td>
-            <td>
-                <button class="btn">Annehmen</button>
-                <button class="btn">Noch unsicher</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Angenommenes Event</td>
-            <td>24.10.2015</td>
-            <td>
-                <button class="btn">Doch unsicher</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr>
-
+        <c:forEach items="${currentevents}" var="element">
+            <tr>
+                <td class="action">
+                    <c:choose>
+                        <c:when test="${element.hosted}">
+                            <a href="#" class="btn"><span class="glyphicon glyphicon-pencil"/></a>
+                            <a href="#" class="btn"><span class="glyphicon glyphicon-trash"/> </a>
+                        </c:when>
+                        <c:otherwise>
+                            <form role="form" class="form">
+                                <div class="form-group">
+                                    <select class="form-control" name="accepted">
+                                        <option selected="selected">
+                                            <spring:message code="manager.table.select.accept"/>
+                                        </option>
+                                        <option>
+                                            <spring:message code="manager.table.select.cancel"/>
+                                        </option>
+                                        <option>
+                                            <spring:message code="manager.table.select.notsure"/>
+                                        </option>
+                                    </select>
+                                </div>
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+                <td class="name">
+                        ${element.name}
+                </td>
+                <td class="date">
+                        ${element.date}
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
-
+    <form>
+        <select class="selectpicker">
+            <option>hi</option>
+        </select>
+    </form>
 </div>
 <!-- JS-Libraries requiered for Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

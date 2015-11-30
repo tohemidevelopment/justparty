@@ -1,7 +1,11 @@
 package de.tohemi.justparty.datamodel;
 
+import de.tohemi.justparty.view_interface.JPDateFormat;
+
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,7 +22,7 @@ public class Event {
     private URL facebookLink;
     private URL googlePlusLink;
     private URL spotifyPlaylistLink;
-
+    private boolean hosted;
 
     public Event(String name, User eventOwner){
         this.name=name;
@@ -103,5 +107,21 @@ public class Event {
 
     public void setSpotifyPlaylistLink(URL spotifyPlaylistLink) {
         this.spotifyPlaylistLink = spotifyPlaylistLink;
+    }
+
+    public String getDate(){
+        if (begin != null)
+        {
+            return JPDateFormat.getSimpleDateFormat().format(begin.getTime());
+        }
+        return "";
+    }
+
+    public void setHosted(boolean hosted) {
+        this.hosted = hosted;
+    }
+
+    public boolean getHosted(){
+        return hosted;
     }
 }

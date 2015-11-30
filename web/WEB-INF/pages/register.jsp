@@ -86,7 +86,7 @@
 
                 <div class="col-sm-7">
                     <input type="text" class="form-control" name="email" id="email"
-                           placeholder="<spring:message code="register.placeholder.email"/>">
+                           placeholder="<spring:message code="register.placeholder.email"/>" autofocus="autofocus">
                 </div>
                 <c:if test="${not empty EMAIL}">
                     <label class="control-label col-sm-2">

@@ -116,11 +116,21 @@ about justparty */
 
 .header-fixed > tbody {
     overflow-y: auto;
-    height: 150px;
+    height: 500px;
 }
 
-.header-fixed > tbody > tr > td,
-.header-fixed > thead > tr > th {
-    width: 20%;
+.header-fixed > tbody > tr > td {
     float: left;
+    width: 33%;
 }
+
+.header-fixed > thead > tr > th {
+    float: left;
+    width:100%;
+}
+
+td.date {
+    float: right;
+  text-align: right;
+}
+/* */
