@@ -22,7 +22,6 @@ public class Event {
     private URL facebookLink;
     private URL googlePlusLink;
     private URL spotifyPlaylistLink;
-    private boolean hosted;
     private int id;
 
     public Event(String name, User eventOwner){
@@ -108,22 +107,6 @@ public class Event {
 
     public void setSpotifyPlaylistLink(URL spotifyPlaylistLink) {
         this.spotifyPlaylistLink = spotifyPlaylistLink;
-    }
-
-    public String getDate(){
-        if (begin != null)
-        {
-            return JPDateFormat.getSimpleDateFormat().format(begin.getTime());
-        }
-        return "";
-    }
-
-    public void setHosted(boolean hosted) {
-        this.hosted = hosted;
-    }
-
-    public boolean getHosted(){
-        return hosted;
     }
 
     public int getId() {

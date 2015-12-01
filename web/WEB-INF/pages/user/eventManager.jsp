@@ -123,7 +123,12 @@
                             <a href="#" class="btn"><span class="glyphicon glyphicon-trash"/> </a>
                         </c:when>
                         <c:otherwise>
-                            <select class="form-control" id="select_${element.id}">
+                            <select class="form-control" id="select_${element.id}" onload="updateSelectBox()">
+                                <c:if test="${empty element.accepted}">
+                                    <option selected="selected">
+                                        <spring:message code="manager.table.select.nothingselected"/>
+                                    </option>
+                                </c:if>
                                 <option class="select-accept">
                                     <spring:message code="manager.table.select.accept"/>
                                 </option>

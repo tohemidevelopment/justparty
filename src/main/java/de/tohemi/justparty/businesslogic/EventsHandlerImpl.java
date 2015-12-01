@@ -1,8 +1,10 @@
 package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.database.controller.DBController;
+import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.UserEventRelation;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,32 +22,25 @@ public class EventsHandlerImpl implements EventsHandler {
         return dbController.addEvent(new Event(eventname, user));
     }
 
-    public static List<Event> getCurrentEvents(String mail) {
+    public static List<UserEventRelation> getCurrentEvents(String mail) {
 
         DBController dbController = DBController.getInstance();
         User user = new User(mail);
         //dbController.getHostedEventsLightweight(user);
 
         //Testevents
-        List<Event> events = new ArrayList<Event>();
-        Event testevent = new Event("Testevent", new User(""));
-        testevent.setBegin(Calendar.getInstance());
+        List<UserEventRelation> events = new ArrayList<UserEventRelation>();
+        Event event = new Event("Testevent", new User("m.goethegymka@web.de"));
+        UserEventRelation testevent = new UserEventRelation(event, new User(mail), Accepted.DECLINED);
+        event.setBegin(Calendar.getInstance());
         events.add(testevent);
         events.add(testevent);
-        Event testevent2 = new Event("Hosted event", new User(""));
-        testevent2.setBegin(Calendar.getInstance());
-        testevent2.setHosted(true);
-        events.add(testevent2);
-        events.add(testevent2);
-        events.add(testevent2);
-        events.add(testevent2);
-        events.add(testevent2);
-        events.add(testevent2);
-        events.add(testevent2);
-        events.add(testevent2);
         events.add(testevent);
+
+        Event event2 = new Event("Testevent", new User("test@test.test"));
+        UserEventRelation testevent2 = new UserEventRelation(event2, new User(mail), Accepted.ACCEPTED);
+        event2.setBegin(Calendar.getInstance());
         events.add(testevent2);
-        events.add(testevent);
 
 
 

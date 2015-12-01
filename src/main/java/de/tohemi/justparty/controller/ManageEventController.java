@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/manageEvent")
 public class ManageEventController {
     @RequestMapping(method = RequestMethod.GET)
-    public String printCreateEvent(ModelMap model) {
+    public String printEvents(ModelMap model) {
 
         model.addAttribute("alert_info", "alert.notimplyet");
 
