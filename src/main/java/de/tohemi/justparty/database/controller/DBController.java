@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Heiko on 04.11.2015.
@@ -60,10 +62,7 @@ public class DBController {
 */
     public boolean addEvent(Event e) {
 
-        // Create a new application context. this processes the Spring config
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
-        // Retrieve the data source from the application context
-        DataSource ds = (DataSource) ctx.getBean("dataSource");
+        DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
@@ -93,11 +92,7 @@ public class DBController {
      * Throws UserNotFoundException, if the Email-Address is not in our DB
      */
     public boolean userIsRegistered(String email)throws UserNotFoundException{
-        //TODO: Implement
-        // Create a new application context. this processes the Spring config
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
-        // Retrieve the data source from the application context
-        DataSource ds = (DataSource) ctx.getBean("dataSource");
+        DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
@@ -132,11 +127,7 @@ public class DBController {
      */
     @Deprecated
     public boolean emailAvailable(String email) {
-        //TODO: Implement
-        // Create a new application context. this processes the Spring config
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
-        // Retrieve the data source from the application context
-        DataSource ds = (DataSource) ctx.getBean("dataSource");
+        DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
@@ -160,11 +151,7 @@ public class DBController {
     }
 
     public boolean addUser(User user, String userRole, String hash) {
-        //TODO: Implement
-        // Create a new application context. this processes the Spring config
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
-        // Retrieve the data source from the application context
-        DataSource ds = (DataSource) ctx.getBean("dataSource");
+        DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
 
@@ -193,10 +180,8 @@ public class DBController {
         return true;
     }
     public boolean changeToUser(User user, String hash) {
-        // Create a new application context. this processes the Spring config
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
-        // Retrieve the data source from the application context
-        DataSource ds = (DataSource) ctx.getBean("dataSource");
+        DataSource ds = getDataSource();
+
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
@@ -223,6 +208,14 @@ public class DBController {
         }
         return true;
     }
+
+    private DataSource getDataSource() {
+        // Create a new application context. this processes the Spring config
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
+        // Retrieve the data source from the application context
+        return (DataSource) ctx.getBean("dataSource");
+    }
+
     private void releaseConnection(DataSource ds, Connection c) {
         try {
             c.close();
@@ -231,4 +224,20 @@ public class DBController {
     }
 
 
+    public List<Event> getHostedEventsLightweight(User user) {
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            //TODO: Implement
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email ....");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            releaseConnection(ds, c);
+        }
+
+        return new ArrayList<Event>();
+    }
 }

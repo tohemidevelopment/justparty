@@ -98,11 +98,10 @@
     <table class="table header-fixed">
         <thead>
         <tr>
-            <th>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="javascript:showCurrentEvents()"><spring:message
-                            code="manager.nav.current"/></a></li>
-                    <!--
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="javascript:showCurrentEvents()"><spring:message
+                        code="manager.nav.current"/></a></li>
+                <!--
                     <li role="presentation"><a href="javascript:showInvitations()"><spring:message
                             code="manager.nav.invites"/></a></li>
                     <li role="presentation"><a href="javascript:showOwnedEvents()"><spring:message
@@ -111,8 +110,7 @@
                             code="manager.nav.canceled"/></a></li>
                     <li role="presentation"><a href="javascript:showPastEvents()"><spring:message
                             code="manager.nav.past"/></a></li>-->
-                </ul>
-            </th>
+            </ul>
         </tr>
         </thead>
         <tbody>
@@ -121,25 +119,21 @@
                 <td class="action">
                     <c:choose>
                         <c:when test="${element.hosted}">
-                            <a href="#" class="btn"><span class="glyphicon glyphicon-pencil"/></a>
+                            <a href="/edit?id=${element.id}" class="btn"><span class="glyphicon glyphicon-pencil"/></a>
                             <a href="#" class="btn"><span class="glyphicon glyphicon-trash"/> </a>
                         </c:when>
                         <c:otherwise>
-                            <form role="form" class="form">
-                                <div class="form-group">
-                                    <select class="form-control" name="accepted">
-                                        <option selected="selected">
-                                            <spring:message code="manager.table.select.accept"/>
-                                        </option>
-                                        <option>
-                                            <spring:message code="manager.table.select.cancel"/>
-                                        </option>
-                                        <option>
-                                            <spring:message code="manager.table.select.notsure"/>
-                                        </option>
-                                    </select>
-                                </div>
-                            </form>
+                            <select class="form-control" id="${element}">
+                                <option class="select-accept">
+                                    <spring:message code="manager.table.select.accept"/>
+                                </option>
+                                <option class="select-cancel">
+                                    <spring:message code="manager.table.select.cancel"/>
+                                </option>
+                                <option class="select-notsure">
+                                    <spring:message code="manager.table.select.notsure"/>
+                                </option>
+                            </select>
                         </c:otherwise>
                     </c:choose>
                 </td>
@@ -153,11 +147,6 @@
         </c:forEach>
         </tbody>
     </table>
-    <form>
-        <select class="selectpicker">
-            <option>hi</option>
-        </select>
-    </form>
 </div>
 <!-- JS-Libraries requiered for Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

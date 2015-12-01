@@ -23,6 +23,7 @@ public class Event {
     private URL googlePlusLink;
     private URL spotifyPlaylistLink;
     private boolean hosted;
+    private int id;
 
     public Event(String name, User eventOwner){
         this.name=name;
@@ -123,5 +124,13 @@ public class Event {
 
     public boolean getHosted(){
         return hosted;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
