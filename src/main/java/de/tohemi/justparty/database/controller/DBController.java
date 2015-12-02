@@ -209,6 +209,24 @@ public class DBController {
         return true;
     }
 
+    public List<Event> getHostedEventsLightweight(User user) {
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            //TODO: Implement
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email FROM events WHERE email = ?;");
+            preparedStatement.setString(1, user.getEmail());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            releaseConnection(ds, c);
+        }
+
+        return new ArrayList<Event>();
+    }
+
     private DataSource getDataSource() {
         // Create a new application context. this processes the Spring config
         ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
@@ -223,21 +241,4 @@ public class DBController {
         DataSourceUtils.releaseConnection(c, ds);
     }
 
-
-    public List<Event> getHostedEventsLightweight(User user) {
-        DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
-        Connection c = DataSourceUtils.getConnection(ds);
-        try {
-            //TODO: Implement
-            PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email ....");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-            releaseConnection(ds, c);
-        }
-
-        return new ArrayList<Event>();
-    }
 }

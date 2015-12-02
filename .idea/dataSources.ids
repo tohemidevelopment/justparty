@@ -861,7 +861,6 @@
       <column name="end" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="address_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="email" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <column name="guestlist" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="facebook_link" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="wishlist_link" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="googleplus_link" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
@@ -871,15 +870,8 @@
     <table name="guestlist" schema="" catalog="justParty_db" type="TABLE">
       <column name="guest" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="event" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="status" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="guest,event"/>
-    </table>
-    <table name="user_roles" schema="" catalog="justParty_db" type="TABLE">
-      <column name="user_role_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="Email" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="role" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="user_role_id"/>
-      <index name="uni_username_role" unique="true" columns="role,Email"/>
-      <index name="fk_username_idx" unique="false" columns="Email"/>
     </table>
     <table name="users" schema="" catalog="justParty_db" type="TABLE">
       <column name="Name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
@@ -889,6 +881,7 @@
       <column name="Password" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="Phone" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="enabled" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <column name="role" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="Email"/>
     </table>
   </data-source>
