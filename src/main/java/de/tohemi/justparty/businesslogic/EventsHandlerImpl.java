@@ -1,13 +1,10 @@
 package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.database.controller.DBController;
-import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -26,27 +23,12 @@ public class EventsHandlerImpl implements EventsHandler {
 
         DBController dbController = DBController.getInstance();
         User user = new User(mail);
-        //dbController.getHostedEventsLightweight(user);
-
-        //Testevents
-        List<UserEventRelation> events = new ArrayList<UserEventRelation>();
-        Event event = new Event("Testevent", new User("m.goethegymka@web.de"));
-        UserEventRelation testevent = new UserEventRelation(event, new User(mail), Accepted.DECLINED);
-        event.setBegin(Calendar.getInstance());
-        events.add(testevent);
-
-        Event event2 = new Event("Testevent", new User("test@test.test"));
-        UserEventRelation testevent2 = new UserEventRelation(event2, new User(mail), null);
-        event2.setBegin(Calendar.getInstance());
-        events.add(testevent2);
-
-
-
-        return events;
+        List<UserEventRelation> userEventsRelations = dbController.getHostedUERs(user);
+        userEventsRelations.addAll(dbController.getInvitedUERs(user));
+        return userEventsRelations;
     }
 
     public boolean userIsHostOfRequestedEvent() {
-        //TODO: Implement
         return true;
     }
 }

@@ -1,19 +1,16 @@
 package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
-import de.tohemi.justparty.datamodel.Event;
-import de.tohemi.justparty.datamodel.User;
-import de.tohemi.justparty.datamodel.UserRoles;
+import de.tohemi.justparty.datamodel.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,8 +20,7 @@ public class DBController {
     private static DBController instance;
 
     public synchronized static DBController getInstance() {
-        if (instance == null)
-        {
+        if (instance == null) {
             return new DBController();
         }
         return instance;
@@ -77,44 +73,41 @@ public class DBController {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
             return false;
-        }
-        finally {
+        } finally {
             // ignore failure closing connection
             releaseConnection(ds, c);
         }
         return true;
     }
+
     /**
      * @param email
-     * @return
-     * Returns true, if the given Email-Address is already used by a user.
+     * @return Returns true, if the given Email-Address is already used by a user.
      * Returns false, if the Email-Address is in our DB but not used by a user.
      * Throws UserNotFoundException, if the Email-Address is not in our DB
      */
-    public boolean userIsRegistered(String email)throws UserNotFoundException{
+    public boolean userIsRegistered(String email) throws UserNotFoundException {
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("SELECT role FROM users WHERE email=?");
-            ps.setString(1,email);
+            ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
-            if(!rs.next())
-            {
+            if (!rs.next()) {
                 throw new UserNotFoundException();
-            }else{
+            } else {
                 rs.beforeFirst();
             }
-            if(rs.next()){
-                if(rs.getString("role").equals(UserRoles.NONUSER))
+            if (rs.next()) {
+                if (rs.getString("role").equals(UserRoles.NONUSER))
                     return false;
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
             // ignore failure closing connection
-        }
-        finally {
+        } finally {
             releaseConnection(ds, c);
         }
         return true;
@@ -122,6 +115,7 @@ public class DBController {
 
     /**
      * Deprecated, use userIsRegistered instead.
+     *
      * @param email
      * @return
      */
@@ -132,19 +126,17 @@ public class DBController {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM users WHERE email=?");
-            ps.setString(1,email);
+            ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
-            if(rs.next())
-            {
-                return rs.getInt(1)== 0;
+            if (rs.next()) {
+                return rs.getInt(1) == 0;
             }
-
-        }catch (SQLException ex) {
+            ps.close();
+        } catch (SQLException ex) {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
             // ignore failure closing connection
-        }
-        finally {
+        } finally {
             releaseConnection(ds, c);
         }
         return false;
@@ -167,12 +159,12 @@ public class DBController {
             ex.printStackTrace();
             // ignore failure closing connection
             return false;
-        }
-        finally {
+        } finally {
             releaseConnection(ds, c);
         }
         return true;
     }
+
     public boolean changeToUser(User user, String hash) {
         DataSource ds = getDataSource();
 
@@ -190,29 +182,88 @@ public class DBController {
             ex.printStackTrace();
             // ignore failure closing connection
             return false;
-        }
-        finally {
+        } finally {
             releaseConnection(ds, c);
         }
         return true;
     }
 
-    public List<Event> getHostedEventsLightweight(User user) {
+    public List<UserEventRelation> getHostedUERs(User user) {
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
+        ArrayList<UserEventRelation> userEventRelations = new ArrayList<UserEventRelation>();
         try {
-            //TODO: Implement
             PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email FROM events WHERE email = ?;");
-            preparedStatement.setString(1, user.getEmail());
+            String email = user.getEmail();
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                Event event = new Event(resultSet.getString("name"), user);
+                event.setId(resultSet.getInt("event_id"));
+                Date date = resultSet.getDate("begin");
+                if (date != null) {
+                    Calendar begin = Calendar.getInstance();
+                    begin.setTime(date);
+                    event.setBegin(begin);
+                }
+                userEventRelations.add(new UserEventRelation(event, user));
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             releaseConnection(ds, c);
         }
 
-        return new ArrayList<Event>();
+        return userEventRelations;
+    }
+
+    public ArrayList<UserEventRelation> getInvitedUERs(User user) {
+
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        ArrayList<UserEventRelation> userEventRelations = new ArrayList<UserEventRelation>();
+        try {
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email, status FROM events, guestlist WHERE event_id = event AND guest = ?;");
+            String email = user.getEmail();
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                Event event = new Event(resultSet.getString("name"), user);
+                event.setId(resultSet.getInt("event_id"));
+                Date date = resultSet.getDate("begin");
+                if (date != null) {
+                    Calendar begin = Calendar.getInstance();
+                    begin.setTime(date);
+                    event.setBegin(begin);
+                }
+                Accepted accepted = null;
+                switch (resultSet.getInt("status")){
+                    case 1:
+                        accepted = Accepted.ACCEPTED;
+                        break;
+                    case 2:
+                        accepted = Accepted.DECLINED;
+                        break;
+                    case 3:
+                        accepted =Accepted.NOTSURE;
+                        break;
+                }
+                UserEventRelation uer = new UserEventRelation(event, user, accepted);
+                userEventRelations.add(uer);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+
+        return userEventRelations;
     }
 
     private DataSource getDataSource() {
@@ -225,8 +276,8 @@ public class DBController {
     private void releaseConnection(DataSource ds, Connection c) {
         try {
             c.close();
-        } catch (SQLException exp) {}
+        } catch (SQLException exp) {
+        }
         DataSourceUtils.releaseConnection(c, ds);
     }
-
 }

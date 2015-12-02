@@ -26,7 +26,7 @@ public class EventController extends JPController {
         String mail = getMailFromLoggedInUser();
         if(eventsHandler.createEvent(eventname, mail))
         {
-            return LogicalViewNames.getNameEventManager();
+            return LogicalViewNames.REDIRECT + "/manageEvent";
         }
         return LogicalViewNames.getNameErrorPage();
     }
@@ -36,7 +36,7 @@ public class EventController extends JPController {
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
         if (!eventsHandler.userIsHostOfRequestedEvent()){
             //TODO: Show Error String, User not host
-            return LogicalViewNames.REDIRECT + LogicalViewNames.getNameErrorPage();
+            return LogicalViewNames.REDIRECT + "/error";
         }
         model.addAttribute("alert_info", "alert.notimplyet");
         //TODO: collect information need for edit page
