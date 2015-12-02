@@ -68,8 +68,8 @@ public class DBController {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("INSERT INTO events (name, email) VALUE (?, ?)");
-            ps.setString(1,e.getName());
-            ps.setString(2,e.getEventOwner().getEmail());
+            ps.setString(1, e.getName());
+            ps.setString(2, e.getEventOwner().getEmail());
             ps.executeUpdate();
             ps.close();
             c.close();
@@ -101,7 +101,7 @@ public class DBController {
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM user_roles WHERE email=?");
+            PreparedStatement ps = c.prepareStatement("SELECT role FROM users WHERE email=?");
             ps.setString(1,email);
             ResultSet rs = ps.executeQuery();
             if(!rs.next())
@@ -132,7 +132,6 @@ public class DBController {
      */
     @Deprecated
     public boolean emailAvailable(String email) {
-        //TODO: Implement
         // Create a new application context. this processes the Spring config
         ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
         // Retrieve the data source from the application context
@@ -160,7 +159,6 @@ public class DBController {
     }
 
     public boolean addUser(User user, String userRole, String hash) {
-        //TODO: Implement
         // Create a new application context. this processes the Spring config
         ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
         // Retrieve the data source from the application context
@@ -169,18 +167,12 @@ public class DBController {
         Connection c = DataSourceUtils.getConnection(ds);
 
         try {
-            PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email, password) VALUE (?, ?)");
-            PreparedStatement psUserRole = c.prepareStatement("INSERT INTO user_roles (role, Email) VALUE (?,?)");
+            PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email, password, role) VALUE (?, ?, ?)");
             psUser.setString(1, user.getEmail());
             psUser.setString(2, hash);
-            psUserRole.setString(1, userRole);
-            psUserRole.setString(2, user.getEmail());
+            psUser.setString(3, UserRoles.USER);
             psUser.executeUpdate();
             psUser.close();
-            psUserRole.executeUpdate();
-            psUserRole.close();
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
@@ -200,18 +192,12 @@ public class DBController {
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psUser = c.prepareStatement("UPDATE users SET Password=? WHERE Email=?");
-            PreparedStatement psUserRole = c.prepareStatement("UPDATE user_roles SET role=? WHERE Email=?");
+            PreparedStatement psUser = c.prepareStatement("UPDATE users SET Password=?, role=? WHERE Email=?");
             psUser.setString(1, hash);
-            psUser.setString(2, user.getEmail());
-            psUserRole.setString(1, UserRoles.USER);
-            psUserRole.setString(2, user.getEmail());
+            psUser.setString(2, UserRoles.USER);
+            psUser.setString(3, user.getEmail());
             psUser.executeUpdate();
             psUser.close();
-            psUserRole.executeUpdate();
-            psUserRole.close();
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
