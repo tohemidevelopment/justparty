@@ -32,7 +32,7 @@
                                users-by-username-query=
                                        "select email,password, enabled from users where email=?"
                                authorities-by-username-query=
-                                       "select email, role from user_roles where email =?  " />
+                                       "select email, role from users where email =?  " />
         </authentication-provider>
     </authentication-manager>
 
