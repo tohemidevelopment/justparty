@@ -22,7 +22,3 @@ function showCanceldEvents(){
 function showPastEvents(){
 //to be implemented when Events have dates
 }
-
-function updateSelectBox(){
-//TODO: implement
-}

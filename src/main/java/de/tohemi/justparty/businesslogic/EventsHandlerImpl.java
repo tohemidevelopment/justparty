@@ -38,7 +38,7 @@ public class EventsHandlerImpl implements EventsHandler {
         events.add(testevent);
 
         Event event2 = new Event("Testevent", new User("test@test.test"));
-        UserEventRelation testevent2 = new UserEventRelation(event2, new User(mail), Accepted.ACCEPTED);
+        UserEventRelation testevent2 = new UserEventRelation(event2, new User(mail), Accepted.NOTSURE);
         event2.setBegin(Calendar.getInstance());
         events.add(testevent2);
 

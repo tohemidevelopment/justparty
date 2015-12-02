@@ -123,19 +123,19 @@
                             <a href="#" class="btn"><span class="glyphicon glyphicon-trash"/> </a>
                         </c:when>
                         <c:otherwise>
-                            <select class="form-control" id="select_${element.id}" onload="updateSelectBox()">
+                            <select class="form-control" id="select_${element.id}">
                                 <c:if test="${empty element.accepted}">
                                     <option selected="selected">
                                         <spring:message code="manager.table.select.nothingselected"/>
                                     </option>
                                 </c:if>
-                                <option class="select-accept">
+                                <option ${element.accepted == "ACCEPTED" ? "selected='selected'": "" } class="select-accept">
                                     <spring:message code="manager.table.select.accept"/>
                                 </option>
-                                <option class="select-cancel">
+                                <option ${element.accepted == "DECLINED" ? "selected='selected'": "" }  class="select-cancel">
                                     <spring:message code="manager.table.select.cancel"/>
                                 </option>
-                                <option class="select-notsure">
+                                <option ${element.accepted == "NOTSURE" ? "selected='selected'": "" } class="select-notsure">
                                     <spring:message code="manager.table.select.notsure"/>
                                 </option>
                             </select>
