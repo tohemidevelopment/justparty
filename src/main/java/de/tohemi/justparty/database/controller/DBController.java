@@ -26,6 +26,18 @@ public class DBController {
         return instance;
     }
 
+    private DataSource getDataSource() {
+        return (DataSource) new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml").getBean("dataSource");
+    }
+
+    private void releaseConnection(DataSource ds, Connection c) {
+        try {
+            c.close();
+        } catch (SQLException exp) {}
+        DataSourceUtils.releaseConnection(c, ds);
+    }
+
+
     /*public User getUser(String email) {
         // Create a new application context. this processes the Spring config
         ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
@@ -67,13 +79,36 @@ public class DBController {
             ps.setString(2, e.getEventOwner().getEmail());
             ps.executeUpdate();
             ps.close();
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
             return false;
         } finally {
+            // ignore failure closing connection
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+
+    public boolean deleteEvent(Event e) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("DELETE FROM events WHERE event_id=?");
+            PreparedStatement psGuests = c.prepareStatement("DELETE FROM guestlist WHERE event=?");
+            psEvent.setInt(1, e.getId());
+            psGuests.setInt(1, e.getId());
+            psEvent.executeUpdate();
+            psGuests.executeUpdate();
+            psEvent.close();
+            psGuests.close();
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            return false;
+        }
+        finally {
             // ignore failure closing connection
             releaseConnection(ds, c);
         }
