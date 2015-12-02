@@ -32,12 +32,13 @@ public class EventController extends JPController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/edit")
-    public String editEvent(){
+    public String editEvent(ModelMap model){
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
         if (!eventsHandler.userIsHostOfRequestedEvent()){
             //TODO: Show Error String, User not host
             return LogicalViewNames.REDIRECT + LogicalViewNames.getNameErrorPage();
         }
+        model.addAttribute("alert_info", "alert.notimplyet");
         //TODO: collect information need for edit page
         return LogicalViewNames.getNameEditEvent();
     }
