@@ -33,4 +33,14 @@ public class Person {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof Person))
+        {
+            return false;
+        }
+        Person person = (Person) obj;
+        return email.equals(person.email);
+    }
 }
