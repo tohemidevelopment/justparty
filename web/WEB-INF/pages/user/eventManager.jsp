@@ -11,18 +11,17 @@
 <html>
 <head>
     <title><spring:message code="manager.title"/></title>
-    <meta lastName="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css">
 </head>
 <body>
-<c:url value="/j_spring_security_logout" var="logoutUrl"/>
-<form action="${logoutUrl}" method="post" id="logoutForm">
+<form action="/j_spring_security_logout" method="post" id="logoutForm">
     <input type="hidden" name="${_csrf.parameterName}"
            value="${_csrf.token}"/>
 </form>
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid" id="navbar">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -70,57 +69,95 @@
 
 <div class="container theme-showcase" role="main">
     <div class="page-header">
-        <h1><spring:message code="manager.header1"/> </h1>
+        <h1><spring:message code="manager.header1"/></h1>
     </div>
-    <div class="alert alert-info" role="alert">
-        Diese Seite ist noch in Bearbeitung und dient momentan nur der optischen Demonstration.
+    <!-- alerts -->
+    <div>
+        <c:if test="${not empty alert_danger}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_danger}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_warning}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_warning}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_success}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_success}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_info}">
+            <div class="alert alert-info" role="alert">
+                <spring:message code="${alert_info}"/>
+            </div>
+        </c:if>
     </div>
 
-    <table class="table">
+    <table class="table header-fixed">
         <thead>
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#">Aktuelle Events</a></li>
-            <li role="presentation"><a href="#">Einladungen</a></li>
-            <li role="presentation"><a href="#">Eigene Events</a></li>
-            <li role="presentation"><a href="#">Absagen</a></li>
-            <li role="presentation"><a href="#">Frühere Events</a></li>
-        </ul>
+        <tr>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="javascript:showCurrentEvents()"><spring:message
+                        code="manager.nav.current"/></a></li>
+                <!--
+                    <li role="presentation"><a href="javascript:showInvitations()"><spring:message
+                            code="manager.nav.invites"/></a></li>
+                    <li role="presentation"><a href="javascript:showOwnedEvents()"><spring:message
+                            code="manager.nav.owned"/></a></li>
+                    <li role="presentation"><a href="javascript:showCanceldEvents()"><spring:message
+                            code="manager.nav.canceled"/></a></li>
+                    <li role="presentation"><a href="javascript:showPastEvents()"><spring:message
+                            code="manager.nav.past"/></a></li>-->
+            </ul>
+        </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>Hosted Event 1</td>
-            <td>20.10.2015</td>
-            <td>
-                <button class="btn">Bearbeiten</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Event 2</td>
-            <td>21.10.2015</td>
-            <td>
-                <button class="btn">Annehmen</button>
-                <button class="btn">Noch unsicher</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Angenommenes Event</td>
-            <td>24.10.2015</td>
-            <td>
-                <button class="btn">Doch unsicher</button>
-                <button class="btn">Absagen</button>
-            </td>
-        </tr>
-
+        <c:forEach items="${currentevents}" var="element">
+            <tr>
+                <td class="action">
+                    <c:choose>
+                        <c:when test="${element.hosted}">
+                            <a href="/edit?id=${element.id}" class="btn"><span class="glyphicon glyphicon-pencil"/></a>
+                            <a href="#" class="btn"><span class="glyphicon glyphicon-trash"/> </a>
+                        </c:when>
+                        <c:otherwise>
+                            <select class="form-control" id="select_${element.id}">
+                                <c:if test="${empty element.accepted}">
+                                    <option selected="selected">
+                                        <spring:message code="manager.table.select.nothingselected"/>
+                                    </option>
+                                </c:if>
+                                <option ${element.accepted == "ACCEPTED" ? "selected='selected'": "" } class="select-accept">
+                                    <spring:message code="manager.table.select.accept"/>
+                                </option>
+                                <option ${element.accepted == "DECLINED" ? "selected='selected'": "" }  class="select-cancel">
+                                    <spring:message code="manager.table.select.cancel"/>
+                                </option>
+                                <option ${element.accepted == "NOTSURE" ? "selected='selected'": "" } class="select-notsure">
+                                    <spring:message code="manager.table.select.notsure"/>
+                                </option>
+                            </select>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+                <td class="name">
+                        ${element.name}
+                </td>
+                <td class="date">
+                        ${element.date}
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
-
 </div>
 <!-- JS-Libraries requiered for Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!-- JS-Libraries requiered for justParty -->
 <script src="${pageContext.request.contextPath}/res/js/logout.js"></script>
+<script src="${pageContext.request.contextPath}/res/js/events.js"></script>
 </body>
 </html>

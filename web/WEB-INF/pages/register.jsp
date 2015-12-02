@@ -12,32 +12,29 @@
 <html>
 <head>
     <title><spring:message code="register.title"/></title>
-    <meta lastName="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/res/style.css">
     <style>
         .form-control {
             display: inline;
-            width: 90%;
-            margin-right: 5px;
+        }
+        .control-label {
+            text-align: left !important;
         }
     </style>
 </head>
 <body>
-
-<nav class="navbar navbar-default">
-    <div class="container-fluid" id="navbar">
-        <!-- Brand and toggle get grouped for better mobile display -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="color: white;">
-                justParty
-            </a>
+            <a class="navbar-brand" href="/">justParty</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -48,84 +45,94 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Einstellungen <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href='/login'><span>Log in</span></a></li>
-                    </ul>
-                </li>
+                <li><a href="/login"><spring:message code="nav.login"/></a></li>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container-fluid -->
 </nav>
 
 <div class="container theme-showcase" role="main">
     <div class="page-header">
         <h1><spring:message code="register.header1"/></h1>
     </div>
-    <div class="alert alert-info" role="alert">
-        Diese Seite ist noch in Bearbeitung und dient momentan nur der optischen Demonstration.
+    <!-- alerts -->
+    <div>
+        <c:if test="${not empty alert_danger}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_danger}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_warning}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_warning}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_success}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_success}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_info}">
+            <div class="alert alert-info" role="alert">
+                <spring:message code="${alert_info}"/>
+            </div>
+        </c:if>
     </div>
+
     <div>
         <form method="post" action="/register" role="form" class="form-horizontal" id="register_form">
             <div class="form-group">
                 <label for="email" class="control-label col-sm-2"><spring:message code="register.label.email"/>:</label>
 
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <input type="text" class="form-control" name="email" id="email"
-                           placeholder="<spring:message code="register.placeholder.email"/>">
+                           placeholder="<spring:message code="register.placeholder.email"/>" autofocus="autofocus">
                 </div>
                 <c:if test="${not empty EMAIL}">
-                    <div class="col-sm-2">
+                    <label class="control-label col-sm-2">
                         <spring:message code="${EMAIL}"/>
-                    </div>
+                    </label>
                 </c:if>
             </div>
             <div class="form-group">
                 <label for="pwd" class="control-label col-sm-2"><spring:message code="register.label.pw"/>:</label>
 
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <input type="password" class="form-control" id="pwd" name="password"
                            placeholder="<spring:message code="register.placeholder.pw"/>">
                 </div>
                 <c:if test="${not empty PASSWORD}">
-                    <div class="col-sm-2">
+                    <label class="control-label col-sm-2">
                         <spring:message code="${PASSWORD}"/>
-                    </div>
+                    </label>
                 </c:if>
             </div>
             <div class="form-group">
                 <label for="pwd2" class="control-label col-sm-2"><spring:message
                         code="register.label.pw.repeat"/>:</label>
 
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <input type="password" class="form-control" id="pwd2" name="password_repeat"
                            placeholder="<spring:message code="register.placeholder.pw.repeat"/>">
                 </div>
-                <c:if test="${not empty PASSWORD}">
-                    <div class="col-sm-2">
-                    </div>
-                </c:if>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-8">
+                <div class="col-sm-offset-2 col-sm-7">
                     <div class="checkbox">
-                        <label><input type="checkbox" name="terms" value=""><spring:message
+
+                        <label><input type="checkbox" name="terms"><spring:message
                                 code="register.label.acceptterms"/></label>
                     </div>
                 </div>
                 <c:if test="${not empty TERMS}">
-                    <div class="col-sm-2">
+                    <label class="control-label col-sm-2">
                         <spring:message code="${TERMS}"/>
-                    </div>
+                    </label>
                 </c:if>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <input class="form-control" style="width: 20%" name="submit" type="submit"
+                <div class="col-sm-offset-2 col-sm-2">
+                    <input class="form-control" name="submit" type="submit"
                            value="<spring:message code="welcome.registerbtn"/> "/>
                 </div>
             </div>

@@ -1,4 +1,3 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tom
@@ -7,19 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title><spring:message code="create.title"/></title>
-    <meta lastName="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/res/style.css">
 </head>
 <body>
 <form action="/j_spring_security_logout?${_csrf.parameterName}=${_csrf.token}" method="post" id="logoutForm">
-    <input type="hidden" lastName="${_csrf.parameterName}"
+    <input type="hidden" name="${_csrf.parameterName}"
            value="${_csrf.token}"/>
 </form>
-<nav class="navbar navbar-default">
-    <div class="container-fluid" id="navbar">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -67,8 +68,28 @@
     <div class="page-header">
         <h2><spring:message code="create.header1"/></h2>
     </div>
-    <div class="alert alert-info" role="alert">
-        Diese Seite ist noch in Bearbeitung und dient momentan nur der optischen Demonstration.
+    <!-- alerts -->
+    <div>
+        <c:if test="${not empty alert_danger}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_danger}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_warning}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_warning}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_success}">
+            <div class="alert alert-success" role="alert">
+                <spring:message code="${alert_success}"/>
+            </div>
+        </c:if>
+        <c:if test="${not empty alert_info}">
+            <div class="alert alert-info" role="alert">
+                <spring:message code="${alert_info}"/>
+            </div>
+        </c:if>
     </div>
     <form method="post" action="/createEvent" role="form" id="login_form">
         <div class="form-group">

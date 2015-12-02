@@ -23,36 +23,46 @@ public class UserHandler {
             //log exception
             return new de.tohemi.justparty.businesslogic.Error("register.error.email", ErrorType.EMAIL);
         }
-        if(!passwordValid(password, matchingPassword)) {
+        if (!passwordValid(password, matchingPassword)) {
             return new Error("register.error.password", ErrorType.PASSWORD);
         }
-        if (!acceptedTerms)
-        {
+        if (!acceptedTerms) {
             return new Error("register.error.terms", ErrorType.TERMS);
         }
+        //At this Point: Userdata is Valid
+        DBController dbController = DBController.getInstance();
         try {
-            if(DBController.getInstance().userIsRegistered(user.getEmail())){
+            if (dbController.userIsRegistered(user.getEmail())) {
+                //User ist registered as USER
                 return new Error("register.error.email.taken", ErrorType.EMAIL);
             }
-            if(DBController.getInstance().changeToUser(user,HashFunction.getHash(password))){
+            //User is registered as NOUSER
+            if (dbController.changeToUser(user, HashFunction.getHash(password))) {
+                //User role updated in DB
                 return null;
             }
 
         } catch (UserNotFoundException e) {
-            if (DBController.getInstance().addUser(user, UserRoles.USER, HashFunction.getHash(password)))
-            {
+            //User not in DB
+            if (dbController.addUser(user, UserRoles.USER, HashFunction.getHash(password))) {
+                //User added to DB
                 return null;
             }
         }
-        //Add User to DB
-
         return new Error("", null);
     }
 
     private boolean passwordValid(String password, String matchingPassword) {
-        if (password != null && password.length() >= MIN_PASSWD_LENGTH && password.equals(matchingPassword)){
-            return true;
+
+        if (password == null) {
+            return false;
         }
-        return false;
+        if (password.length() < MIN_PASSWD_LENGTH) {
+            return false;
+        }
+        if (!password.equals(matchingPassword)) {
+            return false;
+        }
+        return true;
     }
 }
