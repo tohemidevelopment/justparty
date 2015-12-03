@@ -19,6 +19,12 @@ public class EventsHandlerImpl implements EventsHandler {
         return dbController.addEvent(new Event(eventname, user));
     }
 
+    public boolean deleteEvent(Event e) {
+
+        DBController dbController = DBController.getInstance();
+        return dbController.deleteEvent(e);
+    }
+
     public static List<UserEventRelation> getCurrentEvents(String mail) {
 
         DBController dbController = DBController.getInstance();
