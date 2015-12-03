@@ -55,7 +55,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
+                       aria-expanded="false" >Einstellungen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="javascript:logoutFormSubmit()"><span>Logout</span></a></li>
                     </ul>
@@ -119,8 +119,13 @@
                 <td class="action">
                     <c:choose>
                         <c:when test="${element.hosted}">
+                            <form id="delete_${element.id}" method="post" action="/delete">
+                                <input type="hidden" name="id" value="${element.id}">
+                                <input type="hidden" name="${_csrf.parameterName}"
+                                       value="${_csrf.token}"/>
+                            </form>
                             <a href="/edit?id=${element.id}" class="btn"><span class="glyphicon glyphicon-pencil"/></a>
-                            <a href="#" class="btn"><span class="glyphicon glyphicon-trash"/> </a>
+                            <a href="javascript:submitForm('delete_${element.id}')" class="btn"><span class="glyphicon glyphicon-trash"/> </a>
                         </c:when>
                         <c:otherwise>
                             <select class="form-control" id="select_${element.id}">

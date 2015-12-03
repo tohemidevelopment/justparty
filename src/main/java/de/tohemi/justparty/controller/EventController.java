@@ -47,6 +47,7 @@ public class EventController extends JPController {
     @RequestMapping(method = RequestMethod.POST, value = "/delete")
     public  String deleteEvent(ModelMap model, @RequestParam(value = "id") int id)
     {
+        System.out.println("Aufruf delete event");
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
         if (eventsHandler.deleteEvent(id, getMailFromLoggedInUser())){
             model.addAttribute("alert_success" + "alert.success.delete_event");
