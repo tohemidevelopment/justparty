@@ -91,19 +91,22 @@ public class DBController {
         return true;
     }
 
-    public boolean deleteEvent(Event e) {
+    public boolean deleteEvent(Event e, User u) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("DELETE FROM events WHERE event_id=?");
+            PreparedStatement psEvent = c.prepareStatement("DELETE FROM events WHERE event_id=? AND email=?");
             PreparedStatement psGuests = c.prepareStatement("DELETE FROM guestlist WHERE event=?");
             psEvent.setInt(1, e.getId());
+            psEvent.setString(2, u.getEmail());
             psGuests.setInt(1, e.getId());
+
             psEvent.executeUpdate();
             psGuests.executeUpdate();
             psEvent.close();
             psGuests.close();
+
         } catch (SQLException ex) {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
