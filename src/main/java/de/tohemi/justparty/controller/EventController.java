@@ -3,6 +3,7 @@ package de.tohemi.justparty.controller;
 import de.tohemi.justparty.businesslogic.EventsHandler;
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
+import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,4 +44,15 @@ public class EventController extends JPController {
         return LogicalViewNames.getNameEditEvent();
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/delete")
+    public  String deleteEvent(ModelMap model, @RequestParam(value = "id") int id)
+    {
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        if (eventsHandler.deleteEvent(id, getMailFromLoggedInUser())){
+            model.addAttribute("alert_success" + "alert.success.delete_event");
+        }else{
+            model.addAttribute("alert_warning" + "alert.warning.delete_event");
+        }
+        return LogicalViewNames.REDIRECT + "/manageEvent";
+    }
 }

@@ -2,7 +2,6 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.datamodel.*;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
@@ -10,7 +9,6 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -112,8 +110,7 @@ public class DBController {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
             return false;
-        }
-        finally {
+        } finally {
             // ignore failure closing connection
             releaseConnection(ds, c);
         }
@@ -267,13 +264,13 @@ public class DBController {
         Connection c = DataSourceUtils.getConnection(ds);
         ArrayList<UserEventRelation> userEventRelations = new ArrayList<UserEventRelation>();
         try {
-            PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email, status FROM events, guestlist WHERE event_id = event AND guest = ?;");
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email, status FROM events, " + GuestlistDBTabelle.TABLE_NAME + " WHERE event_id = event AND guest = ?;");
             String email = user.getEmail();
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = new Event(resultSet.getString("name"), user);
+                Event event = new Event(resultSet.getString("name"), new User(resultSet.getString("email")));
                 event.setId(resultSet.getInt("event_id"));
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
@@ -281,18 +278,8 @@ public class DBController {
                     begin.setTime(date);
                     event.setBegin(begin);
                 }
-                Accepted accepted = null;
-                switch (resultSet.getInt("status")){
-                    case 1:
-                        accepted = Accepted.ACCEPTED;
-                        break;
-                    case 2:
-                        accepted = Accepted.DECLINED;
-                        break;
-                    case 3:
-                        accepted =Accepted.NOTSURE;
-                        break;
-                }
+                int status = resultSet.getInt("status");
+                Accepted accepted = GuestlistDBTabelle.getAcceptedObjectForStatus(status);
                 UserEventRelation uer = new UserEventRelation(event, user, accepted);
                 userEventRelations.add(uer);
             }
@@ -302,8 +289,10 @@ public class DBController {
         } finally {
             releaseConnection(ds, c);
         }
-
         return userEventRelations;
     }
 
+    public Event getEventById(int id) {
+        return null;
+    }
 }
