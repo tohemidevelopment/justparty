@@ -25,7 +25,8 @@ public class DBController {
     }
 
     private DataSource getDataSource() {
-        return (DataSource) new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml").getBean("dataSource");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
+        return (DataSource) ctx.getBean("dataSource");
     }
 
     private void releaseConnection(DataSource ds, Connection c) {
