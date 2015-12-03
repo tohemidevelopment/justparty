@@ -50,10 +50,10 @@ public class EventController extends JPController {
         System.out.println("Aufruf delete event");
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
         if (eventsHandler.deleteEvent(id, getMailFromLoggedInUser())){
-            model.addAttribute("alert_success" + "alert.success.delete_event");
+            model.addAttribute("alert_success", "alert.success.delete_event");
         }else{
-            model.addAttribute("alert_warning" + "alert.warning.delete_event");
+            model.addAttribute("alert_warning", "alert.warning.delete_event");
         }
-        return LogicalViewNames.REDIRECT + "/manageEvent";
+        return LogicalViewNames.REDIRECT + "manageEvent";
     }
 }

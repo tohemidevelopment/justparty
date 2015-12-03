@@ -24,6 +24,10 @@ public class Event {
     private URL spotifyPlaylistLink;
     private int id;
 
+    public Event(int id) {
+        this.id = id;
+    }
+
     public Event(String name, User eventOwner){
         this.name=name;
         this.eventOwner=eventOwner;

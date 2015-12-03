@@ -94,7 +94,7 @@
     <form method="post" action="/createEvent" role="form" id="login_form">
         <div class="form-group">
             <label for="name">Name: </label>
-            <input type="text" class="form-control" name="eventname" id="name" placeholder="Eventname">
+            <input type="text" class="form-control" name="eventname" id="name" placeholder="Eventname" autofocus="autofocus">
         </div>
         <div class="form-group">
             <input class="form-control" name="submit" type="submit" value="Event erstellen"/>

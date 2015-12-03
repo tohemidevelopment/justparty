@@ -1,4 +1,4 @@
-package de.tohemi.justparty.database.controller;
+package de.tohemi.justparty.database.tables;
 
 import de.tohemi.justparty.datamodel.Accepted;
 

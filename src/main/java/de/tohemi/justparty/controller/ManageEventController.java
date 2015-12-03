@@ -7,21 +7,20 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Tom on 07.11.2015.
  */
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/manageEvent")
-public class ManageEventController {
+public class ManageEventController extends JPController{
     @RequestMapping(method = RequestMethod.GET)
-    public String printEvents(ModelMap model) {
+    public String printEvents(ModelMap model, @RequestParam(value = "alert_success", required = false) String alert_success) {
 
+        setAlerts(model, alert_success);
         model.addAttribute("alert_info", "alert.notimplyet");
-
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String mail = auth.getName(); //get logged in username (=email)
+        String mail = getMailFromLoggedInUser();
         model.addAttribute("currentevents", EventsHandlerImpl.getCurrentEvents(mail));
         return LogicalViewNames.getNameEventManager();
     }

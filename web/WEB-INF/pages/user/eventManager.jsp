@@ -119,7 +119,7 @@
                 <td class="action">
                     <c:choose>
                         <c:when test="${element.hosted}">
-                            <form id="delete_${element.id}" method="post" action="/delete">
+                            <form class="hidden" id="delete_${element.id}" method="post" action="/delete">
                                 <input type="hidden" name="id" value="${element.id}">
                                 <input type="hidden" name="${_csrf.parameterName}"
                                        value="${_csrf.token}"/>

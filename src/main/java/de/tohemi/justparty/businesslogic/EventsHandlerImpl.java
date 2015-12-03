@@ -1,6 +1,7 @@
 package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.database.controller.DBController;
+import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
@@ -19,10 +20,12 @@ public class EventsHandlerImpl implements EventsHandler {
         return dbController.addEvent(new Event(eventname, user));
     }
 
-    public boolean deleteEvent(Event e, User u) {
+    public boolean deleteEvent(int id, String mail) {
 
         DBController dbController = DBController.getInstance();
-        return dbController.deleteEvent(e, u);
+        Event event = new Event(null, null);
+        event.setId(id);
+        return dbController.deleteEvent(event, new User(mail));
     }
 
     public static List<UserEventRelation> getCurrentEvents(String mail) {
@@ -36,5 +39,14 @@ public class EventsHandlerImpl implements EventsHandler {
 
     public boolean userIsHostOfRequestedEvent() {
         return true;
+    }
+
+    public boolean answerInvitation(int eventId, String mail, Accepted answer){
+
+        if (answer == null){
+            return false;
+        }
+        DBController dbController = DBController.getInstance();
+        return dbController.updateGuest(new Event(eventId),new User(mail), answer);
     }
 }

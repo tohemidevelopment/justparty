@@ -14,7 +14,7 @@ import java.security.Principal;
  */
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/login")
-public class LoginController  {
+public class LoginController extends JPController {
     @RequestMapping(method = RequestMethod.GET)
     public String printCreateEvent(Principal principal, @RequestParam(value = "error", required = false) String error,@RequestParam(value = "alert_success", required = false) String alert_success, ModelMap model) {
         if (principal != null){
@@ -23,12 +23,9 @@ public class LoginController  {
             model.addAttribute("info_box", "info.login.loggedin.box");
             return LogicalViewNames.getNameInfoPage();
         }
+        setAlerts(model, alert_success);
         if (error != null) {
             model.addAttribute("login_error","Ung&uuml;ltige Logindaten!");
-        }
-        if (alert_success != null){
-            System.out.println(alert_success);
-            model.addAttribute("alert_success", alert_success);
         }
         return LogicalViewNames.getNameLogin();
     }

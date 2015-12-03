@@ -1,6 +1,7 @@
 package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
+import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
 import de.tohemi.justparty.datamodel.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -293,7 +294,10 @@ public class DBController {
         return userEventRelations;
     }
 
-    public Event getEventById(int id) {
-        return null;
+    public boolean updateGuest(Event event, User user, Accepted answer) {
+        //Status as INT for DB
+        int status = GuestlistDBTabelle.getIntStatusForAcceptedObject(answer);
+        //TODO: Implement
+        return false;
     }
 }

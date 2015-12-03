@@ -11,6 +11,10 @@ body{
      padding-top: 70px;
 }
 
+.hidden {
+    display: none;
+}
+
 /*welcomepage
 about justparty */
 #about {
