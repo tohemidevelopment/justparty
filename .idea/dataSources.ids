@@ -868,7 +868,7 @@
       <primary-key name="PRIMARY" columns="event_id"/>
     </table>
     <table name="guestlist" schema="" catalog="justParty_db" type="TABLE">
-      <column name="guest" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="guest" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="event" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="status" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="guest,event"/>
