@@ -97,13 +97,15 @@ public class DBController {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement psEvent = c.prepareStatement("DELETE FROM events WHERE event_id=? AND email=?");
+
             PreparedStatement psGuests = c.prepareStatement("DELETE FROM guestlist WHERE event=?");
             psEvent.setInt(1, e.getId());
             psEvent.setString(2, u.getEmail());
             psGuests.setInt(1, e.getId());
 
-            psEvent.executeUpdate();
-            psGuests.executeUpdate();
+            if(psEvent.execute()) {
+                psGuests.executeUpdate();
+            }
             psEvent.close();
             psGuests.close();
 
