@@ -14,8 +14,9 @@ import java.security.Principal;
  * Created by Tom on 07.11.2015.
  */
 @org.springframework.stereotype.Controller
-public class RegisterController {
-    @RequestMapping(method = RequestMethod.GET, value = "/register")
+public class RegisterController extends JPController {
+
+    @RequestMapping(method = RequestMethod.GET, value = REGISTER)
     public String printRegisterPage(ModelMap model, Principal principal) {
         if (principal != null){
             model.addAttribute("info_title", "info.login.loggedin.title");
@@ -26,7 +27,7 @@ public class RegisterController {
         return LogicalViewNames.getNameRegister();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/register")
+    @RequestMapping(method = RequestMethod.POST, value = REGISTER)
     public String performRegister(ModelMap model, @RequestParam(value = "email") String email,
                                   @RequestParam(value = "password") String password, @RequestParam(value = "password_repeat") String matchingPassword,
                                   @RequestParam(value = "terms", required = false) String termsAsString) {
@@ -34,8 +35,8 @@ public class RegisterController {
         boolean acceptedTerms = termsAsString != null ? true : false;
         de.tohemi.justparty.businesslogic.Error error = new UserHandler().createUser(email, password, matchingPassword, acceptedTerms);
         if (error == null) {
-            model.addAttribute("alert_success", "alert.success.registration");
-            return LogicalViewNames.REDIRECT + LogicalViewNames.getNameLogin();
+            setAlerts(model, null, null, "alert.success.registration", null);
+            return REDIRECT + LogicalViewNames.getNameLogin();
         }
         if (error.getType() == null) {
             return LogicalViewNames.getNameErrorPage();

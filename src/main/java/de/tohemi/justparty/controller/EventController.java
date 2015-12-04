@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * Created by Heiko on 04.11.2015.
@@ -25,9 +26,9 @@ public class EventController extends JPController {
 
         EventsHandlerImpl eventsHandler = new EventsHandlerImpl();
         String mail = getMailFromLoggedInUser();
-        if(eventsHandler.createEvent(eventname, mail))
+        if(eventsHandler.createEvent(HtmlUtils.htmlEscape(eventname), mail))
         {
-            return LogicalViewNames.REDIRECT + "/manageEvent";
+            return REDIRECT + "/manageEvent";
         }
         return LogicalViewNames.getNameErrorPage();
     }
@@ -37,7 +38,7 @@ public class EventController extends JPController {
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
         if (!eventsHandler.userIsHostOfRequestedEvent()){
             //TODO: Show Error String, User not host
-            return LogicalViewNames.REDIRECT + "/error";
+            return REDIRECT + "/error";
         }
         model.addAttribute("alert_info", "alert.notimplyet");
         //TODO: collect information need for edit page
@@ -54,6 +55,6 @@ public class EventController extends JPController {
         }else{
             model.addAttribute("alert_warning", "alert.warning.delete_event");
         }
-        return LogicalViewNames.REDIRECT + "manageEvent";
+        return REDIRECT + "manageEvent";
     }
 }

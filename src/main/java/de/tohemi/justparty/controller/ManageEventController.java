@@ -18,8 +18,7 @@ public class ManageEventController extends JPController{
     @RequestMapping(method = RequestMethod.GET)
     public String printEvents(ModelMap model, @RequestParam(value = "alert_success", required = false) String alert_success) {
 
-        setAlerts(model, alert_success);
-        model.addAttribute("alert_info", "alert.notimplyet");
+        setAlerts(model, null, null, alert_success, null);
         String mail = getMailFromLoggedInUser();
         model.addAttribute("currentevents", EventsHandlerImpl.getCurrentEvents(mail));
         return LogicalViewNames.getNameEventManager();
