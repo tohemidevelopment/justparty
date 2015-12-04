@@ -14,6 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="ISO-8859-4">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css">
+    <%-- csrf for AJAX--%>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 <body>
 <form action="/j_spring_security_logout" method="post" id="logoutForm">
@@ -90,7 +93,7 @@
         <h1></h1>
     </div>
     <!-- alerts -->
-    <div>
+    <div id="alerts">
         <c:if test="${not empty alert_danger}">
             <div class="alert alert-danger" role="alert">
                 <spring:message code="${alert_danger}"/>

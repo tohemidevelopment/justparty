@@ -1,4 +1,3 @@
-<!--TODO: Optimize Navbar-->
 <%--
   Created by IntelliJ IDEA.
   User: Tom
@@ -15,6 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="ISO-8859-4">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css">
+    <%-- csrf for AJAX--%>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
 </head>
 <body>
 <form action="/j_spring_security_logout" method="post" id="logoutForm">
@@ -47,19 +49,19 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Events <span class="caret"></span></a>
+                       aria-expanded="false"><spring:message code="nav.events"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href='${pageContext.request.contextPath}/createEvent'><span>Event Erstellen</span></a>
+                        <li><a href='${pageContext.request.contextPath}/createEvent'><span><spring:message code="nav.events.create"/></span></a>
                         </li>
-                        <li><a href='${pageContext.request.contextPath}/manageEvent'><span>Events Managen</span></a>
+                        <li><a href='${pageContext.request.contextPath}/manageEvent'><span><spring:message code="nav.events.manage"/></span></a>
                         </li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Einstellungen <span class="caret"></span></a>
+                       aria-expanded="false"><spring:message code="nav.settings"/><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="javascript:logoutFormSubmit()"><span>Logout</span></a></li>
+                        <li><a href="javascript:submitForm('logoutForm')"><span><spring:message code="nav.logout"/></span></a></li>
                     </ul>
                 </li>
             </ul>
@@ -74,7 +76,7 @@
         <h1><spring:message code="manager.header1"/></h1>
     </div>
     <!-- alerts -->
-    <div>
+    <div id="alerts">
         <c:if test="${not empty alert_danger}">
             <div class="alert alert-danger" role="alert">
                 <spring:message code="${alert_danger}"/>
@@ -131,22 +133,22 @@
                                     class="glyphicon glyphicon-trash"/> </a>
                         </c:when>
                         <c:otherwise>
-                            <select class="form-control" id="select_${element.id}">
+                            <select class="form-control" id="select_${element.id}" onchange="sendInvitationAnswer(id)">
                                 <c:if test="${empty element.accepted}">
-                                    <option selected="selected">
+                                    <option name="nothingselected" selected="selected">
                                         <spring:message code="manager.table.select.nothingselected"/>
                                     </option>
                                 </c:if>
                                 <option ${element.accepted == "ACCEPTED" ? "selected='selected'": "" }
-                                        class="select-accept">
+                                        name="ACCEPTED">
                                     <spring:message code="manager.table.select.accept"/>
                                 </option>
                                 <option ${element.accepted == "DECLINED" ? "selected='selected'": "" }
-                                        class="select-cancel">
+                                        name="DECLINED">
                                     <spring:message code="manager.table.select.cancel"/>
                                 </option>
                                 <option ${element.accepted == "NOTSURE" ? "selected='selected'": "" }
-                                        class="select-notsure">
+                                        name="NOTSURE">
                                     <spring:message code="manager.table.select.notsure"/>
                                 </option>
                             </select>

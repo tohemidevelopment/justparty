@@ -6,7 +6,7 @@
 
     <groupId>justparty</groupId>
     <artifactId>justParty</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <packaging>war</packaging>
 
     <build>
