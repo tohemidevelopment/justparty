@@ -1,3 +1,4 @@
+<!--TODO: Optimize Navbar-->
 <%--
   Created by IntelliJ IDEA.
   User: Tom
@@ -30,7 +31,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="color: white;">
+            <a class="navbar-brand" href="/">
                 justParty
             </a>
         </div>
@@ -44,7 +45,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" style="color: white;">Events <span class="caret"></span></a>
+                       aria-expanded="false" >Events <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href='/createEvent'><span>Event Erstellen</span></a></li>
                         <li><a href='/manageEvent'><span>Events Managen</span></a></li>
@@ -52,7 +53,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" style="color: white;">Einstellungen <span class="caret"></span></a>
+                       aria-expanded="false" >Einstellungen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href='javascript:logoutFormSubmit()'><span>Ausloggen</span></a></li>
                     </ul>
@@ -107,6 +108,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!-- JS-Libraries requiered for justParty -->
-<script src="/res/js/logout.js"></script>
+<script src="/res/js/JPforms.js"></script>
 </body>
 </html>

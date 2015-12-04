@@ -156,7 +156,7 @@
         </div>
 
         <div class="item">
-            <img class="mid" src="<spring:message code="welcome.car.4.imgsrc"/>" alt="Funktion 4" style="">
+            <img class="mid" src="<spring:message code="welcome.car.4.imgsrc"/>" alt="Funktion 4">
 
             <div class="carousel-caption">
                 <h3><spring:message code="welcome.car.4.header"/></h3>
@@ -194,6 +194,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!-- JS-Libraries requiered for justParty -->
-<script src="/res/js/logout.js"></script>
+<script src="/res/js/JPforms.js"></script>
 </body>
 </html>

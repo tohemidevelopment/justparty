@@ -1,3 +1,4 @@
+<!--TODO: Optimize Navbar-->
 <%--
   Created by IntelliJ IDEA.
   User: Tom
@@ -31,7 +32,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/" style="color: white;">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/">
                 justParty
             </a>
         </div>
@@ -45,7 +46,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" style="color: white;">Events <span class="caret"></span></a>
+                       aria-expanded="false">Events <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href='${pageContext.request.contextPath}/createEvent'><span>Event Erstellen</span></a>
                         </li>
@@ -55,7 +56,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" >Einstellungen <span class="caret"></span></a>
+                       aria-expanded="false">Einstellungen <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="javascript:logoutFormSubmit()"><span>Logout</span></a></li>
                     </ul>
@@ -125,7 +126,8 @@
                                        value="${_csrf.token}"/>
                             </form>
                             <a href="/edit?id=${element.id}" class="btn"><span class="glyphicon glyphicon-pencil"/></a>
-                            <a href="javascript:submitForm('delete_${element.id}')" class="btn"><span class="glyphicon glyphicon-trash"/> </a>
+                            <a href="javascript:submitForm('delete_${element.id}')" class="btn"><span
+                                    class="glyphicon glyphicon-trash"/> </a>
                         </c:when>
                         <c:otherwise>
                             <select class="form-control" id="select_${element.id}">
@@ -134,13 +136,16 @@
                                         <spring:message code="manager.table.select.nothingselected"/>
                                     </option>
                                 </c:if>
-                                <option ${element.accepted == "ACCEPTED" ? "selected='selected'": "" } class="select-accept">
+                                <option ${element.accepted == "ACCEPTED" ? "selected='selected'": "" }
+                                        class="select-accept">
                                     <spring:message code="manager.table.select.accept"/>
                                 </option>
-                                <option ${element.accepted == "DECLINED" ? "selected='selected'": "" }  class="select-cancel">
+                                <option ${element.accepted == "DECLINED" ? "selected='selected'": "" }
+                                        class="select-cancel">
                                     <spring:message code="manager.table.select.cancel"/>
                                 </option>
-                                <option ${element.accepted == "NOTSURE" ? "selected='selected'": "" } class="select-notsure">
+                                <option ${element.accepted == "NOTSURE" ? "selected='selected'": "" }
+                                        class="select-notsure">
                                     <spring:message code="manager.table.select.notsure"/>
                                 </option>
                             </select>
@@ -162,7 +167,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!-- JS-Libraries requiered for justParty -->
-<script src="${pageContext.request.contextPath}/res/js/logout.js"></script>
-<script src="${pageContext.request.contextPath}/res/js/events.js"></script>
+<script src="${pageContext.request.contextPath}/res/js/JPforms.js"></script>
+<script src="${pageContext.request.contextPath}/res/js/JPevents.js"></script>
 </body>
 </html>
