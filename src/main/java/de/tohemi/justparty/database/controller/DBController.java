@@ -315,4 +315,38 @@ public class DBController {
             releaseConnection(ds, c);
         }
     }
+
+    public boolean updateEventData(Event event, User user) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        boolean tries = false;
+        try {
+            PreparedStatement pS1 = c.prepareStatement("SELECT email FROM events WHERE event_id=?;");
+            pS1.setInt(1, event.getId());
+            PreparedStatement pS = c.prepareStatement("UPDATE events SET name=?, description=?, begin=?, end=?, address_id=?, facebook_link=?, wishlist_link=?, googleplus_link=?, Spotify_link=? WHERE event_id=?;");
+            pS.setString(1, event.getName());
+            pS.setString(2, event.getDescription());
+            pS.setDate(3, (Date) event.getBegin().getTime());
+            pS.setDate(4, (Date) event.getEnd().getTime());
+            pS.setString(5, event.getLocation().getAddress().toString());
+            pS.setURL(6, event.getFacebookLink());
+            pS.setURL(7, event.getGooglePlusLink());
+            pS.setURL(8, event.getWishlistLink());
+            pS.setURL(9, event.getSpotifyPlaylistLink());
+
+            ResultSet rs = pS1.executeQuery();
+
+            if(rs.getString(0).equals(user.getEmail().toString())){
+                pS.executeUpdate();
+                tries = true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            tries = false;
+        } finally {
+            releaseConnection(ds, c);
+            return tries;
+        }
+    }
 }
