@@ -297,9 +297,23 @@ public class DBController {
     }
 
     public boolean updateGuest(Event event, User user, Accepted answer) {
-        //Status as INT for DB
+        boolean tries = false;
         int status = GuestlistDBTabelle.getIntStatusForAcceptedObject(answer);
-        //TODO: Implement
-        return false;
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement pS = c.prepareStatement("UPDATE guestlist SET status=? WHERE event=? AND guest=?;");
+            pS.setInt(1, status);
+            pS.setInt(2, event.getId());
+            pS.setString(3, user.getEmail());
+            tries = pS.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            tries = false;
+        } finally {
+            releaseConnection(ds, c);
+            return tries;
+        }
     }
 }
