@@ -23,7 +23,7 @@ function sendInvitationAnswer(id){
     }
 
     // open connectiom
-    req.open("GET",  "/accepted?id="+id+"&accepted="+accepted, true);
+    req.open("GET",  "accepted?id="+id+"&accepted="+accepted, true);
 
     // put handler for response
     req.onreadystatechange = function receive() {

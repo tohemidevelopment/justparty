@@ -133,7 +133,7 @@
                                     class="glyphicon glyphicon-trash"/> </a>
                         </c:when>
                         <c:otherwise>
-                            <select class="form-control" id="select_${element.id}" onchange="sendInvitationAnswer(id)">
+                            <select class="form-control" id="select_${element.id}" onchange="sendInvitationAnswer(${element.id})">
                                 <c:if test="${empty element.accepted}">
                                     <option name="nothingselected" selected="selected">
                                         <spring:message code="manager.table.select.nothingselected"/>

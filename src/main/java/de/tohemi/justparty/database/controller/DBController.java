@@ -297,7 +297,6 @@ public class DBController {
     }
 
     public boolean updateGuest(Event event, User user, Accepted answer) {
-        boolean tries = false;
         int status = GuestlistDBTabelle.getIntStatusForAcceptedObject(answer);
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
@@ -307,13 +306,13 @@ public class DBController {
             pS.setInt(1, status);
             pS.setInt(2, event.getId());
             pS.setString(3, user.getEmail());
-            tries = pS.execute();
+            pS.executeUpdate();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            tries = false;
+            return false;
         } finally {
             releaseConnection(ds, c);
-            return tries;
         }
     }
 }
