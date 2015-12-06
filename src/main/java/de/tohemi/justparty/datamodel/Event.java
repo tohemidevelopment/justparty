@@ -23,6 +23,7 @@ public class Event {
     private URL googlePlusLink;
     private URL spotifyPlaylistLink;
     private int id;
+    private URL wishlistLink;
 
     public Event(int id) {
         this.id = id;
@@ -119,5 +120,9 @@ public class Event {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public URL getWishlistLink() {
+        return wishlistLink;
     }
 }
