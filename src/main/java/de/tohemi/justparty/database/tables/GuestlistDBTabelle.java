@@ -7,7 +7,10 @@ import de.tohemi.justparty.datamodel.Accepted;
  */
 public class GuestlistDBTabelle {
 
-    public static final String TABLE_NAME = "guestlist";
+    public static final String TABLE = "guestlist";
+    public static final String COLUMN_STATUS = "status";
+    public static final String COLUMN_EVENT = "event";
+    public static final String COLUMN_GUEST = "guest";
 
 
     public static Accepted getAcceptedObjectForStatus(int status) {

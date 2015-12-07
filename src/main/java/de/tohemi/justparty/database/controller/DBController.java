@@ -1,6 +1,7 @@
 package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
+import de.tohemi.justparty.database.tables.EventsDBTabelle;
 import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
 import de.tohemi.justparty.datamodel.*;
 import org.springframework.context.ApplicationContext;
@@ -18,6 +19,8 @@ import java.util.List;
  */
 public class DBController {
     private static DBController instance;
+
+    private DBController(){}
 
     public synchronized static DBController getInstance() {
         if (instance == null) {
@@ -99,7 +102,7 @@ public class DBController {
         try {
             PreparedStatement psEvent = c.prepareStatement("DELETE FROM events WHERE event_id=? AND email=?");
 
-            PreparedStatement psGuests = c.prepareStatement("DELETE FROM guestlist WHERE event=?");
+            PreparedStatement psGuests = c.prepareStatement("DELETE FROM " + GuestlistDBTabelle.TABLE + " WHERE event=?");
             psEvent.setInt(1, e.getId());
             psEvent.setString(2, u.getEmail());
             psGuests.setInt(1, e.getId());
@@ -241,7 +244,7 @@ public class DBController {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = new Event(resultSet.getString("name"), user);
+                Event event = new Event(resultSet.getString(EventsDBTabelle.COLUMN_NAME), user);
                 event.setId(resultSet.getInt("event_id"));
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
@@ -268,13 +271,13 @@ public class DBController {
         Connection c = DataSourceUtils.getConnection(ds);
         ArrayList<UserEventRelation> userEventRelations = new ArrayList<UserEventRelation>();
         try {
-            PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email, status FROM events, " + GuestlistDBTabelle.TABLE_NAME + " WHERE event_id = event AND guest = ?;");
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email, " + EventsDBTabelle.COLUMN_STATUS + " FROM events, " + GuestlistDBTabelle.TABLE + " WHERE event_id = event AND " + GuestlistDBTabelle.COLUMN_GUEST + " = ?;");
             String email = user.getEmail();
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = new Event(resultSet.getString("name"), new User(resultSet.getString("email")));
+                Event event = new Event(resultSet.getString(EventsDBTabelle.COLUMN_NAME), new User(resultSet.getString("email")));
                 event.setId(resultSet.getInt("event_id"));
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
@@ -282,7 +285,7 @@ public class DBController {
                     begin.setTime(date);
                     event.setBegin(begin);
                 }
-                int status = resultSet.getInt("status");
+                int status = resultSet.getInt(GuestlistDBTabelle.COLUMN_STATUS);
                 Accepted accepted = GuestlistDBTabelle.getAcceptedObjectForStatus(status);
                 UserEventRelation uer = new UserEventRelation(event, user, accepted);
                 userEventRelations.add(uer);
@@ -302,7 +305,8 @@ public class DBController {
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement pS = c.prepareStatement("UPDATE guestlist SET status=? WHERE event=? AND guest=?;");
+            PreparedStatement pS = c.prepareStatement("UPDATE " + GuestlistDBTabelle.TABLE + " SET " + GuestlistDBTabelle.COLUMN_STATUS + "=? WHERE " +
+                    GuestlistDBTabelle.COLUMN_EVENT + "=? AND " + GuestlistDBTabelle.COLUMN_GUEST + "=?;");
             pS.setInt(1, status);
             pS.setInt(2, event.getId());
             pS.setString(3, user.getEmail());
