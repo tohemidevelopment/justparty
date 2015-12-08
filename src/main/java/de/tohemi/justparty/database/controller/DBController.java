@@ -216,7 +216,7 @@ public class DBController {
 
         try {
             PreparedStatement psUser = c.prepareStatement("DELETE FROM users WHERE email=?");
-            PreparedStatement psGuestlist = c.prepareStatement("DELETE FROM guestlist WHERE email=?");
+            PreparedStatement psGuestlist = c.prepareStatement("DELETE FROM guestlist WHERE guest=?");
             psUser.setString(1, user.getEmail());
             psGuestlist.setString(1, user.getEmail());
             psUser.executeUpdate();
