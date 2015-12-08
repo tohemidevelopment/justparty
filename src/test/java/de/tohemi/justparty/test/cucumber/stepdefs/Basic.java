@@ -6,6 +6,8 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import de.tohemi.justparty.database.controller.DBController;
+import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.test.cucumber.BaseIntegration;
 import de.tohemi.justparty.test.cucumber.BrowserHolder;
 import org.openqa.selenium.By;
@@ -41,13 +43,15 @@ public class Basic {
 
     @Then("^Now I see \"([^\"]*)\"$")
     public void Now_I_see(String view) throws Throwable {
-
-        if(!browser.getDriver().getCurrentUrl().equals("http://localhost:8080/"+view))
+        System.out.println(view);
+        System.out.println(browser.getDriver().getCurrentUrl());
+        if(!browser.getDriver().getCurrentUrl().contains("http://localhost:8080/" + view))
             throw new Exception();
     }
     @After
     public void tearDown() {
         browser.getDriver().quit();
+        DBController.getInstance().removeUser(new User("cucumber@test.de"));
     }
 
 
