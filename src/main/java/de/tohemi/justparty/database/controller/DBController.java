@@ -209,6 +209,31 @@ public class DBController {
         return true;
     }
 
+    public boolean removeUser(User user) {
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+
+        try {
+            PreparedStatement psUser = c.prepareStatement("DELETE FROM users WHERE email=?");
+            PreparedStatement psGuestlist = c.prepareStatement("DELETE FROM guestlist WHERE email=?");
+            psUser.setString(1, user.getEmail());
+            psGuestlist.setString(1, user.getEmail());
+            psUser.executeUpdate();
+            psGuestlist.executeUpdate();
+            psUser.close();
+            psGuestlist.close();
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+
     public boolean changeToUser(User user, String hash) {
         DataSource ds = getDataSource();
 
