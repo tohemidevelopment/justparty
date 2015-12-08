@@ -30,7 +30,7 @@ public class DBController {
     }
 
     private DataSource getDataSource() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-database.xml");
         return (DataSource) ctx.getBean("dataSource");
     }
 
