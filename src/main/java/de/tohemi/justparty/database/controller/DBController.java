@@ -266,11 +266,11 @@ public class DBController {
         Connection c = DataSourceUtils.getConnection(ds);
         ArrayList<UserEventRelation> gl = new ArrayList<UserEventRelation>();
         try {
-            PreparedStatement preparedStatement = c.prepareStatement("SELECT email, status FROM guestlist WHERE event = ?;");
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT " + GuestlistDBTabelle.COLUMN_GUEST + ", " + GuestlistDBTabelle.COLUMN_STATUS + " FROM guestlist WHERE " + GuestlistDBTabelle.COLUMN_EVENT + " = ?;");
             preparedStatement.setInt(1, event.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                gl.add(new UserEventRelation(event, new User(resultSet.getString("email")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
+                gl.add(new UserEventRelation(event, new User(resultSet.getString("guest")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
             }
 
         } catch (SQLException e) {
@@ -336,6 +336,25 @@ public class DBController {
         } finally {
             releaseConnection(ds, c);
         }
+    }
+
+    public boolean userIsHostOfRequestedEvent(Event event){
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT email, status FROM guestlist WHERE event = ?;");
+            preparedStatement.setInt(1, event.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                           }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return false;
     }
 
     public boolean updateEventData(Event event, User user) {
