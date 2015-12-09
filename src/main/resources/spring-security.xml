@@ -8,7 +8,7 @@
       http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
 
-    <beans:import resource="/spring-database.xml" />
+    <beans:import resource="spring-database.xml" />
 
     <http auto-config="true">
         <intercept-url pattern="/manageEvent**" access="ROLE_USER"/>

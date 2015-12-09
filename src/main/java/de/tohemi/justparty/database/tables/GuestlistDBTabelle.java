@@ -11,15 +11,18 @@ public class GuestlistDBTabelle {
     public static final String COLUMN_STATUS = "status";
     public static final String COLUMN_EVENT = "event";
     public static final String COLUMN_GUEST = "guest";
+    public static final int ACCEPTED=1;
+    public static final int DECLINED=2;
+    public static final int NOTSURE=3;
 
 
     public static Accepted getAcceptedObjectForStatus(int status) {
         switch (status) {
-            case 1:
+            case ACCEPTED:
                 return Accepted.ACCEPTED;
-            case 2:
+            case DECLINED:
                 return Accepted.DECLINED;
-            case 3:
+            case NOTSURE:
                 return Accepted.NOTSURE;
         }
         return null;
@@ -31,11 +34,11 @@ public class GuestlistDBTabelle {
         }
         switch (status) {
             case ACCEPTED:
-                return 1;
+                return ACCEPTED;
             case DECLINED:
-                return 2;
+                return DECLINED;
             case NOTSURE:
-                return 3;
+                return NOTSURE;
         }
         return 0;
     }
