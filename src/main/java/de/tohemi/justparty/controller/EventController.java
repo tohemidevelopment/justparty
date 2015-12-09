@@ -4,12 +4,16 @@ import de.tohemi.justparty.businesslogic.EventsHandler;
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
 import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.HtmlUtils;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Heiko on 04.11.2015.
@@ -55,7 +59,9 @@ public class EventController extends JPController {
             return REDIRECT + ERROR;
         }
 
-        model.addAttribute("guests", eventsHandler.getGuestlist(id, mailFromLoggedInUser));
+        List<UserEventRelation> guestlist = eventsHandler.getGuestlist(id, mailFromLoggedInUser);
+        Collections.sort(guestlist);
+        model.addAttribute("guests", guestlist);
         //TODO: collect information need for edit page
         return LogicalViewNames.getNameShowGuestlist();
     }

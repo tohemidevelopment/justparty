@@ -114,15 +114,15 @@
                 <td>
                     <c:choose>
                         <c:when test="${element.accepted=='ACCEPTED'}">
-                            <spring:message code="manager.table.select.accept"/>
+                            <spring:message code="guests.table.accept"/>
                             <span class="glyphicon glyphicon-ok-sign"></span>
                         </c:when>
                         <c:when test="${element.accepted=='DECLINED'}">
-                            <spring:message code="manager.table.select.cancel"/>
+                            <spring:message code="guests.table.cancel"/>
                             <span class="glyphicon glyphicon-remove-sign"></span>
                         </c:when>
                         <c:when test="${element.accepted=='NOTSURE'}">
-                            <spring:message code="manager.table.select.notsure"/>
+                            <spring:message code="guests.table.notsure"/>
                             <span class="glyphicon glyphicon-question-sign"></span>
                         </c:when>
                     </c:choose>

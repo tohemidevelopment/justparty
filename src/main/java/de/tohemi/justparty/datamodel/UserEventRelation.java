@@ -7,7 +7,7 @@ import java.util.Calendar;
 /**
  * Created by Micha Piertzik on 01.12.2015.
  */
-public class UserEventRelation {
+public class UserEventRelation implements Comparable<UserEventRelation> {
     private User user;
     private Event event;
     private Accepted accepted;
@@ -72,5 +72,10 @@ public class UserEventRelation {
             return false;
         }
         return this.accepted.equals(Accepted.HOST);
+    }
+
+    public int compareTo(UserEventRelation object) {
+
+        return this.accepted.ordinal() - object.accepted.ordinal();
     }
 }
