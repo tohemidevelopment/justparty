@@ -50,8 +50,9 @@ public class EventsHandlerImpl implements EventsHandler {
         return dbController.updateGuest(new Event(eventId),new User(mail), answer);
     }
 
-    public List<UserEventRelation> getGuestlist(int id) {
+    public List<UserEventRelation> getGuestlist(int id, String mail) {
         Event event = new Event(id);
+        event.setEventOwner(new User(mail));
         return DBController.getInstance().getInvitedUsers(event);
     }
 }

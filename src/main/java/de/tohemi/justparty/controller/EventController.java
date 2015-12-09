@@ -37,7 +37,6 @@ public class EventController extends JPController {
     @RequestMapping(method = RequestMethod.POST, value = "/delete")
     public  String deleteEvent(ModelMap model, @RequestParam(value = "id") int id)
     {
-        System.out.println("Aufruf delete event");
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
         if (eventsHandler.deleteEvent(id, getMailFromLoggedInUser())){
             model.addAttribute("alert_success", "alert.success.delete_event");
@@ -45,5 +44,19 @@ public class EventController extends JPController {
             model.addAttribute("alert_warning", "alert.warning.delete_event");
         }
         return REDIRECT + "manageEvent";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "guests")
+    public String editEvent(ModelMap model, @RequestParam (value = "id") int id){
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        String mailFromLoggedInUser = getMailFromLoggedInUser();
+        if (!eventsHandler.userIsHostOfRequestedEvent(id, mailFromLoggedInUser)){
+            //TODO: Show Error String, User not host
+            return REDIRECT + ERROR;
+        }
+
+        model.addAttribute("guests", eventsHandler.getGuestlist(id, mailFromLoggedInUser));
+        //TODO: collect information need for edit page
+        return LogicalViewNames.getNameShowGuestlist();
     }
 }

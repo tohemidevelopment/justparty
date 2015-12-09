@@ -17,7 +17,7 @@ public class UserEventRelation {
     }
 
     public UserEventRelation(Event event, User user, Accepted accepted) {
-        if (event.getEventOwner().equals(user)) {
+        if (event.getEventOwner() != null && event.getEventOwner().equals(user)) {
             accepted = Accepted.HOST;
         }
         this.user = user;

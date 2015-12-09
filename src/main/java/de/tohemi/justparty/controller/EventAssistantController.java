@@ -25,7 +25,6 @@ public class EventAssistantController extends JPController {
         }
 
         model.addAttribute("alert_info", "alert.notimplyet");
-        model.addAttribute("guests", eventsHandler.getGuestlist(id));
         //TODO: collect information need for edit page
         return LogicalViewNames.getNameEditEvent();
     }
