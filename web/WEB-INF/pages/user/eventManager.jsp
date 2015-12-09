@@ -128,8 +128,8 @@
                                 <input type="hidden" name="${_csrf.parameterName}"
                                        value="${_csrf.token}"/>
                             </form>
-                            <a href="/edit?id=${element.id}" class="btn"><span class="glyphicon glyphicon-pencil"/></a>
-                            <a href="javascript:submitForm('delete_${element.id}')" class="btn"><span
+                            <a href="/edit?id=${element.id}" id="edit_${element.id}" class="btn"><span class="glyphicon glyphicon-pencil"/></a>
+                            <a href="javascript:submitForm('delete_${element.id}')" id="delete_${element.id}"class="btn"><span
                                     class="glyphicon glyphicon-trash"/> </a>
                         </c:when>
                         <c:otherwise>
