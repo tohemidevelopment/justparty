@@ -90,7 +90,7 @@
                            placeholder="<spring:message code="register.placeholder.email"/>" autofocus="autofocus">
                 </div>
                 <c:if test="${not empty EMAIL}">
-                    <label class="control-label col-sm-2">
+                    <label name="error_email" class="control-label col-sm-2">
                         <spring:message code="${EMAIL}"/>
                     </label>
                 </c:if>
@@ -103,7 +103,7 @@
                            placeholder="<spring:message code="register.placeholder.pw"/>">
                 </div>
                 <c:if test="${not empty PASSWORD}">
-                    <label class="control-label col-sm-2">
+                    <label name="error_password" class="control-label col-sm-2">
                         <spring:message code="${PASSWORD}"/>
                     </label>
                 </c:if>
@@ -126,7 +126,7 @@
                     </div>
                 </div>
                 <c:if test="${not empty TERMS}">
-                    <label class="control-label col-sm-2">
+                    <label name="error_terms"class="control-label col-sm-2">
                         <spring:message code="${TERMS}"/>
                     </label>
                 </c:if>

@@ -93,7 +93,7 @@
             </div>
         </c:if>
     </div>
-    <form method="post" action="/createEvent" role="form" id="login_form">
+    <form method="post" action="/createEvent" role="form" id="createEvent_form">
         <div class="form-group">
             <label for="name">Name: </label>
             <input type="text" class="form-control" name="eventname" id="name" placeholder="Eventname" autofocus="autofocus">

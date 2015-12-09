@@ -34,6 +34,9 @@ about justparty */
 #login_form {
     width:30%;
 }
+#createEvent_form {
+    width:30%;
+}
 
 /* navbar customization*/
 .navbar-default {
