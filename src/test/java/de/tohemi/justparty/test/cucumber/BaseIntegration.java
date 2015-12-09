@@ -12,7 +12,7 @@ import java.io.File;
 import static org.openqa.selenium.remote.DesiredCapabilities.*;
 
 /**
- * Created by samuel on 02.12.15.
+ * Created by Heiko on 07.12.2015.
  */
 public class BaseIntegration {
     public static final int TIMEOUT = 10;

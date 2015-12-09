@@ -35,7 +35,7 @@ public class Basic {
     }
 
     @When("^I submit the \"([^\"]*)\" form$")
-     public void I_submit_the_form(String formName) throws Throwable {
+    public void I_submit_the_form(String formName) throws Throwable {
         WebElement loginForm = browser.getDriver().findElement(By.id(formName+"_form"));
         loginForm.submit();
         new WebDriverWait(browser.getDriver(), BaseIntegration.TIMEOUT).until(ExpectedConditions.stalenessOf(loginForm));
@@ -55,4 +55,16 @@ public class Basic {
     }
 
 
+
+
+    @Given("^I am logged in with user \"([^\"]*)\" and pw \"([^\"]*)\"$")
+    public void I_am_logged_in_with_user_and_pw(String email, String password) throws Throwable {
+        browser.getDriver().get("http://localhost:8080/login");
+        browser.getDriver().findElement(By.name("username")).sendKeys(email);
+        browser.getDriver().findElement(By.name("password")).sendKeys(password);
+        WebElement loginForm = browser.getDriver().findElement(By.id("login_form"));
+        loginForm.submit();
+        new WebDriverWait(browser.getDriver(), BaseIntegration.TIMEOUT).until(ExpectedConditions.stalenessOf(loginForm));
+
+    }
 }

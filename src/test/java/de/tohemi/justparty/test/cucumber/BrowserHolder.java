@@ -3,7 +3,7 @@ package de.tohemi.justparty.test.cucumber;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Created by samuel on 02.12.15.
+ * Created by Heiko on 07.12.2015.
  */
 public class BrowserHolder {
     private WebDriver driver;
