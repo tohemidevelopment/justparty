@@ -33,17 +33,6 @@ public class EventController extends JPController {
         return LogicalViewNames.getNameErrorPage();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/edit")
-    public String editEvent(ModelMap model){
-        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
-        if (!eventsHandler.userIsHostOfRequestedEvent()){
-            //TODO: Show Error String, User not host
-            return REDIRECT + "/error";
-        }
-        model.addAttribute("alert_info", "alert.notimplyet");
-        //TODO: collect information need for edit page
-        return LogicalViewNames.getNameEditEvent();
-    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/delete")
     public  String deleteEvent(ModelMap model, @RequestParam(value = "id") int id)

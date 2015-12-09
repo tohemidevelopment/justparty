@@ -37,7 +37,7 @@ public class EventsHandlerImpl implements EventsHandler {
         return userEventsRelations;
     }
 
-    public boolean userIsHostOfRequestedEvent() {
+    public boolean userIsHostOfRequestedEvent(int id, String mailFromLoggedInUser) {
         return true;
     }
 
