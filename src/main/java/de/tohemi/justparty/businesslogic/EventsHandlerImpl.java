@@ -38,7 +38,9 @@ public class EventsHandlerImpl implements EventsHandler {
     }
 
     public boolean userIsHostOfRequestedEvent(int id, String mailFromLoggedInUser) {
-        return true;
+
+        DBController dbController = DBController.getInstance();
+        return dbController.userIsHostOfRequestedEvent(new User(mailFromLoggedInUser), new Event(id));
     }
 
     public boolean answerInvitation(int eventId, String mail, Accepted answer){

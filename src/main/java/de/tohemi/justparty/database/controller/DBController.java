@@ -338,23 +338,26 @@ public class DBController {
         }
     }
 
-    public boolean userIsHostOfRequestedEvent(Event event){
+    public boolean userIsHostOfRequestedEvent(User user, Event event){
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
+        boolean tries = false;
         try {
-            PreparedStatement preparedStatement = c.prepareStatement("SELECT email, status FROM guestlist WHERE event = ?;");
-            preparedStatement.setInt(1, event.getId());
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT * FROM events WHERE email=? AND event_id=?;");
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setInt(2, event.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                           }
-
+            if(resultSet.next())
+            {
+                tries = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             releaseConnection(ds, c);
         }
-        return false;
+        return tries;
     }
 
     public boolean updateEventData(Event event, User user) {
