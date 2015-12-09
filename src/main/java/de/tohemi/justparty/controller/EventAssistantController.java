@@ -18,11 +18,14 @@ public class EventAssistantController extends JPController {
     @RequestMapping(method = RequestMethod.GET, value = EDITEVENT)
     public String editEvent(ModelMap model, @RequestParam (value = "id") int id){
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
-        if (!eventsHandler.userIsHostOfRequestedEvent(id, getMailFromLoggedInUser())){
+        String mailFromLoggedInUser = getMailFromLoggedInUser();
+        if (!eventsHandler.userIsHostOfRequestedEvent(id, mailFromLoggedInUser)){
             //TODO: Show Error String, User not host
             return REDIRECT + ERROR;
         }
+
         model.addAttribute("alert_info", "alert.notimplyet");
+        model.addAttribute("guests", eventsHandler.getGuestlist(id));
         //TODO: collect information need for edit page
         return LogicalViewNames.getNameEditEvent();
     }
