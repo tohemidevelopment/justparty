@@ -9,7 +9,6 @@ public class HashFunction {
     public static String getHash(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(password);
-        System.out.println(hashedPassword);
         return hashedPassword;
     }
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="
+      http://www.springframework.org/schema/security
+      http://www.springframework.org/schema/security/spring-security-3.2.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+    <beans:import resource="spring-database.xml" />
+
+    <http auto-config="true">
+        <intercept-url pattern="/manageEvent**" access="ROLE_USER"/>
+        <intercept-url pattern="/createEvent**" access="ROLE_USER"/>
+        <intercept-url pattern="/edit**" access="ROLE_USER"/>
+        <form-login
+                login-page="/login"
+                default-target-url="/manageEvent"
+                login-processing-url="/perform_login"
+                authentication-failure-url="/login?error"
+                username-parameter="username"
+                password-parameter="password"/>
+        <logout logout-success-url="/"/>
+        <!-- enable csrf protection -->
+        <csrf/>
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <password-encoder ref="encoder"/>
+            <jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query=
+                                       "select email,password, enabled from users where email=?"
+                               authorities-by-username-query=
+                                       "select email, role from users where email =?  " />
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="10" />
+    </beans:bean>
+</beans:beans>
