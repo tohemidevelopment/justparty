@@ -39,6 +39,7 @@ public class CreateEvent {
         List<UserEventRelation> eventlist=EventsHandlerImpl.getCurrentEvents(email);
         for (UserEventRelation rel:eventlist){
             if(rel.getName().equals(eventname)) {
+                DBController.getInstance().deleteEvent(rel.getEvent(),rel.getUser());
                 return;
             }
         }
