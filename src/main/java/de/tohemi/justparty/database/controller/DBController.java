@@ -157,35 +157,6 @@ public class DBController {
         return true;
     }
 
-    /**
-     * Deprecated, use userIsRegistered instead.
-     *
-     * @param email
-     * @return
-     */
-    @Deprecated
-    public boolean emailAvailable(String email) {
-        DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
-        Connection c = DataSourceUtils.getConnection(ds);
-        try {
-            PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM users WHERE email=?");
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) == 0;
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
-            ex.printStackTrace();
-            // ignore failure closing connection
-        } finally {
-            releaseConnection(ds, c);
-        }
-        return false;
-    }
-
     public boolean addUser(User user, String userRole, String hash) {
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
@@ -289,6 +260,28 @@ public class DBController {
         return userEventRelations;
     }
 
+    public List<UserEventRelation> getInvitedUsers(Event event) {
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        ArrayList<UserEventRelation> gl = new ArrayList<UserEventRelation>();
+        try {
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT " + GuestlistDBTabelle.COLUMN_GUEST + ", " + GuestlistDBTabelle.COLUMN_STATUS + " FROM guestlist WHERE " + GuestlistDBTabelle.COLUMN_EVENT + " = ?;");
+            preparedStatement.setInt(1, event.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                gl.add(new UserEventRelation(event, new User(resultSet.getString("guest")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+
+        return gl;
+    }
+
     public ArrayList<UserEventRelation> getInvitedUERs(User user) {
 
         DataSource ds = getDataSource();
@@ -343,6 +336,28 @@ public class DBController {
         } finally {
             releaseConnection(ds, c);
         }
+    }
+
+    public boolean userIsHostOfRequestedEvent(User user, Event event){
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        boolean tries = false;
+        try {
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT * FROM events WHERE email=? AND event_id=?;");
+            preparedStatement.setString(1, user.getEmail());
+            preparedStatement.setInt(2, event.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                tries = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return tries;
     }
 
     public boolean updateEventData(Event event, User user) {

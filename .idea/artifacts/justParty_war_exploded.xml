@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="justParty:war exploded">
-    <output-path>$PROJECT_DIR$/target/justParty-0.0.2</output-path>
+    <output-path>$PROJECT_DIR$/target/justParty-0.1</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -69,7 +69,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/justParty-0.0.2/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/justParty-0.1/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="justParty/web/Web" />
     </root>

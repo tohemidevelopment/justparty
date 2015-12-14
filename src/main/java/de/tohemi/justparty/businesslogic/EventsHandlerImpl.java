@@ -37,8 +37,10 @@ public class EventsHandlerImpl implements EventsHandler {
         return userEventsRelations;
     }
 
-    public boolean userIsHostOfRequestedEvent() {
-        return true;
+    public boolean userIsHostOfRequestedEvent(int id, String mailFromLoggedInUser) {
+
+        DBController dbController = DBController.getInstance();
+        return dbController.userIsHostOfRequestedEvent(new User(mailFromLoggedInUser), new Event(id));
     }
 
     public boolean answerInvitation(int eventId, String mail, Accepted answer){
@@ -48,5 +50,11 @@ public class EventsHandlerImpl implements EventsHandler {
         }
         DBController dbController = DBController.getInstance();
         return dbController.updateGuest(new Event(eventId),new User(mail), answer);
+    }
+
+    public List<UserEventRelation> getGuestlist(int id, String mail) {
+        Event event = new Event(id);
+        event.setEventOwner(new User(mail));
+        return DBController.getInstance().getInvitedUsers(event);
     }
 }

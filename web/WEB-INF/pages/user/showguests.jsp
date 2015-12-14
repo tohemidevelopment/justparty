@@ -10,7 +10,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
-    <title><spring:message code="editevent.title"/></title>
+    <title><spring:message code="showguests.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="ISO-8859-4">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/res/style.css">
@@ -74,7 +74,7 @@
 
 <div class="container theme-showcase" role="main">
     <div class="page-header">
-        <h1><spring:message code="editevent.header"/> </h1>
+        <h1><spring:message code="showguests.header"/></h1>
     </div>
     <!-- alerts -->
     <div>
@@ -100,6 +100,37 @@
         </c:if>
     </div>
 
+    <table class="table">
+        <thead>
+        <tr>
+            <th><spring:message code="showguests.guestlist"/></th>
+            <th><spring:message code="showguests.guestlist.accepted"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${guests}" var="element">
+            <tr>
+                <td>${element.user.email}</td>
+                <td>
+                    <c:choose>
+                        <c:when test="${element.accepted=='ACCEPTED'}">
+                            <spring:message code="guests.table.accept"/>
+                            <span class="glyphicon glyphicon-ok-sign"></span>
+                        </c:when>
+                        <c:when test="${element.accepted=='DECLINED'}">
+                            <spring:message code="guests.table.cancel"/>
+                            <span class="glyphicon glyphicon-remove-sign"></span>
+                        </c:when>
+                        <c:when test="${element.accepted=='NOTSURE'}">
+                            <spring:message code="guests.table.notsure"/>
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </c:when>
+                    </c:choose>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
 </div>
 <!-- JS-Libraries requiered for Bootstrap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

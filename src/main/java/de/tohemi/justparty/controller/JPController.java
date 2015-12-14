@@ -11,6 +11,8 @@ public abstract class JPController {
     public static final String REDIRECT = "redirect:";
     public static final String REGISTER = "/register";
     public static final String LOGIN = "/login";
+    public static final String EDITEVENT = "/edit";
+    public static final String ERROR = "/error";
 
     protected String getMailFromLoggedInUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
