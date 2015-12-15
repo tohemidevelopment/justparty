@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @org.springframework.stereotype.Controller
 public class ManageEventController extends JPController {
-    @RequestMapping(method = RequestMethod.GET, value = "/manageEvent")
+
+    @RequestMapping(method = RequestMethod.GET, value = MANAGE_EVENT)
     public String printEvents(ModelMap model, @RequestParam(value = "alert_success", required = false) String alert_success) {
 
         setAlerts(model, null, null, alert_success, null);
@@ -24,7 +25,7 @@ public class ManageEventController extends JPController {
         return LogicalViewNames.getNameEventManager();
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/accepted")
+    @RequestMapping(method = RequestMethod.GET, value = ACCEPTED)
     public String changeAccepted(ModelMap model, @RequestParam(value = "id") int id, @RequestParam(value = "accepted") String accepted,
                                  @RequestParam(value = "generated", required = false) String generated) {
 
@@ -38,7 +39,7 @@ public class ManageEventController extends JPController {
 
     private String getMailFromUserOrGeneratedURLParam(String generated) {
 
-        //TODO: if generated is not null and no user is logged in --> check generated Param and return Person
+        //TODO: if generated is not null and no user is logged in --> check generated Param and return Person | then: need to return a diffrent LogicalView name!
 
         String mail = getMailFromLoggedInUser();
         if (mail.equals("anonymousUser")) {

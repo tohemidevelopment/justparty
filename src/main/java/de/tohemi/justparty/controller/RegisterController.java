@@ -1,8 +1,8 @@
 package de.tohemi.justparty.controller;
 
+import de.tohemi.justparty.businesslogic.Error;
 import de.tohemi.justparty.businesslogic.user.UserHandler;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,14 +18,10 @@ public class RegisterController extends JPController {
 
     @RequestMapping(method = RequestMethod.GET, value = REGISTER)
     public String printRegisterPage(ModelMap model, Principal principal) {
-        if (principal != null){
-            model.addAttribute("info_title", "info.login.loggedin.title");
-            model.addAttribute("info_header", "info.login.loggedin.header");
-            model.addAttribute("info_box", "info.login.loggedin.box");
-            return LogicalViewNames.getNameInfoPage();
-        }
+        if (addInfoIfAlreadyLoggedIn(model, principal)) return LogicalViewNames.getNameInfoPage();
         return LogicalViewNames.getNameRegister();
     }
+
 
     @RequestMapping(method = RequestMethod.POST, value = REGISTER)
     public String performRegister(ModelMap model, @RequestParam(value = "email") String email,
@@ -33,13 +29,13 @@ public class RegisterController extends JPController {
                                   @RequestParam(value = "terms", required = false) String termsAsString) {
 
         boolean acceptedTerms = termsAsString != null ? true : false;
-        de.tohemi.justparty.businesslogic.Error error = new UserHandler().createUser(email, password, matchingPassword, acceptedTerms);
+        Error error = new UserHandler().createUser(email, password, matchingPassword, acceptedTerms);
         if (error == null) {
             setAlerts(model, null, null, "alert.success.registration", null);
             return REDIRECT + LogicalViewNames.getNameLogin();
         }
         if (error.getType() == null) {
-            return LogicalViewNames.getNameErrorPage();
+            return REDIRECT + ERROR;
         }
         model.addAttribute(error.getType().toString(), error.getMsg());
 

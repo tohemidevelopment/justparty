@@ -11,39 +11,12 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
-    <link href="<spring:url value="/resources/css/style.css" />" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="ISO-8859-4">
-    <link rel="stylesheet" href="/res/style.css">
     <title><spring:message code="login.title"/></title>
+    <%@include file="fragments/head.jsp"%>
 </head>
 
 <body>
-
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">justParty</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="<spring:message code="nav.searchplaceholder"/>">
-            </div>
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/register"><spring:message code="nav.register"/></a></li>
-        </ul>
-    </div>
-        </div>
-</nav>
+<%@include file="fragments/navbar.jsp"%>
 
 <div class="container theme-showcase" role="main">
     <div class="page-header">
@@ -54,29 +27,8 @@
                 ${login_error}
         </div>
     </c:if>
-    <!-- alerts -->
-    <div>
-        <c:if test="${not empty alert_danger}">
-            <div class="alert alert-danger" role="alert">
-                <spring:message code="${alert_danger}"/>
-            </div>
-        </c:if>
-        <c:if test="${not empty alert_warning}">
-            <div class="alert alert-warning" role="alert">
-                <spring:message code="${alert_warning}"/>
-            </div>
-        </c:if>
-        <c:if test="${not empty alert_success}">
-            <div class="alert alert-success" role="alert">
-                <spring:message code="${alert_success}"/>
-            </div>
-        </c:if>
-        <c:if test="${not empty alert_info}">
-            <div class="alert alert-info" role="alert">
-                <spring:message code="${alert_info}"/>
-            </div>
-        </c:if>
-    </div>
+    <%@include file="fragments/alerts.jsp"%>
+
     <form method="post" action="/perform_login" role="form" id="login_form">
         <div class="form-group">
             <label for="usr"><spring:message code="login.label.username"/>:</label>
@@ -99,8 +51,6 @@
         </button>
     </a>
 </div>
-<!-- JS-Libraries requiered for Bootstrap -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<%@include file="fragments/jslibs.jsp"%>
 </body>
 </html>

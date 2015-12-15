@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by Micha on 06.11.2015.
  */
 @org.springframework.stereotype.Controller
-@RequestMapping(value = "/")
-public class WelcomeController {
-    @RequestMapping(method = RequestMethod.GET)
+public class WelcomeController extends JPController{
+    @RequestMapping(method = RequestMethod.GET, value = "/")
     public String printWelcomePage(ModelMap model)
     {
       return LogicalViewNames.getNameWelcomePage();

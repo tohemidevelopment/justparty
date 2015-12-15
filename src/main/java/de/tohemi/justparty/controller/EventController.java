@@ -20,25 +20,26 @@ import java.util.List;
  */
 @org.springframework.stereotype.Controller
 public class EventController extends JPController {
-    @RequestMapping(method = RequestMethod.GET, value = "/createEvent")
+
+    @RequestMapping(method = RequestMethod.GET, value = CREATE_EVENT)
     public String printCreateEvent(ModelMap model) {
         return LogicalViewNames.getNameCreateEvent();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/createEvent")
+    @RequestMapping(method = RequestMethod.POST, value = CREATE_EVENT)
     public String createEvent(@RequestParam(value = "eventname")String eventname, ModelMap model) {
 
-        EventsHandlerImpl eventsHandler = new EventsHandlerImpl();
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
         String mail = getMailFromLoggedInUser();
         if(eventsHandler.createEvent(HtmlUtils.htmlEscape(eventname), mail))
         {
-            return REDIRECT + "/manageEvent";
+            return REDIRECT + MANAGE_EVENT;
         }
-        return LogicalViewNames.getNameErrorPage();
+        return REDIRECT + ERROR;
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/delete")
+    @RequestMapping(method = RequestMethod.POST, value = DELETE)
     public  String deleteEvent(ModelMap model, @RequestParam(value = "id") int id)
     {
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
@@ -47,10 +48,10 @@ public class EventController extends JPController {
         }else{
             model.addAttribute("alert_warning", "alert.warning.delete_event");
         }
-        return REDIRECT + "manageEvent";
+        return REDIRECT + MANAGE_EVENT;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "guests")
+    @RequestMapping(method = RequestMethod.GET, value = GUESTS)
     public String editEvent(ModelMap model, @RequestParam (value = "id") int id){
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
         String mailFromLoggedInUser = getMailFromLoggedInUser();
@@ -62,7 +63,6 @@ public class EventController extends JPController {
         List<UserEventRelation> guestlist = eventsHandler.getGuestlist(id, mailFromLoggedInUser);
         Collections.sort(guestlist);
         model.addAttribute("guests", guestlist);
-        //TODO: collect information need for edit page
         return LogicalViewNames.getNameShowGuestlist();
     }
 }
