@@ -1,10 +1,12 @@
 package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.database.controller.DBController;
+import de.tohemi.justparty.database.datainterfaces.DBUser;
 import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
+import de.tohemi.justparty.util.IDGenerator;
 
 import java.util.List;
 
@@ -16,8 +18,10 @@ public class EventsHandlerImpl implements EventsHandler {
     public boolean createEvent(String eventname, String mail) {
 
         DBController dbController = DBController.getInstance();
-        User user = new User(mail);
-        return dbController.addEvent(new Event(eventname, user));
+        DBUser user = new DBUser(mail);
+        EmailSender sender=new EmailSender();
+        sender.sendCreateConfirmation(user,eventname);
+        return dbController.addEvent(new Event(eventname, user.getEmailuser()));
     }
 
     public boolean deleteEvent(int id, String mail) {
