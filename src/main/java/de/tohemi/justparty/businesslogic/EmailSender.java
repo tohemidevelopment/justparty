@@ -21,4 +21,12 @@ public class EmailSender {
         simpleMessage.setFrom("noreply@justparty.ml");
         mailSender.send(simpleMessage);
     }
+    public void sendEmailVerification(DBUser sendTo, String verificationID){
+        SimpleMailMessage simpleMessage = new SimpleMailMessage();
+        simpleMessage.setTo(sendTo.getEmail());
+        simpleMessage.setText("Hallo!\r\nDein Account bei justParty wurde erfolgreich angelegt. Bitte verifiziere nun noch deine E-Mail-Adresse, indem du auf den volgenden Link klickst:\r\nhttp://justparty.ml/verifyEmail?id="+verificationID+"\r\nViele Grüße\r\nDein justParty-Team");
+        simpleMessage.setSubject("E-Mail Verifizierung");
+        simpleMessage.setFrom("noreply@justparty.ml");
+        mailSender.send(simpleMessage);
+    }
 }

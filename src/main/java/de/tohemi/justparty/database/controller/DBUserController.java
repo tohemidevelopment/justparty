@@ -232,7 +232,6 @@ public class DBUserController {
         try {
             // retrieve a list of three random cities
             PreparedStatement ps = c.prepareStatement("UPDATE users SET Birthday=? WHERE Email=?");
-            ;
             ps.setString(1, DateFormater.formatDate(birthday));
             ps.setString(2, email);
             ps.executeUpdate();
@@ -251,4 +250,87 @@ public class DBUserController {
     }
 
 
+    public boolean verificationIDIsValid(String verificationID) {
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            // retrieve a list of three random cities
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM userverification WHERE verificationID=?");
+            ps.setString(1, verificationID);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+            ps.close();
+            c.close();
+            DataSourceUtils.releaseConnection(c, ds);
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return false;
+    }
+
+    public boolean verifyEmail(String verificationID) {
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+
+        try {
+            String email = getEmailFromVerification(c,verificationID);
+            PreparedStatement psEnable=c.prepareStatement("UPDATE users SET enabled=1 WHERE Email=?");
+            PreparedStatement psDelete = c.prepareStatement("DELETE FROM userverification WHERE verificationID=?");
+            psEnable.setString(1, email);
+            psDelete.setString(1, verificationID);
+            psEnable.executeUpdate();
+            psDelete.executeUpdate();
+            psEnable.close();
+            psDelete.close();
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+
+    private String getEmailFromVerification(Connection c, String id) throws SQLException {
+        PreparedStatement ps=c.prepareStatement("SELECT email FROM userverification WHERE verificationID=?");
+        ps.setString(1, id);
+        ResultSet rs= ps.executeQuery();
+        while(rs.next()){
+            return rs.getString("email");
+        }
+        return "";
+    }
+
+    public boolean addVerificationData(String email, String verificationID){
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+
+        try {
+            PreparedStatement ps = c.prepareStatement("INSERT INTO userverification (verificationID, email)  VALUE (?, ?)");
+            ps.setString(1, verificationID);
+            ps.setString(2, email);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
 }
