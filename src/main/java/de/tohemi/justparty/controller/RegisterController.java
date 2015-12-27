@@ -52,7 +52,7 @@ public class RegisterController extends JPController {
         System.out.println("verifyEmail aufgerufen");
         Error error = new UserHandler().verifyEmail(verificationID);
         if (error == null) {
-            setAlerts(model, null, null, "alert.success.registration", null);
+            setAlerts(model, null, null, "alert.success.verification", null);
             return REDIRECT + LogicalViewNames.getNameLogin();
         }
         model.addAttribute(error.getType().toString(), error.getMsg());
