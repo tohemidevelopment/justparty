@@ -1,4 +1,11 @@
 Feature: Event
+    Scenario: Show guestlist
+        Given I am logged in with user "cucumber-user@test.de" and pw "test"
+        And I see "manageEvent"
+        When I click on "guestList" for Event "CucumberTestEvent"
+        Then Now I see "guestList"
+
+
     Scenario: Create
         Given I am logged in with user "cucumber-user@test.de" and pw "test"
         And I see "createEvent"

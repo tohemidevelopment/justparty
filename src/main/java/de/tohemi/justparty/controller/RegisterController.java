@@ -2,6 +2,7 @@ package de.tohemi.justparty.controller;
 
 import de.tohemi.justparty.businesslogic.Error;
 import de.tohemi.justparty.businesslogic.user.UserHandler;
+import de.tohemi.justparty.database.datainterfaces.DBUser;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,5 +45,17 @@ public class RegisterController extends JPController {
         //    model.addAttribute("info_box", "info.box.register");
         //    return LogicalViewNames.getNameInfoPage();
         return LogicalViewNames.getNameRegister();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = VERIFY_EMAIL)
+    public String verifyEmail(ModelMap model, @RequestParam(value = "id") String verificationID) {
+        System.out.println("verifyEmail aufgerufen");
+        Error error = new UserHandler().verifyEmail(verificationID);
+        if (error == null) {
+            setAlerts(model, null, null, "alert.success.verification", null);
+            return REDIRECT + LogicalViewNames.getNameLogin();
+        }
+        model.addAttribute(error.getType().toString(), error.getMsg());
+        return LogicalViewNames.getNameErrorPage();
     }
 }
