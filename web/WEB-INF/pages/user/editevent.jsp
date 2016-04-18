@@ -62,10 +62,10 @@
             </tr>
             </thead>
             <tbody>
-                <div id="general_text"><%@include file="../fragments/editEvent/general.jsp"%></div>
-                <div id="link_text"><%@include file="../fragments/editEvent/link.jsp"%></div>
-                <div id="bringwith_text"><%@include file="../fragments/editEvent/bringwith.jsp"%></div>
-                <div id="guestlist_text"><%@include file="../fragments/editEvent/guestlist.jsp"%></div>
+                <div id="general_text" style="display: block;"><%@include file="../fragments/editEvent/general.jsp"%></div>
+                <div id="link_text" style="display: none;"><%@include file="../fragments/editEvent/link.jsp"%></div>
+                <div id="bringwith_text" style="display: none;"><%@include file="../fragments/editEvent/bringwith.jsp"%></div>
+                <div id="guestlist_text" style="display: none;"><%@include file="../fragments/editEvent/guestlist.jsp"%></div>
             </tbody>
         </table>
     </div>
