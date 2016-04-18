@@ -56,6 +56,11 @@ function showGeneral(){
     $('#links').removeClass("active");
     $('#bringwith').removeClass("active");
     $('#guestlist').removeClass("active");
+
+    $('#general_text').show();
+    $('#link_text').hide();
+    $('#bringwith_text').hide();
+    $('#guestlist_text').hide();
 }
 
 function showLinks(){
@@ -63,6 +68,11 @@ function showLinks(){
     $('#links').addClass("active");
     $('#bringwith').removeClass("active");
     $('#guestlist').removeClass("active");
+
+    $('#general_text').hide();
+    $('#link_text').show();
+    $('#bringwith_text').hide();
+    $('#guestlist_text').hide();
 }
 
 function showBringWith(){
@@ -70,6 +80,11 @@ function showBringWith(){
     $('#links').removeClass("active");
     $('#bringwith').addClass("active");
     $('#guestlist').removeClass("active");
+
+    $('#general_text').hide();
+    $('#link_text').hide();
+    $('#bringwith_text').show();
+    $('#guestlist_text').hide();
 }
 
 function showGuestlist(){
@@ -77,6 +92,11 @@ function showGuestlist(){
     $('#links').removeClass("active");
     $('#bringwith').removeClass("active");
     $('#guestlist').addClass("active");
+
+    $('#general_text').hide();
+    $('#link_text').hide();
+    $('#bringwith_text').hide();
+    $('#guestlist_text').show();
 }
 
 function showOwnedEvents() {

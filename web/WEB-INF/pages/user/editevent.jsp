@@ -52,18 +52,20 @@
                 <ul class="nav nav-tabs" role="tablist">
                     <li id="general" role="presentation" class="active"><a href="javascript:showGeneral()"><spring:message
                             code="editevent.nav.general"/></a></li>
-
-                        <li id="links" role="presentation"><a href="javascript:showLinks()"><spring:message
-                                code="editevent.nav.links"/></a></li>
-                        <li id="bringwith" role="presentation"><a href="javascript:showBringWith()"><spring:message
-                                code="editevent.nav.bringwith"/></a></li>
-                        <li id="guestlist" role="presentation"><a href="javascript:showGuestlist()"><spring:message
-                                code="editevent.nav.guestlist"/></a></li>
+                    <li id="links" role="presentation"><a href="javascript:showLinks()"><spring:message
+                            code="editevent.nav.links"/></a></li>
+                    <li id="bringwith" role="presentation"><a href="javascript:showBringWith()"><spring:message
+                            code="editevent.nav.bringwith"/></a></li>
+                    <li id="guestlist" role="presentation"><a href="javascript:showGuestlist()"><spring:message
+                            code="editevent.nav.guestlist"/></a></li>
                 </ul>
             </tr>
             </thead>
             <tbody>
-                //TODO: FIll With Content :D
+                <div id="general_text"><%@include file="../fragments/editEvent/general.jsp"%></div>
+                <div id="link_text"><%@include file="../fragments/editEvent/link.jsp"%></div>
+                <div id="bringwith_text"><%@include file="../fragments/editEvent/bringwith.jsp"%></div>
+                <div id="guestlist_text"><%@include file="../fragments/editEvent/guestlist.jsp"%></div>
             </tbody>
         </table>
     </div>
