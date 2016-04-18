@@ -46,28 +46,20 @@
     </div>
 
     <div>
-        <table class="table header-fixed">
-            <thead>
-            <tr>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li id="general" role="presentation" class="active"><a href="javascript:showGeneral()"><spring:message
-                            code="editevent.nav.general"/></a></li>
-                    <li id="links" role="presentation"><a href="javascript:showLinks()"><spring:message
-                            code="editevent.nav.links"/></a></li>
-                    <li id="bringwith" role="presentation"><a href="javascript:showBringWith()"><spring:message
-                            code="editevent.nav.bringwith"/></a></li>
-                    <li id="guestlist" role="presentation"><a href="javascript:showGuestlist()"><spring:message
-                            code="editevent.nav.guestlist"/></a></li>
-                </ul>
-            </tr>
-            </thead>
-            <tbody>
-                <div id="general_text" style="display: block;"><%@include file="../fragments/editEvent/general.jsp"%></div>
-                <div id="link_text" style="display: none;"><%@include file="../fragments/editEvent/link.jsp"%></div>
-                <div id="bringwith_text" style="display: none;"><%@include file="../fragments/editEvent/bringwith.jsp"%></div>
-                <div id="guestlist_text" style="display: none;"><%@include file="../fragments/editEvent/guestlist.jsp"%></div>
-            </tbody>
-        </table>
+        <ul class="nav nav-tabs" role="tablist">
+            <li id="general" role="presentation" class="active"><a href="javascript:showGeneral()"><spring:message
+                    code="editevent.nav.general"/></a></li>
+            <li id="links" role="presentation"><a href="javascript:showLinks()"><spring:message
+                    code="editevent.nav.links"/></a></li>
+            <li id="bringwith" role="presentation"><a href="javascript:showBringWith()"><spring:message
+                    code="editevent.nav.bringwith"/></a></li>
+            <li id="guestlist" role="presentation"><a href="javascript:showGuestlist()"><spring:message
+                    code="editevent.nav.guestlist"/></a></li>
+        </ul>
+        <div id="general_text" style="display: block;"><%@include file="../fragments/editEvent/general.jsp"%></div>
+        <div id="link_text" style="display: none;"><%@include file="../fragments/editEvent/link.jsp"%></div>
+        <div id="bringwith_text" style="display: none;"><%@include file="../fragments/editEvent/bringwith.jsp"%></div>
+        <div id="guestlist_text" style="display: none;"><%@include file="../fragments/editEvent/guestlist.jsp"%></div>
     </div>
 
 </div>
