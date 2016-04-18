@@ -47,8 +47,24 @@ function showCurrentEvents() {
 }
 
 function showInvitations() {
-//to be implemented as soon as invitations are implemented
+//TODO: to be implemented as soon as invitations are implemented
 
+}
+
+function showGeneral(){
+//TODO: implement
+}
+
+function showLinks(){
+//TODO: implement
+}
+
+function showBringWith(){
+//TODO: implement
+}
+
+function showGuestlist(){
+//TODO: implement
 }
 
 function showOwnedEvents() {
@@ -56,10 +72,10 @@ function showOwnedEvents() {
 }
 
 function showCanceldEvents() {
-//to be implemented as soon as events can be canceled
+//TODO: to be implemented as soon as events can be canceled
 }
 
 function showPastEvents() {
-//to be implemented when Events have dates
+//TODO: to be implemented when Events have dates
 }
 

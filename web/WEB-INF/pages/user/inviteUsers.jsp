@@ -17,13 +17,13 @@
 <%@include file="../fragments/logoutform.jsp"%>
 <%@include file="../fragments/navbar.jsp"%>
 
-<div class="container theme-showcase" role="main">
+<div class="container theme-showcase" role="main" >
     <div class="page-header">
         <h1><spring:message code="inviteUser.ueberschrift"/></h1>
     </div>
     <%@include file="../fragments/alerts.jsp"%>
 
-
+//TODO:Insert a Textarea/Textfield with label( and help)?
 </div>
 
 <%@include file="../fragments/jslibs.jsp"%>
