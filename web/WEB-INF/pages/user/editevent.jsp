@@ -50,14 +50,14 @@
             <thead>
             <tr>
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="javascript:showGeneral()"><spring:message
+                    <li id="general" role="presentation" class="active"><a href="javascript:showGeneral()"><spring:message
                             code="editevent.nav.general"/></a></li>
 
-                        <li role="presentation"><a href="javascript:showLinks()"><spring:message
+                        <li id="links" role="presentation"><a href="javascript:showLinks()"><spring:message
                                 code="editevent.nav.links"/></a></li>
-                        <li role="presentation"><a href="javascript:showBringWith()"><spring:message
+                        <li id="bringwith" role="presentation"><a href="javascript:showBringWith()"><spring:message
                                 code="editevent.nav.bringwith"/></a></li>
-                        <li role="presentation"><a href="javascript:showGuestlist()"><spring:message
+                        <li id="guestlist" role="presentation"><a href="javascript:showGuestlist()"><spring:message
                                 code="editevent.nav.guestlist"/></a></li>
                 </ul>
             </tr>

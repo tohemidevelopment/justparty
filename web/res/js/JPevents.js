@@ -52,19 +52,31 @@ function showInvitations() {
 }
 
 function showGeneral(){
-//TODO: implement
+    $('#general').addClass("active");
+    $('#links').removeClass("active");
+    $('#bringwith').removeClass("active");
+    $('#guestlist').removeClass("active");
 }
 
 function showLinks(){
-//TODO: implement
+    $('#general').removeClass("active");
+    $('#links').addClass("active");
+    $('#bringwith').removeClass("active");
+    $('#guestlist').removeClass("active");
 }
 
 function showBringWith(){
-//TODO: implement
+    $('#general').removeClass("active");
+    $('#links').removeClass("active");
+    $('#bringwith').addClass("active");
+    $('#guestlist').removeClass("active");
 }
 
 function showGuestlist(){
-//TODO: implement
+    $('#general').removeClass("active");
+    $('#links').removeClass("active");
+    $('#bringwith').removeClass("active");
+    $('#guestlist').addClass("active");
 }
 
 function showOwnedEvents() {
