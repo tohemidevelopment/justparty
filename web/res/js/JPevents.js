@@ -47,8 +47,56 @@ function showCurrentEvents() {
 }
 
 function showInvitations() {
-//to be implemented as soon as invitations are implemented
+//TODO: to be implemented as soon as invitations are implemented
 
+}
+
+function showGeneral(){
+    $('#general').addClass("active");
+    $('#links').removeClass("active");
+    $('#bringwith').removeClass("active");
+    $('#guestlist').removeClass("active");
+
+    $('#general_text').show();
+    $('#link_text').hide();
+    $('#bringwith_text').hide();
+    $('#guestlist_text').hide();
+}
+
+function showLinks(){
+    $('#general').removeClass("active");
+    $('#links').addClass("active");
+    $('#bringwith').removeClass("active");
+    $('#guestlist').removeClass("active");
+
+    $('#general_text').hide();
+    $('#link_text').show();
+    $('#bringwith_text').hide();
+    $('#guestlist_text').hide();
+}
+
+function showBringWith(){
+    $('#general').removeClass("active");
+    $('#links').removeClass("active");
+    $('#bringwith').addClass("active");
+    $('#guestlist').removeClass("active");
+
+    $('#general_text').hide();
+    $('#link_text').hide();
+    $('#bringwith_text').show();
+    $('#guestlist_text').hide();
+}
+
+function showGuestlist(){
+    $('#general').removeClass("active");
+    $('#links').removeClass("active");
+    $('#bringwith').removeClass("active");
+    $('#guestlist').addClass("active");
+
+    $('#general_text').hide();
+    $('#link_text').hide();
+    $('#bringwith_text').hide();
+    $('#guestlist_text').show();
 }
 
 function showOwnedEvents() {
@@ -56,10 +104,10 @@ function showOwnedEvents() {
 }
 
 function showCanceldEvents() {
-//to be implemented as soon as events can be canceled
+//TODO: to be implemented as soon as events can be canceled
 }
 
 function showPastEvents() {
-//to be implemented when Events have dates
+//TODO: to be implemented when Events have dates
 }
 
