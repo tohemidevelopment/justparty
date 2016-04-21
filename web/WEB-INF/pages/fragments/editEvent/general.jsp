@@ -14,7 +14,7 @@
         <tr>
             <td><label for="ort">Ort:</label></td>
             <td><input type="text" class="form-control" id="ort"></td>
-            <td><button type="button" class="btn btn-primary btn-block">Finden</button></td>
+            <td><button type="button" class="btn btn-default btn-block">Finden</button></td>
         </tr>
         <tr>
             <td><label>Zeit:</label></td>
@@ -35,7 +35,7 @@
         <tr>
             <td><label for="art">Art des Events:</label></td>
             <td><input type="text" class="form-control" id="art"></td>
-            <td><button type="button" class="btn btn-primary btn-block">Auswählen</button></td>
+            <td><button type="button" class="btn btn-default btn-block">Auswählen</button></td>
         </tr>
         <tr>
             <td><label for="comment">Beschreibung</label></td>

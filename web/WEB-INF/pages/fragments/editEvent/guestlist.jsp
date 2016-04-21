@@ -8,10 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <table class="table table-hover">
     <tr>
-    <td colespan="3"><h1>Eingeladene Personen</h1></td>
+    <td colspan="2"><h1>Eingeladene Personen</h1></td>
     </tr>
     <tr>
-        <td colespan="3">
+        <td colspan="2">
             <select multiple class="form-control">
                 <option>Testuser</option>
                 <option>Via Backend hier einfügen</option>
@@ -23,7 +23,6 @@
     </tr>
     <tr>
         <td><button type="button" class="btn btn-primary btn-block">Person hinzufügen</button></td>
-        <td><button type="button" class="btn btn-primary btn-block">Auswahl löschen</button></td>
-        <td></td>
+        <td><button type="button" class="btn btn-default btn-block">Auswahl löschen</button></td>
     </tr>
 </table>

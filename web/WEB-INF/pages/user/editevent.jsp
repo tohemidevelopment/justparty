@@ -44,7 +44,7 @@
             </div>
         </c:if>
     </div>
-
+<form action="">
     <div>
         <ul class="nav nav-tabs" role="tablist">
             <li id="general" role="presentation" class="active"><a href="javascript:showGeneral()"><spring:message
@@ -61,7 +61,9 @@
         <div id="bringwith_text" style="display: none;"><%@include file="../fragments/editEvent/bringwith.jsp"%></div>
         <div id="guestlist_text" style="display: none;"><%@include file="../fragments/editEvent/guestlist.jsp"%></div>
     </div>
-
+    <button type="submit" class="btn btn-primary btn-block">Speichern</button>
+    <button type="button" class="btn btn-default btn-block">Zurück</button>
+</form>
 </div>
 
 <%@include file="../fragments/jslibs.jsp"%>
