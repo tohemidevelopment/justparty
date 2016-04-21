@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <table class="table table-hover">
     <tr>
-        <td colspan="3"><h3>Dinge, die jeder mitbringen muss.</h3><p>Diese Dinge muss jeder Deiner Gäste mitbringen.</p></td>
+        <td colspan="3"><h3><spring:message code="editevent.bringwith.title1"/></h3><p><spring:message code="editevent.bringwith.text1"/></p></td>
     </tr>
     <tr>
         <td colspan="3">
@@ -22,12 +22,12 @@
         </td>
     </tr>
     <tr>
-        <td><button type="button" class="btn btn-primary btn-block">Etwas Hinzufügen</button></td>
-        <td><button type="button" class="btn btn-default btn-block">Auswahl löschen</button></td>
-        <td><button type="button" class="btn btn-default btn-block">Auswahl bearbeiten</button></td>
+        <td><button type="button" class="btn btn-primary btn-block"><spring:message code="editevent.bringwith.button1"/></button></td>
+        <td><button type="button" class="btn btn-default btn-block"><spring:message code="editevent.bringwith.button2"/></button></td>
+        <td><button type="button" class="btn btn-default btn-block"><spring:message code="editevent.bringwith.button3"/></button></td>
     </tr>
     <tr>
-        <td colspan="3"><h3>Dinge, die einer mitbringen muss</h3><p>Diese Dinge muss nicht jeder Deiner Gäste mitbringen. Sie können sich dazu bereiterklären.</p></td>
+        <td colspan="3"><h3><spring:message code="editevent.bringwith.title2"/></h3><p><spring:message code="editevent.bringwith.text2"/></p></td>
     </tr>
     <tr>
         <td colspan="3">
@@ -41,8 +41,8 @@
         </td>
     </tr>
     <tr>
-        <td><button type="button" class="btn btn-primary btn-block">Etwas Hinzufügen</button></td>
-        <td><button type="button" class="btn btn-default btn-block">Auswahl löschen</button></td>
-        <td><button type="button" class="btn btn-default btn-block">Auswahl bearbeiten</button></td>
+        <td><button type="button" class="btn btn-primary btn-block"><spring:message code="editevent.bringwith.button1"/></button></td>
+        <td><button type="button" class="btn btn-default btn-block"><spring:message code="editevent.bringwith.button2"/></button></td>
+        <td><button type="button" class="btn btn-default btn-block"><spring:message code="editevent.bringwith.button3"/></button></td>
     </tr>
 </table>
