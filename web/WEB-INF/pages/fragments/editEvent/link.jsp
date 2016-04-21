@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <table class="table table-hover">
     <tr>
-        <td><label for="spotify">Spotify Playlist:</label></td>
+        <td><label for="spotify"><spring:message code="editevent.link.spotify"/></label></td>
         <td colspan="2"><input type="text" class="form-control" id="spotify"></td>
     </tr>
     <tr>
-        <td><label for="amazon">Amazon Wishlist:</label></td>
+        <td><label for="amazon"><spring:message code="editevent.link.amazon"/></label></td>
         <td colspan="2"><input type="text" class="form-control" id="amazon"></td>
     </tr>
 </table>

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <table class="table table-hover">
     <tr>
-    <td colspan="2"><h1>Eingeladene Personen</h1></td>
+    <td colspan="2"><h1><spring:message code="editevent.guestlist.title"/></h1></td>
     </tr>
     <tr>
         <td colspan="2">
@@ -22,7 +22,7 @@
         </td>
     </tr>
     <tr>
-        <td><button type="button" class="btn btn-primary btn-block">Person hinzufügen</button></td>
-        <td><button type="button" class="btn btn-default btn-block">Auswahl löschen</button></td>
+        <td><button type="button" class="btn btn-primary btn-block"><spring:message code="editevent.guestlist.button1"/></button></td>
+        <td><button type="button" class="btn btn-default btn-block"><spring:message code="editevent.guestlist.button2"/></button></td>
     </tr>
 </table>
