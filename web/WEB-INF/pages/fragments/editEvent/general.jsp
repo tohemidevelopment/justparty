@@ -31,9 +31,11 @@
                     });
                 </script>
             </td>
+            </tr>
+        <tr>
             <td><label><spring:message code="editevent.general.zeit.ende"/></label></td>
             <td colspan="2">
-                <div class='input-group date' id='datetimepicker1'>
+                <div class='input-group date' id='datetimepicker2'>
                     <input type='text' class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
@@ -41,7 +43,7 @@
                 </div>
                 <script type="text/javascript">
                     $(function () {
-                        $('#datetimepicker1').datetimepicker();
+                        $('#datetimepicker2').datetimepicker();
                     });
                 </script>
             </td>
