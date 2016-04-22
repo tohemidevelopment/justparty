@@ -16,7 +16,6 @@ public class LogicalViewNames {
     private final static String nameShowGuestlist ="user/showguests";
     private final static String nameInviteUser ="user/inviteUsers";
 
-
     public static String getNameWelcomePage() {
         return welcome;
     }

@@ -13,7 +13,7 @@
     <title><spring:message code="editevent.title"/></title>
     <%@include file="../fragments/head.jsp"%>
 </head>
-<body>
+<body  onload="fillEditEventForm()">
 <%@include file="../fragments/logoutform.jsp"%>
 <%@include file="../fragments/navbar.jsp"%>
 
@@ -45,7 +45,7 @@
         </c:if>
     </div>
 <form action="">
-    <div onload="fillEditEventForm()">
+    <div>
         <ul class="nav nav-tabs" role="tablist">
             <li id="general" role="presentation" class="active"><a href="javascript:showGeneral()"><spring:message
                     code="editevent.nav.general"/></a></li>

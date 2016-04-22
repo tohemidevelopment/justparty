@@ -52,7 +52,7 @@ public class EventController extends JPController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = GUESTS)
-    public String editEvent(ModelMap model, @RequestParam (value = "id") int id){
+    public String showGuestlist(ModelMap model, @RequestParam (value = "id") int id){
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
         String mailFromLoggedInUser = getMailFromLoggedInUser();
         if (!eventsHandler.userIsHostOfRequestedEvent(id, mailFromLoggedInUser)){

@@ -3,19 +3,6 @@
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="justParty-0.1.war">
       <element id="artifact" artifact-name="justParty:war exploded" />
-      <element id="directory" name="WEB-INF">
-        <element id="directory" name="lib">
-          <element id="library" level="project" name="Spring-4.2.2.RELEASE" />
-          <element id="library" level="project" name="Spring Data JPA-1.3.3" />
-          <element id="library" level="project" name="Spring Webflow-2.4.0" />
-          <element id="library" level="project" name="Spring Batch-2.2.6" />
-          <element id="library" level="project" name="Spring Web Services-2.0.2" />
-          <element id="library" level="project" name="Spring Security-3.2.5" />
-          <element id="library" level="project" name="Spring Integration-4.0.3" />
-          <element id="library" level="project" name="Spring MVC-4.2.2.RELEASE" />
-          <element id="file-copy" path="$PROJECT_DIR$/lib/jstl-1.2.jar" />
-        </element>
-      </element>
     </root>
   </artifact>
 </component>

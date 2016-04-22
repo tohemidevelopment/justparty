@@ -114,10 +114,24 @@ function showGuestlist()
 
 function fillEditEventForm()
 {
-    //ajax request data from server
+    var success = function ()
+    {
+        //fill in data in form
 
-    //fill in data in form
+    };
+    var fail = function ()
+    {
+    };
+    requestEditEventData(success, fail);
+}
 
+function requestEditEventData(success, fail)
+{
+    const URL = '/eventdata';
+    const ajaxSettings = {type: 'POST'};
+    $.ajax(URL, ajaxSettings)
+        .done(success)
+        .fail(fail);
 }
 
 function showOwnedEvents()

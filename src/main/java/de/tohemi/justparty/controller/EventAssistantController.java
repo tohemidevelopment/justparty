@@ -23,7 +23,6 @@ public class EventAssistantController extends JPController {
             //TODO: Show Error String, User not host
             return REDIRECT + ERROR;
         }
-
         model.addAttribute("alert_info", "alert.notimplyet");
         //TODO: collect information need for edit page
         return LogicalViewNames.getNameEditEvent();
@@ -32,7 +31,7 @@ public class EventAssistantController extends JPController {
     @RequestMapping(method = RequestMethod.POST, value = EVENTDATA)
     public String getEventData(ModelMap model) {
 
-
+        System.out.println("test");
         return null;
     }
 }
