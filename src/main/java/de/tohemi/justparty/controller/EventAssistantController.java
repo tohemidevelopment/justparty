@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EventAssistantController extends JPController {
 
     @RequestMapping(method = RequestMethod.GET, value = EDITEVENT)
-    public String editEvent(ModelMap model, @RequestParam (value = "id") int id){
+    public String editEvent(ModelMap model, @RequestParam(value = "id") int id) {
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
         String mailFromLoggedInUser = getMailFromLoggedInUser();
-        if (!eventsHandler.userIsHostOfRequestedEvent(id, mailFromLoggedInUser)){
+        if (!eventsHandler.userIsHostOfRequestedEvent(id, mailFromLoggedInUser)) {
             //TODO: Show Error String, User not host
             return REDIRECT + ERROR;
         }
@@ -27,5 +27,12 @@ public class EventAssistantController extends JPController {
         model.addAttribute("alert_info", "alert.notimplyet");
         //TODO: collect information need for edit page
         return LogicalViewNames.getNameEditEvent();
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = EVENTDATA)
+    public String getEventData(ModelMap model) {
+
+
+        return null;
     }
 }

@@ -2,15 +2,18 @@
  * Created by xce35l7 on 25.11.2015.
  */
 //Configure AJAX and csrf
-$(function () {
+$(function ()
+{
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
-    $(document).ajaxSend(function(e, xhr, options) {
+    $(document).ajaxSend(function (e, xhr, options)
+    {
         xhr.setRequestHeader(header, token);
     });
 });
 
-function sendInvitationAnswer(id){
+function sendInvitationAnswer(id)
+{
     var req = new XMLHttpRequest();
 
     // get selected answer
@@ -18,23 +21,27 @@ function sendInvitationAnswer(id){
     var accepted = select.options[select.selectedIndex].getAttribute('name');
 
     // remove Nothing selected option if existing
-    if (select.length > 3){
+    if (select.length > 3)
+    {
         select.options.remove(0);
     }
 
     // open connectiom
-    req.open("GET",  "accepted?id="+id+"&accepted="+accepted, true);
+    req.open("GET", "accepted?id=" + id + "&accepted=" + accepted, true);
 
     // put handler for response
-    req.onreadystatechange = function receive() {
-        if (req.readyState==4) {
+    req.onreadystatechange = function receive()
+    {
+        if (req.readyState == 4)
+        {
             var answer = req.responseText;
             html = "";
-            if(answer != ""){
-                html= answer;
+            if (answer != "")
+            {
+                html = answer;
             }
 
-            document.getElementById("alerts").innerHTML=html;
+            document.getElementById("alerts").innerHTML = html;
         }
     };
 
@@ -42,16 +49,19 @@ function sendInvitationAnswer(id){
 
 }
 
-function showCurrentEvents() {
+function showCurrentEvents()
+{
 //TODO: implement
 }
 
-function showInvitations() {
+function showInvitations()
+{
 //TODO: to be implemented as soon as invitations are implemented
 
 }
 
-function showGeneral(){
+function showGeneral()
+{
     $('#general').addClass("active");
     $('#links').removeClass("active");
     $('#bringwith').removeClass("active");
@@ -63,7 +73,8 @@ function showGeneral(){
     $('#guestlist_text').hide();
 }
 
-function showLinks(){
+function showLinks()
+{
     $('#general').removeClass("active");
     $('#links').addClass("active");
     $('#bringwith').removeClass("active");
@@ -75,7 +86,8 @@ function showLinks(){
     $('#guestlist_text').hide();
 }
 
-function showBringWith(){
+function showBringWith()
+{
     $('#general').removeClass("active");
     $('#links').removeClass("active");
     $('#bringwith').addClass("active");
@@ -87,7 +99,8 @@ function showBringWith(){
     $('#guestlist_text').hide();
 }
 
-function showGuestlist(){
+function showGuestlist()
+{
     $('#general').removeClass("active");
     $('#links').removeClass("active");
     $('#bringwith').removeClass("active");
@@ -99,15 +112,26 @@ function showGuestlist(){
     $('#guestlist_text').show();
 }
 
-function showOwnedEvents() {
+function fillEditEventForm()
+{
+    //ajax request data from server
+
+    //fill in data in form
+
+}
+
+function showOwnedEvents()
+{
 //TODO: implement
 }
 
-function showCanceldEvents() {
+function showCanceldEvents()
+{
 //TODO: to be implemented as soon as events can be canceled
 }
 
-function showPastEvents() {
+function showPastEvents()
+{
 //TODO: to be implemented when Events have dates
 }
 

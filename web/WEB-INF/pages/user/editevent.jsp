@@ -45,7 +45,7 @@
         </c:if>
     </div>
 <form action="">
-    <div>
+    <div onload="fillEditEventForm()">
         <ul class="nav nav-tabs" role="tablist">
             <li id="general" role="presentation" class="active"><a href="javascript:showGeneral()"><spring:message
                     code="editevent.nav.general"/></a></li>
