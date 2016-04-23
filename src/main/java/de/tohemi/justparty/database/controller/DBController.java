@@ -4,15 +4,20 @@ import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.tables.EventsDBTabelle;
 import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
 import de.tohemi.justparty.datamodel.*;
+import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
+import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
+import de.tohemi.justparty.datamodel.wrapper.EMail;
+import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 
 /**
  * Created by Heiko on 04.11.2015.
@@ -364,26 +369,34 @@ public class DBController {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         boolean tries = false;
+        String email = "";
         try {
             PreparedStatement pS1 = c.prepareStatement("SELECT email FROM events WHERE event_id=?;");
             pS1.setInt(1, event.getId());
-            PreparedStatement pS = c.prepareStatement("UPDATE events SET name=?, description=?, begin=?, end=?, address_id=?, facebook_link=?, wishlist_link=?, googleplus_link=?, Spotify_link=? WHERE event_id=?;");
-            pS.setString(1, event.getName());
-            pS.setString(2, event.getDescription());
-            pS.setDate(3, (Date) event.getBegin().getTime());
-            pS.setDate(4, (Date) event.getEnd().getTime());
-            pS.setString(5, event.getLocation().getAddress().toString());
-            pS.setURL(6, event.getFacebookLink());
-            pS.setURL(7, event.getGooglePlusLink());
-            pS.setURL(8, event.getWishlistLink());
-            pS.setURL(9, event.getSpotifyPlaylistLink());
 
             ResultSet rs = pS1.executeQuery();
+            while(rs.next())
+                email = rs.getString("email");
+            rs.close();
 
-            if(rs.getString(0).equals(user.getEmail().toString())){
+            PreparedStatement pS = c.prepareStatement("UPDATE events SET name=?, description=?, begin='2016-07-10 12:00', end='2016-07-10 12:00', address_id='2', facebook_link=?, wishlist_link=?, googleplus_link=?, Spotify_link=? WHERE event_id=?;");
+            pS.setString(1, event.getName());
+            pS.setString(2, event.getDescription());
+            //pS.setDate(3, (Date) event.getBegin().getTime());
+            //pS.setDate(4, (Date) event.getEnd().getTime());
+            //pS.setString(5, event.getLocation().getAddress().toString());
+            pS.setURL(3, event.getFacebookLink());
+            pS.setURL(4, event.getGooglePlusLink());
+            pS.setURL(5, event.getWishlistLink());
+            pS.setURL(6, event.getSpotifyPlaylistLink());
+            pS.setInt(7, event.getId());
+
+
+            if (email.equals(user.getEmail())) {
                 pS.executeUpdate();
                 tries = true;
             }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -394,12 +407,68 @@ public class DBController {
         }
     }
 
-    public Event getEventById(int id) {
-        //TODO:Implement Method
-        //Event muss keinen Event Owner und keine Guestlist enthalten!
-        final Event event = new Event(id);
-        event.setDescription("Das ist eine Beispiel-Beschreibung");
-        event.setName("Das ist ein Beispiel-Name");
+    public int getEventID(User u) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        int exe = 0;
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT event_id FROM events WHERE email=?");
+
+            psEvent.setString(1, u.getEmail());
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next())
+                exe = rs.getInt("event_id");
+
+
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+        } finally {
+            // ignore failure closing connection
+            releaseConnection(ds, c);
+        }
+        return exe;
+    }
+
+
+    public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
+
+        Event event = null;
+        event.setId(id);
+        //TODO: Refactor so we can use the data from database
+        event.setBegin(Calendar.getInstance());
+        event.setEnd(Calendar.getInstance());
+        event.setLocation(new Location("Testlocation bis zum Refactorn", new Address("Test", "12", new ZipCode(12345), "Bei Micha", "in Deutschland"), true));
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT * FROM events WHERE event_id=?");
+
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+
+            while(rs.next())
+            {
+                event.setSpotifyPlaylistLink(rs.getURL("Spotify_link"));
+                event.setGooglePlusLink((rs.getURL("googleplus_link")));
+                event.setFacebookLink(rs.getURL("facebook_link"));
+                //event.setBegin(Calendar.getInstance());
+                //event.setEnd(Calendar.getInstance());
+                event.setDescription(rs.getString("description"));
+                event.setEventOwner(new User(new EMail(rs.getString("email"))));
+                event.setName(rs.getString("name"));
+                //event.setLocation();
+            }
+
+
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+        } finally {
+            // ignore failure closing connection
+            releaseConnection(ds, c);
+        }
 
         return event;
     }
