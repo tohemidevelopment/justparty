@@ -61,4 +61,14 @@ public class EventsHandlerImpl implements EventsHandler {
         event.setEventOwner(new User(mail));
         return DBController.getInstance().getInvitedUsers(event);
     }
+
+    public Event getEvent(final int id, String mail) {
+
+        //Example event to mock unimpleented DB connection
+        final Event event = DBController.getInstance().getEventById(id);
+
+        event.setEventOwner(new User(mail));
+        event.setGuests(getGuestlist(id, mail));
+        return event;
+    }
 }

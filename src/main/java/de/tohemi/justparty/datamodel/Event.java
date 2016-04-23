@@ -18,7 +18,7 @@ public class Event {
     private Calendar end;
     private Location location;
     private User eventOwner;
-    private List<Person> guests;
+    private List<UserEventRelation> guests;
     private URL facebookLink;
     private URL googlePlusLink;
     private URL spotifyPlaylistLink;
@@ -82,11 +82,11 @@ public class Event {
         this.eventOwner = eventOwner;
     }
 
-    public List<Person> getGuests() {
+    public List<UserEventRelation> getGuests() {
         return guests;
     }
 
-    public void setGuests(List<Person> guests) {
+    public void setGuests(List<UserEventRelation> guests) {
         this.guests = guests;
     }
 

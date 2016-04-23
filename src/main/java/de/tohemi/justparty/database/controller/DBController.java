@@ -393,4 +393,14 @@ public class DBController {
             return tries;
         }
     }
+
+    public Event getEventById(int id) {
+        //TODO:Implement Method
+        //Event muss keinen Event Owner und keine Guestlist enthalten!
+        final Event event = new Event(id);
+        event.setDescription("Das ist eine Beispiel-Beschreibung");
+        event.setName("Das ist ein Beispiel-Name");
+
+        return event;
+    }
 }

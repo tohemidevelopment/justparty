@@ -6,21 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <table class="table table-hover">
+<table class="table table-hover">
         <tr>
             <td><label for="name"><spring:message code="editevent.general.eventname"/></label></td>
-            <td colspan="2"><input type="text" class="form-control" id="name"></td>
+            <td colspan="2"><input type="text" class="form-control" id="name" value="${event.name}"></td>
         </tr>
         <tr>
             <td><label for="ort"><spring:message code="editevent.general.ort"/></label></td>
-            <td><input type="text" class="form-control" id="ort"></td>
+            <td><input type="text" class="form-control" id="ort" value="${event.location}"></td>
             <td><button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#find_ort"><spring:message code="editevent.general.button1"/></button></td>
         </tr>
         <tr>
             <td><label><spring:message code="editevent.general.zeit.begin"/></label></td>
             <td colspan="2">
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
+                    <input type='text' class="form-control" value="${event.begin}"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -36,7 +36,7 @@
             <td><label><spring:message code="editevent.general.zeit.ende"/></label></td>
             <td colspan="2">
                 <div class='input-group date' id='datetimepicker2'>
-                    <input type='text' class="form-control" />
+                    <input type='text' class="form-control"  value="${event.end}"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <td><label for="comment"><spring:message code="editevent.general.beschreibung"/></label></td>
-            <td colspan="2"> <textarea class="form-control" rows="5" id="comment"></textarea>
+            <td colspan="2"> <textarea class="form-control" rows="5" id="comment">${event.description}</textarea>
             </td>
         </tr>
     </table>
