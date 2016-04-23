@@ -36,32 +36,4 @@ public class DBAddressController {
         DataSourceUtils.releaseConnection(c, ds);
     }
 
-    public String getLastName(String email){
-        DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
-        Connection c = DataSourceUtils.getConnection(ds);
-        try {
-            // retrieve a list of three random cities
-            PreparedStatement ps = c.prepareStatement("SELECT Name FROM users WHERE Email=?");
-            ps.setString(1, email);
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
-                return rs.getString("name");
-            }
-            ps.close();
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
-        } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
-            ex.printStackTrace();
-            // ignore failure closing connection
-            try {
-                c.close();
-            } catch (SQLException exp) {}
-            DataSourceUtils.releaseConnection(c, ds);
-
-        }
-        return null;
-    }
-
 }

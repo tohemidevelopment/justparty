@@ -14,7 +14,6 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
@@ -42,42 +41,12 @@ public class DBController {
     private void releaseConnection(DataSource ds, Connection c) {
         try {
             c.close();
+            DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException exp) {
+            System.out.println(exp.toString());
         }
-        DataSourceUtils.releaseConnection(c, ds);
     }
 
-
-    /*public User getUser(String email) {
-        // Create a new application context. this processes the Spring config
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("WEB-INF/spring-database.xml");
-        // Retrieve the data source from the application context
-        DataSource ds = (DataSource) ctx.getBean("dataSource");
-        // Open a database connection using Spring's DataSourceUtils
-        Connection c = DataSourceUtils.getConnection(ds);
-        try {
-            // retrieve a list of three random cities
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM users WHERE Email='"+email+"'");
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
-                return new User(rs.getString("Email"), rs.getString("Email"), String firstName, Address address, Calendar birthday);
-            }
-            ps.close();
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
-        } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
-            ex.printStackTrace();
-            // ignore failure closing connection
-            try {
-                c.close();
-            } catch (SQLException exp) {}
-            DataSourceUtils.releaseConnection(c, ds);
-
-        }
-        return null;
-    }
-*/
     public boolean addEvent(Event e) {
 
         DataSource ds = getDataSource();
@@ -129,12 +98,6 @@ public class DBController {
         return true;
     }
 
-    /**
-     * @param email
-     * @return Returns true, if the given Email-Address is already used by a user.
-     * Returns false, if the Email-Address is in our DB but not used by a user.
-     * Throws UserNotFoundException, if the Email-Address is not in our DB
-     */
     public boolean userIsRegistered(String email) throws UserNotFoundException {
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
@@ -249,9 +212,7 @@ public class DBController {
                 event.setId(resultSet.getInt("event_id"));
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
-                    Calendar begin = Calendar.getInstance();
-                    begin.setTime(date);
-                    event.setBegin(begin);
+                    event.setBegin(date);
                 }
                 userEventRelations.add(new UserEventRelation(event, user));
             }
@@ -304,9 +265,7 @@ public class DBController {
                 event.setId(resultSet.getInt("event_id"));
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
-                    Calendar begin = Calendar.getInstance();
-                    begin.setTime(date);
-                    event.setBegin(begin);
+                    event.setBegin(date);
                 }
                 int status = resultSet.getInt(GuestlistDBTabelle.COLUMN_STATUS);
                 Accepted accepted = GuestlistDBTabelle.getAcceptedObjectForStatus(status);
@@ -403,8 +362,8 @@ public class DBController {
             tries = false;
         } finally {
             releaseConnection(ds, c);
-            return tries;
         }
+        return tries;
     }
 
     public int getEventID(User u) {
@@ -431,14 +390,9 @@ public class DBController {
         return exe;
     }
 
-
     public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
 
         final Event event = new Event(id);
-        //TODO: Refactor so we can use the data from database
-        event.setBegin(Calendar.getInstance());
-        event.setEnd(Calendar.getInstance());
-        event.setLocation(new Location("Testlocation bis zum Refactorn", new Address("Test", "12", new ZipCode(12345), "Bei Micha", "in Deutschland"), true));
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
@@ -452,14 +406,46 @@ public class DBController {
                 event.setSpotifyPlaylistLink(rs.getURL("Spotify_link"));
                 event.setGooglePlusLink((rs.getURL("googleplus_link")));
                 event.setFacebookLink(rs.getURL("facebook_link"));
-                //event.setBegin(Calendar.getInstance());
-                //event.setEnd(Calendar.getInstance());
+                event.setBegin(rs.getDate("begin"));
+                event.setEnd(rs.getDate("end"));
                 event.setDescription(rs.getString("description"));
                 event.setEventOwner(new User(new EMail(rs.getString("email"))));
                 event.setName(rs.getString("name"));
-                //event.setLocation();
+                event.setLocation(getLocationByID(rs.getInt("location")));
             }
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+        } finally {
+            // ignore failure closing connection
+            releaseConnection(ds, c);
+        }
+        return event;
+    }
 
+    public Location getLocationByID(int id) throws ZipCodeInvalidException {
+
+        final Location location = new Location("NAME", null, false);
+        final Address address = new Address("street", "housenumber", new ZipCode(12345), "City", "Country");
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psAddress = c.prepareStatement("SELECT * FROM location WHERE address_id=?");
+
+            psAddress.setInt(1, id);
+            ResultSet rs = psAddress.executeQuery();
+
+            while(rs.next())
+            {
+                location.setName(rs.getString("name"));
+                address.setStreet(rs.getString("street"));
+                address.setHouseNumber(rs.getString("house_nr"));
+                address.setZipCode(new ZipCode(rs.getInt("zipcode")));
+                address.setCity(rs.getString("city"));
+                address.setCountry(rs.getString("country"));
+                location.setPublicLocation(rs.getBoolean("public"));
+            }
+            location.setAddress(address);
 
         } catch (SQLException ex) {
             // something has failed and we print a stack trace to analyse the error
@@ -468,7 +454,6 @@ public class DBController {
             // ignore failure closing connection
             releaseConnection(ds, c);
         }
-
-        return event;
+        return location;
     }
 }

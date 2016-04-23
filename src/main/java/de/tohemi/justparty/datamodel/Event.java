@@ -14,11 +14,13 @@ import java.util.List;
 public class Event {
     private String name;
     private String description;
-    private Calendar begin;
-    private Calendar end;
+    private Date begin;
+    private Date end;
     private Location location;
     private User eventOwner;
     private List<UserEventRelation> guests;
+    //TODO: Implement class for things to bring with to party
+    //private List<Things> things;
     private URL facebookLink;
     private URL googlePlusLink;
     private URL spotifyPlaylistLink;
@@ -50,19 +52,19 @@ public class Event {
         this.description = description;
     }
 
-    public Calendar getBegin() {
+    public Date getBegin() {
         return begin;
     }
 
-    public void setBegin(Calendar begin) {
+    public void setBegin(Date begin) {
         this.begin = begin;
     }
 
-    public Calendar getEnd() {
+    public Date getEnd() {
         return end;
     }
 
-    public void setEnd(Calendar end) {
+    public void setEnd(Date end) {
         this.end = end;
     }
 
@@ -124,5 +126,9 @@ public class Event {
 
     public URL getWishlistLink() {
         return wishlistLink;
+    }
+
+    public void setWishlistLink(URL wishlistLink) {
+        this.wishlistLink = wishlistLink;
     }
 }
