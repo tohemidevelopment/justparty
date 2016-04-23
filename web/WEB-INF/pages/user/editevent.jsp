@@ -13,7 +13,7 @@
     <title><spring:message code="editevent.title"/></title>
     <%@include file="../fragments/head.jsp"%>
 </head>
-<body  onload="fillEditEventForm()">
+<body>
 <%@include file="../fragments/logoutform.jsp"%>
 <%@include file="../fragments/navbar.jsp"%>
 

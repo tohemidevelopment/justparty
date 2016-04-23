@@ -40,7 +40,6 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/</path>
-                    <!--<update>true</update>-->
                     <url>http://localhost:8080/manager/text</url>
                     <username>tomcat</username>
                     <password>tomcatuser</password>
@@ -168,6 +167,4 @@
             <version>${javax.mail.version}</version>
         </dependency>
     </dependencies>
-
-
 </project>

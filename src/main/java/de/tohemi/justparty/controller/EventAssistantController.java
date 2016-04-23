@@ -2,6 +2,7 @@ package de.tohemi.justparty.controller;
 
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
+import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,7 +25,9 @@ public class EventAssistantController extends JPController {
             return REDIRECT + ERROR;
         }
         model.addAttribute("alert_info", "alert.notimplyet");
-        //TODO: collect information need for edit page
+
+        Event event = eventsHandler.getEvent(id, mailFromLoggedInUser);
+        model.addAttribute("event", event);
         return LogicalViewNames.getNameEditEvent();
     }
 
