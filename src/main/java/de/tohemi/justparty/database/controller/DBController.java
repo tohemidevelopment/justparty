@@ -434,8 +434,7 @@ public class DBController {
 
     public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
 
-        Event event = null;
-        event.setId(id);
+        final Event event = new Event(id);
         //TODO: Refactor so we can use the data from database
         event.setBegin(Calendar.getInstance());
         event.setEnd(Calendar.getInstance());

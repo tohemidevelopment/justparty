@@ -6,8 +6,11 @@ import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
+import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
+import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.util.IDGenerator;
 
+import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -66,7 +69,16 @@ public class EventsHandlerImpl implements EventsHandler {
     public Event getEvent(final int id, String mail) {
 
         //Example event to mock unimpleented DB connection
-        final Event event = DBController.getInstance().getEventById(id);
+        Event event = null;
+        try {
+            event = DBController.getInstance().getEventById(id);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (InvalidEmailException e) {
+            e.printStackTrace();
+        } catch (ZipCodeInvalidException e) {
+            e.printStackTrace();
+        }
 
         event.setEventOwner(new User(mail));
         final List<UserEventRelation> guestlist = getGuestlist(id, mail);

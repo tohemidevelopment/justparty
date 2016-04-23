@@ -9,7 +9,7 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <td colspan="2"><h1><spring:message code="editevent.guestlist.title"/></h1></td>
+        <td colspan="2"><h3><spring:message code="editevent.guestlist.title"/></h3></td>
     </tr>
     </thead>
     <tbody>
