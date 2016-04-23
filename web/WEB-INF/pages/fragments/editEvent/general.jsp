@@ -9,18 +9,18 @@
 <table class="table table-hover">
         <tr>
             <td><label for="name"><spring:message code="editevent.general.eventname"/></label></td>
-            <td colspan="2"><input type="text" class="form-control" id="name" value="${event.name}"></td>
+            <td colspan="2"><input type="text" class="form-control" id="name" onchange="updateEventData('name');" value="${event.name}"></td>
         </tr>
         <tr>
-            <td><label for="ort"><spring:message code="editevent.general.ort"/></label></td>
-            <td><input type="text" class="form-control" id="ort" value="${event.location}"></td>
+            <td><label for="location"><spring:message code="editevent.general.ort"/></label></td>
+            <td><input type="text" class="form-control" id="location" onchange="updateEventData('location');" value="${event.location}"></td>
             <td><button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#find_ort"><spring:message code="editevent.general.button1"/></button></td>
         </tr>
         <tr>
             <td><label><spring:message code="editevent.general.zeit.begin"/></label></td>
             <td colspan="2">
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" value="${event.begin}"/>
+                    <input type='text' class="form-control" id="begin" onchange="updateEventData('begin');" value="${event.begin}"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -36,7 +36,7 @@
             <td><label><spring:message code="editevent.general.zeit.ende"/></label></td>
             <td colspan="2">
                 <div class='input-group date' id='datetimepicker2'>
-                    <input type='text' class="form-control"  value="${event.end}"/>
+                    <input id="end" type='text' class="form-control" onchange="updateEventData('end');" value="${event.end}"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -48,14 +48,14 @@
                 </script>
             </td>
         </tr>
-        <tr>
+        <%--<tr>
             <td><label for="art"><spring:message code="editevent.general.art"/></label></td>
             <td><input type="text" class="form-control" id="art"></td>
             <td><button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#art_event"><spring:message code="editevent.general.button2"/></button></td>
-        </tr>
+        </tr>--%>
         <tr>
-            <td><label for="comment"><spring:message code="editevent.general.beschreibung"/></label></td>
-            <td colspan="2"> <textarea class="form-control" rows="5" id="comment">${event.description}</textarea>
+            <td><label for="description"><spring:message code="editevent.general.beschreibung"/></label></td>
+            <td colspan="2"> <textarea class="form-control" rows="5" id="description" onchange="updateEventData('description');">${event.description}</textarea>
             </td>
         </tr>
     </table>

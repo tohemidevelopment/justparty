@@ -112,8 +112,18 @@ function showGuestlist()
     $('#guestlist_text').show();
 }
 
-function fillEditEventForm()
+var eventDataChanges = {};
+
+function updateEventData(id)
 {
+    var newValue = document.getElementById(id).value;
+    eventDataChanges[id] = newValue;
+
+
+
+
+
+    //ajax not in this function
     var success = function ()
     {
         //fill in data in form

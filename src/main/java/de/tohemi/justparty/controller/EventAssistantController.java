@@ -34,7 +34,6 @@ public class EventAssistantController extends JPController {
     @RequestMapping(method = RequestMethod.POST, value = EVENTDATA)
     public String getEventData(ModelMap model) {
 
-        System.out.println("test");
         return null;
     }
 }

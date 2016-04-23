@@ -8,6 +8,7 @@ import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.util.IDGenerator;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,8 +20,8 @@ public class EventsHandlerImpl implements EventsHandler {
 
         DBController dbController = DBController.getInstance();
         DBUser user = new DBUser(mail);
-        EmailSender sender=new EmailSender();
-        sender.sendCreateConfirmation(user,eventname);
+        EmailSender sender = new EmailSender();
+        sender.sendCreateConfirmation(user, eventname);
         return dbController.addEvent(new Event(eventname, user.getEmailuser()));
     }
 
@@ -47,13 +48,13 @@ public class EventsHandlerImpl implements EventsHandler {
         return dbController.userIsHostOfRequestedEvent(new User(mailFromLoggedInUser), new Event(id));
     }
 
-    public boolean answerInvitation(int eventId, String mail, Accepted answer){
+    public boolean answerInvitation(int eventId, String mail, Accepted answer) {
 
-        if (answer == null){
+        if (answer == null) {
             return false;
         }
         DBController dbController = DBController.getInstance();
-        return dbController.updateGuest(new Event(eventId),new User(mail), answer);
+        return dbController.updateGuest(new Event(eventId), new User(mail), answer);
     }
 
     public List<UserEventRelation> getGuestlist(int id, String mail) {
@@ -68,7 +69,9 @@ public class EventsHandlerImpl implements EventsHandler {
         final Event event = DBController.getInstance().getEventById(id);
 
         event.setEventOwner(new User(mail));
-        event.setGuests(getGuestlist(id, mail));
+        final List<UserEventRelation> guestlist = getGuestlist(id, mail);
+        Collections.sort(guestlist);
+        event.setGuests(guestlist);
         return event;
     }
 }

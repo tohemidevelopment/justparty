@@ -9,32 +9,19 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th><spring:message code="showguests.guestlist"/></th>
-        <th><spring:message code="showguests.guestlist.accepted"/></th>
+        <td colspan="2"><h1><spring:message code="editevent.guestlist.title"/></h1></td>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${event.guests}" var="element">
-        <tr>
-            <td>${element.user.email}</td>
-            <td>
-                <c:choose>
-                    <c:when test="${element.accepted=='ACCEPTED'}">
-                        <spring:message code="guests.table.accept"/>
-                        <span class="glyphicon glyphicon-ok-sign"></span>
-                    </c:when>
-                    <c:when test="${element.accepted=='DECLINED'}">
-                        <spring:message code="guests.table.cancel"/>
-                        <span class="glyphicon glyphicon-remove-sign"></span>
-                    </c:when>
-                    <c:when test="${element.accepted=='NOTSURE'}">
-                        <spring:message code="guests.table.notsure"/>
-                        <span class="glyphicon glyphicon-question-sign"></span>
-                    </c:when>
-                </c:choose>
-            </td>
-        </tr>
-    </c:forEach>
+    <tr>
+        <td colspan="2">
+            <select multiple class="form-control">
+                <c:forEach items="${event.guests}" var="element">
+                    <option>${element.user.email}</option>
+                </c:forEach>
+            </select>
+        </td>
+    </tr>
     <tr>
         <td>
             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#newguest">
@@ -46,27 +33,6 @@
         </td>
     </tr>
     </tbody>
-
-
-    <!--
-    <tr>
-
-
-    <td colspan="2"><h1><spring:message code="editevent.guestlist.title"/></h1></td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <select multiple class="form-control">
-                <option>Testuser</option>
-                <option>Via Backend hier einfügen</option>
-                <option>Mit Datenbank abfrage</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-        </td>
-    </tr>
-
--->
 </table>
 
 <!-- Modal -->
