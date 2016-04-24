@@ -47,7 +47,6 @@ public class DBEventController {
     public boolean addEvent(Event e) {
 
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("INSERT INTO events (name, email) VALUE (?, ?)");
@@ -56,14 +55,15 @@ public class DBEventController {
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
             return false;
         } finally {
-            // ignore failure closing connection
             releaseConnection(ds, c);
+            e.setId(getEventID(e));
         }
-        return true;
+        if(DBDeclarationController.getInstance().createDeclarationTableForEvent(e))
+            return true;
+        return false;
     }
 
     public boolean deleteEvent(Event e, User u) {
@@ -72,7 +72,6 @@ public class DBEventController {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement psEvent = c.prepareStatement("DELETE FROM events WHERE event_id=? AND email=?");
-
             PreparedStatement psGuests = c.prepareStatement("DELETE FROM " + GuestlistDBTabelle.TABLE + " WHERE event=?");
             psEvent.setInt(1, e.getId());
             psEvent.setString(2, u.getEmail());
@@ -85,14 +84,14 @@ public class DBEventController {
             psGuests.close();
 
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
             return false;
         } finally {
-            // ignore failure closing connection
             releaseConnection(ds, c);
-        }
-        return true;
+            }
+        if(DBDeclarationController.getInstance().deleteDeclarationTableForEvent(e))
+            return true;
+        return false;
     }
 
     public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
@@ -294,5 +293,24 @@ public class DBEventController {
         } finally {
             releaseConnection(ds, c);
         }
+    }
+
+    public int getEventID(Event e) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        int exe = 0;
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT event_id FROM events WHERE name=?;");
+            psEvent.setString(1, e.getName());
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next())
+                exe = rs.getInt("event_id");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return exe;
     }
 }

@@ -44,8 +44,8 @@ public class DBDeclarationController {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("CREATE TABLE 'justParty_db.declaration_" + e.getId() + "' ( id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, usertobringwith VARCHAR(255) NOT NULL, bringwithbyall BOOL DEFAULT 0 NOT NULL );");
-            ps.setString(1, e.getName());
+
+            PreparedStatement ps = c.prepareStatement("CREATE TABLE declaration_" + e.getId() + " ( id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, name VARCHAR(255) NOT NULL, usertobringwith VARCHAR(255) NOT NULL, bringwithbyall BOOL DEFAULT 0 NOT NULL );");
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
@@ -62,8 +62,8 @@ public class DBDeclarationController {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("DROP TABLE 'justParty_db.declaration_" + e.getId() + "';");
-            ps.setString(1, e.getName());
+            System.out.println(e.getId());
+            PreparedStatement ps = c.prepareStatement("DROP TABLE declaration_" + e.getId() + ";");
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
