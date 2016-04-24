@@ -3,6 +3,7 @@ package de.tohemi.justparty.businesslogic.user;
 import de.tohemi.justparty.businesslogic.*;
 import de.tohemi.justparty.businesslogic.Error;
 import de.tohemi.justparty.database.controller.DBController;
+import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBUserController;
 import de.tohemi.justparty.database.datainterfaces.DBUser;
 import de.tohemi.justparty.datamodel.User;
@@ -33,7 +34,7 @@ public class UserHandler {
             return new Error("register.error.terms", ErrorType.TERMS);
         }
         //At this Point: Userdata is Valid
-        DBController dbController = DBController.getInstance();
+        DBUserController dbController = DBUserController.getInstance();
         try {
             if (dbController.userIsRegistered(user.getEmail())) {
                 //User ist registered as USER

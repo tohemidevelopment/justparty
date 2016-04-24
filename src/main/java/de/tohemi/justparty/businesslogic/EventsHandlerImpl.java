@@ -1,6 +1,7 @@
 package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.database.controller.DBController;
+import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.datainterfaces.DBUser;
 import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Event;
@@ -21,7 +22,7 @@ public class EventsHandlerImpl implements EventsHandler {
 
     public boolean createEvent(String eventname, String mail) {
 
-        DBController dbController = DBController.getInstance();
+        DBEventController dbController = DBEventController.getInstance();
         DBUser user = new DBUser(mail);
         EmailSender sender = new EmailSender();
         sender.sendCreateConfirmation(user, eventname);
@@ -30,7 +31,7 @@ public class EventsHandlerImpl implements EventsHandler {
 
     public boolean deleteEvent(int id, String mail) {
 
-        DBController dbController = DBController.getInstance();
+        DBEventController dbController = DBEventController.getInstance();
         Event event = new Event(null, null);
         event.setId(id);
         return dbController.deleteEvent(event, new User(mail));
@@ -38,7 +39,7 @@ public class EventsHandlerImpl implements EventsHandler {
 
     public static List<UserEventRelation> getCurrentEvents(String mail) {
 
-        DBController dbController = DBController.getInstance();
+        DBEventController dbController = DBEventController.getInstance();
         User user = new User(mail);
         List<UserEventRelation> userEventsRelations = dbController.getHostedUERs(user);
         userEventsRelations.addAll(dbController.getInvitedUERs(user));
@@ -47,7 +48,7 @@ public class EventsHandlerImpl implements EventsHandler {
 
     public boolean userIsHostOfRequestedEvent(int id, String mailFromLoggedInUser) {
 
-        DBController dbController = DBController.getInstance();
+        DBEventController dbController = DBEventController.getInstance();
         return dbController.userIsHostOfRequestedEvent(new User(mailFromLoggedInUser), new Event(id));
     }
 
@@ -56,14 +57,14 @@ public class EventsHandlerImpl implements EventsHandler {
         if (answer == null) {
             return false;
         }
-        DBController dbController = DBController.getInstance();
+        DBEventController dbController = DBEventController.getInstance();
         return dbController.updateGuest(new Event(eventId), new User(mail), answer);
     }
 
     public List<UserEventRelation> getGuestlist(int id, String mail) {
         Event event = new Event(id);
         event.setEventOwner(new User(mail));
-        return DBController.getInstance().getInvitedUsers(event);
+        return DBEventController.getInstance().getInvitedUsers(event);
     }
 
     public Event getEvent(final int id, String mail) {
@@ -71,7 +72,7 @@ public class EventsHandlerImpl implements EventsHandler {
         //Example event to mock unimpleented DB connection
         Event event = null;
         try {
-            event = DBController.getInstance().getEventById(id);
+            event = DBEventController.getInstance().getEventById(id);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (InvalidEmailException e) {

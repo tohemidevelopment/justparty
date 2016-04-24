@@ -47,6 +47,11 @@ public class DBController {
         }
     }
 
+    /**
+     * @deprecated
+     * use addEvent(Event e) from class DBEventController instead
+     */
+    @Deprecated
     public boolean addEvent(Event e) {
 
         DataSource ds = getDataSource();
@@ -59,23 +64,25 @@ public class DBController {
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
             return false;
         } finally {
-            // ignore failure closing connection
             releaseConnection(ds, c);
         }
         return true;
     }
 
+    /**
+     * @deprecated
+     * Use deleteEvent(Event e, User u) from DBEventController
+     */
+    @Deprecated
     public boolean deleteEvent(Event e, User u) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement psEvent = c.prepareStatement("DELETE FROM events WHERE event_id=? AND email=?");
-
             PreparedStatement psGuests = c.prepareStatement("DELETE FROM " + GuestlistDBTabelle.TABLE + " WHERE event=?");
             psEvent.setInt(1, e.getId());
             psEvent.setString(2, u.getEmail());
@@ -86,21 +93,22 @@ public class DBController {
             }
             psEvent.close();
             psGuests.close();
-
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
             return false;
         } finally {
-            // ignore failure closing connection
             releaseConnection(ds, c);
         }
         return true;
     }
 
+    /**
+     * @deprecated
+     * Use deleteEvent(Event e, User u) from DBEventController
+     */
+    @Deprecated
     public boolean userIsRegistered(String email) throws UserNotFoundException {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("SELECT role FROM users WHERE email=?");
@@ -116,20 +124,21 @@ public class DBController {
                     return false;
             }
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
         } finally {
             releaseConnection(ds, c);
         }
         return true;
     }
 
+    /**
+     * @deprecated
+     * Use deleteEvent(Event e, User u) from DBEventController
+     */
+    @Deprecated
     public boolean addUser(User user, String userRole, String hash) {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
-
         try {
             PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email, password, role) VALUE (?, ?, ?)");
             psUser.setString(1, user.getEmail());
@@ -138,9 +147,7 @@ public class DBController {
             psUser.executeUpdate();
             psUser.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -148,11 +155,14 @@ public class DBController {
         return true;
     }
 
+    /**
+     * @deprecated
+     * Use deleteEvent(Event e, User u) from DBEventController instead
+     */
+    @Deprecated
     public boolean removeUser(User user) {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
-
         try {
             PreparedStatement psUser = c.prepareStatement("DELETE FROM users WHERE email=?");
             PreparedStatement psGuestlist = c.prepareStatement("DELETE FROM guestlist WHERE guest=?");
@@ -163,9 +173,7 @@ public class DBController {
             psUser.close();
             psGuestlist.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -173,10 +181,13 @@ public class DBController {
         return true;
     }
 
+    /**
+     * @deprecated
+     * Use deleteEvent(Event e, User u) from DBEventController instead
+     */
+    @Deprecated
     public boolean changeToUser(User user, String hash) {
         DataSource ds = getDataSource();
-
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement psUser = c.prepareStatement("UPDATE users SET Password=?, role=? WHERE Email=?");
@@ -186,9 +197,7 @@ public class DBController {
             psUser.executeUpdate();
             psUser.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -196,9 +205,13 @@ public class DBController {
         return true;
     }
 
+    /**
+     * @deprecated
+     * Use deleteEvent(Event e, User u) from DBEventController instead
+     */
+    @Deprecated
     public List<UserEventRelation> getHostedUERs(User user) {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         ArrayList<UserEventRelation> userEventRelations = new ArrayList<UserEventRelation>();
         try {
@@ -207,7 +220,6 @@ public class DBController {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-
                 Event event = new Event(resultSet.getString(EventsDBTabelle.COLUMN_NAME), user);
                 event.setId(resultSet.getInt("event_id"));
                 Date date = resultSet.getDate("begin");
@@ -216,19 +228,21 @@ public class DBController {
                 }
                 userEventRelations.add(new UserEventRelation(event, user));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             releaseConnection(ds, c);
         }
-
         return userEventRelations;
     }
 
+    /**
+     * @deprecated
+     * Use deleteEvent(Event e, User u) from DBEventController instead
+     */
+    @Deprecated
     public List<UserEventRelation> getInvitedUsers(Event event) {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         ArrayList<UserEventRelation> gl = new ArrayList<UserEventRelation>();
         try {
@@ -238,20 +252,22 @@ public class DBController {
             while (resultSet.next()) {
                 gl.add(new UserEventRelation(event, new User(resultSet.getString("guest")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             releaseConnection(ds, c);
         }
-
         return gl;
     }
 
+    /**
+     * @deprecated
+     * Use deleteEvent(Event e, User u) from DBEventController instead
+     */
+    @Deprecated
     public ArrayList<UserEventRelation> getInvitedUERs(User user) {
 
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         ArrayList<UserEventRelation> userEventRelations = new ArrayList<UserEventRelation>();
         try {
@@ -260,7 +276,6 @@ public class DBController {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-
                 Event event = new Event(resultSet.getString(EventsDBTabelle.COLUMN_NAME), new User(resultSet.getString("email")));
                 event.setId(resultSet.getInt("event_id"));
                 Date date = resultSet.getDate("begin");
@@ -272,7 +287,6 @@ public class DBController {
                 UserEventRelation uer = new UserEventRelation(event, user, accepted);
                 userEventRelations.add(uer);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -281,10 +295,14 @@ public class DBController {
         return userEventRelations;
     }
 
+    /**
+     * @deprecated
+     * Use deleteEvent(Event e, User u) from DBEventController instead
+     */
+    @Deprecated
     public boolean updateGuest(Event event, User user, Accepted answer) {
         int status = GuestlistDBTabelle.getIntStatusForAcceptedObject(answer);
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement pS = c.prepareStatement("UPDATE " + GuestlistDBTabelle.TABLE + " SET " + GuestlistDBTabelle.COLUMN_STATUS + "=? WHERE " +
@@ -302,9 +320,13 @@ public class DBController {
         }
     }
 
+    /**
+     * @deprecated
+     * Use userIsHostOfRequestedEvent(User user, Event event) from DBEventController instead
+     */
+    @Deprecated
     public boolean userIsHostOfRequestedEvent(User user, Event event){
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         boolean tries = false;
         try {
@@ -324,6 +346,11 @@ public class DBController {
         return tries;
     }
 
+    /**
+     * @deprecated
+     * Use updateEventData(Event event, User user) from DBEventController instead
+     */
+    @Deprecated
     public boolean updateEventData(Event event, User user) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
@@ -332,12 +359,10 @@ public class DBController {
         try {
             PreparedStatement pS1 = c.prepareStatement("SELECT email FROM events WHERE event_id=?;");
             pS1.setInt(1, event.getId());
-
             ResultSet rs = pS1.executeQuery();
             while(rs.next())
                 email = rs.getString("email");
             rs.close();
-
             PreparedStatement pS = c.prepareStatement("UPDATE events SET name=?, description=?, begin='2016-07-10 12:00', end='2016-07-10 12:00', address_id='2', facebook_link=?, wishlist_link=?, googleplus_link=?, Spotify_link=? WHERE event_id=?;");
             pS.setString(1, event.getName());
             pS.setString(2, event.getDescription());
@@ -350,13 +375,10 @@ public class DBController {
             pS.setURL(6, event.getSpotifyPlaylistLink());
             pS.setInt(7, event.getId());
 
-
             if (email.equals(user.getEmail())) {
                 pS.executeUpdate();
                 tries = true;
             }
-
-
         } catch (SQLException e) {
             e.printStackTrace();
             tries = false;
@@ -366,6 +388,7 @@ public class DBController {
         return tries;
     }
 
+    //Only for testing
     public int getEventID(User u) {
 
         DataSource ds = getDataSource();
@@ -373,23 +396,23 @@ public class DBController {
         int exe = 0;
         try {
             PreparedStatement psEvent = c.prepareStatement("SELECT event_id FROM events WHERE email=?");
-
             psEvent.setString(1, u.getEmail());
             ResultSet rs = psEvent.executeQuery();
             while(rs.next())
                 exe = rs.getInt("event_id");
-
-
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
         } finally {
-            // ignore failure closing connection
             releaseConnection(ds, c);
         }
         return exe;
     }
 
+    /**
+     * @deprecated
+     * Use getEventById(int id) from DBEventController instead
+     */
+    @Deprecated
     public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
 
         final Event event = new Event(id);
@@ -397,10 +420,8 @@ public class DBController {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement psEvent = c.prepareStatement("SELECT * FROM events WHERE event_id=?");
-
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
-
             while(rs.next())
             {
                 event.setSpotifyPlaylistLink(rs.getURL("Spotify_link"));
@@ -411,18 +432,21 @@ public class DBController {
                 event.setDescription(rs.getString("description"));
                 event.setEventOwner(new User(new EMail(rs.getString("email"))));
                 event.setName(rs.getString("name"));
-                event.setLocation(getLocationByID(rs.getInt("location")));
+                event.setLocation(DBLocationController.getInstance().getLocationByID(rs.getInt("location")));
             }
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
         } finally {
-            // ignore failure closing connection
             releaseConnection(ds, c);
         }
         return event;
     }
 
+    /**
+     * @deprecated
+     * use getLocationByID(int id) from DBLocationController instead
+     */
+    @Deprecated
     public Location getLocationByID(int id) throws ZipCodeInvalidException {
 
         final Location location = new Location("NAME", null, false);
@@ -431,12 +455,9 @@ public class DBController {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement psAddress = c.prepareStatement("SELECT * FROM location WHERE address_id=?");
-
             psAddress.setInt(1, id);
             ResultSet rs = psAddress.executeQuery();
-
-            while(rs.next())
-            {
+            while(rs.next()) {
                 location.setName(rs.getString("name"));
                 address.setStreet(rs.getString("street"));
                 address.setHouseNumber(rs.getString("house_nr"));
@@ -448,10 +469,8 @@ public class DBController {
             location.setAddress(address);
 
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
         } finally {
-            // ignore failure closing connection
             releaseConnection(ds, c);
         }
         return location;

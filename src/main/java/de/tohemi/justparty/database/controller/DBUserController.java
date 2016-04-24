@@ -1,7 +1,10 @@
 package de.tohemi.justparty.database.controller;
 
+import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.datainterfaces.DBAddress;
 import de.tohemi.justparty.datamodel.Address;
+import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.util.DateFormater;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -333,4 +336,103 @@ public class DBUserController {
         }
         return true;
     }
+
+    public boolean userIsRegistered(String email) throws UserNotFoundException {
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT role FROM users WHERE email=?");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) {
+                throw new UserNotFoundException();
+            } else {
+                rs.beforeFirst();
+            }
+            if (rs.next()) {
+                if (rs.getString("role").equals(UserRoles.NONUSER))
+                    return false;
+            }
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+
+    public boolean addUser(User user, String userRole, String hash) {
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+
+        try {
+            PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email, password, role) VALUE (?, ?, ?)");
+            psUser.setString(1, user.getEmail());
+            psUser.setString(2, hash);
+            psUser.setString(3, UserRoles.USER);
+            psUser.executeUpdate();
+            psUser.close();
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+
+    public boolean removeUser(User user) {
+        DataSource ds = getDataSource();
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+
+        try {
+            PreparedStatement psUser = c.prepareStatement("DELETE FROM users WHERE email=?");
+            PreparedStatement psGuestlist = c.prepareStatement("DELETE FROM guestlist WHERE guest=?");
+            psUser.setString(1, user.getEmail());
+            psGuestlist.setString(1, user.getEmail());
+            psUser.executeUpdate();
+            psGuestlist.executeUpdate();
+            psUser.close();
+            psGuestlist.close();
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+
+    public boolean changeToUser(User user, String hash) {
+        DataSource ds = getDataSource();
+
+        // Open a database connection using Spring's DataSourceUtils
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psUser = c.prepareStatement("UPDATE users SET Password=?, role=? WHERE Email=?");
+            psUser.setString(1, hash);
+            psUser.setString(2, UserRoles.USER);
+            psUser.setString(3, user.getEmail());
+            psUser.executeUpdate();
+            psUser.close();
+        } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
+            ex.printStackTrace();
+            // ignore failure closing connection
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+
 }
