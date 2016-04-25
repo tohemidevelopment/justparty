@@ -141,7 +141,7 @@ public class DBLocationController {
         return true;
     }
 
-    private int getLocationID(Location l) {
+    public int getLocationID(Location l) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
