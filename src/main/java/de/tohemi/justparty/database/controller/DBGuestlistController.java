@@ -61,4 +61,46 @@ public class DBGuestlistController {
         }
         return true;
     }
+
+    public boolean updateGuestEventStatus(Event e, User u, int status) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("Update  guestlist SET status=? WHERE event=? AND guest=?;");
+            ps.setInt(1,status);
+            ps.setInt(2, e.getId());
+            ps.setString(3, u.getEmail());
+            ps.executeUpdate();
+            ps.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+
+    public boolean deleteGuestFromGuestlist(Event e, User u, int status) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("DELETE * FROM guestlist WHERE guest=? AND event=? AND status=?");
+            ps.setString(1,u.getEmail());
+            ps.setInt(2, e.getId());
+            ps.setInt(3, status);
+            ps.execute();
+            ps.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
 }
