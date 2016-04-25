@@ -1,6 +1,5 @@
 # justparty
 
-https://travis-ci.org/tohemidevelopment/justparty.svg?branch=master
 
 just live. just love. justParty. 
 
