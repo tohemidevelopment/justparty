@@ -21,6 +21,8 @@ public abstract class JPController {
     public static final String DELETE = "/delete";
     public static final String GUESTS = "guests";
     public static final String VERIFY_EMAIL = "/verifyEmail";
+    public static final String INVITE_USER = "/inviteUser";
+    public static final String EVENTDATA = "/eventdata";
 
     protected String getMailFromLoggedInUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

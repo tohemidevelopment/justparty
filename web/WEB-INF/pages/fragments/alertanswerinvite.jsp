@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:if test="${show_alert}">
-        <div class="alert alert-warning" role="alert">
-            <spring:message code="alert.warning.answerinvite"/>
-        </div>
+    <div class="alert alert-warning" role="alert">
+        <spring:message code="alert.warning.answerinvite"/>
+    </div>
 </c:if>
