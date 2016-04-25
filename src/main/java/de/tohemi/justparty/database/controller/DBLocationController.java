@@ -1,6 +1,8 @@
 package de.tohemi.justparty.database.controller;
 
+import com.sun.javafx.css.Declaration;
 import de.tohemi.justparty.datamodel.Address;
+import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
@@ -70,5 +72,29 @@ public class DBLocationController {
             releaseConnection(ds, c);
         }
         return location;
+    }
+
+    public boolean addLocation(Location l) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("INSERT INTO location(street, house_nr, city, zipcode, country, name, public) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            ps.setString(1,l.getAddress().getStreet());
+            ps.setInt(2, Integer.parseInt(l.getAddress().getHouseNumber()));
+            ps.setString(3, l.getAddress().getCity());
+            ps.setInt(4, l.getAddress().getZipCode().getZipInt());
+            ps.setString(5, l.getAddress().getCountry());
+            ps.setString(6, l.getName());
+            ps.setBoolean(7, l.isPublicLocation());
+            ps.execute();
+            ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
     }
 }
