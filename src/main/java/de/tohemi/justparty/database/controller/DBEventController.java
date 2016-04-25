@@ -2,10 +2,7 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.database.tables.EventsDBTabelle;
 import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
-import de.tohemi.justparty.datamodel.Accepted;
-import de.tohemi.justparty.datamodel.Event;
-import de.tohemi.justparty.datamodel.User;
-import de.tohemi.justparty.datamodel.UserEventRelation;
+import de.tohemi.justparty.datamodel.*;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
@@ -127,7 +124,7 @@ public class DBEventController {
         return event;
     }
 
-    public boolean updateEventData(Event event, User user) {
+    public boolean updateEventData(Event event, User user, Location l) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         boolean tries = false;
@@ -146,8 +143,7 @@ public class DBEventController {
             pS.setString(2, event.getDescription());
             pS.setDate(3, (Date) event.getBegin());
             pS.setDate(4, (Date) event.getEnd());
-            //TODO: Create a Method to get the LocationID from Location and save the location in the location database
-            pS.setInt(5, 2);
+            pS.setInt(5, DBLocationController.getInstance().getLocationID(l));
             pS.setURL(6, event.getFacebookLink());
             pS.setURL(7, event.getGooglePlusLink());
             pS.setURL(8, event.getWishlistLink());
