@@ -16,13 +16,11 @@ public class Declaration {
         this.user = user;
     }
 
-    public int getEvent_id() {
+    public int getEventId() {
         return event_id;
     }
 
-    public void setEvent_id(int event_id) {
-        this.event_id = event_id;
-    }
+    public void setEventId(int event_id) { this.event_id = event_id; }
 
     public String getName() {
         return name;
@@ -40,7 +38,7 @@ public class Declaration {
         this.user = user;
     }
 
-    public boolean isBringWithByAll() {
+    public boolean getBringWithByAll() {
         return bringWithByAll;
     }
 

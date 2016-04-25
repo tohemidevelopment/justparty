@@ -71,6 +71,7 @@ public class DBControllerTest {
     @Test
     public void addEvent() throws Exception {
         Assert.isTrue(conE.addEvent(event));
+        conE.deleteEvent(event, user);
     }
 
     @Test

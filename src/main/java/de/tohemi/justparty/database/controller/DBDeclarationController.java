@@ -1,7 +1,8 @@
 package de.tohemi.justparty.database.controller;
 
-import com.sun.javafx.css.Declaration;
+import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -42,17 +43,16 @@ public class DBDeclarationController {
         }
     }
 
-    public boolean addDeclaration(Event e, Declaration d) {
+    public boolean addDeclaration(Declaration d) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
                 PreparedStatement ps = c.prepareStatement("INSERT INTO declaration(name, usertobringwith, bringwithbyall, event_id) VALUES (?, ?, ?, ?);");
-                ps.setString(1,d.getProperty());
-                ps.setString(2, d.getParsedValue().toString());
-                //TODO: Get True: FORALL False: only one from declaration
-                ps.setBoolean(3, false);
-                ps.setInt(4, e.getId());
+                ps.setString(1,d.getName());
+                ps.setString(2, d.getUser().getEmail());
+                ps.setBoolean(3, d.getBringWithByAll());
+                ps.setInt(4, d.getEventId());
                 ps.execute();
                 ps.close();
 
@@ -65,17 +65,16 @@ public class DBDeclarationController {
         return true;
     }
 
-    public boolean deleteDeclaration(Event e, Declaration d) {
+    public boolean deleteDeclaration(Declaration d) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
                 PreparedStatement ps = c.prepareStatement("DELETE * FROM declaration WHERE name=? AND usertobringwith=? AND bringwithbyall=? AND event_id=?;");
-                ps.setString(1,d.getProperty());
-                ps.setString(2, d.getParsedValue().toString());
-                //TODO: Get True: FORALL False: only one from declaration
-                ps.setBoolean(3, false);
-                ps.setInt(4, e.getId());
+                ps.setString(1,d.getName());
+                ps.setString(2, d.getUser().getEmail());
+                ps.setBoolean(3, d.getBringWithByAll());
+                ps.setInt(4, d.getEventId());
                 ps.execute();
                 ps.close();
 
@@ -88,17 +87,16 @@ public class DBDeclarationController {
         return true;
     }
 
-    public boolean udpateDeclaration(Event e, Declaration d) {
+    public boolean udpateDeclaration(Declaration d) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("UPDATE declaration SET name=?, usertobringwith=?, bringwithbyall=? WHERE id=?;");
-            ps.setString(1,d.getProperty());
-            ps.setString(2, d.getParsedValue().toString());
-            //TODO: Get True: FORALL False: only one from declaration
-            ps.setBoolean(3, false);
-            ps.setInt(4,e.getId());
+            ps.setString(1,d.getName());
+            ps.setString(2, d.getUser().getEmail());
+            ps.setBoolean(3, d.getBringWithByAll());
+            ps.setInt(4, d.getEventId());
             ps.execute();
             ps.close();
 
@@ -120,8 +118,7 @@ public class DBDeclarationController {
             ps.setInt(1, e.getId());
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                //TODO: CHange RS:GETSTRING("Usertobringwith") to PARSEVALUEOF
-                //declaration.add(new Declaration(rs.getString("name"), rs.getString("usertobringwith"), rs.getBoolean("bringwithbyall")));
+                declaration.add(new Declaration(rs.getString("name"), new User(rs.getString("usertobringwith")), rs.getBoolean("bringwithbyall"), rs.getInt("event_id")));
             }
             ps.close();
 
