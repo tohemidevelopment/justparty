@@ -148,7 +148,13 @@ public class DBLocationController {
         int exe = 0;
         try {
             PreparedStatement ps = c.prepareStatement("SELECT address_id FROM location Where street=? AND house_nr=? AND city=? AND zipcode=? AND country=? AND name=? AND public=?");
-            ps.setInt(1, getLocationID(l));
+            ps.setString(1,l.getAddress().getStreet());
+            ps.setInt(2, Integer.parseInt(l.getAddress().getHouseNumber()));
+            ps.setString(3, l.getAddress().getCity());
+            ps.setInt(4, l.getAddress().getZipCode().getZipInt());
+            ps.setString(5, l.getAddress().getCountry());
+            ps.setString(6, l.getName());
+            ps.setBoolean(7, l.isPublicLocation());
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 exe = rs.getInt("address_id");
