@@ -99,7 +99,7 @@
         </a>
     </div>
     <div class="container" id="about-div">
-        <spring:message code="welcome.whatis.description"/>
+        <spring:message code="welcome.whatis.description"/>Hallo
     </div>
 </div>
 <%@include file="fragments/jslibs.jsp"%>

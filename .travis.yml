@@ -27,7 +27,7 @@ sudo: false
 #before_script:
 
 # Run Integration tests
-script: "mvn install"
+script: "mvn test tomcat7:redeploy"
 
 #after_success:
 
