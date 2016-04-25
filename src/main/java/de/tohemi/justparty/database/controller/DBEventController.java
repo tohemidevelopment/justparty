@@ -147,7 +147,7 @@ public class DBEventController {
             pS.setDate(3, (Date) event.getBegin());
             pS.setDate(4, (Date) event.getEnd());
             //TODO: Create a Method to get the LocationID from Location and save the location in the location database
-            pS.setInt(5, event.getLocation().getID());
+            pS.setInt(5, 2);
             pS.setURL(6, event.getFacebookLink());
             pS.setURL(7, event.getGooglePlusLink());
             pS.setURL(8, event.getWishlistLink());

@@ -44,6 +44,5 @@ public class Location {
         this.publicLocation = publicLocation;
     }
 
-    public int getID() {return DBLocationController.getInstance().getLocationID(this);
-    }
+
 }

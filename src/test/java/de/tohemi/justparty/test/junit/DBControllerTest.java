@@ -28,9 +28,9 @@ public class DBControllerTest {
         conE = DBEventController.getInstance();
         conU = DBUserController.getInstance();
         con = DBController.getInstance();
-        email = new EMail("tom@wolske.tv");
+        email = new EMail("junit@testemail.tv");
         user = new User(email);
-        event = new Event("TestEvent", user);
+        event = new Event("TestEventForJUnit", user);
         conU.addUser(user, "ROLE_USER", "1234");
         conE.addEvent(event);
         event.setId(con.getEventID(user));
@@ -55,7 +55,7 @@ public class DBControllerTest {
 
     @Test
     public void userIsRegistered() throws Exception {
-        Assert.isTrue(conU.userIsRegistered("tom@wolske.tv"));
+        Assert.isTrue(conU.userIsRegistered("junit@testemail.tv"));
     }
 
     @Test
