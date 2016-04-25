@@ -10,7 +10,9 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by xce35l2 on 25.04.2016.
@@ -102,5 +104,26 @@ public class DBGuestlistController {
             releaseConnection(ds, c);
         }
         return true;
+    }
+
+    public ArrayList<User> getGuestlist(Event e){
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        ArrayList<User> users = new ArrayList<User>();
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM guestlist WHERE event=?");
+            ps.setInt(1,e.getId());
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                users.add(new User(rs.getString("guest")));
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return users;
     }
 }

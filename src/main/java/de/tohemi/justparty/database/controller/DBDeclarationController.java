@@ -141,4 +141,6 @@ public class DBDeclarationController {
         }
         return true;
     }
+
+    public ArrayList<Declaration> getDeclarations(){}
 }
