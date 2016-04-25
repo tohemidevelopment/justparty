@@ -29,7 +29,9 @@ public class DBDeclarationControllerTest {
         DBUserController.getInstance().addUser(u, "ROLE_USER", "1234");
         e = new Event("TestEvent", u);
         DBEventController.getInstance().addEvent(e);
-        d = new Declaration("Testdeclaration", u, false, DBEventController.getInstance().getEventID(e));
+        int event_id = DBEventController.getInstance().getEventID(e);
+        e.setId(event_id);
+        d = new Declaration("Testdeclaration", u, false, event_id);
         conD = DBDeclarationController.getInstance();
     }
 
