@@ -2,11 +2,15 @@ package de.tohemi.justparty.test.junit;
 
 import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.database.controller.DBEventController;
+import de.tohemi.justparty.database.controller.DBLocationController;
 import de.tohemi.justparty.database.controller.DBUserController;
+import de.tohemi.justparty.datamodel.Address;
 import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
+import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,28 +22,34 @@ import org.springframework.util.Assert;
 public class DBControllerTest {
     public DBEventController conE;
     public DBUserController conU;
+    public DBLocationController conL;
     public DBController con;
     public Event event;
     public User user;
     public EMail email;
+    public Location location;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() throws Exception, ZipCodeInvalidException {
         conE = DBEventController.getInstance();
         conU = DBUserController.getInstance();
+        conL = DBLocationController.getInstance();
         con = DBController.getInstance();
         email = new EMail("junit@testemail.tv");
         user = new User(email);
+        location = new Location("Testlocation", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
         event = new Event("TestEventForJUnit", user);
         conU.addUser(user, "ROLE_USER", "1234");
         conE.addEvent(event);
         event.setId(con.getEventID(user));
+        conL.addLocation(location);
     }
 
     @After
     public void tearDown() throws Exception {
         conE.deleteEvent(event, user);
         conU.removeUser(user);
+        conL.deleteLocation(location);
     }
 
     @Test
@@ -99,7 +109,7 @@ public class DBControllerTest {
     public void updateEventData() throws Exception, ZipCodeInvalidException {
 
 
-        Assert.isTrue(conE.updateEventData(event, user));
+        Assert.isTrue(conE.updateEventData(event, user, location));
 
     }
 
