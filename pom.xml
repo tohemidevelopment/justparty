@@ -40,9 +40,9 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/</path>
-                    <url>http://localhost:8080/manager/text</url>
-                    <username>tomcat</username>
-                    <password>tomcatuser</password>
+                    <url>http://justparty.ml/manager/text</url>
+                    <username>tohemi</username>
+                    <password>tinf14b2</password>
                 </configuration>
             </plugin>
         </plugins>
