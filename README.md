@@ -1,6 +1,6 @@
 # justparty
 
-just live. just love. justParty.
+just live. just love. justParty. 
 
 Every time you plan a great party you forget something? You don’t find the perfect date? Some of your friends don’t like the music? Everything seems to go wrong?
 
