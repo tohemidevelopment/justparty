@@ -14,6 +14,7 @@ public class LogicalViewNames {
     private final static String nameEditEvent = "user/editevent";
     private final static String nameAlertAnswerInvitaion = "fragments/alertanswerinvite";
     private final static String nameShowGuestlist ="user/showguests";
+    private final static String nameVerifyEmail = "user/verifyEmail";
     private final static String nameInviteUser ="user/inviteUsers";
 
     public static String getNameWelcomePage() {
@@ -59,4 +60,10 @@ public class LogicalViewNames {
     public static String getNameInviteUsers() {
         return nameInviteUser;
     }
+
+
+    public static String getNameVerifyEmail() {
+        return nameVerifyEmail;
+    }
+
 }
