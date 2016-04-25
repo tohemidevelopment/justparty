@@ -97,4 +97,69 @@ public class DBLocationController {
         }
         return true;
     }
+
+    public boolean deleteLocation(Location l) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("DELETE * FROM location WHERE address_id=?");
+            ps.setInt(1, getLocationID(l));
+            ps.execute();
+            ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+
+    public boolean updateLocation(Location l) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("UPDATE location SET street=? AND house_nr=? AND city=? AND zipcode=? AND country=? AND name=? AND public=? WHERE address_id=?");
+            ps.setString(1,l.getAddress().getStreet());
+            ps.setInt(2, Integer.parseInt(l.getAddress().getHouseNumber()));
+            ps.setString(3, l.getAddress().getCity());
+            ps.setInt(4, l.getAddress().getZipCode().getZipInt());
+            ps.setString(5, l.getAddress().getCountry());
+            ps.setString(6, l.getName());
+            ps.setBoolean(7, l.isPublicLocation());
+            ps.setInt(8, getLocationID(l));
+            ps.execute();
+            ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+
+    private int getLocationID(Location l) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        int exe = 0;
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT address_id FROM location Where street=? AND house_nr=? AND city=? AND zipcode=? AND country=? AND name=? AND public=?");
+            ps.setInt(1, getLocationID(l));
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                exe = rs.getInt("address_id");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return exe;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return exe;
+    }
 }
