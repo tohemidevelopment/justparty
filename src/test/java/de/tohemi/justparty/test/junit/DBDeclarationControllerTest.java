@@ -11,8 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by xce35l2 on 25.04.2016.
  */
@@ -60,11 +58,12 @@ public class DBDeclarationControllerTest {
 
     @Test
     public void udpateDeclaration() throws Exception {
-        Assert.isTrue(conD.udpateDeclaration(d));
+        Assert.isTrue(conD.updateDeclaration(d));
     }
 
     @Test
     public void getDeclarations() throws Exception {
+        conD.addDeclaration(d);
         Assert.notEmpty(conD.getDeclarations(e));
     }
 }

@@ -48,6 +48,8 @@ public class DBControllerTest {
     @After
     public void tearDown() throws Exception {
         conE.deleteEvent(event, user);
+        event.setId(event.getId()-1);
+        conE.deleteEvent(event, user);
         conU.removeUser(user);
         conL.deleteLocation(location);
     }
@@ -71,7 +73,7 @@ public class DBControllerTest {
     @Test
     public void addEvent() throws Exception {
         Assert.isTrue(conE.addEvent(event));
-        conE.deleteEvent(event, user);
+
     }
 
     @Test
