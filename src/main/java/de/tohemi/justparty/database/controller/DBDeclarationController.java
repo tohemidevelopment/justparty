@@ -118,4 +118,27 @@ public class DBDeclarationController {
         }
         return true;
     }
+
+    public boolean udpateDeclaration(Event e, Declaration d) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("UPDATE declaration_" + e.getId() + " SET name=?, usertobringwith=?, bringwithbyall=? WHERE id=?;");
+            ps.setString(1,d.getProperty());
+            ps.setString(2, d.getParsedValue().toString());
+            //TODO: Get True: FORALL False: only one from declaration
+            ps.setBoolean(3, false);
+            //ps.setInt(4,d.getID());
+            ps.execute();
+            ps.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
 }
