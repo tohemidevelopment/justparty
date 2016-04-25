@@ -20,7 +20,7 @@
             <td><label><spring:message code="editevent.general.zeit.begin"/></label></td>
             <td colspan="2">
                 <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" id="begin" onchange="updateEventData('begin');" value="${event.begin}"/>
+                    <input type='date' class="form-control" id="begin" onchange="updateEventData('begin');" value="${event.begin}"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
