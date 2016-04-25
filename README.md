@@ -1,5 +1,4 @@
-# justparty
-
+# justparty [![Build Status](https://travis-ci.org/tohemidevelopment/justparty.svg?branch=master)](https://travis-ci.org/tohemidevelopment/justparty)
 
 just live. just love. justParty. 
 
