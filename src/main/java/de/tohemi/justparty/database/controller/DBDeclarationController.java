@@ -80,12 +80,15 @@ public class DBDeclarationController {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("INSERT INTO declaration_" + e.getId() + "(name, usertobringwith, bringwithbyall) VALUES (?, ?, ?);");
-            ps.setString(1,"");
-            ps.setString(2, "EMAIL");
-            ps.setBoolean(3, false);
-            ps.execute();
-            ps.close();
+            for(int i = 0; i <= d.size(); i++){
+                PreparedStatement ps = c.prepareStatement("INSERT INTO declaration_" + e.getId() + "(name, usertobringwith, bringwithbyall) VALUES (?, ?, ?);");
+                ps.setString(1,d.get(i).getProperty());
+                ps.setString(2, d.get(i).getParsedValue().toString());
+                //TODO: Get True: FORALL False: only one from declaration
+                ps.setBoolean(3, false);
+                ps.execute();
+                ps.close();
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
