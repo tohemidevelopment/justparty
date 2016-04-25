@@ -9,6 +9,7 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -142,5 +143,24 @@ public class DBDeclarationController {
         return true;
     }
 
-    public ArrayList<Declaration> getDeclarations(){}
+    public ArrayList<Declaration> getDeclarations(Event e){
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        ArrayList<Declaration> declaration = new ArrayList<Declaration>();
+        try {
+            PreparedStatement ps = c.prepareStatement("Select * From declaration_" + e.getId() + ";");
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                //TODO: CHange RS:GETSTRING("Usertobringwith") to PARSEVALUEOF
+                //declaration.add(new Declaration(rs.getString("name"), rs.getString("usertobringwith"), rs.getBoolean("bringwithbyall")));
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return declaration;
+    }
 }

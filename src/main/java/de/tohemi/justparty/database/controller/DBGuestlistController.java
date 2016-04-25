@@ -1,6 +1,5 @@
 package de.tohemi.justparty.database.controller;
 
-import com.sun.javafx.css.Declaration;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
 import org.springframework.context.ApplicationContext;
