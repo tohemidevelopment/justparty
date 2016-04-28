@@ -86,9 +86,7 @@ public class DBEventController {
         } finally {
             releaseConnection(ds, c);
             }
-        if(DBDeclarationController.getInstance().deleteDeclarationTableForEvent(e))
-            return true;
-        return false;
+        return true;
     }
 
     public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
@@ -112,7 +110,7 @@ public class DBEventController {
                 event.setDescription(rs.getString("description"));
                 event.setEventOwner(new User(new EMail(rs.getString("email"))));
                 event.setName(rs.getString("name"));
-                event.setLocation(DBLocationController.getInstance().getLocationByID(rs.getInt("location")));
+                event.setLocation(DBLocationController.getInstance().getLocationByID(rs.getInt("address_id")));
             }
         } catch (SQLException ex) {
             // something has failed and we print a stack trace to analyse the error
@@ -270,6 +268,15 @@ public class DBEventController {
         return userEventRelations;
     }
 
+    /**
+     * @Deprecated
+     * @param event
+     * @param user
+     * @param answer
+     * @return boolnothing
+     * use DBGuestlistContorller.getInstance().updateGuestlist(Event, User, State); instead
+     */
+    @Deprecated
     public boolean updateGuest(Event event, User user, Accepted answer) {
         int status = GuestlistDBTabelle.getIntStatusForAcceptedObject(answer);
         DataSource ds = getDataSource();
@@ -297,8 +304,9 @@ public class DBEventController {
         Connection c = DataSourceUtils.getConnection(ds);
         int exe = 0;
         try {
-            PreparedStatement psEvent = c.prepareStatement("SELECT event_id FROM events WHERE name=?;");
+            PreparedStatement psEvent = c.prepareStatement("SELECT event_id FROM events WHERE name=? AND email=?;");
             psEvent.setString(1, e.getName());
+            psEvent.setString(2, e.getEventOwner().getEmail());
             ResultSet rs = psEvent.executeQuery();
             while(rs.next())
                 exe = rs.getInt("event_id");
