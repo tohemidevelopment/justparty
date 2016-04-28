@@ -8,8 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <table class="table table-hover">
         <tr>
-            <td><label for="name"><spring:message code="editevent.general.eventname"/></label></td>
-            <td colspan="2"><input type="text" class="form-control" id="name" onchange="updateEventData('name');" value="${event.name}"></td>
+            <td><label for="eventname"><spring:message code="editevent.general.eventname"/></label></td>
+            <td colspan="2"><input type="text" class="form-control" id="eventname" onchange="updateEventData('eventname');" value="${event.name}"></td>
         </tr>
         <tr>
             <td><label for="location"><spring:message code="editevent.general.ort"/></label></td>
@@ -19,8 +19,8 @@
         <tr>
             <td><label><spring:message code="editevent.general.zeit.begin"/></label></td>
             <td colspan="2">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='date' class="form-control" id="begin" onchange="updateEventData('begin');" value="${event.begin}"/>
+                <div class='input-group datetime' id='datetimepicker1'>
+                    <input type='datetime-local' class="form-control" id="begin" onchange="updateEventData('begin');" value="${event.begin}"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -35,8 +35,8 @@
         <tr>
             <td><label><spring:message code="editevent.general.zeit.ende"/></label></td>
             <td colspan="2">
-                <div class='input-group date' id='datetimepicker2'>
-                    <input id="end" type='text' class="form-control" onchange="updateEventData('end');" value="${event.end}"/>
+                <div class='input-group datetime' id='datetimepicker2'>
+                    <input id="end" type='datetime-local' class="form-control" onchange="updateEventData('end');" value="${event.end}"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -66,23 +66,43 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel3"><spring:message code="editevent.guestlist.modal.title"/></h4>
+                <h4 class="modal-title" id="myModalLabel3"><spring:message code="editevent.general.modal.title"/></h4>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="recipient-name3" class="control-label"><spring:message code="editevent.guestlist.modal.email"/></label>
-                        <input type="text" class="form-control" id="recipient-name3">
+                        <label for="name" class="control-label"><spring:message code="editevent.general.modal.ort.name"/></label>
+                        <input class="form-control" id="name">
                     </div>
                     <div class="form-group">
-                        <label for="message-text3" class="control-label"><spring:message code="editevent.guestlist.modal.nachricht"/></label>
-                        <textarea class="form-control" id="message-text3"></textarea>
+                        <label for="street" class="control-label"><spring:message code="editevent.general.modal.ort.street"/></label>
+                        <input type="text" class="form-control" id="street">
+                    </div>
+                    <div class="form-group">
+                        <label for="housenumber" class="control-label"><spring:message code="editevent.general.modal.ort.housenumber"/></label>
+                        <input type="text" class="form-control" id="housenumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="zip" class="control-label"><spring:message code="editevent.general.modal.ort.zip"/></label>
+                        <input type="text" class="form-control" id="zip">
+                    </div>
+                    <div class="form-group">
+                        <label for="city" class="control-label"><spring:message code="editevent.general.modal.ort.city"/></label>
+                        <input type="text" class="form-control" id="city">
+                    </div>
+                    <div class="form-group">
+                        <label for="land" class="control-label"><spring:message code="editevent.general.modal.ort.land"/></label>
+                        <input type="text" class="form-control" id="land">
+                    </div>
+                    <div class="form-group">
+                        <label for="result" class="control-label"><spring:message code="editevent.general.modal.ort.result"/></label>
+                        <textarea type="text" class="form-control" id="result"></textarea>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="editevent.guestlist.modal.button1"/></button>
-                <button type="button" class="btn btn-primary"><spring:message code="editevent.guestlist.modal.button2"/></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="editevent.general.modal.ort.button1"/></button>
+                <button type="button" class="btn btn-primary"><spring:message code="editevent.general.modal.ort.button2"/></button>
             </div>
         </div>
     </div>
