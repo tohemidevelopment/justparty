@@ -29,7 +29,20 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19</version>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <excludes>
+                        <exclude>**/cucumber/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/</path>
+                    <url>http://justparty.ml/manager/text</url>
+                    <username>tohemi</username>
+                    <password>tinf14b2</password>
                 </configuration>
             </plugin>
         </plugins>
@@ -154,6 +167,4 @@
             <version>${javax.mail.version}</version>
         </dependency>
     </dependencies>
-
-
 </project>

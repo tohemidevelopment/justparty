@@ -7,6 +7,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import de.tohemi.justparty.database.controller.DBController;
+import de.tohemi.justparty.database.controller.DBUserController;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.test.cucumber.BaseIntegration;
 import de.tohemi.justparty.test.cucumber.BrowserHolder;
@@ -51,7 +52,7 @@ public class Basic {
     @After
     public void tearDown() {
         browser.getDriver().quit();
-        DBController.getInstance().removeUser(new User("cucumber@test.de"));
+        DBUserController.getInstance().removeUser(new User("cucumber@test.de"));
     }
 
 

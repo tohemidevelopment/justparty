@@ -2,7 +2,6 @@ package de.tohemi.justparty.datamodel;
 
 import de.tohemi.justparty.view_interface.JPDateFormat;
 
-import java.util.Calendar;
 
 /**
  * Created by Micha Piertzik on 01.12.2015.
@@ -52,7 +51,7 @@ public class UserEventRelation implements Comparable<UserEventRelation> {
     }
 
     public String getDate() {
-        Calendar begin = event.getBegin();
+        java.util.Date begin = event.getBegin();
         if (begin != null) {
             return JPDateFormat.getSimpleDateFormat().format(begin.getTime());
         }

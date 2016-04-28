@@ -13,6 +13,7 @@
     <http auto-config="true">
         <intercept-url pattern="/manageEvent**" access="ROLE_USER"/>
         <intercept-url pattern="/createEvent**" access="ROLE_USER"/>
+        <intercept-url pattern="/inviteUser**" access="ROLE_USER"/>
         <intercept-url pattern="/edit**" access="ROLE_USER"/>
         <form-login
                 login-page="/login"

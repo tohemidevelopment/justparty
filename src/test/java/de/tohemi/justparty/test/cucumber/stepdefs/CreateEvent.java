@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.database.controller.DBController;
+import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
@@ -39,7 +40,7 @@ public class CreateEvent {
         List<UserEventRelation> eventlist=EventsHandlerImpl.getCurrentEvents(email);
         for (UserEventRelation rel:eventlist){
             if(rel.getName().equals(eventname)) {
-                DBController.getInstance().deleteEvent(rel.getEvent(),rel.getUser());
+                DBEventController.getInstance().deleteEvent(rel.getEvent(),rel.getUser());
                 return;
             }
         }
