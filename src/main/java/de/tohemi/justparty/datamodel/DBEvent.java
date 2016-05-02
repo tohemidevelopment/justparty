@@ -22,7 +22,7 @@ public class DBEvent implements Event {
     }
 
     public void setName(String name) {
-
+        System.out.println("-------- " + name + "   " + id);
     }
 
     public String getDescription() {

@@ -91,7 +91,7 @@ public class DBEventController {
 
     public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
 
-        final Event event = new Event(id);
+        final Event event = new ConcreteEvent(id);
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
@@ -195,7 +195,7 @@ public class DBEventController {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = new Event(resultSet.getString(EventsDBTabelle.COLUMN_NAME), user);
+                Event event = new ConcreteEvent(resultSet.getString(EventsDBTabelle.COLUMN_NAME), user);
                 event.setId(resultSet.getInt("event_id"));
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
@@ -248,7 +248,7 @@ public class DBEventController {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = new Event(resultSet.getString(EventsDBTabelle.COLUMN_NAME), new User(resultSet.getString("email")));
+                Event event = new ConcreteEvent(resultSet.getString(EventsDBTabelle.COLUMN_NAME), new User(resultSet.getString("email")));
                 event.setId(resultSet.getInt("event_id"));
                 Date date = resultSet.getDate("begin");
                 if (date != null) {

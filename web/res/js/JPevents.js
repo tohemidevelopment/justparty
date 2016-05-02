@@ -120,21 +120,11 @@ function updateEventData(id)
     eventDataChanges[id] = newValue;
 }
 
-function sendEventDataChanges()
+function sendEventDataChanges(id)
 {
-    var success = function ()
-    {
-
-
-    };
-    var fail = function ()
-    {
-    };
     const URL = '/eventdata';
-    const ajaxSettings = {type: 'POST', data:eventDataChanges};
+    const ajaxSettings = {type: 'POST', data:eventDataChanges, headers:{id:id}};
     $.ajax(URL, ajaxSettings)
-        .done(success)
-        .fail(fail);
 }
 
 function showOwnedEvents()
