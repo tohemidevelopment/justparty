@@ -58,11 +58,11 @@ public class DBLocationControllerTest {
     public void deleteLocation() throws Exception {
         Assert.isTrue(conL.deleteLocation(location));
     }
-
+    /*
     @Test
     public void updateLocation() throws Exception {
         Assert.isTrue(conL.updateLocation(location));
-    }
+    }*/
 
     @Test
     public void getLocationID() throws Exception {
