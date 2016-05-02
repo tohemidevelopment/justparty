@@ -45,6 +45,14 @@
                     <password>tinf14b2</password>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.1.0</version>
+                <configuration>
+                    <repoToken>IVMl5nYOYjLS8qmSGKfBbRGOgdsB3MwNX</repoToken>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
