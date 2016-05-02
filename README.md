@@ -1,4 +1,4 @@
-# justparty [![Build Status](https://travis-ci.org/tohemidevelopment/justparty.svg?branch=master)](https://travis-ci.org/tohemidevelopment/justparty) [![Coverage Status](https://coveralls.io/repos/github/tohemidevelopment/justparty/badge.svg?branch=master)](https://coveralls.io/github/tohemidevelopment/justparty?branch=master) [![Quality Gate](http://sonarqube.it.dh-karlsruhe.de/api/badges/gate?key=justparty:2016)](http://sonarqube.it.dh-karlsruhe.de/overview?id=justparty:2016)
+# justparty [![Build Status](https://travis-ci.org/tohemidevelopment/justparty.svg?branch=master)](https://travis-ci.org/tohemidevelopment/justparty) [![Coverage Status](https://coveralls.io/repos/github/tohemidevelopment/justparty/badge.svg?branch=master)](https://coveralls.io/github/tohemidevelopment/justparty?branch=master) [![Quality Gate](http://sonarqube.it.dh-karlsruhe.de/api/badges/gate?key=justparty)](http://sonarqube.it.dh-karlsruhe.de/overview?id=justparty)
 
 just live. just love. justParty. 
 
