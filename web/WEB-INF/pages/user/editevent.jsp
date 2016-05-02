@@ -61,7 +61,7 @@
         <div id="bringwith_text" style="display: none;"><%@include file="../fragments/editEvent/bringwith.jsp"%></div>
         <div id="guestlist_text" style="display: none;"><%@include file="../fragments/editEvent/guestlist.jsp"%></div>
     </div>
-    <button type="submit" class="btn btn-primary btn-block"><spring:message code="editevent.button.save"/></button>
+    <button type="submit" class="btn btn-primary btn-block" onclick="sendEventDataChanges();"><spring:message code="editevent.button.save"/></button>
     <button type="button" class="btn btn-default btn-block"><spring:message code="editevent.button.back"/></button>
 </form>
 </div>
