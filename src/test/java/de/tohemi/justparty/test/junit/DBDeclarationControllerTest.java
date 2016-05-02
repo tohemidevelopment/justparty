@@ -3,6 +3,7 @@ package de.tohemi.justparty.test.junit;
 import de.tohemi.justparty.database.controller.DBDeclarationController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBUserController;
+import de.tohemi.justparty.datamodel.ConcreteEvent;
 import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
@@ -25,7 +26,7 @@ public class DBDeclarationControllerTest {
     public void setUp() throws Exception {
         u = new User("junit@tester.de");
         DBUserController.getInstance().addUser(u, "ROLE_USER", "1234");
-        e = new Event("TestEvent", u);
+        e = new ConcreteEvent("TestEvent", u);
         DBEventController.getInstance().addEvent(e);
         int event_id = DBEventController.getInstance().getEventID(e);
         e.setId(event_id);
