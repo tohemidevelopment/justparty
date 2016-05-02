@@ -1,6 +1,8 @@
 package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.database.datainterfaces.DBUser;
+import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.Person;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,6 +20,9 @@ import java.nio.file.Files;
  */
 public class EmailSender {
     private String htmlBasic;
+    ApplicationContext context = new ClassPathXmlApplicationContext("spring-mail.xml");
+    JavaMailSender mailSender = context.getBean("mailSender", JavaMailSender.class);
+
     public EmailSender(){
         Charset encoding= StandardCharsets.UTF_8;
         byte[] encoded = new byte[0];
@@ -29,42 +34,65 @@ public class EmailSender {
         }
         htmlBasic= new String(encoded,encoding);
     }
-    ApplicationContext context = new ClassPathXmlApplicationContext("spring-mail.xml");
-    JavaMailSender mailSender = context.getBean("mailSender", JavaMailSender.class);
+
 
     public void sendEmailVerification(DBUser sendTo, String verificationID){
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper=new MimeMessageHelper(message);
-
         String emailContent="Dein Account bei justParty wurde erfolgreich angelegt. Bitte verifiziere nun noch deine E-Mail-Adresse:<br>"+insertButton("http://justparty.ml/verifyEmail?id="+verificationID,"E-Mail verifizieren");
-        emailContent=htmlFormat(emailContent,sendTo.getFirstName());
-        try {
-            helper.setTo(sendTo.getEmail());
-            helper.setText(emailContent,true);
-            helper.setSubject("E-Mail Verifizierung");
-            helper.setFrom("justParty");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-        mailSender.send(message);
+        String subject = "E-Mail Verifizierung";
+        String emailAddress=sendTo.getEmail();
+        String firstName=sendTo.getFirstName();
+
+        sendEmail(emailAddress, firstName, subject, emailContent);
     }
 
     public void sendCreateConfirmation(DBUser sendTo, String eventname){
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper=new MimeMessageHelper(message);
 
         String emailContent="Dein Event <b>"+eventname+"</b> wurde erfolgreich erstellt.";
-        emailContent=htmlFormat(emailContent,sendTo.getFirstName());
+        String subject = "Dein Event wurde erfolgreich erstellt";
+        String emailAddress=sendTo.getEmail();
+        String firstName=sendTo.getFirstName();
+
+        sendEmail(emailAddress, firstName, subject, emailContent);
+    }
+
+    public void sendInvitationToUser(DBUser sendTo, DBUser inviter, Event event){
+
+
+        String firstNameInviter=(inviter.getFirstName()!=null)?inviter.getFirstName():"einem User";
+        String emailContent="Du wurdest von "+firstNameInviter+" zu der Veranstaltung <b>"+event.getName()+"</b> eingeladen. Besuche die <a href=\"justParty.ml/event&id="+event.getId()+"\">Veranstaltungsseite</a>";
+        String address=sendTo.getEmail();
+        String firstName= sendTo.getEmail();
+        String subject = "Veranstaltungseinladung";
+
+        sendEmail(address, firstName, subject, emailContent);
+    }
+
+    public void sendInvitationToNonUser(Person sendTo, DBUser inviter, Event event){
+
+
+        String emailContent="Du wurdest zu der Veranstaltung <b>"+event.getName()+"</b> eingeladen.";
+        String address=sendTo.getEmail();
+        String firstName= null;
+        String subject = "Veranstaltungseinladung";
+
+        sendEmail(address, firstName, subject, emailContent);
+    }
+
+    private void sendEmail(String address, String firstName, String subject, String emailContent) {
+        emailContent=htmlFormat(emailContent,firstName);
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper=new MimeMessageHelper(message);
         try {
-            helper.setTo(sendTo.getEmail());
+            helper.setTo(address);
             helper.setText(emailContent,true);
-            helper.setSubject("Dein Event wurde erfolgreich erstellt");
+            helper.setSubject(subject);
             helper.setFrom("justParty");
         } catch (MessagingException e) {
             e.printStackTrace();
         }
         mailSender.send(message);
     }
+
 
     private String htmlFormat(String emailContent, String firstName) {
         firstName=(firstName!=null)?" "+firstName:"";

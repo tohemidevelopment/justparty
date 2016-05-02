@@ -54,7 +54,7 @@
         <jstl.version>1.2</jstl.version>
         <mysql.connector.version>5.1.30</mysql.connector.version>
         <apache.commons.logging.version>1.2</apache.commons.logging.version>
-        <javax.mail.version>1.4.7</javax.mail.version>
+        <javax.mail.version>1.5.5</javax.mail.version>
     </properties>
 
     <dependencies>
@@ -163,7 +163,7 @@
         </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
+            <artifactId>javax.mail-api</artifactId>
             <version>${javax.mail.version}</version>
         </dependency>
     </dependencies>
