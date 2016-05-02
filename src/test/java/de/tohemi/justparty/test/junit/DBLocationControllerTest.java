@@ -34,7 +34,7 @@ public class DBLocationControllerTest {
 
     @After
     public void tearDown() throws Exception {
-
+        conL.deleteLocation(location);
     }
 
     @Test
@@ -58,6 +58,7 @@ public class DBLocationControllerTest {
     public void deleteLocation() throws Exception {
         Assert.isTrue(conL.deleteLocation(location));
     }
+    //TODO: Unknown error with street, fix asap
     /*
     @Test
     public void updateLocation() throws Exception {
