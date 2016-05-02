@@ -103,7 +103,7 @@ public class DBLocationController {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("DELETE * FROM location WHERE address_id=?");
+            PreparedStatement ps = c.prepareStatement("DELETE FROM location WHERE address_id=?");
             ps.setInt(1, getLocationID(l));
             ps.execute();
             ps.close();
