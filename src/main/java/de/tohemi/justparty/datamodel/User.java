@@ -2,6 +2,7 @@ package de.tohemi.justparty.datamodel;
 
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 /**
@@ -11,7 +12,7 @@ public class User extends Person {
     private String lastName;
     private String firstName;
     private Address address;
-    private Calendar birthday;
+    private Date birthday;
 
     public User(String email) {
         super(email);
@@ -44,12 +45,13 @@ public class User extends Person {
         this.address = address;
     }
 
-    public Calendar getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Calendar birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+
 
 }
