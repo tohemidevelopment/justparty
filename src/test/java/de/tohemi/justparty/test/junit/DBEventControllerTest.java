@@ -4,10 +4,7 @@ import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBLocationController;
 import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.Address;
-import de.tohemi.justparty.datamodel.Event;
-import de.tohemi.justparty.datamodel.Location;
-import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.*;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
@@ -41,7 +38,7 @@ public class DBEventControllerTest {
         email = new EMail("junit@testemail.tv");
         user = new User(email);
         location = new Location("Testlocation", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
-        event = new Event("TestEventForJUnit", user);
+        event = new ConcreteEvent("TestEventForJUnit", user);
         conU.addUser(user, "ROLE_USER", "1234");
         conE.addEvent(event);
         event.setId(con.getEventID(user));
@@ -74,7 +71,7 @@ public class DBEventControllerTest {
 
     @Test
     public void getEventById() throws Exception, ZipCodeInvalidException {
-        Assert.isInstanceOf(Event.class, conE.getEventById(con.getEventID(user)));
+        Assert.isInstanceOf(ConcreteEvent.class, conE.getEventById(con.getEventID(user)));
     }
 
     @Test

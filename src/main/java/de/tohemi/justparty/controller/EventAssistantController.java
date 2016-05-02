@@ -3,6 +3,7 @@ package de.tohemi.justparty.controller;
 import com.google.gson.Gson;
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
+import de.tohemi.justparty.datamodel.DBEvent;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,9 @@ public class EventAssistantController extends JPController {
         final Gson gson = new Gson();
         final Event eventChanges = gson.fromJson(jsonString, Event.class);
         System.out.println();
+        Event dbEvent = new DBEvent();
+
+
         return null;
     }
 }

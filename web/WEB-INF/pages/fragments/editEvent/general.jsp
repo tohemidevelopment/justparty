@@ -20,10 +20,10 @@
             <td><label><spring:message code="editevent.general.zeit.begin"/></label></td>
             <td colspan="2">
                 <div class='input-group datetime' id='datetimepicker1'>
-                    <input type='datetime-local' class="form-control" id="begin" onchange="updateEventData('begin');" value="${event.begin}"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
+                    <input type='datetime-local' class="form-control" id="begin" onchange="updateEventData('begin');" value="${event.begin}"/>
                 </div>
                 <script type="text/javascript">
                     $(function () {
@@ -36,10 +36,10 @@
             <td><label><spring:message code="editevent.general.zeit.ende"/></label></td>
             <td colspan="2">
                 <div class='input-group datetime' id='datetimepicker2'>
-                    <input id="end" type='datetime-local' class="form-control" onchange="updateEventData('end');" value="${event.end}"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
+                    <input id="end" type='datetime-local' class="form-control" onchange="updateEventData('end');" value="${event.end}"/>
                 </div>
                 <script type="text/javascript">
                     $(function () {
