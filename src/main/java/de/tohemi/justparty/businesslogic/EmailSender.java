@@ -20,8 +20,8 @@ import java.nio.file.Files;
  */
 public class EmailSender {
     private String htmlBasic;
-    ApplicationContext context = new ClassPathXmlApplicationContext("spring-mail.xml");
-    JavaMailSender mailSender = context.getBean("mailSender", JavaMailSender.class);
+    private ApplicationContext context = new ClassPathXmlApplicationContext("spring-mail.xml");
+    private JavaMailSender mailSender = context.getBean("mailSender", JavaMailSender.class);
 
     public EmailSender(){
         Charset encoding= StandardCharsets.UTF_8;
