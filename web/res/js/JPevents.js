@@ -118,30 +118,13 @@ function updateEventData(id)
 {
     var newValue = document.getElementById(id).value;
     eventDataChanges[id] = newValue;
-
-
-
-
-
-    //ajax not in this function
-    var success = function ()
-    {
-        //fill in data in form
-
-    };
-    var fail = function ()
-    {
-    };
-    requestEditEventData(success, fail);
 }
 
-function requestEditEventData(success, fail)
+function sendEventDataChanges(id)
 {
     const URL = '/eventdata';
-    const ajaxSettings = {type: 'POST'};
+    const ajaxSettings = {type: 'POST', data:eventDataChanges, headers:{id:id}};
     $.ajax(URL, ajaxSettings)
-        .done(success)
-        .fail(fail);
 }
 
 function showOwnedEvents()

@@ -126,34 +126,29 @@ public class DBUserController {
         return null;
     }
 
-    public Calendar getBirthday(String email){
+    public Date getBirthday(String email){
+        Date bd = new Date(0000, 00, 00);
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            // retrieve a list of three random cities
-            PreparedStatement ps = c.prepareStatement("SELECT Name FROM users WHERE Email=?");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM users WHERE Email=?");
             ps.setString(1, email);
-            ResultSet rs=ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
+
             while(rs.next()){
-                String[] date=rs.getString("Birthday").split("\\.");
-                Calendar bd =new GregorianCalendar(Integer.valueOf(date[0]),Integer.valueOf(date[1]),Integer.valueOf(date[2]));
-                return bd;
+                bd = rs.getDate("Birthday");
             }
+
             ps.close();
             c.close();
             DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
-            try {
-                c.close();
-            } catch (SQLException exp) {}
-            DataSourceUtils.releaseConnection(c, ds);
-
         }
-        return null;
+        finally{
+            releaseConnection(ds, c);
+        }
+        return bd;
     }
 
     public boolean setLastName(String lastName, String email) {
@@ -228,14 +223,14 @@ public class DBUserController {
         return true;
     }
 
-    public boolean setBirthday(Calendar birthday, String email) {
+    public boolean setBirthday(Date birthday, String email) {
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             // retrieve a list of three random cities
             PreparedStatement ps = c.prepareStatement("UPDATE users SET Birthday=? WHERE Email=?");
-            ps.setString(1, DateFormater.formatDate(birthday));
+            ps.setDate(1, birthday);
             ps.setString(2, email);
             ps.executeUpdate();
             ps.close();
@@ -370,10 +365,14 @@ public class DBUserController {
         Connection c = DataSourceUtils.getConnection(ds);
 
         try {
-            PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email, password, role) VALUE (?, ?, ?)");
+            PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email, password, role, Birthday, Name, Firstname, AddressID) VALUE (?, ?, ?, ?, ?, ?, ?)");
             psUser.setString(1, user.getEmail());
             psUser.setString(2, hash);
             psUser.setString(3, UserRoles.USER);
+            psUser.setDate(4, user.getBirthday());
+            psUser.setString(5, user.getLastName());
+            psUser.setString(6, user.getFirstName());
+            psUser.setInt(7, user.getAddress().getID());
             psUser.executeUpdate();
             psUser.close();
         } catch (SQLException ex) {

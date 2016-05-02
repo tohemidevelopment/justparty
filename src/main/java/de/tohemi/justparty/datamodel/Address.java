@@ -12,6 +12,7 @@ public class Address {
     private ZipCode zipCode;
     private String city;
     private String country;
+    private int id;
 
     public Address(String street, String houseNumber, ZipCode zipCode, String city, String country) {
         this.street = street;
@@ -59,5 +60,12 @@ public class Address {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public void setID(int id){
+        this.id = id;
+    }
+    public int getID() {
+        return id;
     }
 }

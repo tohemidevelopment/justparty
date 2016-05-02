@@ -89,7 +89,7 @@ public class DBEventController {
 
     public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
 
-        final Event event = new Event(id);
+        final Event event = new ConcreteEvent(id);
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
@@ -108,8 +108,9 @@ public class DBEventController {
                 event.setDescription(rs.getString("description"));
                 event.setEventOwner(new User(new EMail(rs.getString("email"))));
                 event.setName(rs.getString("name"));
-                event.setLocation(DBLocationController.getInstance().getLocationByID(rs.getInt("location")));
+                event.setLocation(DBLocationController.getInstance().getLocationByID(rs.getInt("address_id")));
             }
+            psEvent.close();
         } catch (SQLException ex) {
             // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
@@ -133,6 +134,7 @@ public class DBEventController {
             while(rs.next())
                 email = rs.getString("email");
             rs.close();
+            pS1.close();
 
             PreparedStatement pS = c.prepareStatement("UPDATE events SET name=?, description=?, begin=?, end=?, address_id=?, facebook_link=?, wishlist_link=?, googleplus_link=?, Spotify_link=? WHERE event_id=?;");
             pS.setString(1, event.getName());
@@ -150,6 +152,7 @@ public class DBEventController {
                 pS.executeUpdate();
                 tries = true;
             }
+            pS.close();
         } catch (SQLException e) {
             e.printStackTrace();
             tries = false;
@@ -173,6 +176,7 @@ public class DBEventController {
             {
                 tries = true;
             }
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -193,7 +197,7 @@ public class DBEventController {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = new Event(resultSet.getString(EventsDBTabelle.COLUMN_NAME), user);
+                Event event = new ConcreteEvent(resultSet.getString(EventsDBTabelle.COLUMN_NAME), user);
                 event.setId(resultSet.getInt("event_id"));
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
@@ -201,7 +205,8 @@ public class DBEventController {
                 }
                 userEventRelations.add(new UserEventRelation(event, user));
             }
-
+            resultSet.close();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -223,7 +228,8 @@ public class DBEventController {
             while (resultSet.next()) {
                 gl.add(new UserEventRelation(event, new User(resultSet.getString("guest")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
             }
-
+            resultSet.close();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -246,7 +252,7 @@ public class DBEventController {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = new Event(resultSet.getString(EventsDBTabelle.COLUMN_NAME), new User(resultSet.getString("email")));
+                Event event = new ConcreteEvent(resultSet.getString(EventsDBTabelle.COLUMN_NAME), new User(resultSet.getString("email")));
                 event.setId(resultSet.getInt("event_id"));
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
@@ -257,7 +263,8 @@ public class DBEventController {
                 UserEventRelation uer = new UserEventRelation(event, user, accepted);
                 userEventRelations.add(uer);
             }
-
+            resultSet.close();
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -266,10 +273,18 @@ public class DBEventController {
         return userEventRelations;
     }
 
+    /**
+     * @Deprecated
+     * @param event
+     * @param user
+     * @param answer
+     * @return boolnothing
+     * use DBGuestlistContorller.getInstance().updateGuestlist(Event, User, State); instead
+     */
+    @Deprecated
     public boolean updateGuest(Event event, User user, Accepted answer) {
         int status = GuestlistDBTabelle.getIntStatusForAcceptedObject(answer);
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement pS = c.prepareStatement("UPDATE " + GuestlistDBTabelle.TABLE + " SET " + GuestlistDBTabelle.COLUMN_STATUS + "=? WHERE " +
@@ -278,6 +293,7 @@ public class DBEventController {
             pS.setInt(2, event.getId());
             pS.setString(3, user.getEmail());
             pS.executeUpdate();
+            pS.close();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -293,11 +309,14 @@ public class DBEventController {
         Connection c = DataSourceUtils.getConnection(ds);
         int exe = 0;
         try {
-            PreparedStatement psEvent = c.prepareStatement("SELECT event_id FROM events WHERE name=?;");
+            PreparedStatement psEvent = c.prepareStatement("SELECT event_id FROM events WHERE name=? AND email=?;");
             psEvent.setString(1, e.getName());
+            psEvent.setString(2, e.getEventOwner().getEmail());
             ResultSet rs = psEvent.executeQuery();
             while(rs.next())
                 exe = rs.getInt("event_id");
+            rs.close();
+            psEvent.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {

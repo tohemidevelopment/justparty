@@ -1,134 +1,59 @@
 package de.tohemi.justparty.datamodel;
 
-import de.tohemi.justparty.view_interface.JPDateFormat;
-
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Heiko on 04.11.2015.
+ * Created by Micha Piertzik on 02.05.2016.
  */
-public class Event {
-    private String name;
-    private String description;
-    private Date begin;
-    private Date end;
-    private Location location;
-    private User eventOwner;
-    private List<UserEventRelation> guests;
-    //TODO: Implement class for things to bring with to party
-    //private List<Things> things;
-    private URL facebookLink;
-    private URL googlePlusLink;
-    private URL spotifyPlaylistLink;
-    private int id;
-    private URL wishlistLink;
+public interface Event {
 
-    public Event(int id) {
-        this.id = id;
-    }
+    String getName();
 
-    public Event(String name, User eventOwner){
-        this.name=name;
-        this.eventOwner=eventOwner;
-    }
+    void setName(String name);
 
-    public String getName() {
-        return name;
-    }
+    String getDescription();
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    void setDescription(String description);
 
-    public String getDescription() {
-        return description;
-    }
+    Date getBegin();
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    void setBegin(Date begin);
 
-    public Date getBegin() {
-        return begin;
-    }
+    Date getEnd();
 
-    public void setBegin(Date begin) {
-        this.begin = begin;
-    }
+    void setEnd(Date end);
 
-    public Date getEnd() {
-        return end;
-    }
+    Location getLocation();
 
-    public void setEnd(Date end) {
-        this.end = end;
-    }
+    void setLocation(Location location);
 
-    public Location getLocation() {
-        return location;
-    }
+    User getEventOwner();
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
+    void setEventOwner(User eventOwner);
 
-    public User getEventOwner() {
-        return eventOwner;
-    }
+    List<UserEventRelation> getGuests();
 
-    public void setEventOwner(User eventOwner) {
-        this.eventOwner = eventOwner;
-    }
+    void setGuests(List<UserEventRelation> guests);
 
-    public List<UserEventRelation> getGuests() {
-        return guests;
-    }
+    URL getFacebookLink();
 
-    public void setGuests(List<UserEventRelation> guests) {
-        this.guests = guests;
-    }
+    void setFacebookLink(URL facebookLink);
 
-    public URL getFacebookLink() {
-        return facebookLink;
-    }
+    URL getGooglePlusLink();
 
-    public void setFacebookLink(URL facebookLink) {
-        this.facebookLink = facebookLink;
-    }
+    void setGooglePlusLink(URL googlePlusLink);
 
-    public URL getGooglePlusLink() {
-        return googlePlusLink;
-    }
+    URL getSpotifyPlaylistLink();
 
-    public void setGooglePlusLink(URL googlePlusLink) {
-        this.googlePlusLink = googlePlusLink;
-    }
+    void setSpotifyPlaylistLink(URL spotifyPlaylistLink);
 
-    public URL getSpotifyPlaylistLink() {
-        return spotifyPlaylistLink;
-    }
+    int getId();
 
-    public void setSpotifyPlaylistLink(URL spotifyPlaylistLink) {
-        this.spotifyPlaylistLink = spotifyPlaylistLink;
-    }
+    void setId(int id);
 
-    public int getId() {
-        return id;
-    }
+    URL getWishlistLink();
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public URL getWishlistLink() {
-        return wishlistLink;
-    }
-
-    public void setWishlistLink(URL wishlistLink) {
-        this.wishlistLink = wishlistLink;
-    }
+    void setWishlistLink(URL wishlistLink);
 }

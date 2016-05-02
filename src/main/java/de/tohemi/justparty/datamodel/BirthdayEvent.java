@@ -5,7 +5,7 @@ import java.net.URL;
 /**
  * Created by Heiko on 04.11.2015.
  */
-public class BirthdayEvent extends Event {
+public class BirthdayEvent extends ConcreteEvent {
 
     private URL amazonWishlistLink;
 
