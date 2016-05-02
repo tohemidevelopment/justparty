@@ -9,6 +9,14 @@ import java.util.List;
  * TODO: insert DB querys in every method
  */
 public class DBEvent implements Event {
+
+    private int id;
+
+    public DBEvent(int id) {
+
+        this.id = id;
+    }
+
     public String getName() {
         return null;
     }
@@ -90,11 +98,11 @@ public class DBEvent implements Event {
     }
 
     public int getId() {
-        return 0;
+        return id;
     }
 
     public void setId(int id) {
-
+        this.id = id;
     }
 
     public URL getWishlistLink() {

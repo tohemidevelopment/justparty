@@ -20,30 +20,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EventAssistantController extends JPController {
 
     @RequestMapping(method = RequestMethod.GET, value = EDITEVENT)
-    public String editEvent(ModelMap model, @RequestParam(value = "id") int id) {
-        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
-        String mailFromLoggedInUser = getMailFromLoggedInUser();
-        if (!eventsHandler.userIsHostOfRequestedEvent(id, mailFromLoggedInUser)) {
+    public String editEvent(final ModelMap model, @RequestParam(value = "id")final int id) {
+
+        if (userIsNotHost(id)) {
             //TODO: Show Error String, User not host
             return REDIRECT + ERROR;
         }
         model.addAttribute("alert_info", "alert.notimplyet");
 
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        String mailFromLoggedInUser = getMailFromLoggedInUser();
         Event event = eventsHandler.getEvent(id, mailFromLoggedInUser);
         model.addAttribute("event", event);
         return LogicalViewNames.getNameEditEvent();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = EVENTDATA)
-    public String getEventData(@RequestBody final String jsonString) {
+    public String getEventData(@RequestBody final String jsonString, @RequestParam(value = "id")final int id) {
 
+        if (userIsNotHost(id)) {
+            //TODO: Show Error String, User not host
+            return REDIRECT + ERROR;
+        }
         System.out.println(jsonString);
         final Gson gson = new Gson();
         final Event eventChanges = gson.fromJson(jsonString, Event.class);
         System.out.println();
-        Event dbEvent = new DBEvent();
+        Event dbEvent = new DBEvent(id);
 
 
         return null;
     }
+
 }

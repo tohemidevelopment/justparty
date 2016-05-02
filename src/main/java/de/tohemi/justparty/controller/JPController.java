@@ -1,8 +1,11 @@
 package de.tohemi.justparty.controller;
 
+import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
+import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -53,5 +56,12 @@ public abstract class JPController {
             return true;
         }
         return false;
+    }
+
+    protected boolean userIsNotHost(final int id) {
+
+        final EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        final String mailFromLoggedInUser = getMailFromLoggedInUser();
+        return !eventsHandler.userIsHostOfRequestedEvent(id, mailFromLoggedInUser);
     }
 }
