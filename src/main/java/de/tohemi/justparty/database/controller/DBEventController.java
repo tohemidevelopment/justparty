@@ -58,9 +58,7 @@ public class DBEventController {
             releaseConnection(ds, c);
             e.setId(getEventID(e));
         }
-        if(DBDeclarationController.getInstance().createDeclarationTableForEvent(e))
-            return true;
-        return false;
+        return true;
     }
 
     public boolean deleteEvent(Event e, User u) {
@@ -86,7 +84,7 @@ public class DBEventController {
         } finally {
             releaseConnection(ds, c);
             }
-        return true;
+            return true;
     }
 
     public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {

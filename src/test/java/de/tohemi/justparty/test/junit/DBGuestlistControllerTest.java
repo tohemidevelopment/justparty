@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
  * Created by xce35l2 on 28.04.2016.
  */
 public class DBGuestlistControllerTest {
+    /*
     @Before
     public void setUp() throws Exception {
 
@@ -44,5 +45,5 @@ public class DBGuestlistControllerTest {
     public void getGuestlist() throws Exception {
 
     }
-
+*/
 }

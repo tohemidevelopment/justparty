@@ -1,0 +1,2 @@
+repo_token: IVMl5nYOYjLS8qmSGKfBbRGOgdsB3MwNX
+gem 'coveralls', require: false

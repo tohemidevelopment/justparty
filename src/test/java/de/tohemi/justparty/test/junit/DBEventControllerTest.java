@@ -13,10 +13,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
 
+import java.sql.Date;
+
 import static org.junit.Assert.*;
 
 /**
- * Created by xce35l2 on 28.04.2016.
+ * Created by xce35l2 on 20.04.2016.
  */
 public class DBEventControllerTest {
 
@@ -37,6 +39,10 @@ public class DBEventControllerTest {
         con = DBController.getInstance();
         email = new EMail("junit@testemail.tv");
         user = new User(email);
+        user.setFirstName("JUnit");
+        user.setLastName("Test");
+        user.setBirthday(new Date(1995, 07, 10));
+        user.setAddress(new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
         location = new Location("Testlocation", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
         event = new ConcreteEvent("TestEventForJUnit", user);
         conU.addUser(user, "ROLE_USER", "1234");
