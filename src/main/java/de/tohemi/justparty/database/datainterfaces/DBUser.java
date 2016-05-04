@@ -4,6 +4,7 @@ import de.tohemi.justparty.database.controller.DBUserController;
 import de.tohemi.justparty.datamodel.Address;
 import de.tohemi.justparty.datamodel.User;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 /**
@@ -48,11 +49,11 @@ public class DBUser {
         controller.setAddress(address, email);
     }
 
-    public Calendar getBirthday() {
+    public Date getBirthday() {
         return controller.getBirthday(email);
     }
 
-    public void setBirthday(Calendar birthday) {
+    public void setBirthday(Date birthday) {
         controller.setBirthday(birthday, email);
     }
 

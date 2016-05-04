@@ -22,7 +22,7 @@ import java.sql.SQLException;
 public class DBLocationController {
     private static DBLocationController instance;
 
-    private DBLocationController(){}
+    public DBLocationController(){}
 
     public synchronized static DBLocationController getInstance() {
         if (instance == null) {

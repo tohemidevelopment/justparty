@@ -9,6 +9,18 @@
     <version>0.1</version>
     <packaging>war</packaging>
 
+    <properties>
+        <org.springframework.security.version>3.2.5.RELEASE</org.springframework.security.version>
+        <org.springframework.version>4.2.2.RELEASE</org.springframework.version>
+        <jstl.version>1.2</jstl.version>
+        <mysql.connector.version>5.1.30</mysql.connector.version>
+        <apache.commons.logging.version>1.2</apache.commons.logging.version>
+        <javax.mail.version>1.4.7</javax.mail.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.host.url>http://193.196.7.25</sonar.host.url>
+        <sonar.language>java</sonar.language>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -45,17 +57,29 @@
                     <password>tinf14b2</password>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.1.0</version>
+                <configuration>
+                    <repoToken>IVMl5nYOYjLS8qmSGKfBbRGOgdsB3MwNX</repoToken>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.5.201505241946</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
-    <properties>
-        <org.springframework.security.version>3.2.5.RELEASE</org.springframework.security.version>
-        <org.springframework.version>4.2.2.RELEASE</org.springframework.version>
-        <jstl.version>1.2</jstl.version>
-        <mysql.connector.version>5.1.30</mysql.connector.version>
-        <apache.commons.logging.version>1.2</apache.commons.logging.version>
-        <javax.mail.version>1.5.5</javax.mail.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -165,6 +189,12 @@
             <groupId>javax.mail</groupId>
             <artifactId>javax.mail-api</artifactId>
             <version>${javax.mail.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.6.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

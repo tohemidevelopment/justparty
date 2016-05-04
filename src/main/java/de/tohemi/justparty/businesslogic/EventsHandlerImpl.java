@@ -3,10 +3,7 @@ package de.tohemi.justparty.businesslogic;
 import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.datainterfaces.DBUser;
-import de.tohemi.justparty.datamodel.Accepted;
-import de.tohemi.justparty.datamodel.Event;
-import de.tohemi.justparty.datamodel.User;
-import de.tohemi.justparty.datamodel.UserEventRelation;
+import de.tohemi.justparty.datamodel.*;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.util.IDGenerator;
@@ -26,13 +23,13 @@ public class EventsHandlerImpl implements EventsHandler {
         DBUser user = new DBUser(mail);
         EmailSender sender = new EmailSender();
         sender.sendCreateConfirmation(user, eventname);
-        return dbController.addEvent(new Event(eventname, user.getEmailuser()));
+        return dbController.addEvent(new ConcreteEvent(eventname, user.getEmailuser()));
     }
 
     public boolean deleteEvent(int id, String mail) {
 
         DBEventController dbController = DBEventController.getInstance();
-        Event event = new Event(null, null);
+        Event event = new ConcreteEvent(null, null);
         event.setId(id);
         return dbController.deleteEvent(event, new User(mail));
     }
@@ -49,7 +46,7 @@ public class EventsHandlerImpl implements EventsHandler {
     public boolean userIsHostOfRequestedEvent(int id, String mailFromLoggedInUser) {
 
         DBEventController dbController = DBEventController.getInstance();
-        return dbController.userIsHostOfRequestedEvent(new User(mailFromLoggedInUser), new Event(id));
+        return dbController.userIsHostOfRequestedEvent(new User(mailFromLoggedInUser), new ConcreteEvent(id));
     }
 
     public boolean answerInvitation(int eventId, String mail, Accepted answer) {
@@ -58,11 +55,11 @@ public class EventsHandlerImpl implements EventsHandler {
             return false;
         }
         DBEventController dbController = DBEventController.getInstance();
-        return dbController.updateGuest(new Event(eventId), new User(mail), answer);
+        return dbController.updateGuest(new ConcreteEvent(eventId), new User(mail), answer);
     }
 
     public List<UserEventRelation> getGuestlist(int id, String mail) {
-        Event event = new Event(id);
+        Event event = new ConcreteEvent(id);
         event.setEventOwner(new User(mail));
         return DBEventController.getInstance().getInvitedUsers(event);
     }
@@ -86,5 +83,16 @@ public class EventsHandlerImpl implements EventsHandler {
         Collections.sort(guestlist);
         event.setGuests(guestlist);
         return event;
+    }
+
+    public boolean updateEvent(Event eventChanges) {
+
+        Event dbEvent = new DBEvent(eventChanges.getId());
+        if (eventChanges.getName() != null) {
+            dbEvent.setName(eventChanges.getName());
+        }
+
+
+        return false;
     }
 }
