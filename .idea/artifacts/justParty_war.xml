@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="justParty:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="justParty-0.1.war">
+      <element id="artifact" artifact-name="justParty:war exploded" />
+    </root>
+  </artifact>
+</component>

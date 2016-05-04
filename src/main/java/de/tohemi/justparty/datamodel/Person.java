@@ -1,26 +1,46 @@
-package main.java.de.tohemi.justparty.datamodel;
+package de.tohemi.justparty.datamodel;
 
-import main.java.de.tohemi.justparty.datamodel.EMail;
+import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
+import de.tohemi.justparty.datamodel.wrapper.EMail;
 
 /**
  * Created by Heiko on 04.11.2015.
  */
 public class Person {
-    private EMail email;
+    private String email;
 
-    public Person(EMail email){
+    public Person(String email){
         this.email=email;
     }
 
-    public EMail getEmail() {
+    public Person(EMail email){
+        this.email=email.toString();
+    }
+
+    public String getEmail() {
         return email;
     }
 
-    public String getEmailAsString() {
-        return email.toString();
+    public void setEmail(EMail email) {
+        this.email = email.toString();
     }
 
-    public void setEmail(EMail email) {
-        this.email = email;
+    public void setEmail(String email) {
+        try {
+            new EMail(email); //TEST IF VALID
+            this.email =email;
+        } catch (InvalidEmailException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof Person))
+        {
+            return false;
+        }
+        Person person = (Person) obj;
+        return email.equals(person.email);
     }
 }

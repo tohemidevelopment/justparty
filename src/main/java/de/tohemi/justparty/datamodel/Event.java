@@ -1,48 +1,59 @@
-package main.java.de.tohemi.justparty.datamodel;
+package de.tohemi.justparty.datamodel;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Heiko on 04.11.2015.
+ * Created by Micha Piertzik on 02.05.2016.
  */
-public class Event {
-    private String name;
-    private String description;
-    private Calendar begin;
-    private Calendar end;
-    private Location location;
-    private User eventOwner;
-    private List<Person> guests;
-    private URL facebookLink;
-    private URL googlePlusLink;
-    private URL spotifyPlaylistLink;
+public interface Event {
 
+    String getName();
 
-    public Event(String name, User eventOwner){
-        this.name=name;
-        this.eventOwner=eventOwner;
-    }
+    void setName(String name);
 
-    public String getName() {
-        return name;
-    }
+    String getDescription();
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    void setDescription(String description);
 
-    public List<Person> getGuests() {
-        return guests;
-    }
+    Date getBegin();
 
-    public void setGuests(List<Person> guests) {
-        this.guests = guests;
-    }
+    void setBegin(Date begin);
 
-    public void addGuest(List<Person> addguests){
-        guests.addAll(addguests);
-    }
+    Date getEnd();
+
+    void setEnd(Date end);
+
+    Location getLocation();
+
+    void setLocation(Location location);
+
+    User getEventOwner();
+
+    void setEventOwner(User eventOwner);
+
+    List<UserEventRelation> getGuests();
+
+    void setGuests(List<UserEventRelation> guests);
+
+    URL getFacebookLink();
+
+    void setFacebookLink(URL facebookLink);
+
+    URL getGooglePlusLink();
+
+    void setGooglePlusLink(URL googlePlusLink);
+
+    URL getSpotifyPlaylistLink();
+
+    void setSpotifyPlaylistLink(URL spotifyPlaylistLink);
+
+    int getId();
+
+    void setId(int id);
+
+    URL getWishlistLink();
+
+    void setWishlistLink(URL wishlistLink);
 }
