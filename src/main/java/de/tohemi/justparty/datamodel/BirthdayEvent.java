@@ -1,5 +1,7 @@
 package de.tohemi.justparty.datamodel;
 
+import de.tohemi.justparty.datamodel.event.ConcreteEvent;
+
 import java.net.URL;
 
 /**

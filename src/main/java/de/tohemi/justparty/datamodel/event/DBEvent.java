@@ -1,4 +1,8 @@
-package de.tohemi.justparty.datamodel;
+package de.tohemi.justparty.datamodel.event;
+
+import de.tohemi.justparty.datamodel.Location;
+import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.UserEventRelation;
 
 import java.net.URL;
 import java.util.Date;

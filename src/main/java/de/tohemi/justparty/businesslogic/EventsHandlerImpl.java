@@ -1,12 +1,13 @@
 package de.tohemi.justparty.businesslogic;
 
-import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.datainterfaces.DBUser;
 import de.tohemi.justparty.datamodel.*;
+import de.tohemi.justparty.datamodel.event.ConcreteEvent;
+import de.tohemi.justparty.datamodel.event.DBEvent;
+import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
-import de.tohemi.justparty.util.IDGenerator;
 
 import java.net.MalformedURLException;
 import java.util.Collections;

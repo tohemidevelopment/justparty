@@ -3,6 +3,8 @@ package de.tohemi.justparty.database.controller;
 import de.tohemi.justparty.database.tables.EventsDBTabelle;
 import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
 import de.tohemi.justparty.datamodel.*;
+import de.tohemi.justparty.datamodel.event.ConcreteEvent;
+import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
