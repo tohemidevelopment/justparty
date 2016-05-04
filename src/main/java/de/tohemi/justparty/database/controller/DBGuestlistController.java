@@ -1,5 +1,6 @@
 package de.tohemi.justparty.database.controller;
 
+import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.User;
 import org.springframework.context.ApplicationContext;
@@ -68,7 +69,7 @@ public class DBGuestlistController {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("Update  guestlist SET status=? WHERE event=? AND guest=?;");
+            PreparedStatement ps = c.prepareStatement("Update guestlist SET status=? WHERE event=? AND guest=?;");
             ps.setInt(1,status);
             ps.setInt(2, e.getId());
             ps.setString(3, u.getEmail());
@@ -89,7 +90,7 @@ public class DBGuestlistController {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("DELETE * FROM guestlist WHERE guest=? AND event=? AND status=?");
+            PreparedStatement ps = c.prepareStatement("DELETE FROM guestlist WHERE guest=? AND event=? AND status=?");
             ps.setString(1,u.getEmail());
             ps.setInt(2, e.getId());
             ps.setInt(3, status);
