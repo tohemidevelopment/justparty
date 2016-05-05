@@ -1,7 +1,8 @@
 package de.tohemi.justparty.test.junit;
 
 import de.tohemi.justparty.database.controller.*;
-import de.tohemi.justparty.datamodel.*;
+import de.tohemi.justparty.datamodel.Address;
+import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
