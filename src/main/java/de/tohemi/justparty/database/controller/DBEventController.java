@@ -5,6 +5,7 @@ import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
 import de.tohemi.justparty.datamodel.*;
 import de.tohemi.justparty.datamodel.event.ConcreteEvent;
 import de.tohemi.justparty.datamodel.event.Event;
+import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
@@ -91,7 +92,7 @@ public class DBEventController {
 
     public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
 
-        final Event event = new ConcreteEvent(id);
+        final Event event = EventFactory.createEvent(id);
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
@@ -199,8 +200,9 @@ public class DBEventController {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = new ConcreteEvent(resultSet.getString(EventsDBTabelle.COLUMN_NAME), user);
-                event.setId(resultSet.getInt("event_id"));
+                Event event = EventFactory.createEvent(resultSet.getInt("event_id"));
+                event.setName(resultSet.getString(EventsDBTabelle.COLUMN_NAME));
+                event.setEventOwner(user);
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
                     event.setBegin(date);
@@ -254,8 +256,9 @@ public class DBEventController {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = new ConcreteEvent(resultSet.getString(EventsDBTabelle.COLUMN_NAME), new User(resultSet.getString("email")));
-                event.setId(resultSet.getInt("event_id"));
+                Event event = EventFactory.createEvent(resultSet.getInt("event_id"));
+                event.setName(resultSet.getString(EventsDBTabelle.COLUMN_NAME));
+                event.setEventOwner(new User(resultSet.getString("email")));
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
                     event.setBegin(date);

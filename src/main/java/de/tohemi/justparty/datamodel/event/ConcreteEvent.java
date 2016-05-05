@@ -27,13 +27,11 @@ public class ConcreteEvent implements Event {
     private int id;
     private URL wishlistLink;
 
-    public ConcreteEvent(int id) {
+    ConcreteEvent(int id) {
         this.id = id;
     }
 
-    public ConcreteEvent(String name, User eventOwner){
-        this.name=name;
-        this.eventOwner=eventOwner;
+    ConcreteEvent() {
     }
 
     public String getName() {

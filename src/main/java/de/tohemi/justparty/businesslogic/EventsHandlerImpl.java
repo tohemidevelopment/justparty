@@ -25,7 +25,10 @@ public class EventsHandlerImpl implements EventsHandler {
         DBUser user = new DBUser(mail);
         EmailSender sender = new EmailSender();
         sender.sendCreateConfirmation(user, eventname);
-        return dbController.addEvent(new ConcreteEvent(eventname, user.getEmailuser()));
+        Event event = EventFactory.createEvent();
+        event.setName(eventname);
+        event.setEventOwner(user.getEmailuser());
+        return dbController.addEvent(event);
     }
 
     public boolean deleteEvent(int id, String mail) {
@@ -47,7 +50,7 @@ public class EventsHandlerImpl implements EventsHandler {
     public boolean userIsHostOfRequestedEvent(int id, String mailFromLoggedInUser) {
 
         DBEventController dbController = DBEventController.getInstance();
-        return dbController.userIsHostOfRequestedEvent(new User(mailFromLoggedInUser), new ConcreteEvent(id));
+        return dbController.userIsHostOfRequestedEvent(new User(mailFromLoggedInUser), EventFactory.createEvent(id));
     }
 
     public boolean answerInvitation(int eventId, String mail, Accepted answer) {
@@ -56,11 +59,11 @@ public class EventsHandlerImpl implements EventsHandler {
             return false;
         }
         DBEventController dbController = DBEventController.getInstance();
-        return dbController.updateGuest(new ConcreteEvent(eventId), new User(mail), answer);
+        return dbController.updateGuest(EventFactory.createEvent(eventId), new User(mail), answer);
     }
 
     public List<UserEventRelation> getGuestlist(int id, String mail) {
-        Event event = new ConcreteEvent(id);
+        Event event = EventFactory.createEvent(id);
         event.setEventOwner(new User(mail));
         return DBEventController.getInstance().getInvitedUsers(event);
     }
@@ -88,7 +91,7 @@ public class EventsHandlerImpl implements EventsHandler {
 
     public boolean updateEvent(Event eventChanges) {
 
-        Event dbEvent = new DBAccessEvent(eventChanges.getId());
+        Event dbEvent = EventFactory.createEvent(eventChanges.getId(), true);
         if (eventChanges.getName() != null) {
             dbEvent.setName(eventChanges.getName());
         }

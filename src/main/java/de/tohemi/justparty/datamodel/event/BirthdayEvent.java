@@ -1,4 +1,4 @@
-package de.tohemi.justparty.datamodel;
+package de.tohemi.justparty.datamodel.event;
 
 import de.tohemi.justparty.datamodel.event.ConcreteEvent;
 import de.tohemi.justparty.datamodel.event.EventType;

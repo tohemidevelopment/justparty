@@ -16,7 +16,7 @@ public class DBAccessEvent implements Event {
 
     private int id;
 
-    public DBAccessEvent(final int id) {
+    DBAccessEvent(final int id) {
 
         this.id = id;
     }

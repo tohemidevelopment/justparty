@@ -1,8 +1,6 @@
 package de.tohemi.justparty.datamodel.event;
 
 
-import de.tohemi.justparty.datamodel.BirthdayEvent;
-
 /**
  * Created by Micha Piertzik on 04.05.2016.
  */
@@ -17,7 +15,7 @@ final public class EventFactory {
         if (dbAccess){
             return new DBAccessEvent(id);
         }
-        return new ConcreteEvent(id);
+        return EventFactory.createEvent(id);
     }
 
     public static Event createEvent(final int id) {
@@ -32,6 +30,11 @@ final public class EventFactory {
     public static Event createEvent(final int id, final boolean dbAccess) {
 
         return createEvent(id, EventType.DEFAULT, dbAccess);
+    }
+
+    public static Event createEvent() {
+
+        return new ConcreteEvent();
     }
 
     public static Event createEvent(final int id, final String jsonString){
