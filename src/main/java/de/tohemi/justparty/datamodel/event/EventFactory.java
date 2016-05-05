@@ -15,7 +15,7 @@ final public class EventFactory {
         if (dbAccess){
             return new DBAccessEvent(id);
         }
-        return EventFactory.createEvent(id);
+        return new ConcreteEvent(id);
     }
 
     public static Event createEvent(final int id) {
