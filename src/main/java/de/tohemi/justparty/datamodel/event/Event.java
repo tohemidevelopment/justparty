@@ -5,7 +5,7 @@ import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 
 import java.net.URL;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**

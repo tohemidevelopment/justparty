@@ -1,16 +1,11 @@
 package de.tohemi.justparty.datamodel.event;
 
-import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
-import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
-import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
-
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -48,22 +43,22 @@ public class DBAccessEvent implements Event {
 
     @Override
     public Date getBegin() {
-        return null;
+        return DBEventController.getInstance().getBegin(id);
     }
 
     @Override
     public void setBegin(Date begin) {
-
+        DBEventController.getInstance().setBegin(id, begin);
     }
 
     @Override
     public Date getEnd() {
-        return null;
+        return DBEventController.getInstance().getEnd(id);
     }
 
     @Override
     public void setEnd(Date end) {
-
+        DBEventController.getInstance().setEnd(id, end);
     }
 
     @Override
