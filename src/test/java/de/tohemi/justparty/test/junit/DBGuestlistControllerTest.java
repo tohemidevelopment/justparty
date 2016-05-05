@@ -2,7 +2,6 @@ package de.tohemi.justparty.test.junit;
 
 import de.tohemi.justparty.database.controller.*;
 import de.tohemi.justparty.datamodel.*;
-import de.tohemi.justparty.datamodel.event.ConcreteEvent;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
@@ -11,14 +10,8 @@ import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.util.Assert;
-
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by xce35l2 on 28.04.2016.
