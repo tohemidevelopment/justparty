@@ -281,9 +281,8 @@ public class DBUserController {
             } else {
                 rs.beforeFirst();
             }
-            if (rs.next()) {
-                if (rs.getString("role").equals(UserRoles.NONUSER))
-                    return false;
+            if (rs.next() && rs.getString("role").equals(UserRoles.NONUSER)) {
+                return false;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

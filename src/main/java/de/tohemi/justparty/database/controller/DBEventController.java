@@ -329,4 +329,81 @@ public class DBEventController {
         }
         return exe;
     }
+
+    public String getName(int id) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        String name = "";
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT name FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next())
+                name = rs.getString("name");
+            rs.close();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return name;
+    }
+
+    public void setName(int id, String name) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET name=? WHERE event_id=?;");
+            psEvent.setString(1, name);
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
+
+    public String getDescription(int id) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        String name = "";
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT description FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next())
+                name = rs.getString("name");
+            rs.close();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return name;
+    }
+
+    public void setDescription(int id, String description) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET description=? WHERE event_id=?;");
+            psEvent.setString(1, description);
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+
+    }
 }
