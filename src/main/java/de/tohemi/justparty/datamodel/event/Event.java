@@ -60,4 +60,8 @@ public interface Event {
     URL getWishlistLink();
 
     void setWishlistLink(URL wishlistLink);
+
+    default EventType getEventType() {
+        return EventType.DEFAULT;
+    }
 }

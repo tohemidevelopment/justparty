@@ -12,11 +12,11 @@ import java.util.List;
  * Created by Micha Piertzik on 02.05.2016.
  * TODO: insert DB querys in every method
  */
-public class DBEvent implements Event {
+public class DBAccessEvent implements Event {
 
     private int id;
 
-    public DBEvent(int id) {
+    public DBAccessEvent(final int id) {
 
         this.id = id;
     }
@@ -26,7 +26,6 @@ public class DBEvent implements Event {
     }
 
     public void setName(String name) {
-        System.out.println("-------- " + name + "   " + id);
     }
 
     public String getDescription() {

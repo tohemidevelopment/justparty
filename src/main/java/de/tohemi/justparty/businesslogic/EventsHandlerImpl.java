@@ -4,8 +4,9 @@ import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.datainterfaces.DBUser;
 import de.tohemi.justparty.datamodel.*;
 import de.tohemi.justparty.datamodel.event.ConcreteEvent;
-import de.tohemi.justparty.datamodel.event.DBEvent;
+import de.tohemi.justparty.datamodel.event.DBAccessEvent;
 import de.tohemi.justparty.datamodel.event.Event;
+import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 
@@ -30,8 +31,7 @@ public class EventsHandlerImpl implements EventsHandler {
     public boolean deleteEvent(int id, String mail) {
 
         DBEventController dbController = DBEventController.getInstance();
-        Event event = new ConcreteEvent(null, null);
-        event.setId(id);
+        Event event = EventFactory.createEvent(id);
         return dbController.deleteEvent(event, new User(mail));
     }
 
@@ -88,7 +88,7 @@ public class EventsHandlerImpl implements EventsHandler {
 
     public boolean updateEvent(Event eventChanges) {
 
-        Event dbEvent = new DBEvent(eventChanges.getId());
+        Event dbEvent = new DBAccessEvent(eventChanges.getId());
         if (eventChanges.getName() != null) {
             dbEvent.setName(eventChanges.getName());
         }
