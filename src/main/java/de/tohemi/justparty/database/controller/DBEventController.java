@@ -16,6 +16,7 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -462,7 +463,7 @@ public class DBEventController {
         }
     }
 
-    public Location getLocation(int id) throws ZipCodeInvalidException {
+    public Location getLocation(int id) {
 
         Location location = null;
         DataSource ds = getDataSource();
@@ -485,6 +486,8 @@ public class DBEventController {
             psLocation.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (ZipCodeInvalidException e) {
+            e.printStackTrace();
         } finally {
             releaseConnection(ds, c);
         }
@@ -529,13 +532,13 @@ public class DBEventController {
         return eo;
     }
 
-    public void setEventOwner(int id, Date end) {
+    public void setEventOwner(int id, User user) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET end=? WHERE event_id=?;");
-            psEvent.setDate(1, end);
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET email=? WHERE event_id=?;");
+            psEvent.setString(1, user.getEmail());
             psEvent.setInt(2, id);
             psEvent.execute();
             psEvent.close();
@@ -546,17 +549,17 @@ public class DBEventController {
         }
     }
 
-    public Date getFacebookLink(int id) {
+    public URL getFacebookLink(int id) {
 
-        Date end = null;
+        URL facebook = null;
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("SELECT end FROM events WHERE event_id=?;");
+            PreparedStatement psEvent = c.prepareStatement("SELECT facebook_link FROM events WHERE event_id=?;");
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while(rs.next()){
-                end = rs.getDate("end");
+                facebook = rs.getURL("facebook_link");
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -564,16 +567,16 @@ public class DBEventController {
         } finally {
             releaseConnection(ds, c);
         }
-        return end;
+        return facebook;
     }
 
-    public void setFacebookLink(int id, Date end) {
+    public void setFacebookLink(int id, URL facebook) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET end=? WHERE event_id=?;");
-            psEvent.setDate(1, end);
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET facebook_link=? WHERE event_id=?;");
+            psEvent.setURL(1, facebook);
             psEvent.setInt(2, id);
             psEvent.execute();
             psEvent.close();
@@ -585,17 +588,17 @@ public class DBEventController {
 
     }
 
-    public Date getSpotifyLink(int id) {
+    public URL getSpotifyLink(int id) {
 
-        Date end = null;
+        URL spotify = null;
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("SELECT end FROM events WHERE event_id=?;");
+            PreparedStatement psEvent = c.prepareStatement("SELECT Spotify_link FROM events WHERE event_id=?;");
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while(rs.next()){
-                end = rs.getDate("end");
+                spotify = rs.getURL("Sportify_link");
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -603,16 +606,16 @@ public class DBEventController {
         } finally {
             releaseConnection(ds, c);
         }
-        return end;
+        return spotify;
     }
 
-    public void setSpotifyLink(int id, Date end) {
+    public void setSpotifyLink(int id, URL spotify) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET end=? WHERE event_id=?;");
-            psEvent.setDate(1, end);
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET Spotify_link=? WHERE event_id=?;");
+            psEvent.setURL(1, spotify);
             psEvent.setInt(2, id);
             psEvent.execute();
             psEvent.close();
@@ -623,17 +626,17 @@ public class DBEventController {
         }
     }
 
-    public Date getGooglePlusLink(int id) {
+    public URL getGooglePlusLink(int id) {
 
-        Date end = null;
+        URL google = null;
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("SELECT end FROM events WHERE event_id=?;");
+            PreparedStatement psEvent = c.prepareStatement("SELECT googleplus_link FROM events WHERE event_id=?;");
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while(rs.next()){
-                end = rs.getDate("end");
+                google = rs.getURL("googleplus_link");
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -641,16 +644,16 @@ public class DBEventController {
         } finally {
             releaseConnection(ds, c);
         }
-        return end;
+        return google;
     }
 
-    public void setGooglePlusLink(int id, Date end) {
+    public void setGooglePlusLink(int id, URL google) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET end=? WHERE event_id=?;");
-            psEvent.setDate(1, end);
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET googleplus_link=? WHERE event_id=?;");
+            psEvent.setURL(1, google);
             psEvent.setInt(2, id);
             psEvent.execute();
             psEvent.close();
@@ -661,17 +664,17 @@ public class DBEventController {
         }
     }
 
-    public Date getWishlistLink(int id) {
+    public URL getWishlistLink(int id) {
 
-        Date end = null;
+        URL wish = null;
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("SELECT end FROM events WHERE event_id=?;");
+            PreparedStatement psEvent = c.prepareStatement("SELECT wishlist_link FROM events WHERE event_id=?;");
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while(rs.next()){
-                end = rs.getDate("end");
+                wish = rs.getURL("wishlist_link");
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -679,16 +682,16 @@ public class DBEventController {
         } finally {
             releaseConnection(ds, c);
         }
-        return end;
+        return wish;
     }
 
-    public void setWishlistLink(int id, Date end) {
+    public void setWishlistLink(int id, URL wishlist) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET end=? WHERE event_id=?;");
-            psEvent.setDate(1, end);
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET wishlist_link=? WHERE event_id=?;");
+            psEvent.setURL(1, wishlist);
             psEvent.setInt(2, id);
             psEvent.execute();
             psEvent.close();

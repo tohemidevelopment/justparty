@@ -5,17 +5,12 @@ import de.tohemi.justparty.database.controller.DBGuestlistController;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
-import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
-import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
-
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
 
 /**
  * Created by Micha Piertzik on 02.05.2016.
- * TODO: insert DB querys in every method
  */
 public class DBAccessEvent implements Event {
 
@@ -68,22 +63,22 @@ public class DBAccessEvent implements Event {
 
     @Override
     public Location getLocation() {
-        return null;
+        return DBEventController.getInstance().getLocation(id);
     }
 
     @Override
     public void setLocation(Location location) {
-
+        DBEventController.getInstance().setLocation(id, location);
     }
 
     @Override
     public User getEventOwner() {
-        return null;
+        return DBEventController.getInstance().getEventOwner(id);
     }
 
     @Override
     public void setEventOwner(User eventOwner) {
-
+        DBEventController.getInstance().setEventOwner(id, eventOwner);
     }
 
     @Override
@@ -100,32 +95,32 @@ public class DBAccessEvent implements Event {
 
     @Override
     public URL getFacebookLink() {
-        return null;
+        return DBEventController.getInstance().getFacebookLink(id);
     }
 
     @Override
     public void setFacebookLink(URL facebookLink) {
-
+        DBEventController.getInstance().setFacebookLink(id, facebookLink);
     }
 
     @Override
     public URL getGooglePlusLink() {
-        return null;
+        return DBEventController.getInstance().getGooglePlusLink(id);
     }
 
     @Override
     public void setGooglePlusLink(URL googlePlusLink) {
-
+        DBEventController.getInstance().setGooglePlusLink(id, googlePlusLink);
     }
 
     @Override
     public URL getSpotifyPlaylistLink() {
-        return null;
+        return DBEventController.getInstance().getSpotifyLink(id);
     }
 
     @Override
     public void setSpotifyPlaylistLink(URL spotifyPlaylistLink) {
-
+        DBEventController.getInstance().setSpotifyLink(id, spotifyPlaylistLink);
     }
 
     @Override
@@ -140,11 +135,11 @@ public class DBAccessEvent implements Event {
 
     @Override
     public URL getWishlistLink() {
-        return null;
+        return DBEventController.getInstance().getWishlistLink(id);
     }
 
     @Override
     public void setWishlistLink(URL wishlistLink) {
-
+        DBEventController.getInstance().setWishlistLink(id, wishlistLink);
     }
 }
