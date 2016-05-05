@@ -1,9 +1,14 @@
 package de.tohemi.justparty.datamodel.event;
 
 import de.tohemi.justparty.database.controller.DBEventController;
+import de.tohemi.justparty.database.controller.DBGuestlistController;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
+import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
+import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
+
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
@@ -83,12 +88,14 @@ public class DBAccessEvent implements Event {
 
     @Override
     public List<UserEventRelation> getGuests() {
-        return null;
+        return DBGuestlistController.getInstance().getInvitedUsers(id);
     }
 
     @Override
     public void setGuests(List<UserEventRelation> guests) {
-
+        for (int i = 0; i < guests.size(); i++) {
+            DBGuestlistController.getInstance().addGuestToEvent(guests.get(i).getEvent(), guests.get(i).getUser(), guests.get(i).getAccepted().getValue());
+        }
     }
 
     @Override

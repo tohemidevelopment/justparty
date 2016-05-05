@@ -9,6 +9,7 @@ import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
+import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -220,29 +221,6 @@ public class DBEventController {
         return userEventRelations;
     }
 
-    public List<UserEventRelation> getInvitedUsers(Event event) {
-        DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
-        Connection c = DataSourceUtils.getConnection(ds);
-        ArrayList<UserEventRelation> gl = new ArrayList<UserEventRelation>();
-        try {
-            PreparedStatement preparedStatement = c.prepareStatement("SELECT " + GuestlistDBTabelle.COLUMN_GUEST + ", " + GuestlistDBTabelle.COLUMN_STATUS + " FROM guestlist WHERE " + GuestlistDBTabelle.COLUMN_EVENT + " = ?;");
-            preparedStatement.setInt(1, event.getId());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                gl.add(new UserEventRelation(event, new User(resultSet.getString("guest")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
-            }
-            resultSet.close();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            releaseConnection(ds, c);
-        }
-
-        return gl;
-    }
-
     public ArrayList<UserEventRelation> getInvitedUERs(User user) {
 
         DataSource ds = getDataSource();
@@ -417,7 +395,7 @@ public class DBEventController {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while(rs.next()){
-                begin = rs.getDate("begin");
+                begin = new Date(rs.getDate("begin").getTime());
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -456,7 +434,7 @@ public class DBEventController {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while(rs.next()){
-                end = rs.getDate("end");
+                end = new Date(rs.getDate("end").getTime());
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -484,34 +462,42 @@ public class DBEventController {
         }
     }
 
-    public Date getLocation(int id) {
+    public Location getLocation(int id) throws ZipCodeInvalidException {
 
-        Date end = null;
+        Location location = null;
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("SELECT end FROM events WHERE event_id=?;");
+            PreparedStatement psEvent = c.prepareStatement("SELECT address_id FROM events WHERE event_id=?;");
+            PreparedStatement psLocation = c.prepareStatement("SELECT * FROM location WHERE address_id=?");
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while(rs.next()){
-                end = rs.getDate("end");
+                psLocation.setInt(1, rs.getInt("address_id"));
             }
+            rs.close();
             psEvent.close();
+            rs = psLocation.executeQuery();
+            while(rs.next()) {
+                location = new Location(rs.getString("name"), new Address(rs.getString("street"), rs.getString("house_nr"), new ZipCode(rs.getInt("zipcode")), rs.getString("city"), rs.getString("country")), rs.getBoolean("public"));
+            }
+            rs.close();
+            psLocation.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             releaseConnection(ds, c);
         }
-        return end;
+        return location;
     }
 
-    public void setLocation(int id, Date end) {
+    public void setLocation(int id, Location location) {
 
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET end=? WHERE event_id=?;");
-            psEvent.setDate(1, end);
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET address_id=? WHERE event_id=?;");
+            psEvent.setInt(1, DBLocationController.getInstance().getLocationID(location));
             psEvent.setInt(2, id);
             psEvent.execute();
             psEvent.close();
@@ -522,17 +508,17 @@ public class DBEventController {
         }
     }
 
-    public Date getEventOwner(int id) {
+    public User getEventOwner(int id) {
 
-        Date end = null;
+        User eo = null;
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("SELECT end FROM events WHERE event_id=?;");
+            PreparedStatement psEvent = c.prepareStatement("SELECT email FROM events WHERE event_id=?;");
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while(rs.next()){
-                end = rs.getDate("end");
+                eo = new User(rs.getString("email"));
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -540,7 +526,7 @@ public class DBEventController {
         } finally {
             releaseConnection(ds, c);
         }
-        return end;
+        return eo;
     }
 
     public void setEventOwner(int id, Date end) {

@@ -1,6 +1,7 @@
 package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.database.controller.DBEventController;
+import de.tohemi.justparty.database.controller.DBGuestlistController;
 import de.tohemi.justparty.database.datainterfaces.DBUser;
 import de.tohemi.justparty.datamodel.*;
 import de.tohemi.justparty.datamodel.event.ConcreteEvent;
@@ -65,7 +66,7 @@ public class EventsHandlerImpl implements EventsHandler {
     public List<UserEventRelation> getGuestlist(int id, String mail) {
         Event event = EventFactory.createEvent(id);
         event.setEventOwner(new User(mail));
-        return DBEventController.getInstance().getInvitedUsers(event);
+        return DBGuestlistController.getInstance().getInvitedUsers(event.getId());
     }
 
     public Event getEvent(final int id, String mail) {

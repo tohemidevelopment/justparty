@@ -1,6 +1,5 @@
 package de.tohemi.justparty.datamodel;
 
-import de.tohemi.justparty.database.controller.DBLocationController;
 
 /**
  * Created by Heiko on 08.11.2015.
@@ -43,6 +42,5 @@ public class Location {
     public void setPublicLocation(boolean publicLocation) {
         this.publicLocation = publicLocation;
     }
-
 
 }
