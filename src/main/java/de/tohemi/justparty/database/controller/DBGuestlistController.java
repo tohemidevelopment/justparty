@@ -1,7 +1,5 @@
 package de.tohemi.justparty.database.controller;
 
-import de.tohemi.justparty.datamodel.Accepted;
-import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.event.Event;
