@@ -95,7 +95,7 @@ public class DBGuestlistController {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("DELETE * FROM guestlist WHERE guest=? AND event=? AND status=?");
+            PreparedStatement ps = c.prepareStatement("DELETE FROM guestlist WHERE guest=? AND event=? AND status=?");
             ps.setString(1,u.getEmail());
             ps.setInt(2, e.getId());
             ps.setInt(3, status);

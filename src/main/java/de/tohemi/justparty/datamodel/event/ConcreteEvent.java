@@ -5,7 +5,7 @@ import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 
 import java.net.URL;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -54,9 +54,7 @@ public class ConcreteEvent implements Event {
         return begin;
     }
 
-    public void setBegin(Date begin) {
-        this.begin = begin;
-    }
+    public void setBegin(Date begin) { this.begin = begin; }
 
     public Date getEnd() {
         return end;

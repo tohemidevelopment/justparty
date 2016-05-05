@@ -135,7 +135,8 @@ public class DBUserController {
         return true;
     }
 
-    public boolean setFirstName(String firstName, String email) {DataSource ds = getDataSource();
+    public boolean setFirstName(String firstName, String email) {
+        DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("UPDATE users SET Firstname=? WHERE Email=?");
@@ -205,9 +206,8 @@ public class DBUserController {
             if(rs.next()){
                 return true;
             }
+            rs.close();
             ps.close();
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
@@ -222,7 +222,7 @@ public class DBUserController {
         Connection c = DataSourceUtils.getConnection(ds);
 
         try {
-            String email = getEmailFromVerification(c,verificationID);
+            String email = getEmailFromVerification(verificationID);
             PreparedStatement psEnable=c.prepareStatement("UPDATE users SET enabled=1 WHERE Email=?");
             PreparedStatement psDelete = c.prepareStatement("DELETE FROM userverification WHERE verificationID=?");
             psEnable.setString(1, email);
@@ -240,14 +240,25 @@ public class DBUserController {
         return true;
     }
 
-    private String getEmailFromVerification(Connection c, String id) throws SQLException {
-        PreparedStatement ps=c.prepareStatement("SELECT email FROM userverification WHERE verificationID=?");
-        ps.setString(1, id);
-        ResultSet rs= ps.executeQuery();
-        while(rs.next()){
-            return rs.getString("email");
+    private String getEmailFromVerification(String id) {
+        String email = "";
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT email FROM userverification WHERE verificationID=?");
+            ps.setString(1, id);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                email = rs.getString("email");
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
         }
-        return "";
+        return email;
     }
 
     public boolean addVerificationData(String email, String verificationID){

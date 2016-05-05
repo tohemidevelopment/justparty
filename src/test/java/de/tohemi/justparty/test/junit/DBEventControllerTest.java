@@ -99,11 +99,6 @@ public class DBEventControllerTest {
     }
 
     @Test
-    public void getInvitedUsers() throws Exception {
-        Assert.notNull(conE.getInvitedUsers(event));
-    }
-
-    @Test
     public void getInvitedUERs() throws Exception {
         Assert.notNull(conE.getInvitedUERs(user));
     }
