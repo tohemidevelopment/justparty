@@ -3,15 +3,20 @@ package de.tohemi.justparty.database.controller;
 import de.tohemi.justparty.database.tables.EventsDBTabelle;
 import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
 import de.tohemi.justparty.datamodel.*;
+import de.tohemi.justparty.datamodel.event.ConcreteEvent;
+import de.tohemi.justparty.datamodel.event.Event;
+import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
+import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +94,7 @@ public class DBEventController {
 
     public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
 
-        final Event event = new ConcreteEvent(id);
+        final Event event = EventFactory.createEvent(id);
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
@@ -197,8 +202,9 @@ public class DBEventController {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = new ConcreteEvent(resultSet.getString(EventsDBTabelle.COLUMN_NAME), user);
-                event.setId(resultSet.getInt("event_id"));
+                Event event = EventFactory.createEvent(resultSet.getInt("event_id"));
+                event.setName(resultSet.getString(EventsDBTabelle.COLUMN_NAME));
+                event.setEventOwner(user);
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
                     event.setBegin(date);
@@ -216,29 +222,6 @@ public class DBEventController {
         return userEventRelations;
     }
 
-    public List<UserEventRelation> getInvitedUsers(Event event) {
-        DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
-        Connection c = DataSourceUtils.getConnection(ds);
-        ArrayList<UserEventRelation> gl = new ArrayList<UserEventRelation>();
-        try {
-            PreparedStatement preparedStatement = c.prepareStatement("SELECT " + GuestlistDBTabelle.COLUMN_GUEST + ", " + GuestlistDBTabelle.COLUMN_STATUS + " FROM guestlist WHERE " + GuestlistDBTabelle.COLUMN_EVENT + " = ?;");
-            preparedStatement.setInt(1, event.getId());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                gl.add(new UserEventRelation(event, new User(resultSet.getString("guest")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
-            }
-            resultSet.close();
-            preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            releaseConnection(ds, c);
-        }
-
-        return gl;
-    }
-
     public ArrayList<UserEventRelation> getInvitedUERs(User user) {
 
         DataSource ds = getDataSource();
@@ -252,8 +235,9 @@ public class DBEventController {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = new ConcreteEvent(resultSet.getString(EventsDBTabelle.COLUMN_NAME), new User(resultSet.getString("email")));
-                event.setId(resultSet.getInt("event_id"));
+                Event event = EventFactory.createEvent(resultSet.getInt("event_id"));
+                event.setName(resultSet.getString(EventsDBTabelle.COLUMN_NAME));
+                event.setEventOwner(new User(resultSet.getString("email")));
                 Date date = resultSet.getDate("begin");
                 if (date != null) {
                     event.setBegin(date);
@@ -323,5 +307,398 @@ public class DBEventController {
             releaseConnection(ds, c);
         }
         return exe;
+    }
+
+    public String getName(int id) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        String name = "";
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT name FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next())
+                name = rs.getString("name");
+            rs.close();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return name;
+    }
+
+    public void setName(int id, String name) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET name=? WHERE event_id=?;");
+            psEvent.setString(1, name);
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
+
+    public String getDescription(int id) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        String name = "";
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT description FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next())
+                name = rs.getString("name");
+            rs.close();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return name;
+    }
+
+    public void setDescription(int id, String description) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET description=? WHERE event_id=?;");
+            psEvent.setString(1, description);
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+
+    }
+
+    public Date getBegin(int id) {
+
+        Date begin = null;
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT begin FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next()){
+                begin = new Date(rs.getDate("begin").getTime());
+            }
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return begin;
+    }
+
+    public void setBegin(int id, Date begin) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET begin=? WHERE event_id=?;");
+            psEvent.setDate(1, begin);
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+
+    }
+
+    public Date getEnd(int id) {
+
+        Date end = null;
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT end FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next()){
+                end = new Date(rs.getDate("end").getTime());
+            }
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return end;
+    }
+
+    public void setEnd(int id, Date end) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET end=? WHERE event_id=?;");
+            psEvent.setDate(1, end);
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
+
+    public Location getLocation(int id) {
+
+        Location location = null;
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT address_id FROM events WHERE event_id=?;");
+            PreparedStatement psLocation = c.prepareStatement("SELECT * FROM location WHERE address_id=?");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next()){
+                psLocation.setInt(1, rs.getInt("address_id"));
+            }
+            rs.close();
+            psEvent.close();
+            rs = psLocation.executeQuery();
+            while(rs.next()) {
+                location = new Location(rs.getString("name"), new Address(rs.getString("street"), rs.getString("house_nr"), new ZipCode(rs.getInt("zipcode")), rs.getString("city"), rs.getString("country")), rs.getBoolean("public"));
+            }
+            rs.close();
+            psLocation.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ZipCodeInvalidException e) {
+            e.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return location;
+    }
+
+    public void setLocation(int id, Location location) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET address_id=? WHERE event_id=?;");
+            psEvent.setInt(1, DBLocationController.getInstance().getLocationID(location));
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
+
+    public User getEventOwner(int id) {
+
+        User eo = null;
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT email FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next()){
+                eo = new User(rs.getString("email"));
+            }
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return eo;
+    }
+
+    public void setEventOwner(int id, User user) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET email=? WHERE event_id=?;");
+            psEvent.setString(1, user.getEmail());
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
+
+    public URL getFacebookLink(int id) {
+
+        URL facebook = null;
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT facebook_link FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next()){
+                facebook = rs.getURL("facebook_link");
+            }
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return facebook;
+    }
+
+    public void setFacebookLink(int id, URL facebook) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET facebook_link=? WHERE event_id=?;");
+            psEvent.setURL(1, facebook);
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+
+    }
+
+    public URL getSpotifyLink(int id) {
+
+        URL spotify = null;
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT Spotify_link FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next()){
+                spotify = rs.getURL("Sportify_link");
+            }
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return spotify;
+    }
+
+    public void setSpotifyLink(int id, URL spotify) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET Spotify_link=? WHERE event_id=?;");
+            psEvent.setURL(1, spotify);
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
+
+    public URL getGooglePlusLink(int id) {
+
+        URL google = null;
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT googleplus_link FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next()){
+                google = rs.getURL("googleplus_link");
+            }
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return google;
+    }
+
+    public void setGooglePlusLink(int id, URL google) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET googleplus_link=? WHERE event_id=?;");
+            psEvent.setURL(1, google);
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
+
+    public URL getWishlistLink(int id) {
+
+        URL wish = null;
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT wishlist_link FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while(rs.next()){
+                wish = rs.getURL("wishlist_link");
+            }
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return wish;
+    }
+
+    public void setWishlistLink(int id, URL wishlist) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET wishlist_link=? WHERE event_id=?;");
+            psEvent.setURL(1, wishlist);
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
     }
 }

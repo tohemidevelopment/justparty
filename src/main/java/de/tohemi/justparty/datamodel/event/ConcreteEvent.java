@@ -1,11 +1,11 @@
-package de.tohemi.justparty.datamodel;
+package de.tohemi.justparty.datamodel.event;
 
-import de.tohemi.justparty.view_interface.JPDateFormat;
+import de.tohemi.justparty.datamodel.Location;
+import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.UserEventRelation;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -27,13 +27,11 @@ public class ConcreteEvent implements Event {
     private int id;
     private URL wishlistLink;
 
-    public ConcreteEvent(int id) {
+    ConcreteEvent(int id) {
         this.id = id;
     }
 
-    public ConcreteEvent(String name, User eventOwner){
-        this.name=name;
-        this.eventOwner=eventOwner;
+    ConcreteEvent() {
     }
 
     public String getName() {
@@ -56,9 +54,7 @@ public class ConcreteEvent implements Event {
         return begin;
     }
 
-    public void setBegin(Date begin) {
-        this.begin = begin;
-    }
+    public void setBegin(Date begin) { this.begin = begin; }
 
     public Date getEnd() {
         return end;

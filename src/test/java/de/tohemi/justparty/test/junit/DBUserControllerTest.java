@@ -2,6 +2,7 @@ package de.tohemi.justparty.test.junit;
 
 import de.tohemi.justparty.database.controller.DBLocationController;
 import de.tohemi.justparty.database.controller.DBUserController;
+import de.tohemi.justparty.database.datainterfaces.DBAddress;
 import de.tohemi.justparty.datamodel.Address;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.User;
@@ -61,14 +62,6 @@ public class DBUserControllerTest {
         Assert.isTrue(user.getFirstName().equals(conU.getFirstName(email.toString())));
     }
 
-    /*
-    @Test
-    public void getAddress() throws Exception {
-        System.out.println("address User: " + user.getAddress());
-        Address ad = conU.getAddress(user.getEmail());
-        Assert.isTrue(         .equals(user.getAddress().getCity()));
-    }*/
-
     @Test
     public void getBirthday() throws Exception {
         Assert.isTrue(user.getBirthday().equals(conU.getBirthday(user.getEmail())));
@@ -95,4 +88,31 @@ public class DBUserControllerTest {
         Assert.isTrue(conU.changeToUser(user, "12345"));
     }
 
+    @Test
+    public void getAddress() throws Exception  {
+        Assert.notNull(DBUserController.getInstance().getAddress(email.toString()));
+    }
+
+    @Test
+    public void setLastName() throws Exception  {
+        DBUserController.getInstance().setLastName("TEST", email.toString());
+        Assert.hasText(DBUserController.getInstance().getLastName(email.toString()));
+    }
+
+    @Test
+    public void setFirstName() throws Exception  {
+        DBUserController.getInstance().setFirstName("TEST", email.toString());
+        Assert.hasText(DBUserController.getInstance().getFirstName(email.toString()));
+    }
+
+    @Test
+    public void setAddress() throws Exception  {
+        DBUserController.getInstance().setAddress(new DBAddress(4), email.toString());
+        Assert.isTrue(4 == DBUserController.getInstance().getAddress(email.toString()).getId());
+    }
+
+    @Test
+    public void setBirthday() throws Exception  {
+        Assert.isTrue(DBUserController.getInstance().setBirthday(new Date(2016, 05, 05), email.toString()));
+    }
 }

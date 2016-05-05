@@ -2,6 +2,9 @@ package de.tohemi.justparty.test.junit;
 
 import de.tohemi.justparty.database.controller.*;
 import de.tohemi.justparty.datamodel.*;
+import de.tohemi.justparty.datamodel.event.ConcreteEvent;
+import de.tohemi.justparty.datamodel.event.Event;
+import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
@@ -46,7 +49,9 @@ public class DBGuestlistControllerTest {
         user.setBirthday(new Date(1995, 07, 10));
         user.setAddress(new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
         location = new Location("Testlocation", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
-        event = new ConcreteEvent("TestEventForJUnit", user);
+        event = EventFactory.createEvent();
+        event.setEventOwner(user);
+        event.setName("TestEvent");
         conU.addUser(user, "ROLE_USER", "1234");
         conE.addEvent(event);
         event.setId(con.getEventID(user));
@@ -86,6 +91,6 @@ public class DBGuestlistControllerTest {
     @Test
     public void getGuestlist() throws Exception {
         conG.addGuestToEvent(event, user, 0);
-        Assert.notEmpty(conG.getGuestlist(event));
+        Assert.notEmpty(conG.getInvitedUsers(event.getId()));
     }
 }

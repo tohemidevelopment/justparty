@@ -1,8 +1,6 @@
 package de.tohemi.justparty.database.controller;
 
-import com.sun.javafx.css.Declaration;
 import de.tohemi.justparty.datamodel.Address;
-import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;

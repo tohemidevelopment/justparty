@@ -1,7 +1,7 @@
 package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.datamodel.Declaration;
-import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

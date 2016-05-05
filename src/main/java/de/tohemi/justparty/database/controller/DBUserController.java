@@ -2,19 +2,14 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.datainterfaces.DBAddress;
-import de.tohemi.justparty.datamodel.Address;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserRoles;
-import de.tohemi.justparty.util.DateFormater;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Created by Heiko on 26.12.2015.
@@ -24,7 +19,7 @@ public class DBUserController {
 
     private DBUserController(){}
 
-    public synchronized static DBUserController getInstance() {
+    public static synchronized DBUserController getInstance() {
         if (instance == null) {
             return new DBUserController();
         }
@@ -38,16 +33,15 @@ public class DBUserController {
         try {
             c.close();
         } catch (SQLException exp) {
+            exp.getStackTrace();
         }
         DataSourceUtils.releaseConnection(c, ds);
     }
 
     public String getLastName(String email){
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            // retrieve a list of three random cities
             PreparedStatement ps = c.prepareStatement("SELECT Name FROM users WHERE Email=?");
             ps.setString(1, email);
             ResultSet rs=ps.executeQuery();
@@ -55,27 +49,17 @@ public class DBUserController {
                 return rs.getString("name");
             }
             ps.close();
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
-            try {
-                c.close();
-            } catch (SQLException exp) {}
-            DataSourceUtils.releaseConnection(c, ds);
-
+            releaseConnection(ds, c);
         }
         return null;
     }
 
     public String getFirstName(String email){
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            // retrieve a list of three random cities
             PreparedStatement ps = c.prepareStatement("SELECT Firstname FROM users WHERE Email=?");
             ps.setString(1, email);
             ResultSet rs=ps.executeQuery();
@@ -83,27 +67,17 @@ public class DBUserController {
                 return rs.getString("Firstname");
             }
             ps.close();
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
-            try {
-                c.close();
-            } catch (SQLException exp) {}
-            DataSourceUtils.releaseConnection(c, ds);
-
+            releaseConnection(ds, c);
         }
         return null;
     }
 
     public DBAddress getAddress(String email){
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            // retrieve a list of three random cities
             PreparedStatement ps = c.prepareStatement("SELECT AddressID FROM users WHERE Email=?");
             ps.setString(1, email);
             ResultSet rs=ps.executeQuery();
@@ -111,17 +85,9 @@ public class DBUserController {
                 return new DBAddress(rs.getInt("AddressID"));
             }
             ps.close();
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
-            try {
-                c.close();
-            } catch (SQLException exp) {}
-            DataSourceUtils.releaseConnection(c, ds);
-
+            releaseConnection(ds, c);
         }
         return null;
     }
@@ -140,8 +106,6 @@ public class DBUserController {
             }
 
             ps.close();
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -153,10 +117,8 @@ public class DBUserController {
 
     public boolean setLastName(String lastName, String email) {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            // retrieve a list of three random cities
             PreparedStatement ps = c.prepareStatement("UPDATE users SET Name=? WHERE Email=?");
             ps.setString(1, lastName);
             ps.setString(2, email);
@@ -165,9 +127,7 @@ public class DBUserController {
             c.close();
             DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -175,11 +135,10 @@ public class DBUserController {
         return true;
     }
 
-    public boolean setFirstName(String firstName, String email) {DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
+    public boolean setFirstName(String firstName, String email) {
+        DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            // retrieve a list of three random cities
             PreparedStatement ps = c.prepareStatement("UPDATE users SET Firstname=? WHERE Email=?");
             ps.setString(1, firstName);
             ps.setString(2, email);
@@ -188,23 +147,18 @@ public class DBUserController {
             c.close();
             DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
         }
         return true;
-
     }
 
     public boolean setAddress(DBAddress address, String email) {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            // retrieve a list of three random cities
             PreparedStatement ps = c.prepareStatement("UPDATE users SET AddressID=? WHERE Email=?");
             ps.setInt(1, address.getId());
             ps.setString(2, email);
@@ -213,9 +167,7 @@ public class DBUserController {
             c.close();
             DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -225,10 +177,8 @@ public class DBUserController {
 
     public boolean setBirthday(Date birthday, String email) {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            // retrieve a list of three random cities
             PreparedStatement ps = c.prepareStatement("UPDATE users SET Birthday=? WHERE Email=?");
             ps.setDate(1, birthday);
             ps.setString(2, email);
@@ -237,9 +187,7 @@ public class DBUserController {
             c.close();
             DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -250,23 +198,18 @@ public class DBUserController {
 
     public boolean verificationIDIsValid(String verificationID) {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            // retrieve a list of three random cities
             PreparedStatement ps = c.prepareStatement("SELECT * FROM userverification WHERE verificationID=?");
             ps.setString(1, verificationID);
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
                 return true;
             }
+            rs.close();
             ps.close();
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -276,11 +219,10 @@ public class DBUserController {
 
     public boolean verifyEmail(String verificationID) {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
 
         try {
-            String email = getEmailFromVerification(c,verificationID);
+            String email = getEmailFromVerification(verificationID);
             PreparedStatement psEnable=c.prepareStatement("UPDATE users SET enabled=1 WHERE Email=?");
             PreparedStatement psDelete = c.prepareStatement("DELETE FROM userverification WHERE verificationID=?");
             psEnable.setString(1, email);
@@ -290,9 +232,7 @@ public class DBUserController {
             psEnable.close();
             psDelete.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -300,19 +240,29 @@ public class DBUserController {
         return true;
     }
 
-    private String getEmailFromVerification(Connection c, String id) throws SQLException {
-        PreparedStatement ps=c.prepareStatement("SELECT email FROM userverification WHERE verificationID=?");
-        ps.setString(1, id);
-        ResultSet rs= ps.executeQuery();
-        while(rs.next()){
-            return rs.getString("email");
+    private String getEmailFromVerification(String id) {
+        String email = "";
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT email FROM userverification WHERE verificationID=?");
+            ps.setString(1, id);
+            ResultSet rs= ps.executeQuery();
+            while(rs.next()){
+                email = rs.getString("email");
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
         }
-        return "";
+        return email;
     }
 
     public boolean addVerificationData(String email, String verificationID){
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
 
         try {
@@ -322,9 +272,7 @@ public class DBUserController {
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -334,7 +282,6 @@ public class DBUserController {
 
     public boolean userIsRegistered(String email) throws UserNotFoundException {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("SELECT role FROM users WHERE email=?");
@@ -345,14 +292,11 @@ public class DBUserController {
             } else {
                 rs.beforeFirst();
             }
-            if (rs.next()) {
-                if (rs.getString("role").equals(UserRoles.NONUSER))
-                    return false;
+            if (rs.next() && rs.getString("role").equals(UserRoles.NONUSER)) {
+                return false;
             }
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
         } finally {
             releaseConnection(ds, c);
         }
@@ -361,7 +305,6 @@ public class DBUserController {
 
     public boolean addUser(User user, String userRole, String hash) {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
 
         try {
@@ -376,9 +319,7 @@ public class DBUserController {
             psUser.executeUpdate();
             psUser.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -388,7 +329,6 @@ public class DBUserController {
 
     public boolean removeUser(User user) {
         DataSource ds = getDataSource();
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
 
         try {
@@ -401,9 +341,7 @@ public class DBUserController {
             psUser.close();
             psGuestlist.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -413,8 +351,6 @@ public class DBUserController {
 
     public boolean changeToUser(User user, String hash) {
         DataSource ds = getDataSource();
-
-        // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement psUser = c.prepareStatement("UPDATE users SET Password=?, role=? WHERE Email=?");
@@ -424,14 +360,11 @@ public class DBUserController {
             psUser.executeUpdate();
             psUser.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
-            // ignore failure closing connection
             return false;
         } finally {
             releaseConnection(ds, c);
         }
         return true;
     }
-
 }

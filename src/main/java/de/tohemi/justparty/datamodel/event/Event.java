@@ -1,7 +1,11 @@
-package de.tohemi.justparty.datamodel;
+package de.tohemi.justparty.datamodel.event;
+
+import de.tohemi.justparty.datamodel.Location;
+import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.UserEventRelation;
 
 import java.net.URL;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -56,4 +60,8 @@ public interface Event {
     URL getWishlistLink();
 
     void setWishlistLink(URL wishlistLink);
+
+    default EventType getEventType() {
+        return EventType.DEFAULT;
+    }
 }

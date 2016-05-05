@@ -2,17 +2,24 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
+import de.tohemi.justparty.datamodel.UserEventRelation;
+import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
+import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
+import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by xce35l2 on 25.04.2016.
@@ -106,24 +113,34 @@ public class DBGuestlistController {
         return true;
     }
 
-    public ArrayList<User> getGuestlist(Event e){
+    public List<UserEventRelation> getInvitedUsers(int id) {
+        Event ev = null;
+        try {
+            ev = DBEventController.getInstance().getEventById(id);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (InvalidEmailException e) {
+            e.printStackTrace();
+        } catch (ZipCodeInvalidException e) {
+            e.printStackTrace();
+        }
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
-        ArrayList<User> users = new ArrayList<User>();
+        ArrayList<UserEventRelation> gl = new ArrayList<UserEventRelation>();
         try {
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM guestlist WHERE event=?");
-            ps.setInt(1,e.getId());
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                users.add(new User(rs.getString("guest")));
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT " + GuestlistDBTabelle.COLUMN_GUEST + ", " + GuestlistDBTabelle.COLUMN_STATUS + " FROM guestlist WHERE " + GuestlistDBTabelle.COLUMN_EVENT + " = ?;");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                gl.add(new UserEventRelation(ev, new User(resultSet.getString("guest")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
             }
-            ps.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
             releaseConnection(ds, c);
         }
-        return users;
+        return gl;
     }
 }

@@ -101,8 +101,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="editevent.general.modal.ort.button1"/></button>
-                <button type="button" class="btn btn-primary"><spring:message code="editevent.general.modal.ort.button2"/></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="editevent.general.modal.ort.button2"/></button>
+                <button type="button" class="btn btn-primary"><spring:message code="editevent.general.modal.ort.button1"/></button>
             </div>
         </div>
     </div>
