@@ -25,11 +25,6 @@
                     </span>
                     <input type='datetime-local' class="form-control" id="begin" onchange="updateEventData('begin');" value="${event.begin}"/>
                 </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker1').datetimepicker();
-                    });
-                </script>
             </td>
             </tr>
         <tr>
