@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Heiko on 04.11.2015.
  */
 public class ConcreteEvent implements Event {
-    private String name;
+    private String eventname;
     private String description;
     private Date begin;
     private Date end;
@@ -35,11 +35,11 @@ public class ConcreteEvent implements Event {
     }
 
     public String getName() {
-        return name;
+        return eventname;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.eventname = name;
     }
 
     public String getDescription() {

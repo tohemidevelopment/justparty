@@ -1,18 +1,20 @@
 package de.tohemi.justparty.datamodel.event;
 
 
+import com.google.gson.Gson;
+
 /**
  * Created by Micha Piertzik on 04.05.2016.
  */
 final public class EventFactory {
 
-    static public Event createEvent(final int id, final EventType eventType ,final boolean dbAccess){
-        if (eventType == EventType.BIRTHDAY){
+    static public Event createEvent(final int id, final EventType eventType, final boolean dbAccess) {
+        if (eventType == EventType.BIRTHDAY) {
             return new BirthdayEvent(id);
         }
 
         //Eventtype == Default
-        if (dbAccess){
+        if (dbAccess) {
             return new DBAccessEvent(id);
         }
         return new ConcreteEvent(id);
@@ -37,9 +39,10 @@ final public class EventFactory {
         return new ConcreteEvent();
     }
 
-    public static Event createEvent(final int id, final String jsonString){
-        //TODO: Impl
-
-        return null;
+    public static Event createEventFromJson(final int id, final String jsonString) {
+        Gson gson = new Gson();
+        Event event = gson.fromJson(jsonString, ConcreteEvent.class);
+        event.setId(id);
+        return event;
     }
 }
