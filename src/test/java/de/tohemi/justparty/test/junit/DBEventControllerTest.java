@@ -17,6 +17,8 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Calendar;
 
 /**
  * Created by xce35l2 on 20.04.2016.
@@ -48,6 +50,8 @@ public class DBEventControllerTest {
         event = EventFactory.createEvent();
         event.setName("TestEventForJUnit");
         event.setEventOwner(user);
+        event.setBegin(new Timestamp(1462542416));
+        event.setEnd(new Timestamp(1466542416));
         conU.addUser(user, "ROLE_USER", "1234");
         conE.addEvent(event);
         event.setId(con.getEventID(user));
