@@ -15,8 +15,8 @@
     <tr>
         <td><label for="location"><spring:message code="editevent.general.ort"/></label></td>
         <c:set var="location" value="${event.location}"/>
-        <td><input type="text" class="form-control" id="location" onchange="updateEventData('location');" value="
-        <%@include file="../displayLocation.jsp"%>"></td>
+        <td><input type="text" class="form-control" id="location" onchange="updateEventData('location');"
+                   value="<%@include file="../displayLocation.jsp"%>"></td>
         <td>
             <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#find_ort">
                 <spring:message code="editevent.general.button1"/></button>

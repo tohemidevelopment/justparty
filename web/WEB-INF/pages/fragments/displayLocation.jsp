@@ -7,8 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 ${location.name}
+${" "}
 ${location.address.street}
+${" "}
 ${location.address.houseNumber},
+${" "}
 ${location.address.zipCode.zipInt}
+${" "}
 ${location.address.city}
+${" "}
 ${location.address.country}
