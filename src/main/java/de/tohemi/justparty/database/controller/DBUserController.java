@@ -269,7 +269,7 @@ public class DBUserController {
             PreparedStatement ps = c.prepareStatement("INSERT INTO userverification (verificationID, email)  VALUE (?, ?)");
             ps.setString(1, verificationID);
             ps.setString(2, email);
-            ps.executeUpdate();
+            ps.execute();
             ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
