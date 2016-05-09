@@ -63,6 +63,6 @@ public class DBAddress implements Address{
     }
 
     public int getID() {
-        return 0;
+        return id;
     }
 }

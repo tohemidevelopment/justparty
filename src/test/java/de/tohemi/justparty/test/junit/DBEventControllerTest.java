@@ -4,7 +4,8 @@ import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBLocationController;
 import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.*;
+import de.tohemi.justparty.datamodel.Location;
+import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.event.ConcreteEvent;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
@@ -21,7 +22,7 @@ import org.springframework.util.Assert;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * Created by xce35l2 on 20.04.2016.
@@ -82,7 +83,7 @@ public class DBEventControllerTest {
         conE.deleteEvent(event, user);
         conU.removeUser(user);
         conL.deleteLocation(location);
-        conL.deleteLocation(new Location("TestLocation23", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false));
+        conL.deleteLocation(new Location("TestLocation23", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false));
     }
 
     @Test
@@ -138,7 +139,7 @@ public class DBEventControllerTest {
     @Test
     public void setName() throws Exception {
         conE.setName(event.getId(), "TestEventForJava1");
-        Assert.isTrue(conE.getName(event.getId()) != event.getName());
+        Assert.isTrue(!Objects.equals(conE.getName(event.getId()), event.getName()));
     }
 
     @Test
@@ -149,7 +150,7 @@ public class DBEventControllerTest {
     @Test
     public void setDescription() throws Exception {
         conE.setDescription(event.getId(), "TestEventForJava1");
-        Assert.isTrue(conE.getDescription(event.getId()) != event.getDescription());
+        Assert.isTrue(!Objects.equals(conE.getDescription(event.getId()), event.getDescription()));
     }
 
     @Test
@@ -161,7 +162,7 @@ public class DBEventControllerTest {
     public void setBegin() throws Exception {
         conE.setBegin(event.getId(), new Timestamp(1466542000));
         Assert.isTrue(conE.getBegin(event.getId()).getTime() == 1466542000);
-        }
+    }
 
     @Test
     public void getEnd() throws Exception {
@@ -183,8 +184,8 @@ public class DBEventControllerTest {
 
     @Test
     public void setLocation() throws Exception, ZipCodeInvalidException {
-        conL.addLocation(new Location("TestLocation23", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false));
-        conE.setLocation(event.getId(), new Location("TestLocation23", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false));
+        conL.addLocation(new Location("TestLocation23", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false));
+        conE.setLocation(event.getId(), new Location("TestLocation23", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false));
         Assert.isTrue(conE.getLocation(event.getId()).getName().equals("TestLocation23"));
     }
 
@@ -195,7 +196,7 @@ public class DBEventControllerTest {
 
     @Test
     public void setEventOwner() throws Exception {
-        conE.setEventOwner(event.getId(), new User("test€tester23.de"));
+        conE.setEventOwner(event.getId(), UserFactory.create("test€tester23.de"));
         Assert.hasText(conE.getEventOwner(event.getId()).getEmail(), "test€tester23.de");
     }
 

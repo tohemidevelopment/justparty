@@ -1,7 +1,6 @@
 package de.tohemi.justparty.datamodel.event;
 
 import de.tohemi.justparty.datamodel.Location;
-import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 
 import de.tohemi.justparty.datamodel.user.User;
