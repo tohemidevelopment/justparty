@@ -1,7 +1,6 @@
 package de.tohemi.justparty.test.junit;
 
 import de.tohemi.justparty.database.controller.*;
-import de.tohemi.justparty.datamodel.ConcreteEvent;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.event.Event;
