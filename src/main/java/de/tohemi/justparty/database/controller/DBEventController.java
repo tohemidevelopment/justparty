@@ -116,10 +116,8 @@ public class DBEventController {
             }
             psEvent.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
         } finally {
-            // ignore failure closing connection
             releaseConnection(ds, c);
         }
         return event;
@@ -256,36 +254,6 @@ public class DBEventController {
         return userEventRelations;
     }
 
-    /**
-     * @Deprecated
-     * @param event
-     * @param user
-     * @param answer
-     * @return boolnothing
-     * use DBGuestlistContorller.getInstance().upTimeStampGuestlist(Event, User, State); instead
-     */
-    @Deprecated
-    public boolean updateGuest(Event event, User user, Accepted answer) {
-        int status = GuestlistDBTabelle.getIntStatusForAcceptedObject(answer);
-        DataSource ds = getDataSource();
-        Connection c = DataSourceUtils.getConnection(ds);
-        try {
-            PreparedStatement pS = c.prepareStatement("UPDATE " + GuestlistDBTabelle.TABLE + " SET " + GuestlistDBTabelle.COLUMN_STATUS + "=? WHERE " +
-                    GuestlistDBTabelle.COLUMN_EVENT + "=? AND " + GuestlistDBTabelle.COLUMN_GUEST + "=?;");
-            pS.setInt(1, status);
-            pS.setInt(2, event.getId());
-            pS.setString(3, user.getEmail());
-            pS.executeUpdate();
-            pS.close();
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            releaseConnection(ds, c);
-        }
-    }
-
     public int getEventID(Event e) {
 
         DataSource ds = getDataSource();
@@ -356,7 +324,7 @@ public class DBEventController {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while(rs.next())
-                name = rs.getString("name");
+                name = rs.getString("description");
             rs.close();
             psEvent.close();
         } catch (SQLException ex) {
@@ -597,7 +565,7 @@ public class DBEventController {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while(rs.next()){
-                spotify = rs.getURL("Sportify_link");
+                spotify = rs.getURL("Spotify_link");
             }
             psEvent.close();
         } catch (SQLException ex) {
