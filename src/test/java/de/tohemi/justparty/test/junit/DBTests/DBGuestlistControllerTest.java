@@ -1,4 +1,4 @@
-package de.tohemi.justparty.test.junit;
+package de.tohemi.justparty.test.junit.dbtests;
 
 import de.tohemi.justparty.database.controller.*;
 import de.tohemi.justparty.datamodel.Address;

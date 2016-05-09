@@ -1,10 +1,9 @@
-package de.tohemi.justparty.test.junit;
+package de.tohemi.justparty.test.junit.dbtests;
 
 import de.tohemi.justparty.database.controller.DBDeclarationController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBUserController;
 import de.tohemi.justparty.datamodel.*;
-import de.tohemi.justparty.datamodel.event.ConcreteEvent;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
