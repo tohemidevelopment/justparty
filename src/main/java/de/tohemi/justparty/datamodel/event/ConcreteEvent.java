@@ -5,7 +5,7 @@ import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 
 import java.net.URL;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -14,8 +14,8 @@ import java.util.List;
 public class ConcreteEvent implements Event {
     private String eventname;
     private String description;
-    private Date begin;
-    private Date end;
+    private Timestamp begin;
+    private Timestamp end;
     private Location location;
     private User eventOwner;
     private List<UserEventRelation> guests;
@@ -50,17 +50,17 @@ public class ConcreteEvent implements Event {
         this.description = description;
     }
 
-    public Date getBegin() {
+    public Timestamp getBegin() {
         return begin;
     }
 
-    public void setBegin(Date begin) { this.begin = begin; }
+    public void setBegin(Timestamp begin) { this.begin = begin; }
 
-    public Date getEnd() {
+    public Timestamp getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(Timestamp end) {
         this.end = end;
     }
 
