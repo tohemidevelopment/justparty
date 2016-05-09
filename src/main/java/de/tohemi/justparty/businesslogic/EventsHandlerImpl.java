@@ -59,8 +59,8 @@ public class EventsHandlerImpl implements EventsHandler {
         if (answer == null) {
             return false;
         }
-        DBEventController dbController = DBEventController.getInstance();
-        return dbController.updateGuest(EventFactory.createEvent(eventId), new User(mail), answer);
+        DBGuestlistController dbController = DBGuestlistController.getInstance();
+        return dbController.addGuestToEvent(EventFactory.createEvent(eventId), new User(mail), answer.getValue());
     }
 
     public List<UserEventRelation> getGuestlist(int id, String mail) {
@@ -96,8 +96,20 @@ public class EventsHandlerImpl implements EventsHandler {
         if (eventChanges.getName() != null) {
             dbEvent.setName(eventChanges.getName());
         }
+        if (eventChanges.getDescription() != null) {
+            dbEvent.setDescription(eventChanges.getDescription());
+        }
+        if (eventChanges.getBegin() != null) {
+            dbEvent.setBegin(eventChanges.getBegin());
+        }
+        if (eventChanges.getEnd() != null) {
+            dbEvent.setEnd(eventChanges.getEnd());
+        }
+        if (eventChanges.getLocation() != null) {
+            dbEvent.setLocation(eventChanges.getLocation());
+        }
+        //TODO: add missing fields
 
-
-        return false;
+        return true;
     }
 }

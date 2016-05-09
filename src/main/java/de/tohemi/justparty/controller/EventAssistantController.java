@@ -5,6 +5,7 @@ import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
 import de.tohemi.justparty.datamodel.event.ConcreteEvent;
 import de.tohemi.justparty.datamodel.event.Event;
+import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -56,20 +57,8 @@ public class EventAssistantController extends JPController {
             //TODO: Show Error String, User not host
             return REDIRECT + ERROR;
         }
-        System.out.println(jsonString);
-
-
-
-
-        final Gson gson = new Gson();
-        try {
-            final Event eventChanges = gson.fromJson(jsonString, ConcreteEvent.class);
-            eventsHandler.updateEvent(eventChanges);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
+        final Event eventChanges = EventFactory.createEventFromJson(id, jsonString);
+        eventsHandler.updateEvent(eventChanges);
         return null;
     }
 
