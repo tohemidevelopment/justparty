@@ -22,6 +22,7 @@ import org.springframework.util.Assert;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 /**
  * Created by xce35l2 on 20.04.2016.
@@ -138,7 +139,7 @@ public class DBEventControllerTest {
     @Test
     public void setName() throws Exception {
         conE.setName(event.getId(), "TestEventForJava1");
-        Assert.isTrue(conE.getName(event.getId()) != event.getName());
+        Assert.isTrue(!Objects.equals(conE.getName(event.getId()), event.getName()));
     }
 
     @Test
@@ -149,7 +150,7 @@ public class DBEventControllerTest {
     @Test
     public void setDescription() throws Exception {
         conE.setDescription(event.getId(), "TestEventForJava1");
-        Assert.isTrue(conE.getDescription(event.getId()) != event.getDescription());
+        Assert.isTrue(!Objects.equals(conE.getDescription(event.getId()), event.getDescription()));
     }
 
     @Test
