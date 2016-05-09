@@ -15,8 +15,8 @@
     <tr>
         <td><label for="location"><spring:message code="editevent.general.ort"/></label></td>
         <c:set var="location" value="${event.location}"/>
-        <td><input type="text" class="form-control" id="location" onchange="updateEventData('location');" value="
-        <%@include file="../displayLocation.jsp"%>"></td>
+        <td><input type="text" class="form-control" id="location" onchange="updateEventData('location');"
+                   value="<%@include file="../displayLocation.jsp"%>"></td>
         <td>
             <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#find_ort">
                 <spring:message code="editevent.general.button1"/></button>
@@ -42,7 +42,7 @@
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 <input id="end" type='datetime-local' class="form-control" onchange="updateEventData('end');"
-                       value="<fmt:formatDate value='${event.begin}' type='BOTH' pattern="yyyy-MM-dd"/>T<fmt:formatDate value='${event.begin}' type='BOTH' pattern="hh:mm"/>"/>
+                       value="<fmt:formatDate value='${event.end}' type='BOTH' pattern="yyyy-MM-dd"/>T<fmt:formatDate value='${event.end}' type='BOTH' pattern="hh:mm"/>"/>
             </div>
         </td>
     </tr>
