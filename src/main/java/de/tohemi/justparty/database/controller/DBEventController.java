@@ -112,7 +112,7 @@ public class DBEventController {
                 event.setDescription(rs.getString("description"));
                 event.setEventOwner(new User(new EMail(rs.getString("email"))));
                 event.setName(rs.getString("name"));
-                event.setLocation(DBLocationController.getInstance().getLocationByID(rs.getInt("address_id")));
+                event.setLocation(getLocation(rs.getInt("address_id")));
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -265,7 +265,7 @@ public class DBEventController {
      * use DBGuestlistContorller.getInstance().upTimeStampGuestlist(Event, User, State); instead
      */
     @Deprecated
-    public boolean upTimeStampGuest(Event event, User user, Accepted answer) {
+    public boolean updateGuest(Event event, User user, Accepted answer) {
         int status = GuestlistDBTabelle.getIntStatusForAcceptedObject(answer);
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
