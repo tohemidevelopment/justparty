@@ -14,6 +14,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
+
 import java.sql.Date;
 
 /**
@@ -90,30 +91,30 @@ public class DBAccessUserControllerTest {
     }
 
     @Test
-    public void getAddress() throws Exception  {
+    public void getAddress() throws Exception {
         Assert.notNull(DBUserController.getInstance().getAddress(email.toString()));
     }
 
     @Test
-    public void setLastName() throws Exception  {
+    public void setLastName() throws Exception {
         DBUserController.getInstance().setLastName("TEST", email.toString());
         Assert.hasText(DBUserController.getInstance().getLastName(email.toString()));
     }
 
     @Test
-    public void setFirstName() throws Exception  {
+    public void setFirstName() throws Exception {
         DBUserController.getInstance().setFirstName("TEST", email.toString());
         Assert.hasText(DBUserController.getInstance().getFirstName(email.toString()));
     }
 
     @Test
-    public void setAddress() throws Exception  {
+    public void setAddress() throws Exception {
         DBUserController.getInstance().setAddress(new DBAddress(4), email.toString());
-        Assert.isTrue(4 == DBUserController.getInstance().getAddress(email.toString()).getId());
+        Assert.isTrue(4 == DBUserController.getInstance().getAddress(email.toString()).getID());
     }
 
     @Test
-    public void setBirthday() throws Exception  {
+    public void setBirthday() throws Exception {
         Assert.isTrue(DBUserController.getInstance().setBirthday(new Date(2016, 05, 05), email.toString()));
     }
 }
