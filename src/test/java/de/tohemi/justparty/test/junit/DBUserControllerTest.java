@@ -20,7 +20,7 @@ import java.sql.Date;
 /**
  * Created by xce35l2 on 28.04.2016.
  */
-public class DBAccessUserControllerTest {
+public class DBUserControllerTest {
 
     public DBUserController conU;
     public DBLocationController conL;
