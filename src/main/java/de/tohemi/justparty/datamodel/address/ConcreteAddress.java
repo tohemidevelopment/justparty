@@ -1,11 +1,12 @@
-package de.tohemi.justparty.datamodel;
+package de.tohemi.justparty.datamodel.address;
 
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
+import org.jboss.netty.channel.AdaptiveReceiveBufferSizePredictor;
 
 /**
  * Created by Heiko on 04.11.2015.
  */
-public class Address {
+public class ConcreteAddress implements Address{
 
     private String street;
     private String houseNumber;
@@ -14,7 +15,7 @@ public class Address {
     private String country;
     private int id;
 
-    public Address(String street, String houseNumber, ZipCode zipCode, String city, String country) {
+    public ConcreteAddress(String street, String houseNumber, ZipCode zipCode, String city, String country) {
         this.street = street;
         this.houseNumber = houseNumber;
         this.zipCode = zipCode;

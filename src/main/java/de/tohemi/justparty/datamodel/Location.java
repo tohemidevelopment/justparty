@@ -1,5 +1,6 @@
 package de.tohemi.justparty.datamodel;
 
+import de.tohemi.justparty.datamodel.address.Address;
 
 /**
  * Created by Heiko on 08.11.2015.

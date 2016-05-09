@@ -7,6 +7,8 @@ import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
+import de.tohemi.justparty.datamodel.user.User;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.springframework.context.ApplicationContext;
@@ -33,10 +35,12 @@ public class DBEventController {
         }
         return instance;
     }
+
     private DataSource getDataSource() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-database.xml");
         return (DataSource) ctx.getBean("dataSource");
     }
+
     private void releaseConnection(DataSource ds, Connection c) {
         try {
             c.close();
@@ -76,7 +80,7 @@ public class DBEventController {
             psEvent.setString(2, u.getEmail());
             psGuests.setInt(1, e.getId());
 
-            if(psEvent.execute()) {
+            if (psEvent.execute()) {
                 psGuests.executeUpdate();
             }
             psEvent.close();
@@ -87,8 +91,8 @@ public class DBEventController {
             return false;
         } finally {
             releaseConnection(ds, c);
-            }
-            return true;
+        }
+        return true;
     }
 
     public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
@@ -110,14 +114,16 @@ public class DBEventController {
                 event.setBegin(rs.getTimestamp("begin"));
                 event.setEnd(rs.getTimestamp("end"));
                 event.setDescription(rs.getString("description"));
-                event.setEventOwner(new User(new EMail(rs.getString("email"))));
+                event.setEventOwner(UserFactory.create(new EMail(rs.getString("email"))));
                 event.setName(rs.getString("name"));
                 event.setLocation(getLocation(rs.getInt("address_id")));
             }
             psEvent.close();
         } catch (SQLException ex) {
+            // something has failed and we print a stack trace to analyse the error
             ex.printStackTrace();
         } finally {
+            // ignore failure closing connection
             releaseConnection(ds, c);
         }
         return event;
@@ -133,7 +139,7 @@ public class DBEventController {
             pS1.setInt(1, event.getId());
 
             ResultSet rs = pS1.executeQuery();
-            while(rs.next())
+            while (rs.next())
                 email = rs.getString("email");
             rs.close();
             pS1.close();
@@ -164,7 +170,7 @@ public class DBEventController {
         return tries;
     }
 
-    public boolean userIsHostOfRequestedEvent(User user, Event event){
+    public boolean userIsHostOfRequestedEvent(User user, Event event) {
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
@@ -174,8 +180,7 @@ public class DBEventController {
             preparedStatement.setString(1, user.getEmail());
             preparedStatement.setInt(2, event.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next())
-            {
+            if (resultSet.next()) {
                 tries = true;
             }
             preparedStatement.close();
@@ -234,7 +239,7 @@ public class DBEventController {
 
                 Event event = EventFactory.createEvent(resultSet.getInt("event_id"));
                 event.setName(resultSet.getString(EventsDBTabelle.COLUMN_NAME));
-                event.setEventOwner(new User(resultSet.getString("email")));
+                event.setEventOwner(UserFactory.create(resultSet.getString("email")));
                 Timestamp TimeStamp = resultSet.getTimestamp("begin");
                 if (TimeStamp != null) {
                     event.setBegin(TimeStamp);
@@ -264,7 +269,7 @@ public class DBEventController {
             psEvent.setString(1, e.getName());
             psEvent.setString(2, e.getEventOwner().getEmail());
             ResultSet rs = psEvent.executeQuery();
-            while(rs.next())
+            while (rs.next())
                 exe = rs.getInt("event_id");
             rs.close();
             psEvent.close();

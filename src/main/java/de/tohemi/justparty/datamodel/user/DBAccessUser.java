@@ -1,28 +1,39 @@
-package de.tohemi.justparty.database.datainterfaces;
+package de.tohemi.justparty.datamodel.user;
 
 import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.Address;
-import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.database.datainterfaces.DBAddress;
+import de.tohemi.justparty.datamodel.address.Address;
+import de.tohemi.justparty.datamodel.wrapper.EMail;
 
 import java.sql.Date;
-import java.util.Calendar;
 
 /**
  * Created by Heiko on 26.12.2015.
  */
-public class DBUser {
-    String email;
-    DBUserController controller= DBUserController.getInstance();
-    public DBUser(String email){
-        this.email=email;
+public class DBAccessUser implements User {
+    private String email;
+    private DBUserController controller;
+
+    public DBAccessUser(String email) {
+        controller = DBUserController.getInstance();
+        this.email = email;
     }
 
-    public User getEmailuser(){
-        return new User(email);
+    public DBAccessUser(EMail email) {
+        controller = DBUserController.getInstance();
+        this.email = email.toString();
     }
 
     public String getEmail() {
         return email;
+    }
+
+    public void setEmail(EMail email) {
+
+    }
+
+    public void setEmail(String email) {
+
     }
 
     public String getLastName() {
@@ -30,7 +41,7 @@ public class DBUser {
     }
 
     public void setLastName(String lastName) {
-        controller.setLastName(lastName,email);
+        controller.setLastName(lastName, email);
     }
 
     public String getFirstName() {
@@ -41,8 +52,12 @@ public class DBUser {
         controller.setFirstName(firstName, email);
     }
 
-    public DBAddress getAddress() {
+    public Address getAddress() {
         return controller.getAddress(email);
+    }
+
+    public void setAddress(Address address) {
+
     }
 
     public void setAddress(DBAddress address) {

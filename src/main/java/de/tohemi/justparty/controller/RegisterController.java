@@ -2,7 +2,6 @@ package de.tohemi.justparty.controller;
 
 import de.tohemi.justparty.businesslogic.Error;
 import de.tohemi.justparty.businesslogic.user.UserHandler;
-import de.tohemi.justparty.database.datainterfaces.DBUser;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -4,6 +4,8 @@ import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 
+import de.tohemi.justparty.datamodel.user.User;
+
 import java.net.URL;
 import java.sql.Timestamp;
 import java.util.List;

@@ -3,10 +3,11 @@ package de.tohemi.justparty.test.junit;
 import de.tohemi.justparty.database.controller.DBLocationController;
 import de.tohemi.justparty.database.controller.DBUserController;
 import de.tohemi.justparty.database.datainterfaces.DBAddress;
-import de.tohemi.justparty.datamodel.Address;
 import de.tohemi.justparty.datamodel.Location;
-import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
+import de.tohemi.justparty.datamodel.user.User;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.junit.After;
@@ -18,7 +19,7 @@ import java.sql.Date;
 /**
  * Created by xce35l2 on 28.04.2016.
  */
-public class DBUserControllerTest {
+public class DBAccessUserControllerTest {
 
     public DBUserController conU;
     public DBLocationController conL;
@@ -31,12 +32,12 @@ public class DBUserControllerTest {
         conU = DBUserController.getInstance();
         conL = DBLocationController.getInstance();
         email = new EMail("junit@testemail.tv");
-        user = new User(email);
+        user = UserFactory.create(email);
         user.setFirstName("JUnit");
         user.setLastName("Test");
         user.setBirthday(new Date(1995, 07, 10));
-        user.setAddress(new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
-        location = new Location("Testlocation", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
+        user.setAddress(new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
+        location = new Location("Testlocation", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
         conU.addUser(user, "ROLE_USER", "1234");
         conL.addLocation(location);
     }

@@ -2,7 +2,7 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.event.Event;
-import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -48,13 +48,13 @@ public class DBDeclarationController {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-                PreparedStatement ps = c.prepareStatement("INSERT INTO declaration(name, usertobringwith, bringwithbyall, event_id) VALUES (?, ?, ?, ?);");
-                ps.setString(1,d.getName());
-                ps.setString(2, d.getUser().getEmail());
-                ps.setBoolean(3, d.getBringWithByAll());
-                ps.setInt(4, d.getEventId());
-                ps.execute();
-                ps.close();
+            PreparedStatement ps = c.prepareStatement("INSERT INTO declaration(name, usertobringwith, bringwithbyall, event_id) VALUES (?, ?, ?, ?);");
+            ps.setString(1, d.getName());
+            ps.setString(2, d.getUser().getEmail());
+            ps.setBoolean(3, d.getBringWithByAll());
+            ps.setInt(4, d.getEventId());
+            ps.execute();
+            ps.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -70,13 +70,13 @@ public class DBDeclarationController {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-                PreparedStatement ps = c.prepareStatement("DELETE FROM declaration WHERE name=? AND usertobringwith=? AND bringwithbyall=? AND event_id=?;");
-                ps.setString(1,d.getName());
-                ps.setString(2, d.getUser().getEmail());
-                ps.setBoolean(3, d.getBringWithByAll());
-                ps.setInt(4, d.getEventId());
-                ps.execute();
-                ps.close();
+            PreparedStatement ps = c.prepareStatement("DELETE FROM declaration WHERE name=? AND usertobringwith=? AND bringwithbyall=? AND event_id=?;");
+            ps.setString(1, d.getName());
+            ps.setString(2, d.getUser().getEmail());
+            ps.setBoolean(3, d.getBringWithByAll());
+            ps.setInt(4, d.getEventId());
+            ps.execute();
+            ps.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -93,7 +93,7 @@ public class DBDeclarationController {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("UPDATE declaration SET name=?, usertobringwith=?, bringwithbyall=? WHERE id=?;");
-            ps.setString(1,d.getName());
+            ps.setString(1, d.getName());
             ps.setString(2, d.getUser().getEmail());
             ps.setBoolean(3, d.getBringWithByAll());
             ps.setInt(4, d.getEventId());
@@ -109,7 +109,7 @@ public class DBDeclarationController {
         return true;
     }
 
-    public ArrayList<Declaration> getDeclarations(Event e){
+    public ArrayList<Declaration> getDeclarations(Event e) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         ArrayList<Declaration> declaration = new ArrayList<Declaration>();
@@ -117,8 +117,8 @@ public class DBDeclarationController {
             PreparedStatement ps = c.prepareStatement("SELECT * FROM declaration WHERE event_id=?;");
             ps.setInt(1, e.getId());
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                declaration.add(new Declaration(rs.getString("name"), new User(rs.getString("usertobringwith")), rs.getBoolean("bringwithbyall"), rs.getInt("event_id")));
+            while (rs.next()) {
+                declaration.add(new Declaration(rs.getString("name"), UserFactory.create(rs.getString("usertobringwith")), rs.getBoolean("bringwithbyall"), rs.getInt("event_id")));
             }
             ps.close();
 

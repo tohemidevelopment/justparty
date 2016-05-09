@@ -1,8 +1,8 @@
 package de.tohemi.justparty.businesslogic;
 
-import de.tohemi.justparty.database.datainterfaces.DBUser;
+import de.tohemi.justparty.datamodel.user.DBAccessUser;
 import de.tohemi.justparty.datamodel.event.Event;
-import de.tohemi.justparty.datamodel.Person;
+import de.tohemi.justparty.datamodel.user.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -36,7 +36,7 @@ public class EmailSender {
     }
 
 
-    public void sendEmailVerification(DBUser sendTo, String verificationID){
+    public void sendEmailVerification(User sendTo, String verificationID){
         String emailContent="Dein Account bei justParty wurde erfolgreich angelegt. Bitte verifiziere nun noch deine E-Mail-Adresse:<br>"+insertButton("http://justparty.ml/verifyEmail?id="+verificationID,"E-Mail verifizieren");
         String subject = "E-Mail Verifizierung";
         String emailAddress=sendTo.getEmail();
@@ -45,7 +45,7 @@ public class EmailSender {
         sendEmail(emailAddress, firstName, subject, emailContent);
     }
 
-    public void sendCreateConfirmation(DBUser sendTo, String eventname){
+    public void sendCreateConfirmation(User sendTo, String eventname){
 
         String emailContent="Dein Event <b>"+eventname+"</b> wurde erfolgreich erstellt.";
         String subject = "Dein Event wurde erfolgreich erstellt";
@@ -55,7 +55,7 @@ public class EmailSender {
         sendEmail(emailAddress, firstName, subject, emailContent);
     }
 
-    public void sendInvitationToUser(DBUser sendTo, DBUser inviter, Event event){
+    public void sendInvitationToUser(User sendTo, User inviter, Event event){
 
 
         String firstNameInviter=(inviter.getFirstName()!=null)?inviter.getFirstName():"einem User";
@@ -67,7 +67,7 @@ public class EmailSender {
         sendEmail(address, firstName, subject, emailContent);
     }
 
-    public void sendInvitationToNonUser(Person sendTo, DBUser inviter, Event event){
+    public void sendInvitationToNonUser(User sendTo, User inviter, Event event){
 
 
         String emailContent="Du wurdest zu der Veranstaltung <b>"+event.getName()+"</b> eingeladen.";

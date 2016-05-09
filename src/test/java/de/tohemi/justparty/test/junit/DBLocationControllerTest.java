@@ -1,19 +1,15 @@
 package de.tohemi.justparty.test.junit;
 
 import de.tohemi.justparty.database.controller.DBLocationController;
-import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.Address;
+import de.tohemi.justparty.datamodel.address.Address;
+import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.Location;
-import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
-import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by xce35l2 on 28.04.2016.
@@ -26,7 +22,7 @@ public class DBLocationControllerTest {
 
     @Before
     public void setUp() throws Exception, ZipCodeInvalidException {
-        address = new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland");
+        address = new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland");
         conL = new DBLocationController().getInstance();
         location = new Location("LocationName", address, false);
         conL.addLocation(location);

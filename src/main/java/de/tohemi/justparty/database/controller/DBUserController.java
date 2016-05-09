@@ -2,7 +2,8 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.datainterfaces.DBAddress;
-import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.address.Address;
+import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.UserRoles;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -74,7 +75,7 @@ public class DBUserController {
         return null;
     }
 
-    public DBAddress getAddress(String email){
+    public Address getAddress(String email){
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
