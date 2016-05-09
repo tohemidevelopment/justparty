@@ -20,9 +20,7 @@ public final class UserFactory {
             if (!dbAccess) {
                 return new ConcreteUser(email);
             }
-            if (dbAccess) {
-                return new DBAccessUser(email);
-            }
+            return new DBAccessUser(email);
         }
         if (!dbAccess) {
             return new UnregisteredUser(email);
@@ -35,9 +33,7 @@ public final class UserFactory {
             if (!dbAccess) {
                 return new ConcreteUser(email);
             }
-            if (dbAccess) {
-                return new DBAccessUser(email);
-            }
+            return new DBAccessUser(email);
         }
         if (!dbAccess) {
             return new UnregisteredUser(email);

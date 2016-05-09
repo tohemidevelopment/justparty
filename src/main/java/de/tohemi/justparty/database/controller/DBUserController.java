@@ -2,9 +2,9 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.datainterfaces.DBAddress;
+import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.address.Address;
 import de.tohemi.justparty.datamodel.user.User;
-import de.tohemi.justparty.datamodel.UserRoles;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -18,7 +18,8 @@ import java.sql.*;
 public class DBUserController {
     private static DBUserController instance;
 
-    private DBUserController(){}
+    private DBUserController() {
+    }
 
     public static synchronized DBUserController getInstance() {
         if (instance == null) {
@@ -26,10 +27,12 @@ public class DBUserController {
         }
         return instance;
     }
+
     private DataSource getDataSource() {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-database.xml");
         return (DataSource) ctx.getBean("dataSource");
     }
+
     private void releaseConnection(DataSource ds, Connection c) {
         try {
             c.close();
@@ -39,50 +42,50 @@ public class DBUserController {
         DataSourceUtils.releaseConnection(c, ds);
     }
 
-    public String getLastName(String email){
+    public String getLastName(String email) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("SELECT Name FROM users WHERE Email=?");
             ps.setString(1, email);
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 return rs.getString("name");
             }
             ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            releaseConnection(ds, c);
         }
         return null;
     }
 
-    public String getFirstName(String email){
+    public String getFirstName(String email) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("SELECT Firstname FROM users WHERE Email=?");
             ps.setString(1, email);
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 return rs.getString("Firstname");
             }
             ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
             releaseConnection(ds, c);
         }
         return null;
     }
 
-    public Address getAddress(String email){
+    public Address getAddress(String email) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("SELECT AddressID FROM users WHERE Email=?");
             ps.setString(1, email);
-            ResultSet rs=ps.executeQuery();
-            while(rs.next()){
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 return new DBAddress(rs.getInt("AddressID"));
             }
             ps.close();
@@ -93,7 +96,7 @@ public class DBUserController {
         return null;
     }
 
-    public Date getBirthday(String email){
+    public Date getBirthday(String email) {
         Date bd = new Date(0000, 00, 00);
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
@@ -102,15 +105,14 @@ public class DBUserController {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 bd = rs.getDate("Birthday");
             }
 
             ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }
-        finally{
+        } finally {
             releaseConnection(ds, c);
         }
         return bd;
@@ -203,8 +205,8 @@ public class DBUserController {
         try {
             PreparedStatement ps = c.prepareStatement("SELECT * FROM userverification WHERE verificationID=?");
             ps.setString(1, verificationID);
-            ResultSet rs=ps.executeQuery();
-            if(rs.next()){
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
                 return true;
             }
             rs.close();
@@ -224,7 +226,7 @@ public class DBUserController {
 
         try {
             String email = getEmailFromVerification(verificationID);
-            PreparedStatement psEnable=c.prepareStatement("UPDATE users SET enabled=1 WHERE Email=?");
+            PreparedStatement psEnable = c.prepareStatement("UPDATE users SET enabled=1 WHERE Email=?");
             PreparedStatement psDelete = c.prepareStatement("DELETE FROM userverification WHERE verificationID=?");
             psEnable.setString(1, email);
             psDelete.setString(1, verificationID);
@@ -248,8 +250,8 @@ public class DBUserController {
         try {
             PreparedStatement ps = c.prepareStatement("SELECT email FROM userverification WHERE verificationID=?");
             ps.setString(1, id);
-            ResultSet rs= ps.executeQuery();
-            while(rs.next()){
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 email = rs.getString("email");
             }
             rs.close();
@@ -262,7 +264,7 @@ public class DBUserController {
         return email;
     }
 
-    public boolean addVerificationData(String email, String verificationID){
+    public boolean addVerificationData(String email, String verificationID) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
 

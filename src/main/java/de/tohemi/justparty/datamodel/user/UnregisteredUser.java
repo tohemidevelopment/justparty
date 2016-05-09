@@ -73,4 +73,9 @@ public class UnregisteredUser implements User {
         UnregisteredUser unregisteredUser = (UnregisteredUser) obj;
         return email.equals(unregisteredUser.email);
     }
+
+    @Override
+    public int hashCode() {
+        return email.hashCode();
+    }
 }
