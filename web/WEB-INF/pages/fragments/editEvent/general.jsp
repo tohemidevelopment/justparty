@@ -42,7 +42,7 @@
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 <input id="end" type='datetime-local' class="form-control" onchange="updateEventData('end');"
-                       value="<fmt:formatDate value='${event.begin}' type='BOTH' pattern="yyyy-MM-dd"/>T<fmt:formatDate value='${event.begin}' type='BOTH' pattern="hh:mm"/>"/>
+                       value="<fmt:formatDate value='${event.end}' type='BOTH' pattern="yyyy-MM-dd"/>T<fmt:formatDate value='${event.end}' type='BOTH' pattern="hh:mm"/>"/>
             </div>
         </td>
     </tr>
