@@ -1,20 +1,14 @@
 package de.tohemi.justparty.test.cucumber.stepdefs;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
-import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.database.controller.DBEventController;
-import de.tohemi.justparty.datamodel.Event;
-import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.test.cucumber.BrowserHolder;
 import org.openqa.selenium.By;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 

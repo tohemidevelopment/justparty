@@ -1,5 +1,7 @@
 package de.tohemi.justparty.datamodel;
 
+import de.tohemi.justparty.datamodel.user.User;
+
 import java.net.URL;
 import java.util.Date;
 import java.util.List;

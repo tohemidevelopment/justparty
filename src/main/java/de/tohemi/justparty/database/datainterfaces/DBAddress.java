@@ -1,9 +1,13 @@
 package de.tohemi.justparty.database.datainterfaces;
 
+import de.tohemi.justparty.datamodel.address.Address;
+import de.tohemi.justparty.datamodel.wrapper.ZipCode;
+
 /**
  * Created by Heiko on 26.12.2015.
+ * TODO: implement Methods
  */
-public class DBAddress {
+public class DBAddress implements Address{
     private int id;
 
     public DBAddress(int id) {
@@ -13,44 +17,52 @@ public class DBAddress {
     public int getId() {
         return id;
     }
-    /*
+
     public String getStreet() {
-        return street;
+        return null;
     }
 
     public void setStreet(String street) {
-        this.street = street;
+
     }
 
     public String getHouseNumber() {
-        return houseNumber;
+        return null;
     }
 
     public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
+
     }
 
-    public int getZipCode() {
-        return zipCode;
+    public ZipCode getZipCode() {
+        return null;
     }
 
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
+    public void setZipCode(ZipCode zipCode) {
+
     }
 
     public String getCity() {
-        return city;
+        return null;
     }
 
     public void setCity(String location) {
-        this.city = city;
+
     }
 
     public String getCountry() {
-        return country;
+        return null;
     }
 
     public void setCountry(String country) {
-        this.country = country;
-    }*/
+
+    }
+
+    public void setID(int id) {
+
+    }
+
+    public int getID() {
+        return 0;
+    }
 }

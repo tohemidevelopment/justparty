@@ -1,5 +1,6 @@
 package de.tohemi.justparty.datamodel;
 
+import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.view_interface.JPDateFormat;
 
 

@@ -4,8 +4,13 @@ import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBLocationController;
 import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.*;
+import de.tohemi.justparty.datamodel.ConcreteEvent;
+import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.Location;
+import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
+import de.tohemi.justparty.datamodel.user.User;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.junit.After;
@@ -14,8 +19,6 @@ import org.junit.Test;
 import org.springframework.util.Assert;
 
 import java.sql.Date;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by xce35l2 on 20.04.2016.
@@ -38,12 +41,12 @@ public class DBEventControllerTest {
         conL = DBLocationController.getInstance();
         con = DBController.getInstance();
         email = new EMail("junit@testemail.tv");
-        user = new User(email);
+        user = UserFactory.create(email);
         user.setFirstName("JUnit");
         user.setLastName("Test");
         user.setBirthday(new Date(1995, 07, 10));
-        user.setAddress(new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
-        location = new Location("Testlocation", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
+        user.setAddress(new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
+        location = new Location("Testlocation", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
         event = new ConcreteEvent("TestEventForJUnit", user);
         conU.addUser(user, "ROLE_USER", "1234");
         conE.addEvent(event);
@@ -54,7 +57,7 @@ public class DBEventControllerTest {
     @After
     public void tearDown() throws Exception {
         conE.deleteEvent(event, user);
-        event.setId(event.getId()-1);
+        event.setId(event.getId() - 1);
         conE.deleteEvent(event, user);
         conU.removeUser(user);
         conL.deleteLocation(location);

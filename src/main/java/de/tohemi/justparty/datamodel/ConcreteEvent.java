@@ -1,10 +1,8 @@
 package de.tohemi.justparty.datamodel;
 
-import de.tohemi.justparty.view_interface.JPDateFormat;
+import de.tohemi.justparty.datamodel.user.User;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 

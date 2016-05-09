@@ -3,8 +3,13 @@ package de.tohemi.justparty.test.junit;
 import de.tohemi.justparty.database.controller.DBDeclarationController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.*;
+import de.tohemi.justparty.datamodel.ConcreteEvent;
+import de.tohemi.justparty.datamodel.Declaration;
+import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
+import de.tohemi.justparty.datamodel.user.User;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.junit.After;
 import org.junit.Before;
@@ -25,11 +30,11 @@ public class DBDeclarationControllerTest {
 
     @Before
     public void setUp() throws Exception, ZipCodeInvalidException {
-        u = new User("junit@tester.de");
+        u = UserFactory.create("junit@tester.de");
         u.setFirstName("JUnit");
         u.setLastName("Test");
         u.setBirthday(new Date(1995, 07, 10));
-        u.setAddress(new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
+        u.setAddress(new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
         DBUserController.getInstance().addUser(u, "ROLE_USER", "1234");
         e = new ConcreteEvent("TestEvent", u);
         DBEventController.getInstance().addEvent(e);

@@ -1,8 +1,8 @@
 package de.tohemi.justparty.database.controller;
 
-import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Event;
-import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.user.User;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -115,7 +115,7 @@ public class DBGuestlistController {
             ps.setInt(1,e.getId());
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                users.add(new User(rs.getString("guest")));
+                users.add(UserFactory.create(rs.getString("guest")));
             }
             ps.close();
 

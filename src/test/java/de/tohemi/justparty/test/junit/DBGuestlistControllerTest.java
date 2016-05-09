@@ -1,21 +1,20 @@
 package de.tohemi.justparty.test.junit;
 
 import de.tohemi.justparty.database.controller.*;
-import de.tohemi.justparty.datamodel.*;
+import de.tohemi.justparty.datamodel.ConcreteEvent;
+import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.Location;
+import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.util.Assert;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by xce35l2 on 28.04.2016.
@@ -28,7 +27,7 @@ public class DBGuestlistControllerTest {
     public DBGuestlistController conG;
     public DBController con;
     public Event event;
-    public de.tohemi.justparty.datamodel.User user;
+    public de.tohemi.justparty.datamodel.user.User user;
     public EMail email;
     public Location location;
 
@@ -40,12 +39,12 @@ public class DBGuestlistControllerTest {
         conG = DBGuestlistController.getInstance();
         con = DBController.getInstance();
         email = new EMail("junit@testemail.tv");
-        user = new de.tohemi.justparty.datamodel.User(email);
+        user = UserFactory.create(email);
         user.setFirstName("JUnit");
         user.setLastName("Test");
         user.setBirthday(new Date(1995, 07, 10));
-        user.setAddress(new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
-        location = new Location("Testlocation", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
+        user.setAddress(new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
+        location = new Location("Testlocation", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
         event = new ConcreteEvent("TestEventForJUnit", user);
         conU.addUser(user, "ROLE_USER", "1234");
         conE.addEvent(event);

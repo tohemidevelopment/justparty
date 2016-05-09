@@ -1,12 +1,11 @@
 package de.tohemi.justparty.businesslogic;
 
-import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.database.controller.DBEventController;
-import de.tohemi.justparty.database.datainterfaces.DBUser;
 import de.tohemi.justparty.datamodel.*;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
-import de.tohemi.justparty.util.IDGenerator;
+import de.tohemi.justparty.datamodel.user.User;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 
 import java.net.MalformedURLException;
 import java.util.Collections;
@@ -20,10 +19,10 @@ public class EventsHandlerImpl implements EventsHandler {
     public boolean createEvent(String eventname, String mail) {
 
         DBEventController dbController = DBEventController.getInstance();
-        DBUser user = new DBUser(mail);
+        User user = UserFactory.create(mail, true);
         EmailSender sender = new EmailSender();
         sender.sendCreateConfirmation(user, eventname);
-        return dbController.addEvent(new ConcreteEvent(eventname, user.getEmailuser()));
+        return dbController.addEvent(new ConcreteEvent(eventname, UserFactory.create(user.getEmail())));
     }
 
     public boolean deleteEvent(int id, String mail) {
@@ -31,13 +30,13 @@ public class EventsHandlerImpl implements EventsHandler {
         DBEventController dbController = DBEventController.getInstance();
         Event event = new ConcreteEvent(null, null);
         event.setId(id);
-        return dbController.deleteEvent(event, new User(mail));
+        return dbController.deleteEvent(event, UserFactory.create(mail));
     }
 
     public static List<UserEventRelation> getCurrentEvents(String mail) {
 
         DBEventController dbController = DBEventController.getInstance();
-        User user = new User(mail);
+        User user = UserFactory.create(mail);
         List<UserEventRelation> userEventsRelations = dbController.getHostedUERs(user);
         userEventsRelations.addAll(dbController.getInvitedUERs(user));
         return userEventsRelations;
@@ -46,7 +45,7 @@ public class EventsHandlerImpl implements EventsHandler {
     public boolean userIsHostOfRequestedEvent(int id, String mailFromLoggedInUser) {
 
         DBEventController dbController = DBEventController.getInstance();
-        return dbController.userIsHostOfRequestedEvent(new User(mailFromLoggedInUser), new ConcreteEvent(id));
+        return dbController.userIsHostOfRequestedEvent(UserFactory.create(mailFromLoggedInUser), new ConcreteEvent(id));
     }
 
     public boolean answerInvitation(int eventId, String mail, Accepted answer) {
@@ -55,18 +54,17 @@ public class EventsHandlerImpl implements EventsHandler {
             return false;
         }
         DBEventController dbController = DBEventController.getInstance();
-        return dbController.updateGuest(new ConcreteEvent(eventId), new User(mail), answer);
+        return dbController.updateGuest(new ConcreteEvent(eventId), UserFactory.create(mail), answer);
     }
 
     public List<UserEventRelation> getGuestlist(int id, String mail) {
         Event event = new ConcreteEvent(id);
-        event.setEventOwner(new User(mail));
+        event.setEventOwner(UserFactory.create(mail));
         return DBEventController.getInstance().getInvitedUsers(event);
     }
 
     public Event getEvent(final int id, String mail) {
 
-        //Example event to mock unimpleented DB connection
         Event event = null;
         try {
             event = DBEventController.getInstance().getEventById(id);
@@ -78,7 +76,7 @@ public class EventsHandlerImpl implements EventsHandler {
             e.printStackTrace();
         }
 
-        event.setEventOwner(new User(mail));
+        event.setEventOwner(UserFactory.create(mail));
         final List<UserEventRelation> guestlist = getGuestlist(id, mail);
         Collections.sort(guestlist);
         event.setGuests(guestlist);
@@ -91,8 +89,6 @@ public class EventsHandlerImpl implements EventsHandler {
         if (eventChanges.getName() != null) {
             dbEvent.setName(eventChanges.getName());
         }
-
-
         return false;
     }
 }

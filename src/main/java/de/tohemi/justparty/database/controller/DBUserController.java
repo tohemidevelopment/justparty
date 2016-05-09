@@ -2,19 +2,15 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.datainterfaces.DBAddress;
-import de.tohemi.justparty.datamodel.Address;
-import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.address.Address;
+import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.UserRoles;
-import de.tohemi.justparty.util.DateFormater;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Created by Heiko on 26.12.2015.
@@ -98,7 +94,7 @@ public class DBUserController {
         return null;
     }
 
-    public DBAddress getAddress(String email){
+    public Address getAddress(String email){
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
