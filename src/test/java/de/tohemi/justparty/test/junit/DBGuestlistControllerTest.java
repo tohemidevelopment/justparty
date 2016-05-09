@@ -2,9 +2,10 @@ package de.tohemi.justparty.test.junit;
 
 import de.tohemi.justparty.database.controller.*;
 import de.tohemi.justparty.datamodel.ConcreteEvent;
-import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.address.ConcreteAddress;
+import de.tohemi.justparty.datamodel.event.Event;
+import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
@@ -13,7 +14,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
-
 import java.sql.Date;
 
 /**
@@ -45,7 +45,9 @@ public class DBGuestlistControllerTest {
         user.setBirthday(new Date(1995, 07, 10));
         user.setAddress(new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
         location = new Location("Testlocation", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
-        event = new ConcreteEvent("TestEventForJUnit", user);
+        event = EventFactory.createEvent();
+        event.setEventOwner(user);
+        event.setName("TestEvent");
         conU.addUser(user, "ROLE_USER", "1234");
         conE.addEvent(event);
         event.setId(con.getEventID(user));
@@ -85,6 +87,6 @@ public class DBGuestlistControllerTest {
     @Test
     public void getGuestlist() throws Exception {
         conG.addGuestToEvent(event, user, 0);
-        Assert.notEmpty(conG.getGuestlist(event));
+        Assert.notEmpty(conG.getInvitedUsers(event.getId()));
     }
 }

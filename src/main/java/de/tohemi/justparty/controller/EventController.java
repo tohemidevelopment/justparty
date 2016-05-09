@@ -1,9 +1,7 @@
 package de.tohemi.justparty.controller;
 
-import de.tohemi.justparty.businesslogic.EventsHandler;
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
-import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
 import org.springframework.ui.ModelMap;

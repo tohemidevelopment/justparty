@@ -44,5 +44,4 @@ public class Location {
         this.publicLocation = publicLocation;
     }
 
-
 }

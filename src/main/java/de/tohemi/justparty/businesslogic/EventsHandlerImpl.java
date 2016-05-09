@@ -1,7 +1,12 @@
 package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.database.controller.DBEventController;
+import de.tohemi.justparty.database.controller.DBGuestlistController;
 import de.tohemi.justparty.datamodel.*;
+import de.tohemi.justparty.datamodel.event.ConcreteEvent;
+import de.tohemi.justparty.datamodel.event.DBAccessEvent;
+import de.tohemi.justparty.datamodel.event.Event;
+import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.User;
@@ -22,14 +27,16 @@ public class EventsHandlerImpl implements EventsHandler {
         User user = UserFactory.create(mail, true);
         EmailSender sender = new EmailSender();
         sender.sendCreateConfirmation(user, eventname);
-        return dbController.addEvent(new ConcreteEvent(eventname, UserFactory.create(user.getEmail())));
+        Event event = EventFactory.createEvent();
+        event.setName(eventname);
+        event.setEventOwner(UserFactory.create(user.getEmail()));
+        return dbController.addEvent(event);
     }
 
     public boolean deleteEvent(int id, String mail) {
 
         DBEventController dbController = DBEventController.getInstance();
-        Event event = new ConcreteEvent(null, null);
-        event.setId(id);
+        Event event = EventFactory.createEvent(id);
         return dbController.deleteEvent(event, UserFactory.create(mail));
     }
 
@@ -45,7 +52,7 @@ public class EventsHandlerImpl implements EventsHandler {
     public boolean userIsHostOfRequestedEvent(int id, String mailFromLoggedInUser) {
 
         DBEventController dbController = DBEventController.getInstance();
-        return dbController.userIsHostOfRequestedEvent(UserFactory.create(mailFromLoggedInUser), new ConcreteEvent(id));
+        return dbController.userIsHostOfRequestedEvent(UserFactory.create(mailFromLoggedInUser), EventFactory.createEvent(id));
     }
 
     public boolean answerInvitation(int eventId, String mail, Accepted answer) {
@@ -53,18 +60,19 @@ public class EventsHandlerImpl implements EventsHandler {
         if (answer == null) {
             return false;
         }
-        DBEventController dbController = DBEventController.getInstance();
-        return dbController.updateGuest(new ConcreteEvent(eventId), UserFactory.create(mail), answer);
+        DBGuestlistController dbController = DBGuestlistController.getInstance();
+        return dbController.addGuestToEvent(EventFactory.createEvent(eventId), UserFactory.create(mail), answer.getValue());
     }
 
     public List<UserEventRelation> getGuestlist(int id, String mail) {
-        Event event = new ConcreteEvent(id);
+        Event event = EventFactory.createEvent(id);
         event.setEventOwner(UserFactory.create(mail));
-        return DBEventController.getInstance().getInvitedUsers(event);
+        return DBGuestlistController.getInstance().getInvitedUsers(event.getId());
     }
 
     public Event getEvent(final int id, String mail) {
 
+        //Example event to mock unimpleented DB connection
         Event event = null;
         try {
             event = DBEventController.getInstance().getEventById(id);
@@ -85,10 +93,24 @@ public class EventsHandlerImpl implements EventsHandler {
 
     public boolean updateEvent(Event eventChanges) {
 
-        Event dbEvent = new DBEvent(eventChanges.getId());
+        Event dbEvent = EventFactory.createEvent(eventChanges.getId(), true);
         if (eventChanges.getName() != null) {
             dbEvent.setName(eventChanges.getName());
         }
-        return false;
+        if (eventChanges.getDescription() != null) {
+            dbEvent.setDescription(eventChanges.getDescription());
+        }
+        if (eventChanges.getBegin() != null) {
+            dbEvent.setBegin(eventChanges.getBegin());
+        }
+        if (eventChanges.getEnd() != null) {
+            dbEvent.setEnd(eventChanges.getEnd());
+        }
+        if (eventChanges.getLocation() != null) {
+            dbEvent.setLocation(eventChanges.getLocation());
+        }
+        //TODO: add missing fields
+
+        return true;
     }
 }

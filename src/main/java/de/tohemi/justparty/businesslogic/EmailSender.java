@@ -1,7 +1,7 @@
 package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.datamodel.user.DBAccessUser;
-import de.tohemi.justparty.datamodel.Event;
+import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.user.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

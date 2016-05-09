@@ -3,10 +3,11 @@ package de.tohemi.justparty.test.junit;
 import de.tohemi.justparty.database.controller.DBDeclarationController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.ConcreteEvent;
 import de.tohemi.justparty.datamodel.Declaration;
-import de.tohemi.justparty.datamodel.Event;
 import de.tohemi.justparty.datamodel.address.ConcreteAddress;
+import de.tohemi.justparty.datamodel.Declaration;
+import de.tohemi.justparty.datamodel.event.Event;
+import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
@@ -15,7 +16,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
-
 import java.sql.Date;
 
 /**
@@ -36,7 +36,9 @@ public class DBDeclarationControllerTest {
         u.setBirthday(new Date(1995, 07, 10));
         u.setAddress(new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
         DBUserController.getInstance().addUser(u, "ROLE_USER", "1234");
-        e = new ConcreteEvent("TestEvent", u);
+        e = EventFactory.createEvent();
+        e.setName("TestEvent");
+        e.setEventOwner(u);
         DBEventController.getInstance().addEvent(e);
         int event_id = DBEventController.getInstance().getEventID(e);
         e.setId(event_id);

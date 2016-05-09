@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
@@ -62,7 +63,7 @@
         <div id="guestlist_text" style="display: none;"><%@include file="../fragments/editEvent/guestlist.jsp"%></div>
     </div>
     <button type="submit" class="btn btn-primary btn-block" onclick="sendEventDataChanges(${event.id});"><spring:message code="editevent.button.save"/></button>
-    <button type="button" class="btn btn-default btn-block"><spring:message code="editevent.button.back"/></button>
+    <button type="button" class="btn btn-default btn-block" onclick="location.href='/manageEvent'"><spring:message code="editevent.button.back"/></button>
 </form>
 </div>
 
