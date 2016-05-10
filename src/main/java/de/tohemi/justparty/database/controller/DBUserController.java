@@ -5,7 +5,6 @@ import de.tohemi.justparty.database.datainterfaces.DBAddress;
 import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.address.Address;
 import de.tohemi.justparty.datamodel.user.User;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
@@ -29,8 +28,10 @@ public class DBUserController {
     }
 
     private DataSource getDataSource() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-database.xml");
-        return (DataSource) ctx.getBean("dataSource");
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-database.xml");
+        DataSource dataSource = (DataSource) ctx.getBean("dataSource");
+        ctx.close();
+        return dataSource;
     }
 
     private void releaseConnection(DataSource ds, Connection c) {
