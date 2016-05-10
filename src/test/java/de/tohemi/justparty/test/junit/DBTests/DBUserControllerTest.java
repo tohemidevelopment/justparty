@@ -6,6 +6,7 @@ import de.tohemi.justparty.database.datainterfaces.DBAddress;
 import de.tohemi.justparty.datamodel.Address;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
@@ -41,7 +42,7 @@ public class DBUserControllerTest {
         user.setBirthday(new Date(birthday.getTimeInMillis()));
         user.setAddress(new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
         location = new Location("Testlocation", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
-        conU.addUser(user, "ROLE_USER", "1234");
+        conU.addUser(user, UserRoles.USER, "1234");
         conL.addLocation(location);
     }
 
@@ -79,7 +80,7 @@ public class DBUserControllerTest {
     @Test
     public void addUser() throws Exception {
         conU.removeUser(user);
-        Assert.isTrue(conU.addUser(user, "ROLE_USER", "12345"));
+        Assert.isTrue(conU.addUser(user, UserRoles.USER, "12345"));
     }
 
     @Test
