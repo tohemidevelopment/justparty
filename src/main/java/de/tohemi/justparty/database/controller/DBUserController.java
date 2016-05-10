@@ -5,6 +5,8 @@ import de.tohemi.justparty.database.datainterfaces.DBAddress;
 import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.address.Address;
 import de.tohemi.justparty.datamodel.user.User;
+import de.tohemi.justparty.util.SystemProperties;
+import de.tohemi.justparty.util.logger.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
@@ -14,7 +16,7 @@ import java.sql.*;
 /**
  * Created by Heiko on 26.12.2015.
  */
-public class DBUserController {
+public class DBUserController extends DBControl {
     private static DBUserController instance;
 
     private DBUserController() {
@@ -25,22 +27,6 @@ public class DBUserController {
             return new DBUserController();
         }
         return instance;
-    }
-
-    private DataSource getDataSource() {
-        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring-database.xml");
-        DataSource dataSource = (DataSource) ctx.getBean("dataSource");
-        ctx.close();
-        return dataSource;
-    }
-
-    private void releaseConnection(DataSource ds, Connection c) {
-        try {
-            c.close();
-        } catch (SQLException exp) {
-            exp.getStackTrace();
-        }
-        DataSourceUtils.releaseConnection(c, ds);
     }
 
     public String getLastName(String email) {
@@ -55,7 +41,9 @@ public class DBUserController {
             }
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
         }
         return null;
     }
@@ -72,7 +60,7 @@ public class DBUserController {
             }
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -91,7 +79,8 @@ public class DBUserController {
             }
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
+        } finally {
             releaseConnection(ds, c);
         }
         return null;
@@ -112,7 +101,7 @@ public class DBUserController {
 
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -131,8 +120,7 @@ public class DBUserController {
             c.close();
             DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -151,7 +139,7 @@ public class DBUserController {
             c.close();
             DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -171,7 +159,7 @@ public class DBUserController {
             c.close();
             DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -191,7 +179,7 @@ public class DBUserController {
             c.close();
             DataSourceUtils.releaseConnection(c, ds);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -213,7 +201,7 @@ public class DBUserController {
             rs.close();
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -236,7 +224,7 @@ public class DBUserController {
             psEnable.close();
             psDelete.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -257,8 +245,8 @@ public class DBUserController {
             }
             rs.close();
             ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -276,7 +264,7 @@ public class DBUserController {
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -300,7 +288,8 @@ public class DBUserController {
                 return false;
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
+            return false;
         } finally {
             releaseConnection(ds, c);
         }
@@ -323,7 +312,7 @@ public class DBUserController {
             psUser.executeUpdate();
             psUser.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -345,7 +334,7 @@ public class DBUserController {
             psUser.close();
             psGuestlist.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -364,7 +353,7 @@ public class DBUserController {
             psUser.executeUpdate();
             psUser.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);

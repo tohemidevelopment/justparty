@@ -14,8 +14,6 @@ import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
@@ -28,8 +26,7 @@ import java.util.List;
 /**
  * Created by Tom on 24.04.2016.
  */
-public class DBEventController {
-
+public class DBEventController extends DBControl {
     private static DBEventController instance;
 
     public synchronized static DBEventController getInstance() {
@@ -37,19 +34,6 @@ public class DBEventController {
             return new DBEventController();
         }
         return instance;
-    }
-
-    private DataSource getDataSource() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-database.xml");
-        return (DataSource) ctx.getBean("dataSource");
-    }
-
-    private void releaseConnection(DataSource ds, Connection c) {
-        try {
-            c.close();
-        } catch (SQLException exp) {
-        }
-        DataSourceUtils.releaseConnection(c, ds);
     }
 
     public boolean addEvent(Event e) {
@@ -63,11 +47,10 @@ public class DBEventController {
             ps.executeUpdate();
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
-            e.setId(getEventID(e));
         }
         return true;
     }
@@ -88,9 +71,8 @@ public class DBEventController {
             }
             psEvent.close();
             psGuests.close();
-
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -122,10 +104,8 @@ public class DBEventController {
             }
             psEvent.close();
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
-            // ignore failure closing connection
             releaseConnection(ds, c);
         }
         return event;
@@ -163,9 +143,9 @@ public class DBEventController {
                 tries = true;
             }
             pS.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            tries = false;
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+            return false;
         } finally {
             releaseConnection(ds, c);
         }
@@ -186,8 +166,9 @@ public class DBEventController {
                 tries = true;
             }
             preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+            return false;
         } finally {
             releaseConnection(ds, c);
         }
@@ -217,16 +198,15 @@ public class DBEventController {
             }
             resultSet.close();
             preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
-
         return userEventRelations;
     }
 
-    public ArrayList<UserEventRelation> getInvitedUERs(User user) {
+    public List<UserEventRelation> getInvitedUERs(User user) {
 
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
@@ -253,8 +233,8 @@ public class DBEventController {
             }
             resultSet.close();
             preparedStatement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -276,7 +256,7 @@ public class DBEventController {
             rs.close();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -297,7 +277,7 @@ public class DBEventController {
             rs.close();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -315,7 +295,7 @@ public class DBEventController {
             psEvent.execute();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -335,7 +315,7 @@ public class DBEventController {
             rs.close();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -353,11 +333,10 @@ public class DBEventController {
             psEvent.execute();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
-
     }
 
     public Timestamp getBegin(int id) {
@@ -374,7 +353,7 @@ public class DBEventController {
             }
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -392,11 +371,10 @@ public class DBEventController {
             psEvent.execute();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
-
     }
 
     public Timestamp getEnd(int id) {
@@ -413,7 +391,7 @@ public class DBEventController {
             }
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -431,7 +409,7 @@ public class DBEventController {
             psEvent.execute();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -458,10 +436,8 @@ public class DBEventController {
             }
             rs.close();
             psLocation.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ZipCodeInvalidException e) {
-            e.printStackTrace();
+        } catch (SQLException | ZipCodeInvalidException ex) {
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -479,7 +455,7 @@ public class DBEventController {
             psEvent.execute();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -499,7 +475,7 @@ public class DBEventController {
             }
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -517,7 +493,7 @@ public class DBEventController {
             psEvent.execute();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -537,7 +513,7 @@ public class DBEventController {
             }
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -555,11 +531,10 @@ public class DBEventController {
             psEvent.execute();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
-
     }
 
     public URL getSpotifyLink(int id) {
@@ -576,7 +551,7 @@ public class DBEventController {
             }
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -594,7 +569,7 @@ public class DBEventController {
             psEvent.execute();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -614,7 +589,7 @@ public class DBEventController {
             }
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -632,7 +607,7 @@ public class DBEventController {
             psEvent.execute();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -652,7 +627,7 @@ public class DBEventController {
             }
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -670,7 +645,7 @@ public class DBEventController {
             psEvent.execute();
             psEvent.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }

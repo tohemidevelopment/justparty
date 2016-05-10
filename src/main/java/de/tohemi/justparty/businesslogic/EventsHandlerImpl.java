@@ -2,15 +2,16 @@ package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBGuestlistController;
-import de.tohemi.justparty.datamodel.*;
-import de.tohemi.justparty.datamodel.event.ConcreteEvent;
-import de.tohemi.justparty.datamodel.event.DBAccessEvent;
+import de.tohemi.justparty.datamodel.Accepted;
+import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
+import de.tohemi.justparty.util.SystemProperties;
+import de.tohemi.justparty.util.logger.Logger;
 
 import java.net.MalformedURLException;
 import java.util.Collections;
@@ -20,6 +21,7 @@ import java.util.List;
  * Created by Micha Piertzik on 17.11.2015.
  */
 public class EventsHandlerImpl implements EventsHandler {
+    private static final Logger LOGGER = SystemProperties.getLogger();
 
     public boolean createEvent(String eventname, String mail) {
 
@@ -76,12 +78,8 @@ public class EventsHandlerImpl implements EventsHandler {
         Event event = null;
         try {
             event = DBEventController.getInstance().getEventById(id);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (InvalidEmailException e) {
-            e.printStackTrace();
-        } catch (ZipCodeInvalidException e) {
-            e.printStackTrace();
+        } catch (MalformedURLException | InvalidEmailException | ZipCodeInvalidException e) {
+            LOGGER.logException(e, "");
         }
 
         event.setEventOwner(UserFactory.create(mail));

@@ -3,6 +3,8 @@ package de.tohemi.justparty.database.controller;
 import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.user.UserFactory;
+import de.tohemi.justparty.util.SystemProperties;
+import de.tohemi.justparty.util.logger.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
@@ -17,30 +19,17 @@ import java.util.ArrayList;
 /**
  * Created by Tom on 24.04.2016.
  */
-public class DBDeclarationController {
+public class DBDeclarationController extends DBControl {
     private static DBDeclarationController instance;
 
-    private DBDeclarationController(){}
+    private DBDeclarationController() {
+    }
 
     public synchronized static DBDeclarationController getInstance() {
         if (instance == null) {
             return new DBDeclarationController();
         }
         return instance;
-    }
-
-    private DataSource getDataSource() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-database.xml");
-        return (DataSource) ctx.getBean("dataSource");
-    }
-
-    private void releaseConnection(DataSource ds, Connection c) {
-        try {
-            c.close();
-            DataSourceUtils.releaseConnection(c, ds);
-        } catch (SQLException exp) {
-            System.out.println(exp.toString());
-        }
     }
 
     public boolean addDeclaration(Declaration d) {
@@ -55,9 +44,8 @@ public class DBDeclarationController {
             ps.setInt(4, d.getEventId());
             ps.execute();
             ps.close();
-
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -77,9 +65,8 @@ public class DBDeclarationController {
             ps.setInt(4, d.getEventId());
             ps.execute();
             ps.close();
-
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -99,9 +86,8 @@ public class DBDeclarationController {
             ps.setInt(4, d.getEventId());
             ps.execute();
             ps.close();
-
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -123,7 +109,7 @@ public class DBDeclarationController {
             ps.close();
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }

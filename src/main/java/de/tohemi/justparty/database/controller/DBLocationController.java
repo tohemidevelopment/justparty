@@ -1,10 +1,11 @@
 package de.tohemi.justparty.database.controller;
 
-import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.Location;
+import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
-import org.springframework.context.ApplicationContext;
+import de.tohemi.justparty.util.SystemProperties;
+import de.tohemi.justparty.util.logger.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
@@ -17,27 +18,17 @@ import java.sql.SQLException;
 /**
  * Created by Heiko on 26.12.2015.
  */
-public class DBLocationController {
+public class DBLocationController extends DBControl {
     private static DBLocationController instance;
 
-    public DBLocationController(){}
+    public DBLocationController() {
+    }
 
     public synchronized static DBLocationController getInstance() {
         if (instance == null) {
             return new DBLocationController();
         }
         return instance;
-    }
-    private DataSource getDataSource() {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-database.xml");
-        return (DataSource) ctx.getBean("dataSource");
-    }
-    private void releaseConnection(DataSource ds, Connection c) {
-        try {
-            c.close();
-        } catch (SQLException exp) {
-        }
-        DataSourceUtils.releaseConnection(c, ds);
     }
 
     public Location getLocationByID(int id) throws ZipCodeInvalidException {
@@ -50,8 +41,7 @@ public class DBLocationController {
             psAddress.setInt(1, id);
             ResultSet rs = psAddress.executeQuery();
 
-            while(rs.next())
-            {
+            while (rs.next()) {
                 location.setName(rs.getString("name"));
                 address.setStreet(rs.getString("street"));
                 address.setHouseNumber(rs.getString("house_nr"));
@@ -78,7 +68,7 @@ public class DBLocationController {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("INSERT INTO location(street, house_nr, city, zipcode, country, name, public) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1,l.getAddress().getStreet());
+            ps.setString(1, l.getAddress().getStreet());
             ps.setInt(2, Integer.parseInt(l.getAddress().getHouseNumber()));
             ps.setString(3, l.getAddress().getCity());
             ps.setInt(4, l.getAddress().getZipCode().getZipInt());
@@ -88,7 +78,7 @@ public class DBLocationController {
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -106,7 +96,7 @@ public class DBLocationController {
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -120,7 +110,7 @@ public class DBLocationController {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("UPDATE location SET street=? AND house_nr=? AND city=? AND zipcode=? AND country=? AND name=? AND public=? WHERE address_id=?");
-            ps.setString(1,l.getAddress().getStreet());
+            ps.setString(1, l.getAddress().getStreet());
             ps.setInt(2, Integer.parseInt(l.getAddress().getHouseNumber()));
             ps.setString(3, l.getAddress().getCity());
             ps.setInt(4, l.getAddress().getZipCode().getZipInt());
@@ -131,7 +121,7 @@ public class DBLocationController {
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.logException(ex, "");
             return false;
         } finally {
             releaseConnection(ds, c);
@@ -145,8 +135,8 @@ public class DBLocationController {
         Connection c = DataSourceUtils.getConnection(ds);
         int exe = 0;
         try {
-            PreparedStatement ps = c.prepareStatement("SELECT address_id FROM location Where street=? AND house_nr=? AND city=? AND zipcode=? AND country=? AND name=? AND public=?");
-            ps.setString(1,l.getAddress().getStreet());
+            PreparedStatement ps = c.prepareStatement("SELECT address_id FROM location WHERE street=? AND house_nr=? AND city=? AND zipcode=? AND country=? AND name=? AND public=?");
+            ps.setString(1, l.getAddress().getStreet());
             ps.setInt(2, Integer.parseInt(l.getAddress().getHouseNumber()));
             ps.setString(3, l.getAddress().getCity());
             ps.setInt(4, l.getAddress().getZipCode().getZipInt());
@@ -154,10 +144,9 @@ public class DBLocationController {
             ps.setString(6, l.getName());
             ps.setBoolean(7, l.isPublicLocation());
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 exe = rs.getInt("address_id");
             }
-
         } catch (SQLException ex) {
             ex.printStackTrace();
             return exe;
