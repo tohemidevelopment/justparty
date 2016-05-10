@@ -11,8 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
  * Created by Heiko on 16.12.2015.
  */
 public class RandomizerTest extends TestCase {
-    public void testNumber2() {
-
+    public void generateLength50() {
         assertTrue(50 == IDGenerator.generateID(50).length());
     }
 }
