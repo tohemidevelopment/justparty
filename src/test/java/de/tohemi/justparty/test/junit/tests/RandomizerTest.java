@@ -1,4 +1,4 @@
-package de.tohemi.justparty.test.junit;
+package de.tohemi.justparty.test.junit.tests;
 
 import de.tohemi.justparty.util.IDGenerator;
 import org.junit.Test;
