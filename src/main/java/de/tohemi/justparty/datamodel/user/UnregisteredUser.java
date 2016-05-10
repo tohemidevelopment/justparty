@@ -3,6 +3,7 @@ package de.tohemi.justparty.datamodel.user;
 import de.tohemi.justparty.datamodel.address.Address;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
+import de.tohemi.justparty.util.SystemProperties;
 
 import java.sql.Date;
 
@@ -33,7 +34,7 @@ public class UnregisteredUser implements User {
             new EMail(email); //TEST IF VALID
             this.email = email;
         } catch (InvalidEmailException e) {
-            e.printStackTrace();
+            SystemProperties.getLogger().logException(e);
         }
     }
 

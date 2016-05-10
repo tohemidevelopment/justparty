@@ -3,7 +3,7 @@ package de.tohemi.justparty.datamodel.exceptions;
 /**
  * Created by Micha Piertzik on 12.11.2015.
  */
-public class ZipCodeInvalidException extends Throwable {
+public class ZipCodeInvalidException extends Exception {
     public ZipCodeInvalidException() {
     }
 

@@ -1,15 +1,18 @@
 package de.tohemi.justparty.businesslogic.user;
 
-import de.tohemi.justparty.businesslogic.*;
+import de.tohemi.justparty.businesslogic.EmailSender;
 import de.tohemi.justparty.businesslogic.Error;
+import de.tohemi.justparty.businesslogic.ErrorType;
+import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.user.DBAccessUser;
-import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
+import de.tohemi.justparty.datamodel.user.DBAccessUser;
+import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.util.IDGenerator;
+import de.tohemi.justparty.util.SystemProperties;
 
 /**
  * Created by Micha Piertzik on 23.11.2015.
@@ -23,7 +26,7 @@ public class UserHandler {
         try {
             user = UserFactory.create(new EMail(email));
         } catch (InvalidEmailException e) {
-            //log exception
+            SystemProperties.getLogger().logException(e);
             return new de.tohemi.justparty.businesslogic.Error("register.error.email", ErrorType.EMAIL);
         }
         if (!passwordValid(password, matchingPassword)) {
@@ -47,6 +50,7 @@ public class UserHandler {
             }
 
         } catch (UserNotFoundException e) {
+            SystemProperties.getLogger().logException(e);
             //User not in DB
             if (dbController.addUser(user, UserRoles.USER, HashFunction.getHash(password))) {
                 //User added to DB
@@ -58,8 +62,8 @@ public class UserHandler {
     }
 
     private void sendVerificationEmail(String email) {
-        EmailSender sender= new EmailSender();
-        String id= IDGenerator.generateID(50);
+        EmailSender sender = new EmailSender();
+        String id = IDGenerator.generateID(50);
         sender.sendEmailVerification(new DBAccessUser(email), id);
         DBUserController.getInstance().addVerificationData(email, id);
 
@@ -79,11 +83,11 @@ public class UserHandler {
         return true;
     }
 
-    public Error verifyEmail(String verificationID){
-        if(DBUserController.getInstance().verificationIDIsValid(verificationID)){
+    public Error verifyEmail(String verificationID) {
+        if (DBUserController.getInstance().verificationIDIsValid(verificationID)) {
             DBUserController.getInstance().verifyEmail(verificationID);
             return null;
         }
-        return new Error("Bestätigung Fehlgeschlafen",ErrorType.GENERAL);
+        return new Error("Bestätigung Fehlgeschlafen", ErrorType.GENERAL);
     }
 }
