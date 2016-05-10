@@ -1,22 +1,12 @@
 package de.tohemi.justparty.database.controller;
 
-import de.tohemi.justparty.businesslogic.UserNotFoundException;
-import de.tohemi.justparty.database.tables.EventsDBTabelle;
-import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
-import de.tohemi.justparty.datamodel.*;
-import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
-import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
-import de.tohemi.justparty.datamodel.wrapper.EMail;
-import de.tohemi.justparty.datamodel.wrapper.ZipCode;
+import de.tohemi.justparty.datamodel.user.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
-import java.net.MalformedURLException;
 import java.sql.*;
-import java.sql.Date;
-import java.util.*;
 
 /**
  * Created by Heiko on 04.11.2015.

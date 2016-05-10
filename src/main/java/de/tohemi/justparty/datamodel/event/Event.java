@@ -1,11 +1,12 @@
 package de.tohemi.justparty.datamodel.event;
 
 import de.tohemi.justparty.datamodel.Location;
-import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 
+import de.tohemi.justparty.datamodel.user.User;
+
 import java.net.URL;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -21,13 +22,13 @@ public interface Event {
 
     void setDescription(String description);
 
-    Date getBegin();
+    Timestamp getBegin();
 
-    void setBegin(Date begin);
+    void setBegin(Timestamp begin);
 
-    Date getEnd();
+    Timestamp getEnd();
 
-    void setEnd(Date end);
+    void setEnd(Timestamp end);
 
     Location getLocation();
 

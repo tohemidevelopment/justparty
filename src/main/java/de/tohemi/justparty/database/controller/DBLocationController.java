@@ -1,6 +1,6 @@
 package de.tohemi.justparty.database.controller;
 
-import de.tohemi.justparty.datamodel.Address;
+import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
@@ -42,7 +42,7 @@ public class DBLocationController {
 
     public Location getLocationByID(int id) throws ZipCodeInvalidException {
         final Location location = new Location("NAME", null, false);
-        final Address address = new Address("street", "housenumber", new ZipCode(12345), "City", "Country");
+        final ConcreteAddress address = new ConcreteAddress("street", "housenumber", new ZipCode(12345), "City", "Country");
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {

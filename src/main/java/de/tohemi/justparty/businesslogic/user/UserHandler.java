@@ -2,13 +2,12 @@ package de.tohemi.justparty.businesslogic.user;
 
 import de.tohemi.justparty.businesslogic.*;
 import de.tohemi.justparty.businesslogic.Error;
-import de.tohemi.justparty.database.controller.DBController;
-import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.database.datainterfaces.DBUser;
-import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.user.DBAccessUser;
+import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.util.IDGenerator;
 
@@ -22,7 +21,7 @@ public class UserHandler {
     public Error createUser(String email, String password, String matchingPassword, boolean acceptedTerms) {
         User user;
         try {
-            user = new User(new EMail(email));
+            user = UserFactory.create(new EMail(email));
         } catch (InvalidEmailException e) {
             //log exception
             return new de.tohemi.justparty.businesslogic.Error("register.error.email", ErrorType.EMAIL);
@@ -61,7 +60,7 @@ public class UserHandler {
     private void sendVerificationEmail(String email) {
         EmailSender sender= new EmailSender();
         String id= IDGenerator.generateID(50);
-        sender.sendEmailVerification(new DBUser(email), id);
+        sender.sendEmailVerification(new DBAccessUser(email), id);
         DBUserController.getInstance().addVerificationData(email, id);
 
     }

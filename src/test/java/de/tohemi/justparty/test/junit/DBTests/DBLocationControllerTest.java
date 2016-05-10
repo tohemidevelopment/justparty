@@ -1,7 +1,8 @@
 package de.tohemi.justparty.test.junit.dbtests;
 
 import de.tohemi.justparty.database.controller.DBLocationController;
-import de.tohemi.justparty.datamodel.Address;
+import de.tohemi.justparty.datamodel.address.Address;
+import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
@@ -21,7 +22,7 @@ public class DBLocationControllerTest {
 
     @Before
     public void setUp() throws Exception, ZipCodeInvalidException {
-        address = new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland");
+        address = new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland");
         conL = new DBLocationController().getInstance();
         location = new Location("LocationName", address, false);
         conL.addLocation(location);

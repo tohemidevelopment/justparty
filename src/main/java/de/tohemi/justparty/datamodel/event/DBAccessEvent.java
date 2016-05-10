@@ -3,10 +3,11 @@ package de.tohemi.justparty.datamodel.event;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBGuestlistController;
 import de.tohemi.justparty.datamodel.Location;
-import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.UserEventRelation;
+import de.tohemi.justparty.datamodel.user.User;
+
 import java.net.URL;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -41,22 +42,22 @@ public class DBAccessEvent implements Event {
     }
 
     @Override
-    public Date getBegin() {
+    public Timestamp getBegin() {
         return DBEventController.getInstance().getBegin(id);
     }
 
     @Override
-    public void setBegin(Date begin) {
+    public void setBegin(Timestamp begin) {
         DBEventController.getInstance().setBegin(id, begin);
     }
 
     @Override
-    public Date getEnd() {
+    public Timestamp getEnd() {
         return DBEventController.getInstance().getEnd(id);
     }
 
     @Override
-    public void setEnd(Date end) {
+    public void setEnd(Timestamp end) {
         DBEventController.getInstance().setEnd(id, end);
     }
 

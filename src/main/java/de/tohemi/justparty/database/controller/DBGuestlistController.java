@@ -1,9 +1,10 @@
 package de.tohemi.justparty.database.controller;
 
+import de.tohemi.justparty.datamodel.user.User;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.event.Event;
-import de.tohemi.justparty.datamodel.User;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import org.springframework.context.ApplicationContext;
@@ -130,7 +131,7 @@ public class DBGuestlistController {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                gl.add(new UserEventRelation(ev, new User(resultSet.getString("guest")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
+                gl.add(new UserEventRelation(ev, UserFactory.create(resultSet.getString("guest")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
             }
             resultSet.close();
             preparedStatement.close();

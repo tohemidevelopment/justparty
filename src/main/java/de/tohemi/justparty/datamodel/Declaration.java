@@ -1,5 +1,7 @@
 package de.tohemi.justparty.datamodel;
 
+import de.tohemi.justparty.datamodel.user.User;
+
 /**
  * Created by xce35l2 on 25.04.2016.
  */

@@ -2,7 +2,6 @@ package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBGuestlistController;
-import de.tohemi.justparty.database.datainterfaces.DBUser;
 import de.tohemi.justparty.datamodel.*;
 import de.tohemi.justparty.datamodel.event.ConcreteEvent;
 import de.tohemi.justparty.datamodel.event.DBAccessEvent;
@@ -10,6 +9,8 @@ import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
+import de.tohemi.justparty.datamodel.user.User;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 
 import java.net.MalformedURLException;
 import java.util.Collections;
@@ -23,12 +24,12 @@ public class EventsHandlerImpl implements EventsHandler {
     public boolean createEvent(String eventname, String mail) {
 
         DBEventController dbController = DBEventController.getInstance();
-        DBUser user = new DBUser(mail);
+        User user = UserFactory.create(mail, true);
         EmailSender sender = new EmailSender();
         sender.sendCreateConfirmation(user, eventname);
         Event event = EventFactory.createEvent();
         event.setName(eventname);
-        event.setEventOwner(user.getEmailuser());
+        event.setEventOwner(UserFactory.create(user.getEmail()));
         return dbController.addEvent(event);
     }
 
@@ -36,13 +37,13 @@ public class EventsHandlerImpl implements EventsHandler {
 
         DBEventController dbController = DBEventController.getInstance();
         Event event = EventFactory.createEvent(id);
-        return dbController.deleteEvent(event, new User(mail));
+        return dbController.deleteEvent(event, UserFactory.create(mail));
     }
 
     public static List<UserEventRelation> getCurrentEvents(String mail) {
 
         DBEventController dbController = DBEventController.getInstance();
-        User user = new User(mail);
+        User user = UserFactory.create(mail);
         List<UserEventRelation> userEventsRelations = dbController.getHostedUERs(user);
         userEventsRelations.addAll(dbController.getInvitedUERs(user));
         return userEventsRelations;
@@ -51,7 +52,7 @@ public class EventsHandlerImpl implements EventsHandler {
     public boolean userIsHostOfRequestedEvent(int id, String mailFromLoggedInUser) {
 
         DBEventController dbController = DBEventController.getInstance();
-        return dbController.userIsHostOfRequestedEvent(new User(mailFromLoggedInUser), EventFactory.createEvent(id));
+        return dbController.userIsHostOfRequestedEvent(UserFactory.create(mailFromLoggedInUser), EventFactory.createEvent(id));
     }
 
     public boolean answerInvitation(int eventId, String mail, Accepted answer) {
@@ -59,13 +60,13 @@ public class EventsHandlerImpl implements EventsHandler {
         if (answer == null) {
             return false;
         }
-        DBEventController dbController = DBEventController.getInstance();
-        return dbController.updateGuest(EventFactory.createEvent(eventId), new User(mail), answer);
+        DBGuestlistController dbController = DBGuestlistController.getInstance();
+        return dbController.addGuestToEvent(EventFactory.createEvent(eventId), UserFactory.create(mail), answer.getValue());
     }
 
     public List<UserEventRelation> getGuestlist(int id, String mail) {
         Event event = EventFactory.createEvent(id);
-        event.setEventOwner(new User(mail));
+        event.setEventOwner(UserFactory.create(mail));
         return DBGuestlistController.getInstance().getInvitedUsers(event.getId());
     }
 
@@ -83,7 +84,7 @@ public class EventsHandlerImpl implements EventsHandler {
             e.printStackTrace();
         }
 
-        event.setEventOwner(new User(mail));
+        event.setEventOwner(UserFactory.create(mail));
         final List<UserEventRelation> guestlist = getGuestlist(id, mail);
         Collections.sort(guestlist);
         event.setGuests(guestlist);
@@ -96,8 +97,20 @@ public class EventsHandlerImpl implements EventsHandler {
         if (eventChanges.getName() != null) {
             dbEvent.setName(eventChanges.getName());
         }
+        if (eventChanges.getDescription() != null) {
+            dbEvent.setDescription(eventChanges.getDescription());
+        }
+        if (eventChanges.getBegin() != null) {
+            dbEvent.setBegin(eventChanges.getBegin());
+        }
+        if (eventChanges.getEnd() != null) {
+            dbEvent.setEnd(eventChanges.getEnd());
+        }
+        if (eventChanges.getLocation() != null) {
+            dbEvent.setLocation(eventChanges.getLocation());
+        }
+        //TODO: add missing fields
 
-
-        return false;
+        return true;
     }
 }

@@ -3,16 +3,18 @@ package de.tohemi.justparty.test.junit.dbtests;
 import de.tohemi.justparty.database.controller.DBLocationController;
 import de.tohemi.justparty.database.controller.DBUserController;
 import de.tohemi.justparty.database.datainterfaces.DBAddress;
-import de.tohemi.justparty.datamodel.Address;
 import de.tohemi.justparty.datamodel.Location;
-import de.tohemi.justparty.datamodel.User;
+import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
+import de.tohemi.justparty.datamodel.user.User;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.util.Assert;
+
 import java.sql.Date;
 
 /**
@@ -31,12 +33,12 @@ public class DBUserControllerTest {
         conU = DBUserController.getInstance();
         conL = DBLocationController.getInstance();
         email = new EMail("junit@testemail.tv");
-        user = new User(email);
+        user = UserFactory.create(email);
         user.setFirstName("JUnit");
         user.setLastName("Test");
         user.setBirthday(new Date(1995, 07, 10));
-        user.setAddress(new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
-        location = new Location("Testlocation", new Address("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
+        user.setAddress(new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
+        location = new Location("Testlocation", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
         conU.addUser(user, "ROLE_USER", "1234");
         conL.addLocation(location);
     }
@@ -89,30 +91,30 @@ public class DBUserControllerTest {
     }
 
     @Test
-    public void getAddress() throws Exception  {
+    public void getAddress() throws Exception {
         Assert.notNull(DBUserController.getInstance().getAddress(email.toString()));
     }
 
     @Test
-    public void setLastName() throws Exception  {
+    public void setLastName() throws Exception {
         DBUserController.getInstance().setLastName("TEST", email.toString());
         Assert.hasText(DBUserController.getInstance().getLastName(email.toString()));
     }
 
     @Test
-    public void setFirstName() throws Exception  {
+    public void setFirstName() throws Exception {
         DBUserController.getInstance().setFirstName("TEST", email.toString());
         Assert.hasText(DBUserController.getInstance().getFirstName(email.toString()));
     }
 
     @Test
-    public void setAddress() throws Exception  {
+    public void setAddress() throws Exception {
         DBUserController.getInstance().setAddress(new DBAddress(4), email.toString());
-        Assert.isTrue(4 == DBUserController.getInstance().getAddress(email.toString()).getId());
+        Assert.isTrue(4 == DBUserController.getInstance().getAddress(email.toString()).getID());
     }
 
     @Test
-    public void setBirthday() throws Exception  {
+    public void setBirthday() throws Exception {
         Assert.isTrue(DBUserController.getInstance().setBirthday(new Date(2016, 05, 05), email.toString()));
     }
 }

@@ -3,6 +3,8 @@ package de.tohemi.justparty.datamodel.event;
 import de.tohemi.justparty.datamodel.event.ConcreteEvent;
 import de.tohemi.justparty.datamodel.event.EventType;
 
+import de.tohemi.justparty.datamodel.user.User;
+
 import java.net.URL;
 
 /**

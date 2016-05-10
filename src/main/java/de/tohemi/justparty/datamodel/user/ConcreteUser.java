@@ -1,24 +1,27 @@
-package de.tohemi.justparty.datamodel;
+package de.tohemi.justparty.datamodel.user;
 
+import de.tohemi.justparty.datamodel.address.Address;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 
 import java.sql.Date;
-import java.util.Calendar;
 
 /**
  * Created by Heiko on 04.11.2015.
  */
-public class User extends Person {
+public class ConcreteUser implements User {
+    private String email;
     private String lastName;
     private String firstName;
     private Address address;
     private Date birthday;
 
-    public User(String email) {
-        super(email);
+    public ConcreteUser(String email) {
+        this.email = email;
     }
-    public User(EMail email) {
-        super(email);
+
+    @Deprecated
+    public ConcreteUser(EMail email) {
+        this.email = email.toString();
     }
 
     public String getLastName() {
@@ -53,5 +56,15 @@ public class User extends Person {
         this.birthday = birthday;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(EMail email) {
+        this.email = email.toString();
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

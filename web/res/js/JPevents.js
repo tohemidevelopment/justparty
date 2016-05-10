@@ -123,8 +123,15 @@ function updateEventData(id)
 function sendEventDataChanges(id)
 {
     const URL = '/eventdata';
-    const ajaxSettings = {type: 'POST', data:eventDataChanges, headers:{id:id}};
-    $.ajax(URL, ajaxSettings)
+    var data = JSON.stringify(eventDataChanges);
+    $.ajax({
+        url:URL,
+        type: 'POST',
+        data: data,
+        headers:{id:id},
+        processData:false,
+        contentType: "application/json; charset=utf-8"
+    });
 }
 
 function showOwnedEvents()
