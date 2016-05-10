@@ -1,11 +1,10 @@
 package de.tohemi.justparty.test.junit.tests;
 
-import de.tohemi.justparty.businesslogic.Error;
+
 import de.tohemi.justparty.businesslogic.ErrorType;
 import de.tohemi.justparty.businesslogic.user.UserHandler;
 import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.User;
-import de.tohemi.justparty.datamodel.wrapper.EMail;
+import de.tohemi.justparty.datamodel.user.UserFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +25,7 @@ public class UserHandlerTest {
 
     @After
     public void tearDown() throws Exception {
-        DBUserController.getInstance().removeUser(new User(new EMail("test@test.de")));
+        DBUserController.getInstance().removeUser(UserFactory.create("test@test.de"));
     }
 
 /*
