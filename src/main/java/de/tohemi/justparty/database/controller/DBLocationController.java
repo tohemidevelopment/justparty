@@ -4,9 +4,6 @@ import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
-import de.tohemi.justparty.util.SystemProperties;
-import de.tohemi.justparty.util.logger.Logger;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
@@ -51,12 +48,11 @@ public class DBLocationController extends DBControl {
                 location.setPublicLocation(rs.getBoolean("public"));
             }
             location.setAddress(address);
+            psAddress.close();
 
         } catch (SQLException ex) {
-            // something has failed and we print a stack trace to analyse the error
-            ex.printStackTrace();
+            LOGGER.logException(ex);
         } finally {
-            // ignore failure closing connection
             releaseConnection(ds, c);
         }
         return location;
@@ -147,6 +143,7 @@ public class DBLocationController extends DBControl {
             while (rs.next()) {
                 exe = rs.getInt("address_id");
             }
+            ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
             return exe;

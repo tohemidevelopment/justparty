@@ -98,12 +98,8 @@ public class DBGuestlistController extends DBControl {
         Event ev = null;
         try {
             ev = DBEventController.getInstance().getEventById(id);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (InvalidEmailException e) {
-            e.printStackTrace();
-        } catch (ZipCodeInvalidException e) {
-            e.printStackTrace();
+        } catch (MalformedURLException | InvalidEmailException | ZipCodeInvalidException e) {
+            LOGGER.logException(e);
         }
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
