@@ -30,12 +30,11 @@ public class UnregisteredUser implements User {
     }
 
     public void setEmail(String email) {
-        try {
-            new EMail(email); //TEST IF VALID
+
+        if (EMail.isEmailValid(email)) {
             this.email = email;
-        } catch (InvalidEmailException e) {
-            SystemProperties.getLogger().logException(e);
         }
+        SystemProperties.getLogger().logError("Email not valid: " + email);
     }
 
     public String getLastName() {

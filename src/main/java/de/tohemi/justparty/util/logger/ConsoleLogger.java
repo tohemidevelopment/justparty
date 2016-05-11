@@ -43,5 +43,6 @@ public class ConsoleLogger implements Logger {
     @Override
     public void logException(Throwable e) {
         e.printStackTrace();
+        System.err.println(e);
     }
 }
