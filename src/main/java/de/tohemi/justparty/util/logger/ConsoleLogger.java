@@ -42,7 +42,17 @@ public class ConsoleLogger implements Logger {
 
     @Override
     public void logException(Throwable e) {
-        e.printStackTrace();
         System.err.println(e);
+        System.err.println(stackTraceToString(e));
+    }
+
+    private String stackTraceToString(Throwable e) {
+        StringBuilder sb = new StringBuilder();
+        for (StackTraceElement element : e.getStackTrace()) {
+            sb.append("\tat ");
+            sb.append(element.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
