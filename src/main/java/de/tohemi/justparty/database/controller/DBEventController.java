@@ -2,6 +2,7 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.database.tables.EventsDBTabelle;
 import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
+import de.tohemi.justparty.database.tables.LocationDBTabelle;
 import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.UserEventRelation;
@@ -435,7 +436,7 @@ public class DBEventController extends DBControl {
             psEvent.close();
             rs = psLocation.executeQuery();
             while (rs.next()) {
-                location = new Location(rs.getString("name"), new ConcreteAddress(rs.getString("street"), rs.getString("house_nr"), new ZipCode(rs.getInt("zipcode")), rs.getString("city"), rs.getString("country")), rs.getBoolean("public"));
+                location = new Location(rs.getString(LocationDBTabelle.COLUMN_NAME), new ConcreteAddress(rs.getString(LocationDBTabelle.COLUMN_STREET), rs.getString(LocationDBTabelle.COLUMN_HOUSENR), new ZipCode(rs.getInt(LocationDBTabelle.COLUMN_ZIPCODE)), rs.getString(LocationDBTabelle.COLUMN_CITY), rs.getString(LocationDBTabelle.COLUMN_COUNTRY)), rs.getBoolean(LocationDBTabelle.COLUMN_PUBLIC));
             }
             rs.close();
             psLocation.close();

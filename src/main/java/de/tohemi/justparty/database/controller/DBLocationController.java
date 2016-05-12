@@ -1,5 +1,6 @@
 package de.tohemi.justparty.database.controller;
 
+import de.tohemi.justparty.database.tables.LocationDBTabelle;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
@@ -36,13 +37,13 @@ public class DBLocationController extends DBControl {
             ResultSet rs = psAddress.executeQuery();
 
             while (rs.next()) {
-                location.setName(rs.getString("name"));
-                address.setStreet(rs.getString("street"));
-                address.setHouseNumber(rs.getString("house_nr"));
-                address.setZipCode(new ZipCode(rs.getInt("zipcode")));
-                address.setCity(rs.getString("city"));
-                address.setCountry(rs.getString("country"));
-                location.setPublicLocation(rs.getBoolean("public"));
+                location.setName(rs.getString(LocationDBTabelle.COLUMN_NAME));
+                address.setStreet(rs.getString(LocationDBTabelle.COLUMN_STREET));
+                address.setHouseNumber(rs.getString(LocationDBTabelle.COLUMN_HOUSENR));
+                address.setZipCode(new ZipCode(rs.getInt(LocationDBTabelle.COLUMN_ZIPCODE)));
+                address.setCity(rs.getString(LocationDBTabelle.COLUMN_CITY));
+                address.setCountry(rs.getString(LocationDBTabelle.COLUMN_COUNTRY));
+                location.setPublicLocation(rs.getBoolean(LocationDBTabelle.COLUMN_PUBLIC));
             }
             location.setAddress(address);
             psAddress.close();
@@ -138,7 +139,7 @@ public class DBLocationController extends DBControl {
             ps.setBoolean(7, l.isPublicLocation());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                exe = rs.getInt("address_id");
+                exe = rs.getInt(LocationDBTabelle.COLUMN_ADDRESS_ID);
             }
             ps.close();
         } catch (SQLException ex) {

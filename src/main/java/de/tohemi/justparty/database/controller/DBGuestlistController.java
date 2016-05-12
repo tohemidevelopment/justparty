@@ -104,7 +104,7 @@ public class DBGuestlistController extends DBControl {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                gl.add(new UserEventRelation(ev, UserFactory.create(resultSet.getString("guest")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
+                gl.add(new UserEventRelation(ev, UserFactory.create(resultSet.getString(GuestlistDBTabelle.COLUMN_GUEST)), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt(GuestlistDBTabelle.COLUMN_STATUS))));
             }
             resultSet.close();
             preparedStatement.close();
