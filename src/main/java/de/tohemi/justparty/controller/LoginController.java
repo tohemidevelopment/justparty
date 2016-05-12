@@ -19,8 +19,8 @@ public class LoginController extends JPController {
         if (addInfoIfAlreadyLoggedIn(model, principal)) {
             return LogicalViewNames.getNameInfoPage();
         }
-        String alert_danger = (error != null) ? "alert.danger.login_err" : null;
-        setAlerts(model, alert_danger, null, alert_success, null);
+        String alertDanger = (error != null) ? "alert.danger.login_err" : null;
+        setAlerts(model, alertDanger, null, alert_success, null);
         return LogicalViewNames.getNameLogin();
     }
 }
