@@ -1,9 +1,5 @@
 package de.tohemi.justparty.datamodel.event;
 
-import de.tohemi.justparty.datamodel.event.ConcreteEvent;
-import de.tohemi.justparty.datamodel.event.EventType;
-
-import de.tohemi.justparty.datamodel.user.User;
 
 import java.net.URL;
 
@@ -11,6 +7,10 @@ import java.net.URL;
  * Created by Heiko on 04.11.2015.
  */
 public class BirthdayEvent extends ConcreteEvent {
+
+    public BirthdayEvent(int id) {
+        super(id);
+    }
 
     private URL amazonWishlistLink;
 
@@ -20,10 +20,6 @@ public class BirthdayEvent extends ConcreteEvent {
 
     public void setAmazonWishlistLink(URL amazonWishlistLink) {
         this.amazonWishlistLink = amazonWishlistLink;
-    }
-
-    public BirthdayEvent(int id) {
-        super(id);
     }
 
     @Override

@@ -4,15 +4,12 @@ package de.tohemi.justparty.datamodel.event;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 /**
  * Created by Micha Piertzik on 04.05.2016.
  */
-final public class EventFactory {
+public final class EventFactory {
 
-    static public Event createEvent(final int id, final EventType eventType, final boolean dbAccess) {
+    public static Event createEvent(final int id, final EventType eventType, final boolean dbAccess) {
         if (eventType == EventType.BIRTHDAY) {
             return new BirthdayEvent(id);
         }
