@@ -1,9 +1,7 @@
 package de.tohemi.justparty.controller;
 
-import com.google.gson.Gson;
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
-import de.tohemi.justparty.datamodel.event.ConcreteEvent;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.view_interface.LogicalViewNames;
@@ -18,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class EventAssistantController extends JPController {
 
     @RequestMapping(method = RequestMethod.GET, value = EDITEVENT)
-    public String editEvent(final ModelMap model, @RequestParam(value = "id") final int id) {
+    public String editEventData(final ModelMap model, @RequestParam(value = "id") final int id) {
 
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         if (userIsNotHost(id, eventsHandler)) {
