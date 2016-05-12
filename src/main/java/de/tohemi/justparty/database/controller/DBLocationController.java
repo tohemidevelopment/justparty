@@ -145,8 +145,7 @@ public class DBLocationController extends DBControl {
             }
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
-            return exe;
+            LOGGER.logException(ex, "");
         } finally {
             releaseConnection(ds, c);
         }
