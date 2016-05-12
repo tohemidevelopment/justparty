@@ -5,9 +5,9 @@ package de.tohemi.justparty.viewInterface;
  */
 public class LogicalViewNames {
     private static final String WELCOME_PAGE = "welcomepage";
-    private static final String LOGIN = "LOGIN";
-    private static final String REGISTER = "REGISTER";
-    private static final String EVENTMANAGER = "user/EVENTMANAGER";
+    private static final String LOGIN = "login";
+    private static final String REGISTER = "register";
+    private static final String EVENTMANAGER = "user/eventManager";
     private static final String NAME_CREATE_EVENT = "user/createEvent";
     private static final String NAME_ERROR_PAGE = "error";
     private static final String NAME_INFO_PAGE = "infopage";
