@@ -3,9 +3,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="username" value="noreply@justparty.ml"/>
+        <property name="username" value="noreply@euve99227.serverprofi24.de"/>
         <property name="password" value="tinf14b2NRPW"/>
-        <property name="host" value="justparty.ml"/>
+        <property name="host" value="euve99227.serverprofi24.de"/>
         <property name="port" value="25"/>
         <property name="javaMailProperties">
             <props>
