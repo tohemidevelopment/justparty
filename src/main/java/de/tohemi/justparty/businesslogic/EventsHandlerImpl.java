@@ -8,8 +8,6 @@ import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
-import de.tohemi.justparty.util.SystemProperties;
-import de.tohemi.justparty.util.logger.Logger;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,7 +15,6 @@ import java.util.List;
  * Created by Micha Piertzik on 17.11.2015.
  */
 public class EventsHandlerImpl implements EventsHandler {
-    private static final Logger LOGGER = SystemProperties.getLogger();
 
     public boolean createEvent(String eventname, String mail) {
 
