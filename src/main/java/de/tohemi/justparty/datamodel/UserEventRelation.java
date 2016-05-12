@@ -77,7 +77,6 @@ public class UserEventRelation implements Comparable<UserEventRelation> {
 
     @Override
     public int compareTo(UserEventRelation object) {
-
         return this.accepted.ordinal() - object.accepted.ordinal();
     }
 
