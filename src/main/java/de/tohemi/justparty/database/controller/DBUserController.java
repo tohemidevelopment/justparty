@@ -293,6 +293,30 @@ public class DBUserController extends DBControl {
         return true;
     }
 
+    public boolean addUser(User user, String hash){
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+
+        try {
+            PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email, password, role) VALUE (?, ?, ?)");
+            psUser.setString(1, user.getEmail());
+            psUser.setString(2, hash);
+            psUser.setString(3, UserRoles.USER);
+            psUser.executeUpdate();
+            psUser.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+
+    /**
+     * USE addUser(User user, String hash) instead
+     */
+    @Deprecated
     public boolean addUser(User user, String userRole, String hash) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
