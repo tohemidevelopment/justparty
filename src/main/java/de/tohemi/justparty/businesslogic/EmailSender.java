@@ -72,7 +72,7 @@ public class EmailSender {
     public void sendInvitationToNonUser(User sendTo, User inviter, Event event) {
 
 
-        String emailContent = "Du wurdest zu der Veranstaltung <b>" + event.getName() + "</b> eingeladen.";
+        String emailContent = "Du wurdest von " + inviter.getEmail() + " zu der Veranstaltung <b>" + event.getName() + "</b> eingeladen.";
         String address = sendTo.getEmail();
         String firstName = null;
         String subject = "Veranstaltungseinladung";
@@ -81,7 +81,7 @@ public class EmailSender {
     }
 
     private void sendEmail(String address, String firstName, String subject, String emailContent) {
-        emailContent = htmlFormat(emailContent, firstName);
+        String newEmailContent = htmlFormat(emailContent, firstName);
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
@@ -97,9 +97,8 @@ public class EmailSender {
 
 
     private String htmlFormat(String emailContent, String firstName) {
-        firstName = (firstName != null) ? " " + firstName : "";
-        return htmlBasic.replace("_content", emailContent).replace("_firstName", firstName);
-
+        String newFirstName = (firstName != null) ? " " + firstName : "";
+        return htmlBasic.replace("_content", emailContent).replace("_firstName", newFirstName);
     }
 
     private String insertButton(String href, String label) {

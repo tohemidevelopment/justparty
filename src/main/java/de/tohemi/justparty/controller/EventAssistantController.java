@@ -20,7 +20,7 @@ public class EventAssistantController extends JPController {
     @RequestMapping(method = RequestMethod.GET, value = EDITEVENT)
     public String editEvent(final ModelMap model, @RequestParam(value = "id") final int id) {
 
-        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         if (userIsNotHost(id, eventsHandler)) {
             //TODO: Show Error String, User not host
             return REDIRECT + ERROR;
@@ -36,7 +36,7 @@ public class EventAssistantController extends JPController {
     @RequestMapping(method = RequestMethod.GET, value = EVENTDATA)
     public String showEventData(final ModelMap model, @RequestParam(value = "id") final int id) {
 
-        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         if (userIsNotHost(id, eventsHandler)) {
             //TODO: Show Error String, User not host
             return REDIRECT + ERROR;
@@ -52,7 +52,7 @@ public class EventAssistantController extends JPController {
     @RequestMapping(method = RequestMethod.POST, value = EVENTDATA)
     public String getEventData(@RequestBody final String jsonString, @RequestHeader(value = "id") final int id) {
 
-        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         if (userIsNotHost(id, eventsHandler)) {
             //TODO: Show Error String, User not host
             return REDIRECT + ERROR;

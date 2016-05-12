@@ -27,7 +27,7 @@ public class EventController extends JPController {
     @RequestMapping(method = RequestMethod.POST, value = CREATE_EVENT)
     public String createEvent(@RequestParam(value = "eventname")String eventname, ModelMap model) {
 
-        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         String mail = getMailFromLoggedInUser();
         if(eventsHandler.createEvent(HtmlUtils.htmlEscape(eventname), mail))
         {
@@ -40,7 +40,7 @@ public class EventController extends JPController {
     @RequestMapping(method = RequestMethod.POST, value = DELETE)
     public  String deleteEvent(ModelMap model, @RequestParam(value = "id") int id)
     {
-        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         if (eventsHandler.deleteEvent(id, getMailFromLoggedInUser())){
             model.addAttribute("alert_success", "alert.success.delete_event");
         }else{
@@ -51,7 +51,7 @@ public class EventController extends JPController {
 
     @RequestMapping(method = RequestMethod.GET, value = GUESTS)
     public String showGuestlist(ModelMap model, @RequestParam (value = "id") int id){
-        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         String mailFromLoggedInUser = getMailFromLoggedInUser();
         if (!eventsHandler.userIsHostOfRequestedEvent(id, mailFromLoggedInUser)){
             //TODO: Show Error String, User not host

@@ -8,7 +8,7 @@ import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
  */
 public class EventsHandlerFactory {
 
-    public EventsHandler getEventsHandler(String s) {
+    public EventsHandler getEventsHandler() {
         return new EventsHandlerImpl();
     }
 }

@@ -30,7 +30,7 @@ public class ManageEventController extends JPController {
                                  @RequestParam(value = "generated", required = false) String generated) {
 
         String mail = getMailFromUserOrGeneratedURLParam(generated);
-        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         Boolean failure = Boolean.valueOf(!eventsHandler.answerInvitation(id, mail,
                 Accepted.valueOf(accepted)));
         model.addAttribute("show_alert", failure);
