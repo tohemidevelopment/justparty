@@ -15,7 +15,7 @@
         <jstl.version>1.2</jstl.version>
         <mysql.connector.version>5.1.30</mysql.connector.version>
         <apache.commons.logging.version>1.2</apache.commons.logging.version>
-        <javax.mail.version>1.4.7</javax.mail.version>
+        <javax.mail.version>1.5.5</javax.mail.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.host.url>http://193.196.7.25</sonar.host.url>
         <sonar.language>java</sonar.language>
@@ -196,6 +196,11 @@
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>javax.mail-api</artifactId>
+            <version>${javax.mail.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
             <version>${javax.mail.version}</version>
         </dependency>
         <dependency>
