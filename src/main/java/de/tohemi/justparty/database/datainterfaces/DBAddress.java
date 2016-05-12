@@ -18,50 +18,49 @@ public class DBAddress implements Address{
         return id;
     }
 
+    @Override
     public String getStreet() {
         return null;
     }
 
-    public void setStreet(String street) {
+    @Override
+    public void setStreet(String street) { }
 
-    }
-
+    @Override
     public String getHouseNumber() {
         return null;
     }
 
-    public void setHouseNumber(String houseNumber) {
+    @Override
+    public void setHouseNumber(String houseNumber) { }
 
-    }
-
+    @Override
     public ZipCode getZipCode() {
         return null;
     }
 
-    public void setZipCode(ZipCode zipCode) {
+    @Override
+    public void setZipCode(ZipCode zipCode) { }
 
-    }
-
+    @Override
     public String getCity() {
         return null;
     }
 
-    public void setCity(String location) {
+    @Override
+    public void setCity(String location) { }
 
-    }
-
+    @Override
     public String getCountry() {
         return null;
     }
 
-    public void setCountry(String country) {
+    @Override
+    public void setCountry(String country) { }
 
-    }
-
-    public void setID(int id) {
-
-    }
-
+    @Override
+    public void setID(int id) { }
+    @Override
     public int getID() {
         return id;
     }

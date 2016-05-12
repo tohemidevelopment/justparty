@@ -18,10 +18,7 @@ import java.sql.SQLException;
 public class DBLocationController extends DBControl {
     private static DBLocationController instance;
 
-    public DBLocationController() {
-    }
-
-    public synchronized static DBLocationController getInstance() {
+    public static synchronized DBLocationController getInstance() {
         if (instance == null) {
             return new DBLocationController();
         }

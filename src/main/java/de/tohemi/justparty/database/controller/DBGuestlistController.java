@@ -27,7 +27,7 @@ public class DBGuestlistController extends DBControl {
     private DBGuestlistController() {
     }
 
-    public synchronized static DBGuestlistController getInstance() {
+    public static synchronized DBGuestlistController getInstance() {
         if (instance == null) {
             return new DBGuestlistController();
         }
@@ -95,12 +95,7 @@ public class DBGuestlistController extends DBControl {
     }
 
     public List<UserEventRelation> getInvitedUsers(int id) {
-        Event ev = null;
-        try {
-            ev = DBEventController.getInstance().getEventById(id);
-        } catch (MalformedURLException | InvalidEmailException | ZipCodeInvalidException e) {
-            LOGGER.logException(e);
-        }
+        Event ev = DBEventController.getInstance().getEventById(id);
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         ArrayList<UserEventRelation> gl = new ArrayList<UserEventRelation>();

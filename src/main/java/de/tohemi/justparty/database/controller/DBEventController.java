@@ -29,7 +29,7 @@ import java.util.List;
 public class DBEventController extends DBControl {
     private static DBEventController instance;
 
-    public synchronized static DBEventController getInstance() {
+    public static synchronized DBEventController getInstance() {
         if (instance == null) {
             return new DBEventController();
         }
@@ -80,7 +80,7 @@ public class DBEventController extends DBControl {
         return true;
     }
 
-    public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
+    public Event getEventById(int id) {
 
         final Event event = EventFactory.createEvent(id);
         DataSource ds = getDataSource();
@@ -93,18 +93,22 @@ public class DBEventController extends DBControl {
 
             while (rs.next()) {
                 event.setSpotifyPlaylistLink(rs.getURL("Spotify_link"));
-                event.setGooglePlusLink((rs.getURL("googleplus_link")));
+                event.setGooglePlusLink(rs.getURL("googleplus_link"));
                 event.setFacebookLink(rs.getURL("facebook_link"));
                 event.setBegin(rs.getTimestamp("begin"));
                 event.setEnd(rs.getTimestamp("end"));
                 event.setDescription(rs.getString("description"));
-                event.setEventOwner(UserFactory.create(new EMail(rs.getString("email"))));
+
+                    event.setEventOwner(UserFactory.create(new EMail(rs.getString("email"))));
+
                 event.setName(rs.getString("name"));
                 event.setLocation(getLocation(rs.getInt("address_id")));
             }
             psEvent.close();
         } catch (SQLException ex) {
             LOGGER.logException(ex, "");
+        } catch (InvalidEmailException e) {
+            LOGGER.logException(e, "");
         } finally {
             releaseConnection(ds, c);
         }

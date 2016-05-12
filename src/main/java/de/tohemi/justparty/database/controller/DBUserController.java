@@ -5,9 +5,6 @@ import de.tohemi.justparty.database.datainterfaces.DBAddress;
 import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.address.Address;
 import de.tohemi.justparty.datamodel.user.User;
-import de.tohemi.justparty.util.SystemProperties;
-import de.tohemi.justparty.util.logger.Logger;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
