@@ -170,7 +170,21 @@ public class DBLocationController extends DBControl {
         return street;
         }
 
-    public void setStreet(String street) { }
+    public void setStreet(String street, int id) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("UPDATE location SET street=? WHERE address_id=?");
+            ps.setInt(2, id);
+            ps.setString(1, street);
+            ps.execute();
+            ps.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
 
     public String getHouseNumber(int id) {
         DataSource ds = getDataSource();
@@ -192,7 +206,21 @@ public class DBLocationController extends DBControl {
         return housenumber;
     }
 
-    public void setHouseNumber(String houseNumber) { }
+    public void setHouseNumber(String houseNumber, int id) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("UPDATE location SET house_nr=? WHERE address_id=?");
+            ps.setInt(2, id);
+            ps.setString(1, houseNumber);
+            ps.execute();
+            ps.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
 
     public ZipCode getZipCode(int id) {
         DataSource ds = getDataSource();
@@ -216,7 +244,21 @@ public class DBLocationController extends DBControl {
         return zipcode;
     }
 
-    public void setZipCode(ZipCode zipCode) { }
+    public void setZipCode(ZipCode zipCode, int id) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("UPDATE location SET zipcode=? WHERE address_id=?");
+            ps.setInt(2, id);
+            ps.setString(1, zipCode.toString());
+            ps.execute();
+            ps.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
 
     public String getCity(int id) {
         DataSource ds = getDataSource();
@@ -238,7 +280,7 @@ public class DBLocationController extends DBControl {
         return city;
     }
 
-    public void setCity(String location) { }
+    public void setCity(String city, int id) { }
 
     public String getCountry(int id) {
         DataSource ds = getDataSource();
@@ -260,6 +302,6 @@ public class DBLocationController extends DBControl {
         return country;
     }
 
-    public void setCountry(String country) { }
+    public void setCountry(String country, int id) { }
     }
 }
