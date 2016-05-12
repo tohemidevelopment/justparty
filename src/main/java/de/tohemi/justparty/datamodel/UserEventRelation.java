@@ -75,8 +75,12 @@ public class UserEventRelation implements Comparable<UserEventRelation> {
         return this.accepted.equals(Accepted.HOST);
     }
 
+    @Override
     public int compareTo(UserEventRelation object) {
 
         return this.accepted.ordinal() - object.accepted.ordinal();
     }
+
+    @Override
+    public boolean equals(Object obj) { return true; }
 }
