@@ -75,17 +75,11 @@ public class EventsHandlerImpl implements EventsHandler {
     public Event getEvent(final int id, String mail) {
 
         //Example event to mock unimpleented DB connection
-        Event event = null;
-        try {
-            event = DBEventController.getInstance().getEventById(id);
-            event.setEventOwner(UserFactory.create(mail));
-            final List<UserEventRelation> guestlist = getGuestlist(id, mail);
-            Collections.sort(guestlist);
-            event.setGuests(guestlist);
-        } catch (MalformedURLException | InvalidEmailException | ZipCodeInvalidException e) {
-            LOGGER.logException(e, "");
-        }
-
+        Event event = DBEventController.getInstance().getEventById(id);
+        event.setEventOwner(UserFactory.create(mail));
+        final List<UserEventRelation> guestlist = getGuestlist(id, mail);
+        Collections.sort(guestlist);
+        event.setGuests(guestlist);
         return event;
     }
 
