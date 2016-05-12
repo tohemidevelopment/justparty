@@ -18,12 +18,13 @@ public class UserEventRelation implements Comparable<UserEventRelation> {
     }
 
     public UserEventRelation(Event event, User user, Accepted accepted) {
-        if (event.getEventOwner() != null && event.getEventOwner().equals(user)) {
-            accepted = Accepted.HOST;
-        }
         this.user = user;
         this.event = event;
-        setAccepted(accepted);
+        if (event.getEventOwner() != null && event.getEventOwner().equals(user)) {
+            setAccepted(Accepted.HOST);
+        } else {
+            setAccepted(accepted);
+        }
     }
 
     public User getUser() {
