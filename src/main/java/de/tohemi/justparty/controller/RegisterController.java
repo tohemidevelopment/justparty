@@ -41,11 +41,11 @@ public class RegisterController extends JPController {
         }
         model.addAttribute(error.getType().toString(), error.getMsg());
 
-        //Diese Attribute werden benötigt, wenn Bestätigungsmail geschickt wird
-        //    model.addAttribute("info_header", "info.header.register");
-        //    model.addAttribute("info_box", "info.box.register");
-        //    return LogicalViewNames.getNameInfoPage();
         return LogicalViewNames.getNameRegister();
+        /*  Diese Attribute werden benötigt, wenn Bestätigungsmail geschickt wird
+            model.addAttribute("info_header", "info.header.register");
+            model.addAttribute("info_box", "info.box.register");
+            return LogicalViewNames.getNameInfoPage();*/
     }
 
     @RequestMapping(method = RequestMethod.GET, value = VERIFY_EMAIL)
