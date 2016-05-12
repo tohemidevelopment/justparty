@@ -6,14 +6,10 @@ import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
-import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
-import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.util.SystemProperties;
 import de.tohemi.justparty.util.logger.Logger;
-
-import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.List;
 

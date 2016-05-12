@@ -5,7 +5,6 @@ import de.tohemi.justparty.businesslogic.Error;
 import de.tohemi.justparty.businesslogic.ErrorType;
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.user.DBAccessUser;
 import de.tohemi.justparty.datamodel.user.User;
