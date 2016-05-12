@@ -30,14 +30,13 @@ public class UserHandler {
             SystemProperties.getLogger().logException(e);
             error = new Error("register.error.email", ErrorType.EMAIL);
         }
-        error = checkPassword(password, matchingPassword, error);
-        error = getcheckTerms(acceptedTerms, error);
+        if (!passwordValid(password, matchingPassword)) {
+            error =  new Error("register.error.password", ErrorType.PASSWORD);
+        }
+        if (!acceptedTerms) {
+            error =  new Error("register.error.terms", ErrorType.TERMS);
+        }
         //At this Point: Userdata is Valid
-        error = checkIsNoUserOrUser(password, error, user);
-        return error;
-    }
-
-    private Error checkIsNoUserOrUser(String password, Error error, User user) {
         DBUserController dbController = DBUserController.getInstance();
         try {
             if (dbController.userIsRegistered(user.getEmail())) {
@@ -59,20 +58,6 @@ public class UserHandler {
                 sendVerificationEmail(user.getEmail());
                 error = null;
             }
-        }
-        return error;
-    }
-
-    private Error getcheckTerms(boolean acceptedTerms, Error error) {
-        if (!acceptedTerms) {
-            error =  new Error("register.error.terms", ErrorType.TERMS);
-        }
-        return error;
-    }
-
-    private Error checkPassword(String password, String matchingPassword, Error error) {
-        if (!passwordValid(password, matchingPassword)) {
-            error =  new Error("register.error.password", ErrorType.PASSWORD);
         }
         return error;
     }
