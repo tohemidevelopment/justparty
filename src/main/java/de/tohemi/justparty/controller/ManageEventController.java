@@ -41,7 +41,7 @@ public class ManageEventController extends JPController {
         //TODO: if generated is not null and no user is logged in --> check generated Param and return UnregisteredUser | then: need to return a diffrent LogicalView name!
 
         String mail = getMailFromLoggedInUser();
-        if (mail.equals("anonymousUser")) {
+        if ("anonymousUser".equals(mail)) {
             //Nobody is logged in
             return null;
         }
