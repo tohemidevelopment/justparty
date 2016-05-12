@@ -1,5 +1,6 @@
 package de.tohemi.justparty.database.controller;
 
+import de.tohemi.justparty.database.tables.DeclarationDBTabelle;
 import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.user.UserFactory;
@@ -100,7 +101,7 @@ public class DBDeclarationController extends DBControl {
             ps.setInt(1, e.getId());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                declaration.add(new Declaration(rs.getString("name"), UserFactory.create(rs.getString("usertobringwith")), rs.getBoolean("bringwithbyall"), rs.getInt("event_id")));
+                declaration.add(new Declaration(rs.getString(DeclarationDBTabelle.COLUMN_NAME), UserFactory.create(rs.getString(DeclarationDBTabelle.COLUMN_USER_TO_BRING_WITH)), rs.getBoolean(DeclarationDBTabelle.COLUMN_BRING_WITH_BY_ALL), rs.getInt(DeclarationDBTabelle.COLUMN_EVENT_ID)));
             }
             ps.close();
 
