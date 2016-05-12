@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @org.springframework.stereotype.Controller
 public class WelcomeController extends JPController{
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public String printWelcomePage(ModelMap model)
+    public String printWelcomePage()
     {
       return LogicalViewNames.getNameWelcomePage();
     }

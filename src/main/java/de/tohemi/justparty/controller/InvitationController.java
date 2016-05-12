@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class InvitationController extends JPController {
 
         @RequestMapping(method = RequestMethod.GET, value = INVITE_USER)
-        public String printWelcomePage(ModelMap model)
+        public String printWelcomePage()
         {
             return LogicalViewNames.getNameInviteUsers();
         }

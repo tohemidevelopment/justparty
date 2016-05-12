@@ -3,10 +3,6 @@ package de.tohemi.justparty.database.controller;
 import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.user.UserFactory;
-import de.tohemi.justparty.util.SystemProperties;
-import de.tohemi.justparty.util.logger.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
@@ -25,7 +21,7 @@ public class DBDeclarationController extends DBControl {
     private DBDeclarationController() {
     }
 
-    public synchronized static DBDeclarationController getInstance() {
+    public static synchronized DBDeclarationController getInstance() {
         if (instance == null) {
             return new DBDeclarationController();
         }
@@ -95,7 +91,7 @@ public class DBDeclarationController extends DBControl {
         return true;
     }
 
-    public ArrayList<Declaration> getDeclarations(Event e) {
+    public ArrayList getDeclarations(Event e) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         ArrayList<Declaration> declaration = new ArrayList<Declaration>();

@@ -20,12 +20,12 @@ import java.util.List;
 public class EventController extends JPController {
 
     @RequestMapping(method = RequestMethod.GET, value = CREATE_EVENT)
-    public String printCreateEvent(ModelMap model) {
+    public String printCreateEvent() {
         return LogicalViewNames.getNameCreateEvent();
     }
 
     @RequestMapping(method = RequestMethod.POST, value = CREATE_EVENT)
-    public String createEvent(@RequestParam(value = "eventname")String eventname, ModelMap model) {
+    public String createEvent(@RequestParam(value = "eventname")String eventname) {
 
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         String mail = getMailFromLoggedInUser();
