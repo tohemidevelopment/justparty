@@ -6,7 +6,6 @@ import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 
 /**
  * Created by Heiko on 26.12.2015.
- * TODO: implement Methods
  */
 public class DBAddress implements Address{
     private int id;
@@ -16,49 +15,43 @@ public class DBAddress implements Address{
     }
 
     @Override
-    public String getStreet() {
-        return null;
-    }
+    public String getStreet() { return DBLocationController.getInstance().getStreet(id);}
 
     @Override
-    public void setStreet(String street) { }
+    public void setStreet(String street) { DBLocationController.getInstance().setStreet(street, id); }
 
     @Override
     public String getHouseNumber() {
-        return null;
+        return DBLocationController.getInstance().getHouseNumber(id);
     }
 
     @Override
-    public void setHouseNumber(String houseNumber) { }
+    public void setHouseNumber(String houseNumber) { DBLocationController.getInstance().setHouseNumber(houseNumber,id); }
 
     @Override
     public ZipCode getZipCode() {
-        return null;
+        return DBLocationController.getInstance().getZipCode(id);
     }
 
     @Override
-    public void setZipCode(ZipCode zipCode) { }
+    public void setZipCode(ZipCode zipCode) { DBLocationController.getInstance().setZipCode(zipCode, id); }
 
     @Override
     public String getCity() {
-        return null;
+        return DBLocationController.getInstance().getCity(id);
     }
 
     @Override
-    public void setCity(String location) { }
+    public void setCity(String city) { DBLocationController.getInstance().setCity(city, id); }
 
     @Override
-    public String getCountry() {
-        return null;
-    }
+    public String getCountry() { return DBLocationController.getInstance().getCountry(id); }
 
     @Override
-    public void setCountry(String country) { }
+    public void setCountry(String country) { DBLocationController.getInstance().setCountry(country, id); }
 
     @Override
-    public void setID(int id) {
-
-    }
+    public void setID(int id) { this.id = id;}
 
     @Override
     public int getID() {
