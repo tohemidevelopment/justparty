@@ -4,6 +4,9 @@ package de.tohemi.justparty.database.tables;
  * Created by Tom on 12.05.2016.
  */
 public class DeclarationDBTabelle {
+
+    private DeclarationDBTabelle(){}
+
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_USER_TO_BRING_WITH = "usertobringwith";

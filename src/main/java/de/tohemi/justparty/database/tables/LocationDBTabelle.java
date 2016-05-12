@@ -4,6 +4,9 @@ package de.tohemi.justparty.database.tables;
  * Created by Tom on 12.05.2016.
  */
 public class LocationDBTabelle {
+
+    private LocationDBTabelle(){}
+
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_ADDRESS_ID = "address_id";
     public static final String COLUMN_STREET = "street";

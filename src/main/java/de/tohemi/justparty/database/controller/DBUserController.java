@@ -313,10 +313,9 @@ public class DBUserController extends DBControl {
         }
         return true;
     }
-
     /**
-     * USE addUser(User user, String hash) instead
-     */
+    * @deprecated USE addUser(User user, String hash) instead
+    */
     @Deprecated
     public boolean addUser(User user, String userRole, String hash) {
         DataSource ds = getDataSource();
