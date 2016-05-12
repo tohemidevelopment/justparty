@@ -237,7 +237,7 @@ public class DBLocationController extends DBControl {
         } catch (SQLException ex) {
             LOGGER.logException(ex, "");
         } catch (ZipCodeInvalidException e) {
-            e.printStackTrace();
+            LOGGER.logException(e, "");
         } finally {
             releaseConnection(ds, c);
         }
