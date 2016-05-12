@@ -95,7 +95,7 @@ public class DBGuestlistController extends DBControl {
         Event ev = DBEventController.getInstance().getEventById(id);
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
-        ArrayList<UserEventRelation> gl = new ArrayList<UserEventRelation>();
+        List<UserEventRelation> gl = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = c.prepareStatement("SELECT " + GuestlistDBTabelle.COLUMN_GUEST + ", " + GuestlistDBTabelle.COLUMN_STATUS + " FROM guestlist WHERE " + GuestlistDBTabelle.COLUMN_EVENT + " = ?;");
             preparedStatement.setInt(1, id);

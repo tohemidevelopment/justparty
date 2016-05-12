@@ -183,7 +183,7 @@ public class DBEventController extends DBControl {
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
-        ArrayList<UserEventRelation> userEventRelations = new ArrayList<UserEventRelation>();
+        List<UserEventRelation> userEventRelations = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email FROM events WHERE email = ?;");
             String email = user.getEmail();
@@ -215,7 +215,7 @@ public class DBEventController extends DBControl {
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
-        ArrayList<UserEventRelation> userEventRelations = new ArrayList<UserEventRelation>();
+        List<UserEventRelation> userEventRelations = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email, " + GuestlistDBTabelle.COLUMN_STATUS + " FROM events, " + GuestlistDBTabelle.TABLE + " WHERE event_id = event AND " + GuestlistDBTabelle.COLUMN_GUEST + " = ?;");
             String email = user.getEmail();
