@@ -194,9 +194,9 @@ public class DBEventController extends DBControl {
                 Event event = EventFactory.createEvent(resultSet.getInt(EventsDBTabelle.COLUMN_ID));
                 event.setName(resultSet.getString(EventsDBTabelle.COLUMN_NAME));
                 event.setEventOwner(user);
-                Timestamp TimeStamp = resultSet.getTimestamp(EventsDBTabelle.COLUMN_BEGIN);
-                if (TimeStamp != null) {
-                    event.setBegin(TimeStamp);
+                Timestamp timeStamp = resultSet.getTimestamp(EventsDBTabelle.COLUMN_BEGIN);
+                if (timeStamp != null) {
+                    event.setBegin(timeStamp);
                 }
                 userEventRelations.add(new UserEventRelation(event, user));
             }
@@ -226,9 +226,9 @@ public class DBEventController extends DBControl {
                 Event event = EventFactory.createEvent(resultSet.getInt(EventsDBTabelle.COLUMN_ID));
                 event.setName(resultSet.getString(EventsDBTabelle.COLUMN_NAME));
                 event.setEventOwner(UserFactory.create(resultSet.getString(EventsDBTabelle.COLUMN_EMAIL)));
-                Timestamp TimeStamp = resultSet.getTimestamp(EventsDBTabelle.COLUMN_BEGIN);
-                if (TimeStamp != null) {
-                    event.setBegin(TimeStamp);
+                Timestamp timeStamp = resultSet.getTimestamp(EventsDBTabelle.COLUMN_BEGIN);
+                if (timeStamp != null) {
+                    event.setBegin(timeStamp);
                 }
                 int status = resultSet.getInt(GuestlistDBTabelle.COLUMN_STATUS);
                 Accepted accepted = GuestlistDBTabelle.getAcceptedObjectForStatus(status);
