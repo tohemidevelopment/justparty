@@ -82,5 +82,8 @@ public class UserEventRelation implements Comparable<UserEventRelation> {
     }
 
     @Override
-    public boolean equals(Object obj) { return true; }
+    public boolean equals(Object obj) { return super.equals(obj); }
+
+    @Override
+    public int hashCode() {return super.hashCode();}
 }
