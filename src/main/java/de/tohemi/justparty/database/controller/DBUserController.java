@@ -150,7 +150,7 @@ public class DBUserController extends DBControl {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("UPDATE users SET AddressID=? WHERE Email=?");
-            ps.setInt(1, address.getId());
+            ps.setInt(1, address.getID());
             ps.setString(2, email);
             ps.executeUpdate();
             ps.close();
