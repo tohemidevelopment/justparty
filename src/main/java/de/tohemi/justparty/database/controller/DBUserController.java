@@ -2,6 +2,7 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.datainterfaces.DBAddress;
+import de.tohemi.justparty.database.tables.UsersDBTabelle;
 import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.address.Address;
 import de.tohemi.justparty.datamodel.user.User;
@@ -34,7 +35,7 @@ public class DBUserController extends DBControl {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return rs.getString("name");
+                return rs.getString(UsersDBTabelle.COLUMN_NAME);
             }
             ps.close();
         } catch (SQLException ex) {
@@ -53,7 +54,7 @@ public class DBUserController extends DBControl {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return rs.getString("Firstname");
+                return rs.getString(UsersDBTabelle.COLUMN_FIRSTNAME);
             }
             ps.close();
         } catch (SQLException ex) {
@@ -72,7 +73,7 @@ public class DBUserController extends DBControl {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return new DBAddress(rs.getInt("AddressID"));
+                return new DBAddress(rs.getInt(UsersDBTabelle.COLUMN_ADDRESS_ID));
             }
             ps.close();
         } catch (SQLException ex) {
@@ -93,7 +94,7 @@ public class DBUserController extends DBControl {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                bd = rs.getDate("Birthday");
+                bd = rs.getDate(UsersDBTabelle.COLUMN_BIRTHDAY);
             }
 
             ps.close();
@@ -238,7 +239,7 @@ public class DBUserController extends DBControl {
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                email = rs.getString("email");
+                email = rs.getString(UsersDBTabelle.COLUMN_EMAIL);
             }
             rs.close();
             ps.close();
@@ -281,7 +282,7 @@ public class DBUserController extends DBControl {
             } else {
                 rs.beforeFirst();
             }
-            if (rs.next() && rs.getString("role").equals(UserRoles.NONUSER)) {
+            if (rs.next() && rs.getString(UsersDBTabelle.COLUMN_ROLE).equals(UserRoles.NONUSER)) {
                 return false;
             }
         } catch (SQLException ex) {
