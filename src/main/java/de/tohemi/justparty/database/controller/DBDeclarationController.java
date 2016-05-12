@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Tom on 24.04.2016.
@@ -92,10 +93,10 @@ public class DBDeclarationController extends DBControl {
         return true;
     }
 
-    public ArrayList getDeclarations(Event e) {
+    public List<Declaration> getDeclarations(Event e) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
-        ArrayList<Declaration> declaration = new ArrayList<Declaration>();
+        List<Declaration> declaration = new ArrayList<>();
         try {
             PreparedStatement ps = c.prepareStatement("SELECT * FROM declaration WHERE event_id=?;");
             ps.setInt(1, e.getId());
