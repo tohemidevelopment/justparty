@@ -1,7 +1,6 @@
 package de.tohemi.justparty.datamodel.address;
 
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
-import org.jboss.netty.channel.AdaptiveReceiveBufferSizePredictor;
 
 /**
  * Created by Heiko on 04.11.2015.
