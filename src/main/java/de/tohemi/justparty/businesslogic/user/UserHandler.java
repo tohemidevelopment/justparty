@@ -22,32 +22,31 @@ public class UserHandler {
     public static final int MIN_PASSWD_LENGTH = 4;
 
     public Error createUser(String email, String password, String matchingPassword, boolean acceptedTerms) {
-        Error error = new Error("", null);
-        User user = null;
+        User user;
         try {
             user = UserFactory.create(new EMail(email));
         } catch (InvalidEmailException e) {
             SystemProperties.getLogger().logException(e);
-            error = new Error("register.error.email", ErrorType.EMAIL);
+            return new Error("register.error.email", ErrorType.EMAIL);
         }
         if (!passwordValid(password, matchingPassword)) {
-            error =  new Error("register.error.password", ErrorType.PASSWORD);
+            return new Error("register.error.password", ErrorType.PASSWORD);
         }
         if (!acceptedTerms) {
-            error =  new Error("register.error.terms", ErrorType.TERMS);
+            return new Error("register.error.terms", ErrorType.TERMS);
         }
         //At this Point: Userdata is Valid
         DBUserController dbController = DBUserController.getInstance();
         try {
             if (dbController.userIsRegistered(user.getEmail())) {
                 //User ist registered as USER
-                error =  new Error("register.error.email.taken", ErrorType.EMAIL);
+                return new Error("register.error.email.taken", ErrorType.EMAIL);
             }
             //User is registered as NOUSER
             if (dbController.changeToUser(user, HashFunction.getHash(password))) {
                 //User role updated in DB
                 sendVerificationEmail(user.getEmail());
-                error =  null;
+                return null;
             }
 
         } catch (UserNotFoundException e) {
@@ -56,10 +55,10 @@ public class UserHandler {
             if (dbController.addUser(user, UserRoles.USER, HashFunction.getHash(password))) {
                 //User added to DB
                 sendVerificationEmail(user.getEmail());
-                error = null;
+                return null;
             }
         }
-        return error;
+        return null;
     }
 
     private void sendVerificationEmail(String email) {
