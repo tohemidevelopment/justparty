@@ -1,7 +1,6 @@
 package de.tohemi.justparty.datamodel.user;
 
 import de.tohemi.justparty.datamodel.address.Address;
-import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.util.SystemProperties;
 
