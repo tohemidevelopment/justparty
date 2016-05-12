@@ -5,14 +5,11 @@ package de.tohemi.justparty.database.tables;
  */
 public class DeclarationDBTabelle {
 
-    private DeclarationDBTabelle(){}
-
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_USER_TO_BRING_WITH = "usertobringwith";
     public static final String COLUMN_BRING_WITH_BY_ALL = "bringwithbyall";
     public static final String COLUMN_EVENT_ID = "event_id";
 
-
-
+    private DeclarationDBTabelle(){}
 }

@@ -5,8 +5,6 @@ package de.tohemi.justparty.database.tables;
  */
 public class EventsDBTabelle {
 
-    private EventsDBTabelle(){}
-
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_BEGIN = "begin";
@@ -18,4 +16,6 @@ public class EventsDBTabelle {
     public static final String COLUMN_SPOTIFY = "Spotify_link";
     public static final String COLUMN_GOOGLE = "googleplus_link";
     public static final String COLUMN_ID = "event_id";
+
+    private EventsDBTabelle(){}
 }

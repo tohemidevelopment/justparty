@@ -7,8 +7,6 @@ import de.tohemi.justparty.datamodel.Accepted;
  */
 public class GuestlistDBTabelle {
 
-    private GuestlistDBTabelle(){}
-
     public static final String TABLE = "guestlist";
     public static final String COLUMN_STATUS = "status";
     public static final String COLUMN_EVENT = "event";
@@ -17,6 +15,7 @@ public class GuestlistDBTabelle {
     public static final int DECLINED=2;
     public static final int NOTSURE=3;
 
+    private GuestlistDBTabelle(){}
 
     public static Accepted getAcceptedObjectForStatus(int status) {
         switch (status) {

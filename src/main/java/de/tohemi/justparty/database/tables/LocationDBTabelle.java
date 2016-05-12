@@ -5,8 +5,6 @@ package de.tohemi.justparty.database.tables;
  */
 public class LocationDBTabelle {
 
-    private LocationDBTabelle(){}
-
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_ADDRESS_ID = "address_id";
     public static final String COLUMN_STREET = "street";
@@ -16,4 +14,5 @@ public class LocationDBTabelle {
     public static final String COLUMN_COUNTRY = "country";
     public static final String COLUMN_PUBLIC = "public";
 
+    private LocationDBTabelle(){}
 }

@@ -5,8 +5,6 @@ package de.tohemi.justparty.database.tables;
  */
 public class UsersDBTabelle {
 
-    private UsersDBTabelle(){}
-
     public static final String COLUMN_EMAIL = "Email";
     public static final String COLUMN_NAME = "Name";
     public static final String COLUMN_ADDRESS_ID = "AddressID";
@@ -16,4 +14,6 @@ public class UsersDBTabelle {
     public static final String COLUMN_ENABLED = "enabled";
     public static final String COLUMN_ROLE = "role";
     public static final String COLUMN_FIRSTNAME = "Firstname";
+
+    private UsersDBTabelle(){}
 }
