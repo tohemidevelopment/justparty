@@ -280,7 +280,21 @@ public class DBLocationController extends DBControl {
         return city;
     }
 
-    public void setCity(String city, int id) { }
+    public void setCity(String city, int id) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("UPDATE location SET city=? WHERE address_id=?");
+            ps.setInt(2, id);
+            ps.setString(1, city);
+            ps.execute();
+            ps.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
 
     public String getCountry(int id) {
         DataSource ds = getDataSource();
@@ -302,6 +316,19 @@ public class DBLocationController extends DBControl {
         return country;
     }
 
-    public void setCountry(String country, int id) { }
+    public void setCountry(String country, int id) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement ps = c.prepareStatement("UPDATE location SET country=? WHERE address_id=?");
+            ps.setInt(2, id);
+            ps.setString(1, country);
+            ps.execute();
+            ps.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
     }
 }
