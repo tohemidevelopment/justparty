@@ -81,7 +81,7 @@ public class EmailSender {
     }
 
     private void sendEmail(String address, String firstName, String subject, String emailContent) {
-        String newEmailContent = htmlFormat(emailContent, firstName);
+        htmlFormat(emailContent, firstName);
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
