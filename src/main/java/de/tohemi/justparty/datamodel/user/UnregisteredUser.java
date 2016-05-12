@@ -20,14 +20,17 @@ public class UnregisteredUser implements User {
         this.email = email.toString();
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
 
+    @Override
     public void setEmail(EMail email) {
         this.email = email.toString();
     }
 
+    @Override
     public void setEmail(String email) {
 
         if (EMail.isEmailValid(email)) {
@@ -36,32 +39,40 @@ public class UnregisteredUser implements User {
         SystemProperties.getLogger().logError("Email not valid: " + email);
     }
 
+    @Override
     public String getLastName() {
         return null;
     }
 
-    public void setLastName(String lastName) {
+    @Override
+    public void setLastName(String lastName) {//implement
     }
 
+    @Override
     public String getFirstName() {
         return null;
     }
 
-    public void setFirstName(String firstName) {
+    @Override
+    public void setFirstName(String firstName) {//implement
     }
 
+    @Override
     public Address getAddress() {
         return null;
     }
 
-    public void setAddress(Address address) {
+    @Override
+    public void setAddress(Address address) {//implement
     }
 
+    @Override
     public Date getBirthday() {
         return null;
     }
 
-    public void setBirthday(Date birthday) {
+    @Override
+    public void setBirthday(Date birthday) { //implement
     }
 
     @Override

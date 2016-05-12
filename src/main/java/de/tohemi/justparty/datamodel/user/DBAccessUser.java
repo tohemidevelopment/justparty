@@ -24,39 +24,48 @@ public class DBAccessUser implements User {
         this.email = email.toString();
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
 
+    @Override
     public void setEmail(EMail email) {
-
+//implement
     }
 
+    @Override
     public void setEmail(String email) {
-
+//implement
     }
 
+    @Override
     public String getLastName() {
         return controller.getLastName(email);
     }
 
+    @Override
     public void setLastName(String lastName) {
         controller.setLastName(lastName, email);
     }
 
+    @Override
     public String getFirstName() {
         return controller.getFirstName(email);
     }
 
+    @Override
     public void setFirstName(String firstName) {
         controller.setFirstName(firstName, email);
     }
 
+    @Override
     public Address getAddress() {
         return controller.getAddress(email);
     }
 
-    public void setAddress(Address address) {
+    @Override
+    public void setAddress(Address address) {//implement
 
     }
 
@@ -64,10 +73,12 @@ public class DBAccessUser implements User {
         controller.setAddress(address, email);
     }
 
+    @Override
     public Date getBirthday() {
         return controller.getBirthday(email);
     }
 
+    @Override
     public void setBirthday(Date birthday) {
         controller.setBirthday(birthday, email);
     }
