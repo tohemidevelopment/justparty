@@ -22,31 +22,33 @@ public class UserHandler {
     public static final int MIN_PASSWD_LENGTH = 4;
 
     public Error createUser(String email, String password, String matchingPassword, boolean acceptedTerms) {
-        User user;
+        Error error = new Error("", null);
+        User user = null;
         try {
             user = UserFactory.create(new EMail(email));
         } catch (InvalidEmailException e) {
             SystemProperties.getLogger().logException(e);
-            return new de.tohemi.justparty.businesslogic.Error("register.error.email", ErrorType.EMAIL);
+            error = new Error("register.error.email", ErrorType.EMAIL);
         }
-        if (!passwordValid(password, matchingPassword)) {
-            return new Error("register.error.password", ErrorType.PASSWORD);
-        }
-        if (!acceptedTerms) {
-            return new Error("register.error.terms", ErrorType.TERMS);
-        }
+        error = checkPassword(password, matchingPassword, error);
+        error = getcheckTerms(acceptedTerms, error);
         //At this Point: Userdata is Valid
+        error = checkIsNoUserOrUser(password, error, user);
+        return error;
+    }
+
+    private Error checkIsNoUserOrUser(String password, Error error, User user) {
         DBUserController dbController = DBUserController.getInstance();
         try {
             if (dbController.userIsRegistered(user.getEmail())) {
                 //User ist registered as USER
-                return new Error("register.error.email.taken", ErrorType.EMAIL);
+                error =  new Error("register.error.email.taken", ErrorType.EMAIL);
             }
             //User is registered as NOUSER
             if (dbController.changeToUser(user, HashFunction.getHash(password))) {
                 //User role updated in DB
                 sendVerificationEmail(user.getEmail());
-                return null;
+                error =  null;
             }
 
         } catch (UserNotFoundException e) {
@@ -55,10 +57,24 @@ public class UserHandler {
             if (dbController.addUser(user, UserRoles.USER, HashFunction.getHash(password))) {
                 //User added to DB
                 sendVerificationEmail(user.getEmail());
-                return null;
+                error = null;
             }
         }
-        return new Error("", null);
+        return error;
+    }
+
+    private Error getcheckTerms(boolean acceptedTerms, Error error) {
+        if (!acceptedTerms) {
+            error =  new Error("register.error.terms", ErrorType.TERMS);
+        }
+        return error;
+    }
+
+    private Error checkPassword(String password, String matchingPassword, Error error) {
+        if (!passwordValid(password, matchingPassword)) {
+            error =  new Error("register.error.password", ErrorType.PASSWORD);
+        }
+        return error;
     }
 
     private void sendVerificationEmail(String email) {
