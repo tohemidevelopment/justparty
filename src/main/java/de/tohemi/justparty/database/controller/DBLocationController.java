@@ -149,4 +149,117 @@ public class DBLocationController extends DBControl {
         }
         return exe;
     }
+
+    public String getStreet(int id) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        String street = "";
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT street FROM location WHERE address_id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                street = rs.getString(LocationDBTabelle.COLUMN_STREET);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return street;
+        }
+
+    public void setStreet(String street) { }
+
+    public String getHouseNumber(int id) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        String housenumber = "";
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT house_nr FROM location WHERE address_id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                housenumber = rs.getString(LocationDBTabelle.COLUMN_HOUSENR);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return housenumber;
+    }
+
+    public void setHouseNumber(String houseNumber) { }
+
+    public ZipCode getZipCode(int id) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        ZipCode zipcode = null;
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT zipcode FROM location WHERE address_id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                zipcode = new ZipCode(Integer.parseInt(rs.getString(LocationDBTabelle.COLUMN_ZIPCODE)));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } catch (ZipCodeInvalidException e) {
+            e.printStackTrace();
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return zipcode;
+    }
+
+    public void setZipCode(ZipCode zipCode) { }
+
+    public String getCity(int id) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        String city = "";
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT city FROM location WHERE address_id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                city = rs.getString(LocationDBTabelle.COLUMN_CITY);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return city;
+    }
+
+    public void setCity(String location) { }
+
+    public String getCountry(int id) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        String country = "";
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT country FROM location WHERE address_id=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                country = rs.getString(LocationDBTabelle.COLUMN_COUNTRY);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return country;
+    }
+
+    public void setCountry(String country) { }
+    }
 }

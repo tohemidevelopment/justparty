@@ -1,5 +1,6 @@
 package de.tohemi.justparty.database.datainterfaces;
 
+import de.tohemi.justparty.database.controller.DBLocationController;
 import de.tohemi.justparty.datamodel.address.Address;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 
@@ -12,10 +13,6 @@ public class DBAddress implements Address{
 
     public DBAddress(int id) {
         this.id = id;
-    }
-
-    public int getId() {
-        return id;
     }
 
     @Override
@@ -59,7 +56,10 @@ public class DBAddress implements Address{
     public void setCountry(String country) { }
 
     @Override
-    public void setID(int id) { }
+    public void setID(int id) {
+
+    }
+
     @Override
     public int getID() {
         return id;
