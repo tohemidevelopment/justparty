@@ -1,4 +1,4 @@
-package de.tohemi.justparty.viewInterface;
+package de.tohemi.justparty.viewinterface;
 
 /**
  * Created by xce35l7 on 07.11.2015.
