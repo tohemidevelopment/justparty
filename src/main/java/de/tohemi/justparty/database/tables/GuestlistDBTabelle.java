@@ -41,7 +41,8 @@ public class GuestlistDBTabelle {
                 return DECLINED;
             case NOTSURE:
                 return NOTSURE;
+            default:
+                return 0;
         }
-        return 0;
     }
 }
