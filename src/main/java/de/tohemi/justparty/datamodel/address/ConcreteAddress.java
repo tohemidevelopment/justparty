@@ -58,7 +58,7 @@ public class ConcreteAddress implements Address{
 
     @Override
     public void setCity(String location) {
-        this.city = city;
+        this.city = location;
     }
 
     @Override
