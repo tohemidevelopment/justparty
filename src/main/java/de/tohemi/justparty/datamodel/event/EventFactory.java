@@ -9,6 +9,8 @@ import com.google.gson.GsonBuilder;
  */
 public final class EventFactory {
 
+    private EventFactory(){}
+
     public static Event createEvent(final int id, final EventType eventType, final boolean dbAccess) {
         if (eventType == EventType.BIRTHDAY) {
             return new BirthdayEvent(id);
@@ -26,17 +28,14 @@ public final class EventFactory {
     }
 
     public static Event createEvent(final int id, final EventType eventType) {
-
         return createEvent(id, eventType, false);
     }
 
     public static Event createEvent(final int id, final boolean dbAccess) {
-
         return createEvent(id, EventType.DEFAULT, dbAccess);
     }
 
     public static Event createEvent() {
-
         return new ConcreteEvent();
     }
 
