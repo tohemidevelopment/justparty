@@ -25,8 +25,9 @@ public class GuestlistDBTabelle {
                 return Accepted.DECLINED;
             case NOTSURE:
                 return Accepted.NOTSURE;
+            default:
+                return null;
         }
-        return null;
     }
 
     public static int getIntStatusForAcceptedObject(Accepted status) {
