@@ -7,13 +7,10 @@ import de.tohemi.justparty.datamodel.*;
 import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
-import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.springframework.util.Assert;
 import java.sql.Date;
 
@@ -22,19 +19,24 @@ import java.sql.Date;
  */
 public class DBDeclarationControllerTest {
 
-    public DBDeclarationController conD;
+    public static DBDeclarationController conD;
     public Declaration d;
     public Event e;
-    public User u;
+    public static User u;
 
-    @Before
-    public void setUp() throws Exception, ZipCodeInvalidException {
+    @BeforeClass
+    public static void setUp() throws Exception {
         u = UserFactory.create("junit@tester.de");
         u.setFirstName("JUnit");
         u.setLastName("Test");
         u.setBirthday(new Date(1995, 07, 10));
         u.setAddress(new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
         DBUserController.getInstance().addUser(u, "ROLE_USER", "1234");
+        conD = DBDeclarationController.getInstance();
+    }
+
+    @Before
+    public void setUpEachTest() throws Exception {
         e = EventFactory.createEvent();
         e.setName("TestEvent");
         e.setEventOwner(u);
@@ -42,15 +44,16 @@ public class DBDeclarationControllerTest {
         int event_id = DBEventController.getInstance().getEventID(e);
         e.setId(event_id);
         d = new Declaration("Testdeclaration", u, false, event_id);
-        conD = DBDeclarationController.getInstance();
-
-
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDownEachTest() throws Exception {
         conD.deleteDeclaration(d);
         DBEventController.getInstance().deleteEvent(e, u);
+    }
+
+    @AfterClass
+    public static void tearDown() throws Exception {
         DBUserController.getInstance().removeUser(u);
     }
 
