@@ -7,13 +7,13 @@ import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
  */
 public class EMail {
     private static final String REGEX_MAIL = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}";
-    private String email;
+    private String emailAddress;
 
     public EMail(final String email) throws InvalidEmailException {
         if (!isEmailValid(email)){
             throw new InvalidEmailException("Invalid email: " + email);
         }
-        this.email = email.toLowerCase();
+        this.emailAddress = email.toLowerCase();
     }
 
     public static boolean isEmailValid(String mail) {
@@ -22,6 +22,6 @@ public class EMail {
 
     @Override
     public String toString() {
-        return email;
+        return emailAddress;
     }
 }
