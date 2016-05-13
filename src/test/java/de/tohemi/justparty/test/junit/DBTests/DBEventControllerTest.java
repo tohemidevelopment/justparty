@@ -9,7 +9,6 @@ import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.event.ConcreteEvent;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
-import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
@@ -97,7 +96,7 @@ public class DBEventControllerTest {
     }
 
     @Test
-    public void getEventById() throws Exception, ZipCodeInvalidException {
+    public void getEventById() throws Exception {
         Assert.isInstanceOf(ConcreteEvent.class, conE.getEventById(con.getEventID(user)));
     }
 
