@@ -27,10 +27,10 @@ sudo: false
 #before_script:
 
 # Run Integration tests
-script: "mvn test sonar:sonar jacoco:report coveralls:report && mvn tomcat7:redeploy"
+script: "mvn test sonar:sonar && mvn tomcat7:redeploy"
 
-#after_success:
-#  - mvn clean test jacoco:report coveralls:report
+after_success:
+  - mvn clean test jacoco:report coveralls:report
 
 #after_failure:
 

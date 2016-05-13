@@ -15,12 +15,12 @@ import java.security.Principal;
 public class LoginController extends JPController {
 
     @RequestMapping(method = RequestMethod.GET, value = LOGIN)
-    public String printCreateEvent(Principal principal, @RequestParam(value = "error", required = false) String error, @RequestParam(value = "alert_success", required = false) String alert_success, ModelMap model) {
+    public String printCreateEvent(Principal principal, @RequestParam(value = "error", required = false) String error, @RequestParam(value = "alert_success", required = false) String alertSuccess, ModelMap model) {
         if (addInfoIfAlreadyLoggedIn(model, principal)) {
             return LogicalViewNames.getNameInfoPage();
         }
         String alertDanger = (error != null) ? "alert.danger.login_err" : null;
-        setAlerts(model, alertDanger, null, alert_success, null);
+        setAlerts(model, alertDanger, null, alertSuccess, null);
         return LogicalViewNames.getNameLogin();
     }
 }
