@@ -36,9 +36,9 @@ public class DBDeclarationController extends DBControl {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("INSERT INTO declaration(name, usertobringwith, bringwithbyall, event_id) VALUES (?, ?, ?, ?);");
-            ps.setString(1, d.getName());
             ps.setString(2, d.getUser().getEmail());
             ps.setBoolean(3, d.getBringWithByAll());
+            ps.setString(1, d.getName());
             ps.setInt(4, d.getEventId());
             ps.execute();
             ps.close();
@@ -57,9 +57,9 @@ public class DBDeclarationController extends DBControl {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("DELETE FROM declaration WHERE name=? AND usertobringwith=? AND bringwithbyall=? AND event_id=?;");
+            ps.setBoolean(3, d.getBringWithByAll());
             ps.setString(1, d.getName());
             ps.setString(2, d.getUser().getEmail());
-            ps.setBoolean(3, d.getBringWithByAll());
             ps.setInt(4, d.getEventId());
             ps.execute();
             ps.close();
@@ -80,8 +80,8 @@ public class DBDeclarationController extends DBControl {
             PreparedStatement ps = c.prepareStatement("UPDATE declaration SET name=?, usertobringwith=?, bringwithbyall=? WHERE id=?;");
             ps.setString(1, d.getName());
             ps.setString(2, d.getUser().getEmail());
-            ps.setBoolean(3, d.getBringWithByAll());
             ps.setInt(4, d.getEventId());
+            ps.setBoolean(3, d.getBringWithByAll());
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
