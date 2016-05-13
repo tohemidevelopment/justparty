@@ -62,13 +62,13 @@ public class DBLocationController extends DBControl {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("INSERT INTO location(street, house_nr, city, zipcode, country, name, public) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            ps.setInt(4, l.getAddress().getZipCode().getZipInt());
             ps.setString(1, l.getAddress().getStreet());
             ps.setInt(2, Integer.parseInt(l.getAddress().getHouseNumber()));
+            ps.setBoolean(7, l.isPublicLocation());
             ps.setString(3, l.getAddress().getCity());
-            ps.setInt(4, l.getAddress().getZipCode().getZipInt());
             ps.setString(5, l.getAddress().getCountry());
             ps.setString(6, l.getName());
-            ps.setBoolean(7, l.isPublicLocation());
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
@@ -104,13 +104,13 @@ public class DBLocationController extends DBControl {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("UPDATE location SET street=? AND house_nr=? AND city=? AND zipcode=? AND country=? AND name=? AND public=? WHERE address_id=?");
-            ps.setString(1, l.getAddress().getStreet());
+            ps.setInt(4, l.getAddress().getZipCode().getZipInt());
             ps.setInt(2, Integer.parseInt(l.getAddress().getHouseNumber()));
             ps.setString(3, l.getAddress().getCity());
-            ps.setInt(4, l.getAddress().getZipCode().getZipInt());
+            ps.setString(1, l.getAddress().getStreet());
+            ps.setBoolean(7, l.isPublicLocation());
             ps.setString(5, l.getAddress().getCountry());
             ps.setString(6, l.getName());
-            ps.setBoolean(7, l.isPublicLocation());
             ps.setInt(8, getLocationID(l));
             ps.execute();
             ps.close();
