@@ -38,8 +38,8 @@ public class DBGuestlistController extends DBControl {
         try {
             PreparedStatement ps = c.prepareStatement("INSERT INTO guestlist(guest, event, status) VALUES (?, ?, ?);");
             ps.setString(1, u.getEmail());
-            ps.setInt(2, e.getId());
             ps.setInt(3, status);
+            ps.setInt(2, e.getId());
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
@@ -77,9 +77,9 @@ public class DBGuestlistController extends DBControl {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("DELETE FROM guestlist WHERE guest=? AND event=? AND status=?");
+            ps.setInt(3, status);
             ps.setString(1, u.getEmail());
             ps.setInt(2, e.getId());
-            ps.setInt(3, status);
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
