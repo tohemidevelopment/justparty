@@ -8,11 +8,11 @@ import java.net.URL;
  */
 public class BirthdayEvent extends ConcreteEvent {
 
+    private URL amazonWishlistLink;
+
     public BirthdayEvent(int id) {
         super(id);
     }
-
-    private URL amazonWishlistLink;
 
     public URL getAmazonWishlistLink() {
         return amazonWishlistLink;
