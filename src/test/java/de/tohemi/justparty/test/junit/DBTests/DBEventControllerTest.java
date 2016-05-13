@@ -14,9 +14,7 @@ import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.springframework.util.Assert;
 
 import java.net.URL;
@@ -28,17 +26,17 @@ import java.sql.Timestamp;
  */
 public class DBEventControllerTest {
 
-    public DBEventController conE;
-    public DBUserController conU;
-    public DBLocationController conL;
-    public DBController con;
+    public static DBEventController conE;
+    public static DBUserController conU;
+    public static DBLocationController conL;
+    public static DBController con;
     public Event event;
-    public User user;
-    public EMail email;
-    public Location location;
+    public static User user;
+    public static EMail email;
+    public static Location location;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
         conE = DBEventController.getInstance();
         conU = DBUserController.getInstance();
         conL = DBLocationController.getInstance();
@@ -50,6 +48,12 @@ public class DBEventControllerTest {
         user.setBirthday(new Date(1995, 07, 10));
         user.setAddress(new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"));
         location = new Location("Testlocation", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false);
+        conU.addUser(user, "ROLE_USER", "1234");
+        conL.addLocation(location);
+    }
+
+    @Before
+    public void setUpEachTest() throws Exception {
         event = EventFactory.createEvent();
         event.setName("TestEventForJUnit");
         event.setDescription("Description");
@@ -60,20 +64,21 @@ public class DBEventControllerTest {
         event.setFacebookLink(new URL("http://www.facebook.com"));
         event.setWishlistLink(new URL("http://www.facebook.com"));
         event.setGooglePlusLink(new URL("http://www.facebook.com"));
-        conU.addUser(user, "ROLE_USER", "1234");
         conE.addEvent(event);
         event.setId(con.getEventID(user));
-        conL.addLocation(location);
+    }
+
+    @AfterClass
+    public static void tearDown() throws Exception {
+        conU.removeUser(user);
+        conL.deleteLocation(location);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDownEachMethod() throws Exception {
         conE.deleteEvent(event, user);
         event.setId(event.getId() - 1);
         conE.deleteEvent(event, user);
-        conU.removeUser(user);
-        conL.deleteLocation(location);
-        conL.deleteLocation(new Location("TestLocation23", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false));
     }
 
     @Test
