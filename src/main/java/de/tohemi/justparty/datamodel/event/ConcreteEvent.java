@@ -19,8 +19,7 @@ public class ConcreteEvent implements Event {
     private Location location;
     private User eventOwner;
     private List<UserEventRelation> guests;
-    //TODO: Implement class for things to bring with to party
-    //private List<Things> things;
+    //TODO: Implement class for things to bring with to party private List<Things> things;
     private URL facebookLink;
     private URL googlePlusLink;
     private URL spotifyPlaylistLink;
