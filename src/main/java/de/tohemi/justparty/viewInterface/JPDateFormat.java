@@ -1,4 +1,4 @@
-package de.tohemi.justparty.viewInterface;
+package de.tohemi.justparty.viewinterface;
 
 import java.text.SimpleDateFormat;
 
@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
  * Created by Micha Piertzik on 30.11.2015.
  */
 public class JPDateFormat {
+
+    private JPDateFormat(){}
 
     public static SimpleDateFormat getSimpleDateFormat() {
         //TODO: check locale
