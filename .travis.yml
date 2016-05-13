@@ -29,8 +29,8 @@ sudo: false
 # Run Integration tests
 script: "mvn test sonar:sonar && mvn tomcat7:redeploy"
 
-after_success:
-  - mvn clean test jacoco:report coveralls:report
+#after_success:
+#  - mvn clean test jacoco:report coveralls:report
 
 #after_failure:
 

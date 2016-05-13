@@ -18,6 +18,8 @@ public class LogicalViewNames {
     private static final String NAME_VERIFY_EMAIL = "user/verifyEmail";
     private static final String NAME_INVITE_USER ="user/inviteUsers";
 
+    private LogicalViewNames(){}
+
     public static String getNameWelcomePage() {
         return WELCOME_PAGE;
     }
