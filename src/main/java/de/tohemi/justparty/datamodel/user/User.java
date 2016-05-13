@@ -12,6 +12,10 @@ public interface User {
 
     String getEmail();
 
+    /**
+     *
+     * @deprecated Use setEmail(String email) instead
+     */
     @Deprecated
     void setEmail(EMail email);
 
