@@ -94,7 +94,22 @@ public class EventsHandlerImpl implements EventsHandler {
         if (eventChanges.getLocation() != null) {
             dbEvent.setLocation(eventChanges.getLocation());
         }
-        //TODO: add missing fields
+        if(eventChanges.getEventOwner() != null) {
+            dbEvent.setEventOwner(eventChanges.getEventOwner());
+        }
+        if(eventChanges.getFacebookLink() != null) {
+            dbEvent.setFacebookLink(eventChanges.getFacebookLink());
+        }
+        if(eventChanges.getGooglePlusLink() != null) {
+            dbEvent.setGooglePlusLink(eventChanges.getGooglePlusLink());
+        }
+        if(eventChanges.getGuests() != null)  {
+            dbEvent.setGuests(eventChanges.getGuests());
+        }
+        if(eventChanges.getId() != -1) {
+            dbEvent.setId(eventChanges.getId());
+        }
+        //TODO: add missing field eventType
 
         return true;
     }
