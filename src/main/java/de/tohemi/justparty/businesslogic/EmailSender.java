@@ -38,26 +38,26 @@ public class EmailSender {
     }
 
 
-    public void sendEmailVerification(User sendTo, String verificationID) {
+    public boolean sendEmailVerification(User sendTo, String verificationID) {
         String emailContent = "Dein Account bei justParty wurde erfolgreich angelegt. Bitte verifiziere nun noch deine E-Mail-Adresse:<br>" + insertButton("http://justparty.ml/verifyEmail?id=" + verificationID, "E-Mail verifizieren");
         String subject = "E-Mail Verifizierung";
         String emailAddress = sendTo.getEmail();
         String firstName = sendTo.getFirstName();
 
-        sendEmail(emailAddress, firstName, subject, emailContent);
+        return sendEmail(emailAddress, firstName, subject, emailContent);
     }
 
-    public void sendCreateConfirmation(User sendTo, String eventname) {
+    public boolean sendCreateConfirmation(User sendTo, String eventname) {
 
         String emailContent = "Dein Event <b>" + eventname + "</b> wurde erfolgreich erstellt.";
         String subject = "Dein Event wurde erfolgreich erstellt";
         String emailAddress = sendTo.getEmail();
         String firstName = sendTo.getFirstName();
 
-        sendEmail(emailAddress, firstName, subject, emailContent);
+        return sendEmail(emailAddress, firstName, subject, emailContent);
     }
 
-    public void sendInvitationToUser(User sendTo, User inviter, Event event) {
+    public boolean sendInvitationToUser(User sendTo, User inviter, Event event) {
 
 
         String firstNameInviter = (inviter.getFirstName() != null) ? inviter.getFirstName() : "einem User";
@@ -66,10 +66,10 @@ public class EmailSender {
         String firstName = sendTo.getEmail();
         String subject = "Veranstaltungseinladung";
 
-        sendEmail(address, firstName, subject, emailContent);
+        return sendEmail(address, firstName, subject, emailContent);
     }
 
-    public void sendInvitationToNonUser(User sendTo, User inviter, Event event) {
+    public boolean sendInvitationToNonUser(User sendTo, User inviter, Event event) {
 
 
         String emailContent = "Du wurdest von " + inviter.getEmail() + " zu der Veranstaltung <b>" + event.getName() + "</b> eingeladen.";
@@ -77,10 +77,10 @@ public class EmailSender {
         String firstName = null;
         String subject = "Veranstaltungseinladung";
 
-        sendEmail(address, firstName, subject, emailContent);
+        return sendEmail(address, firstName, subject, emailContent);
     }
 
-    private void sendEmail(String address, String firstName, String subject, String emailContent) {
+    private boolean sendEmail(String address, String firstName, String subject, String emailContent) {
         htmlFormat(emailContent, firstName);
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -91,8 +91,10 @@ public class EmailSender {
             helper.setFrom("justParty");
         } catch (MessagingException e) {
             SystemProperties.getLogger().logException(e);
+            return false;
         }
         mailSender.send(message);
+        return true;
     }
 
 
