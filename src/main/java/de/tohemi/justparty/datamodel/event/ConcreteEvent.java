@@ -26,11 +26,11 @@ public class ConcreteEvent implements Event {
     private int id;
     private URL wishlistLink;
 
-    ConcreteEvent(int id) {
+    public ConcreteEvent(int id) {
         this.id = id;
     }
 
-    ConcreteEvent() {}
+    public ConcreteEvent() {}
 
     @Override
     public String getName() {
