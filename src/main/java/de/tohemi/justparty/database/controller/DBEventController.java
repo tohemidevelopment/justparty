@@ -422,19 +422,22 @@ public class DBEventController extends DBControl {
     public Location getLocation(int id) {
 
         Location location = null;
+        int address_id = id;
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement psEvent = c.prepareStatement("SELECT address_id FROM events WHERE event_id=?;");
+            //PreparedStatement psEvent = c.prepareStatement("SELECT address_id FROM events WHERE event_id=?;");
             PreparedStatement psLocation = c.prepareStatement("SELECT * FROM location WHERE address_id=?");
-            psEvent.setInt(1, id);
-            ResultSet rs = psEvent.executeQuery();
-            while (rs.next()) {
-                psLocation.setInt(1, rs.getInt(EventsDBTabelle.COLUMN_ADDRESS_ID));
-            }
-            rs.close();
-            psEvent.close();
-            rs = psLocation.executeQuery();
+            //psEvent.setInt(1, id);
+            //ResultSet rs = psEvent.executeQuery();
+            //while(rs.next()) {
+            //    address_id = rs.getInt(EventsDBTabelle.COLUMN_ADDRESS_ID);
+            //}
+            //rs.close();
+            //psEvent.close();
+
+            psLocation.setInt(1, address_id);
+            ResultSet rs = psLocation.executeQuery();
             while (rs.next()) {
                 location = new Location(rs.getString(LocationDBTabelle.COLUMN_NAME), new ConcreteAddress(rs.getString(LocationDBTabelle.COLUMN_STREET), rs.getString(LocationDBTabelle.COLUMN_HOUSENR), new ZipCode(rs.getInt(LocationDBTabelle.COLUMN_ZIPCODE)), rs.getString(LocationDBTabelle.COLUMN_CITY), rs.getString(LocationDBTabelle.COLUMN_COUNTRY)), rs.getBoolean(LocationDBTabelle.COLUMN_PUBLIC));
             }
