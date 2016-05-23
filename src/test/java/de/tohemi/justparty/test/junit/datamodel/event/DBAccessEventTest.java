@@ -146,7 +146,7 @@ public class DBAccessEventTest {
     }
 
     @Test
-    public void setLocation() throws Exception, ZipCodeInvalidException {
+    public void setLocation() throws Exception {
         conL.addLocation(new Location("TestLocation23", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false));
         DBAE.setLocation(new Location("TestLocation23", new ConcreteAddress("Teststraße", "12", new ZipCode(12345), "Testort", "Testland"), false));
         Assert.isTrue(DBAE.getLocation().getName().equals("TestLocation23"));

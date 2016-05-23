@@ -102,7 +102,7 @@ public class DBEventController extends DBControl {
                     event.setEventOwner(UserFactory.create(new EMail(rs.getString(EventsDBTabelle.COLUMN_EMAIL))));
 
                 event.setName(rs.getString(EventsDBTabelle.COLUMN_NAME));
-                event.setLocation(getLocation(rs.getInt(EventsDBTabelle.COLUMN_ADDRESS_ID)));
+                event.setLocation(getLocation(id));
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -422,19 +422,19 @@ public class DBEventController extends DBControl {
     public Location getLocation(int id) {
 
         Location location = null;
-        int address_id = id;
+        int address_id = 0;
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            //PreparedStatement psEvent = c.prepareStatement("SELECT address_id FROM events WHERE event_id=?;");
+            PreparedStatement psEvent = c.prepareStatement("SELECT address_id FROM events WHERE event_id=?;");
             PreparedStatement psLocation = c.prepareStatement("SELECT * FROM location WHERE address_id=?");
-            //psEvent.setInt(1, id);
-            //ResultSet rs = psEvent.executeQuery();
-            //while(rs.next()) {
-            //    address_id = rs.getInt(EventsDBTabelle.COLUMN_ADDRESS_ID);
-            //}
-            //rs.close();
-            //psEvent.close();
+            psEvent.setInt(1, id);
+            ResultSet rs1 = psEvent.executeQuery();
+            while (rs1.next()) {
+                address_id = rs1.getInt(EventsDBTabelle.COLUMN_ADDRESS_ID);
+            }
+            rs1.close();
+            psEvent.close();
 
             psLocation.setInt(1, address_id);
             ResultSet rs = psLocation.executeQuery();
