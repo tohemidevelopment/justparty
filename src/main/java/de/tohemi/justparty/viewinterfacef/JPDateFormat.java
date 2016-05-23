@@ -1,4 +1,4 @@
-package de.tohemi.justparty.viewinterface;
+package de.tohemi.justparty.viewinterfacef;
 
 import java.text.SimpleDateFormat;
 

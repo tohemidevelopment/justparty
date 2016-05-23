@@ -1,6 +1,6 @@
 package de.tohemi.justparty.controller;
 
-import de.tohemi.justparty.viewinterface.LogicalViewNames;
+import de.tohemi.justparty.viewinterfacef.LogicalViewNames;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 

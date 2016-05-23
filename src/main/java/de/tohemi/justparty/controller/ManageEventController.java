@@ -3,7 +3,7 @@ package de.tohemi.justparty.controller;
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
 import de.tohemi.justparty.datamodel.Accepted;
-import de.tohemi.justparty.viewinterface.LogicalViewNames;
+import de.tohemi.justparty.viewinterfacef.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
