@@ -1,6 +1,6 @@
 package de.tohemi.justparty.test.junit.tests;
 
-import de.tohemi.justparty.viewinterfacef.LogicalViewNames;
+import de.tohemi.justparty.viewinterface.LogicalViewNames;
 import org.junit.Test;
 import org.springframework.util.Assert;
 

@@ -2,7 +2,7 @@ package de.tohemi.justparty.datamodel;
 
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.event.Event;
-import de.tohemi.justparty.viewinterfacef.JPDateFormat;
+import de.tohemi.justparty.viewinterface.JPDateFormat;
 
 
 /**
