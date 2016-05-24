@@ -19,6 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.host.url>http://193.196.7.25</sonar.host.url>
         <sonar.language>java</sonar.language>
+        <sass.plugin.version>2.18</sass.plugin.version>
     </properties>
 
     <build>
@@ -33,8 +34,11 @@
                             <!-- this is relative to the pom.xml directory -->
                             <directory>web</directory>
                         </resource>
+
                     </webResources>
+                    <packagingExcludes>res/sass/default-theme/*.scss</packagingExcludes>
                 </configuration>
+
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -84,6 +88,22 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>nl.geodienstencentrum.maven</groupId>
+                <artifactId>sass-maven-plugin</artifactId>
+                <version>${sass.plugin.version}</version>
+                <configuration>
+                    <resources>
+                        <resource>
+                            <!-- Set source and destination dirs -->
+                            <source>
+                                <directory>${project.basedir}/web/res/sass/default-theme</directory>
+                            </source>
+                            <destination>${project.basedir}/web/res/css/default-theme</destination>
+                        </resource>
+                    </resources>
                 </configuration>
             </plugin>
         </plugins>
