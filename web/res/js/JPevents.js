@@ -114,6 +114,32 @@ function showGuestlist()
 
 var eventDataChanges = {};
 
+function invitePerson(email, message) {
+    var req = new XMLHttpRequest();
+
+
+    // open connectiom
+    req.open("GET", "invited?email=" + email + "&id=" + id, true);
+
+    // put handler for response
+    /*req.onreadystatechange = function receive()
+     {
+     if (req.readyState == 4)
+     {
+     var answer = req.responseText;
+     html = "";
+     if (answer != "")
+     {
+     html = answer;
+     }
+
+     document.getElementById("alerts").innerHTML = html;
+     }
+     };*/
+
+    req.send();
+}
+
 function updateEventData(id)
 {
     var newValue = document.getElementById(id).value;

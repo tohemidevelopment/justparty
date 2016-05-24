@@ -62,7 +62,9 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message
                         code="editevent.guestlist.modal.button1"/></button>
-                <button type="button" class="btn btn-primary"><spring:message
+                <button type="button" class="btn btn-primary"
+                        onclick="invitePerson(document.getElementById('#recipient-name').valueOf(), document.getElementById('#message-text').valueOf())">
+                    <spring:message
                         code="editevent.guestlist.modal.button2"/></button>
             </div>
         </div>
