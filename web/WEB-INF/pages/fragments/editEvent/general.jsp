@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: Tom
@@ -11,6 +12,14 @@
         <td><label for="eventname"><spring:message code="editevent.general.eventname"/></label></td>
         <td colspan="2"><input type="text" class="form-control" id="eventname" onchange="updateEventData('eventname');"
                                value="${event.name}"></td>
+    </tr>
+    <tr>
+        <td><label for="eventtype"><spring:message code="editevent.general.eventtype"/></label></td>
+        <td colspan="2">
+            <select class="form-control" id="eventtype" onchange="updateEventData('eventtype');">
+
+            </select>
+        </td>
     </tr>
     <tr>
         <td><label for="location"><spring:message code="editevent.general.ort"/></label></td>

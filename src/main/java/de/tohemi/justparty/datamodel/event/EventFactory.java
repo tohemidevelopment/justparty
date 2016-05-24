@@ -5,7 +5,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by Micha Piertzik on 04.05.2016.
@@ -39,7 +41,6 @@ final public class EventFactory {
     }
 
     public static Event createEvent() {
-
         return new ConcreteEvent();
     }
 
@@ -49,4 +50,5 @@ final public class EventFactory {
         event.setId(id);
         return event;
     }
+
 }
