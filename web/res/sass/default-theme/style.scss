@@ -1,0 +1,14 @@
+@import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css";
+@import "welcome";
+@import "navbar";
+@import "manageEvents";
+
+body{
+  font-family: Arial;
+  margin-top: 0;
+  padding-top: 70px;
+}
+
+.hidden {
+  display: none;
+}
