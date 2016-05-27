@@ -19,22 +19,13 @@ public class EventAssistantController extends JPController {
     @RequestMapping(method = RequestMethod.GET, value = EDITEVENT)
     public String editEventData(final ModelMap model, @RequestParam(value = "id") final int id) {
 
-        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
-        if (userIsNotHost(id, eventsHandler)) {
-            //TODO: Show Error String, User not host
-            return REDIRECT + ERROR;
-        }
+        return EventAssistant.getInstance().getViewName(model, id);
+    }
 
-        String mailFromLoggedInUser = getMailFromLoggedInUser();
-        Event event = eventsHandler.getEvent(id, mailFromLoggedInUser);
-        model.addAttribute("event", event);
-        if (event.getEventType() == null)
-        {
-            //display chooseEventType
-            model.addAttribute("types", EventType.getEventTypes());
-            return LogicalViewNames.getNameChooseEventType();
-        }
-        return LogicalViewNames.getNameEditEvent();
+    @RequestMapping(method = RequestMethod.POST, value = EVENTTYPE)
+    public String setEventType(final ModelMap model, @RequestParam(value = "id") final int id) {
+
+        return EventAssistant.getInstance().getViewName(model, id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = EVENTDATA)
