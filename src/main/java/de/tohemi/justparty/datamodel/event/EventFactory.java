@@ -9,10 +9,16 @@ import com.google.gson.GsonBuilder;
  */
 public final class EventFactory {
 
-    private EventFactory(){}
+    private EventFactory() {
+    }
 
     public static Event createEvent(final int id, final EventType eventType, final boolean dbAccess) {
         if (eventType == EventType.BIRTHDAY) {
+            if (dbAccess) {
+                DBAccessEvent dbAccessEvent = new DBAccessEvent(id);
+                dbAccessEvent.setEventType(eventType);
+                return dbAccessEvent;
+            }
             return new BirthdayEvent(id);
         }
 

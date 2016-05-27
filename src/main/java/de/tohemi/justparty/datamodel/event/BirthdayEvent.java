@@ -9,10 +9,13 @@ import java.net.URL;
 public class BirthdayEvent extends ConcreteEvent {
 
     private URL amazonWishlistLink;
+    private EventType type;
 
     public BirthdayEvent(int id) {
         super(id);
+        type = EventType.BIRTHDAY;
     }
+
 
     public URL getAmazonWishlistLink() {
         return amazonWishlistLink;

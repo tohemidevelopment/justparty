@@ -22,13 +22,18 @@
         <h1><spring:message code="editevent.eventtype.header"/></h1>
     </div>
     <%@include file="../../fragments/alerts.jsp" %>
-    <form action="/edit?" role="form" class="form">
+    <form action="/settype" role="form" class="form" method="post">
         <div class="form-group">
-            <label for="eventtype"><spring:message code="editevent.general.eventtype"/></label>
-            <select class="form-control" id="eventtype" name="eventtype" onchange="updateEventData('eventtype');">
+            <label for="type"><spring:message code="editevent.general.eventtype"/></label>
+            <select name="type" class="form-control" id="type">
+                <c:forEach var="type" items="${types}">
+                    <option value="${type}"><spring:message code="editevent.eventtype.${type}"/></option>
+                </c:forEach>
             </select>
         </div>
         <input type="hidden" value="${event.id}" name="id"/>
+        <input type="hidden" name="${_csrf.parameterName}"
+               value="${_csrf.token}"/>
         <input class="form-control" type="submit" value="<spring:message code="nav.next"/> ">
     </form>
 </div>

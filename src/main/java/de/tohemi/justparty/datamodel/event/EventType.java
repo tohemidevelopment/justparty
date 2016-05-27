@@ -9,11 +9,11 @@ import java.util.List;
 public enum EventType {
     DEFAULT, BIRTHDAY;
 
-    public static List<EventType> getEventTypes() {
-        final List<EventType> eventTypes;
+    public static List<String> getEventTypes() {
+        final List<String> eventTypes;
         eventTypes = new ArrayList<>();
         for (EventType eventtype : EventType.values()) {
-            eventTypes.add(eventtype);
+            eventTypes.add(eventtype.toString());
         }
         return eventTypes;
     }

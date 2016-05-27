@@ -82,6 +82,8 @@ public class DBEventController extends DBControl {
 
     public Event getEventById(int id) {
 
+        //TODO: eventtype abfragen und in event speichern
+
         final Event event = EventFactory.createEvent(id);
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);

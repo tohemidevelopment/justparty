@@ -37,6 +37,7 @@ public class ConcreteEvent implements Event {
 
     public ConcreteEvent() {
         properties = new HashMap<String, Object>();
+        eventType = EventType.DEFAULT;
     }
 
     @Override

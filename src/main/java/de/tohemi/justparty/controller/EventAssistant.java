@@ -15,9 +15,17 @@ public class EventAssistant extends JPController {
 
     private static EventAssistant instance;
 
-    private EventAssistant() {}
+    private EventAssistant() {
+    }
 
-    public String getViewName(ModelMap model, @RequestParam(value = "id") int id) {
+    public synchronized static EventAssistant getInstance() {
+        if (instance == null) {
+            return new EventAssistant();
+        }
+        return instance;
+    }
+
+    public String getViewName(ModelMap model, int id) {
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         if (userIsNotHost(id, eventsHandler)) {
             //TODO: Show Error String, User not host
@@ -33,12 +41,5 @@ public class EventAssistant extends JPController {
             return LogicalViewNames.getNameChooseEventType();
         }
         return LogicalViewNames.getNameEditEvent();
-    }
-
-    public synchronized static EventAssistant getInstance() {
-        if (instance == null) {
-            return new EventAssistant();
-        }
-        return instance;
     }
 }

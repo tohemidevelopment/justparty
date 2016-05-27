@@ -150,7 +150,7 @@ public class DBAccessEvent implements Event {
 
     @Override
     public void setEventType(EventType type) {
-
+        //TODO: change type in DB
     }
 
     @Override
