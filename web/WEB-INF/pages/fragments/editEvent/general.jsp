@@ -82,32 +82,33 @@
                     <div class="form-group">
                         <label for="name" class="control-label"><spring:message
                                 code="editevent.general.modal.ort.name"/></label>
-                        <input class="form-control" id="name">
+                        <input class="form-control" id="name" value="${location.name}">
                     </div>
                     <div class="form-group">
                         <label for="street" class="control-label"><spring:message
                                 code="editevent.general.modal.ort.street"/></label>
-                        <input type="text" class="form-control" id="street">
+                        <input type="text" class="form-control" id="street" value="${location.address.street}">
                     </div>
                     <div class="form-group">
                         <label for="housenumber" class="control-label"><spring:message
                                 code="editevent.general.modal.ort.housenumber"/></label>
-                        <input type="text" class="form-control" id="housenumber">
+                        <input type="text" class="form-control" id="housenumber"
+                               value="${location.address.houseNumber}">
                     </div>
                     <div class="form-group">
                         <label for="zip" class="control-label"><spring:message
                                 code="editevent.general.modal.ort.zip"/></label>
-                        <input type="text" class="form-control" id="zip">
+                        <input type="text" class="form-control" id="zip" value="${location.address.zipCode.zipInt}">
                     </div>
                     <div class="form-group">
                         <label for="city" class="control-label"><spring:message
                                 code="editevent.general.modal.ort.city"/></label>
-                        <input type="text" class="form-control" id="city">
+                        <input type="text" class="form-control" id="city" value="${location.address.city}">
                     </div>
                     <div class="form-group">
                         <label for="land" class="control-label"><spring:message
                                 code="editevent.general.modal.ort.land"/></label>
-                        <input type="text" class="form-control" id="land">
+                        <input type="text" class="form-control" id="land" value="${location.address.country}">
                     </div>
                     <div class="form-group">
                         <label for="result" class="control-label"><spring:message

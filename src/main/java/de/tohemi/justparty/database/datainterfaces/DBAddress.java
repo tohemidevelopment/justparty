@@ -1,11 +1,11 @@
 package de.tohemi.justparty.database.datainterfaces;
 
+import de.tohemi.justparty.database.controller.DBLocationController;
 import de.tohemi.justparty.datamodel.address.Address;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 
 /**
  * Created by Heiko on 26.12.2015.
- * TODO: implement Methods
  */
 public class DBAddress implements Address{
     private int id;
@@ -14,54 +14,46 @@ public class DBAddress implements Address{
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
+    @Override
+    public String getStreet() { return DBLocationController.getInstance().getStreet(id);}
 
-    public String getStreet() {
-        return null;
-    }
+    @Override
+    public void setStreet(String street) { DBLocationController.getInstance().setStreet(street, id); }
 
-    public void setStreet(String street) {
-
-    }
-
+    @Override
     public String getHouseNumber() {
-        return null;
+        return DBLocationController.getInstance().getHouseNumber(id);
     }
 
-    public void setHouseNumber(String houseNumber) {
+    @Override
+    public void setHouseNumber(String houseNumber) { DBLocationController.getInstance().setHouseNumber(houseNumber,id); }
 
-    }
-
+    @Override
     public ZipCode getZipCode() {
-        return null;
+        return DBLocationController.getInstance().getZipCode(id);
     }
 
-    public void setZipCode(ZipCode zipCode) {
+    @Override
+    public void setZipCode(ZipCode zipCode) { DBLocationController.getInstance().setZipCode(zipCode, id); }
 
-    }
-
+    @Override
     public String getCity() {
-        return null;
+        return DBLocationController.getInstance().getCity(id);
     }
 
-    public void setCity(String location) {
+    @Override
+    public void setCity(String city) { DBLocationController.getInstance().setCity(city, id); }
 
-    }
+    @Override
+    public String getCountry() { return DBLocationController.getInstance().getCountry(id); }
 
-    public String getCountry() {
-        return null;
-    }
+    @Override
+    public void setCountry(String country) { DBLocationController.getInstance().setCountry(country, id); }
 
-    public void setCountry(String country) {
+    @Override
+    public void setID(int id) { this.id = id;}
 
-    }
-
-    public void setID(int id) {
-
-    }
-
+    @Override
     public int getID() {
         return id;
     }

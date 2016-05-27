@@ -5,7 +5,6 @@ import de.tohemi.justparty.businesslogic.Error;
 import de.tohemi.justparty.businesslogic.ErrorType;
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.user.DBAccessUser;
 import de.tohemi.justparty.datamodel.user.User;
@@ -27,7 +26,7 @@ public class UserHandler {
             user = UserFactory.create(new EMail(email));
         } catch (InvalidEmailException e) {
             SystemProperties.getLogger().logException(e);
-            return new de.tohemi.justparty.businesslogic.Error("register.error.email", ErrorType.EMAIL);
+            return new Error("register.error.email", ErrorType.EMAIL);
         }
         if (!passwordValid(password, matchingPassword)) {
             return new Error("register.error.password", ErrorType.PASSWORD);
@@ -52,13 +51,13 @@ public class UserHandler {
         } catch (UserNotFoundException e) {
             SystemProperties.getLogger().logException(e);
             //User not in DB
-            if (dbController.addUser(user, UserRoles.USER, HashFunction.getHash(password))) {
+            if (dbController.addUser(user, HashFunction.getHash(password))) {
                 //User added to DB
                 sendVerificationEmail(user.getEmail());
                 return null;
             }
         }
-        return new Error("", null);
+        return null;
     }
 
     private void sendVerificationEmail(String email) {

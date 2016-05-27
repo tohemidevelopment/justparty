@@ -19,51 +19,66 @@ public class ConcreteUser implements User {
         this.email = email;
     }
 
+    /**
+     *
+     * @deprecated  use other instead
+     */
     @Deprecated
     public ConcreteUser(EMail email) {
         this.email = email.toString();
     }
 
+    @Override
     public String getLastName() {
         return lastName;
     }
 
+    @Override
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    @Override
     public String getFirstName() {
         return firstName;
     }
 
+    @Override
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    @Override
     public Address getAddress() {
         return address;
     }
 
+    @Override
     public void setAddress(Address address) {
         this.address = address;
     }
 
+    @Override
     public Date getBirthday() {
         return birthday;
     }
 
+    @Override
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
 
+    @Override
     public void setEmail(EMail email) {
         this.email = email.toString();
     }
 
+    @Override
     public void setEmail(String email) {
         this.email = email;
     }

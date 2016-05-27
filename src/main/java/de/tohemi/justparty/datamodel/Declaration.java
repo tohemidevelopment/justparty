@@ -9,20 +9,20 @@ public class Declaration {
     private String name;
     private User user;
     private boolean bringWithByAll;
-    private int event_id;
+    private int eventID;
 
-    public Declaration(String name, User user, boolean bringWithByAll, int event_id){
+    public Declaration(String name, User user, boolean bringWithByAll, int eventID){
         this.bringWithByAll = bringWithByAll;
-        this.event_id = event_id;
+        this.eventID = eventID;
         this.name = name;
         this.user = user;
     }
 
     public int getEventId() {
-        return event_id;
+        return eventID;
     }
 
-    public void setEventId(int event_id) { this.event_id = event_id; }
+    public void setEventId(int eventID) { this.eventID = eventID; }
 
     public String getName() {
         return name;

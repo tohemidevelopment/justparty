@@ -7,6 +7,8 @@ import de.tohemi.justparty.datamodel.wrapper.EMail;
  */
 public final class UserFactory {
 
+    private UserFactory(){}
+
     public static User create(final EMail email) {
         return UserFactory.create(email, false, false);
     }

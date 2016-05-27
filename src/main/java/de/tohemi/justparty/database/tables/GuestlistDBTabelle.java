@@ -15,6 +15,7 @@ public class GuestlistDBTabelle {
     public static final int DECLINED=2;
     public static final int NOTSURE=3;
 
+    private GuestlistDBTabelle(){}
 
     public static Accepted getAcceptedObjectForStatus(int status) {
         switch (status) {
@@ -24,8 +25,9 @@ public class GuestlistDBTabelle {
                 return Accepted.DECLINED;
             case NOTSURE:
                 return Accepted.NOTSURE;
+            default:
+                return null;
         }
-        return null;
     }
 
     public static int getIntStatusForAcceptedObject(Accepted status) {
@@ -39,7 +41,8 @@ public class GuestlistDBTabelle {
                 return DECLINED;
             case NOTSURE:
                 return NOTSURE;
+            default:
+                return 0;
         }
-        return 0;
     }
 }

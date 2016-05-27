@@ -10,8 +10,8 @@ ${location.name}
 ${" "}
 ${location.address.street}
 ${" "}
-${location.address.houseNumber},
-${" "}
+${location.address.houseNumber}
+${", "}
 ${location.address.zipCode.zipInt}
 ${" "}
 ${location.address.city}

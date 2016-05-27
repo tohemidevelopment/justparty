@@ -2,6 +2,7 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.database.tables.EventsDBTabelle;
 import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
+import de.tohemi.justparty.database.tables.LocationDBTabelle;
 import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.UserEventRelation;
@@ -17,7 +18,6 @@ import de.tohemi.justparty.datamodel.wrapper.ZipCode;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import java.util.List;
 public class DBEventController extends DBControl {
     private static DBEventController instance;
 
-    public synchronized static DBEventController getInstance() {
+    public static synchronized DBEventController getInstance() {
         if (instance == null) {
             return new DBEventController();
         }
@@ -80,7 +80,7 @@ public class DBEventController extends DBControl {
         return true;
     }
 
-    public Event getEventById(int id) throws MalformedURLException, InvalidEmailException, ZipCodeInvalidException {
+    public Event getEventById(int id) {
 
         final Event event = EventFactory.createEvent(id);
         DataSource ds = getDataSource();
@@ -92,19 +92,23 @@ public class DBEventController extends DBControl {
             ResultSet rs = psEvent.executeQuery();
 
             while (rs.next()) {
-                event.setSpotifyPlaylistLink(rs.getURL("Spotify_link"));
-                event.setGooglePlusLink((rs.getURL("googleplus_link")));
-                event.setFacebookLink(rs.getURL("facebook_link"));
-                event.setBegin(rs.getTimestamp("begin"));
-                event.setEnd(rs.getTimestamp("end"));
-                event.setDescription(rs.getString("description"));
-                event.setEventOwner(UserFactory.create(new EMail(rs.getString("email"))));
-                event.setName(rs.getString("name"));
-                event.setLocation(getLocation(rs.getInt("address_id")));
+                event.setSpotifyPlaylistLink(rs.getURL(EventsDBTabelle.COLUMN_SPOTIFY));
+                event.setGooglePlusLink(rs.getURL(EventsDBTabelle.COLUMN_GOOGLE));
+                event.setFacebookLink(rs.getURL(EventsDBTabelle.COLUMN_FACEBOOK));
+                event.setBegin(rs.getTimestamp(EventsDBTabelle.COLUMN_BEGIN));
+                event.setEnd(rs.getTimestamp(EventsDBTabelle.COLUMN_END));
+                event.setDescription(rs.getString(EventsDBTabelle.COLUMN_DESCRIPTION));
+
+                    event.setEventOwner(UserFactory.create(new EMail(rs.getString(EventsDBTabelle.COLUMN_EMAIL))));
+
+                event.setName(rs.getString(EventsDBTabelle.COLUMN_NAME));
+                event.setLocation(getLocation(id));
             }
             psEvent.close();
         } catch (SQLException ex) {
             LOGGER.logException(ex, "");
+        } catch (InvalidEmailException e) {
+            LOGGER.logException(e, "");
         } finally {
             releaseConnection(ds, c);
         }
@@ -122,7 +126,7 @@ public class DBEventController extends DBControl {
 
             ResultSet rs = pS1.executeQuery();
             while (rs.next())
-                email = rs.getString("email");
+                email = rs.getString(EventsDBTabelle.COLUMN_EMAIL);
             rs.close();
             pS1.close();
 
@@ -179,7 +183,7 @@ public class DBEventController extends DBControl {
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
-        ArrayList<UserEventRelation> userEventRelations = new ArrayList<UserEventRelation>();
+        List<UserEventRelation> userEventRelations = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email FROM events WHERE email = ?;");
             String email = user.getEmail();
@@ -187,12 +191,12 @@ public class DBEventController extends DBControl {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = EventFactory.createEvent(resultSet.getInt("event_id"));
+                Event event = EventFactory.createEvent(resultSet.getInt(EventsDBTabelle.COLUMN_ID));
                 event.setName(resultSet.getString(EventsDBTabelle.COLUMN_NAME));
                 event.setEventOwner(user);
-                Timestamp TimeStamp = resultSet.getTimestamp("begin");
-                if (TimeStamp != null) {
-                    event.setBegin(TimeStamp);
+                Timestamp timeStamp = resultSet.getTimestamp(EventsDBTabelle.COLUMN_BEGIN);
+                if (timeStamp != null) {
+                    event.setBegin(timeStamp);
                 }
                 userEventRelations.add(new UserEventRelation(event, user));
             }
@@ -211,20 +215,20 @@ public class DBEventController extends DBControl {
         DataSource ds = getDataSource();
         // Open a database connection using Spring's DataSourceUtils
         Connection c = DataSourceUtils.getConnection(ds);
-        ArrayList<UserEventRelation> userEventRelations = new ArrayList<UserEventRelation>();
+        List<UserEventRelation> userEventRelations = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email, " + EventsDBTabelle.COLUMN_STATUS + " FROM events, " + GuestlistDBTabelle.TABLE + " WHERE event_id = event AND " + GuestlistDBTabelle.COLUMN_GUEST + " = ?;");
+            PreparedStatement preparedStatement = c.prepareStatement("SELECT event_id, name, begin, email, " + GuestlistDBTabelle.COLUMN_STATUS + " FROM events, " + GuestlistDBTabelle.TABLE + " WHERE event_id = event AND " + GuestlistDBTabelle.COLUMN_GUEST + " = ?;");
             String email = user.getEmail();
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Event event = EventFactory.createEvent(resultSet.getInt("event_id"));
+                Event event = EventFactory.createEvent(resultSet.getInt(EventsDBTabelle.COLUMN_ID));
                 event.setName(resultSet.getString(EventsDBTabelle.COLUMN_NAME));
-                event.setEventOwner(UserFactory.create(resultSet.getString("email")));
-                Timestamp TimeStamp = resultSet.getTimestamp("begin");
-                if (TimeStamp != null) {
-                    event.setBegin(TimeStamp);
+                event.setEventOwner(UserFactory.create(resultSet.getString(EventsDBTabelle.COLUMN_EMAIL)));
+                Timestamp timeStamp = resultSet.getTimestamp(EventsDBTabelle.COLUMN_BEGIN);
+                if (timeStamp != null) {
+                    event.setBegin(timeStamp);
                 }
                 int status = resultSet.getInt(GuestlistDBTabelle.COLUMN_STATUS);
                 Accepted accepted = GuestlistDBTabelle.getAcceptedObjectForStatus(status);
@@ -252,7 +256,7 @@ public class DBEventController extends DBControl {
             psEvent.setString(2, e.getEventOwner().getEmail());
             ResultSet rs = psEvent.executeQuery();
             while (rs.next())
-                exe = rs.getInt("event_id");
+                exe = rs.getInt(EventsDBTabelle.COLUMN_ID);
             rs.close();
             psEvent.close();
         } catch (SQLException ex) {
@@ -273,7 +277,7 @@ public class DBEventController extends DBControl {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while (rs.next())
-                name = rs.getString("name");
+                name = rs.getString(EventsDBTabelle.COLUMN_NAME);
             rs.close();
             psEvent.close();
         } catch (SQLException ex) {
@@ -311,7 +315,7 @@ public class DBEventController extends DBControl {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while (rs.next())
-                name = rs.getString("description");
+                name = rs.getString(EventsDBTabelle.COLUMN_DESCRIPTION);
             rs.close();
             psEvent.close();
         } catch (SQLException ex) {
@@ -349,7 +353,7 @@ public class DBEventController extends DBControl {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while (rs.next()) {
-                begin = new Timestamp(rs.getTimestamp("begin").getTime());
+                begin = new Timestamp(rs.getTimestamp(EventsDBTabelle.COLUMN_BEGIN).getTime());
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -387,7 +391,7 @@ public class DBEventController extends DBControl {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while (rs.next()) {
-                end = new Timestamp(rs.getTimestamp("end").getTime());
+                end = new Timestamp(rs.getTimestamp(EventsDBTabelle.COLUMN_END).getTime());
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -418,21 +422,24 @@ public class DBEventController extends DBControl {
     public Location getLocation(int id) {
 
         Location location = null;
+        int address_id = 0;
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement psEvent = c.prepareStatement("SELECT address_id FROM events WHERE event_id=?;");
             PreparedStatement psLocation = c.prepareStatement("SELECT * FROM location WHERE address_id=?");
             psEvent.setInt(1, id);
-            ResultSet rs = psEvent.executeQuery();
-            while (rs.next()) {
-                psLocation.setInt(1, rs.getInt("address_id"));
+            ResultSet rs1 = psEvent.executeQuery();
+            while (rs1.next()) {
+                address_id = rs1.getInt(EventsDBTabelle.COLUMN_ADDRESS_ID);
             }
-            rs.close();
+            rs1.close();
             psEvent.close();
-            rs = psLocation.executeQuery();
+
+            psLocation.setInt(1, address_id);
+            ResultSet rs = psLocation.executeQuery();
             while (rs.next()) {
-                location = new Location(rs.getString("name"), new ConcreteAddress(rs.getString("street"), rs.getString("house_nr"), new ZipCode(rs.getInt("zipcode")), rs.getString("city"), rs.getString("country")), rs.getBoolean("public"));
+                location = new Location(rs.getString(LocationDBTabelle.COLUMN_NAME), new ConcreteAddress(rs.getString(LocationDBTabelle.COLUMN_STREET), rs.getString(LocationDBTabelle.COLUMN_HOUSENR), new ZipCode(rs.getInt(LocationDBTabelle.COLUMN_ZIPCODE)), rs.getString(LocationDBTabelle.COLUMN_CITY), rs.getString(LocationDBTabelle.COLUMN_COUNTRY)), rs.getBoolean(LocationDBTabelle.COLUMN_PUBLIC));
             }
             rs.close();
             psLocation.close();
@@ -471,7 +478,7 @@ public class DBEventController extends DBControl {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while (rs.next()) {
-                eo = UserFactory.create(rs.getString("email"));
+                eo = UserFactory.create(rs.getString(EventsDBTabelle.COLUMN_EMAIL));
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -509,7 +516,7 @@ public class DBEventController extends DBControl {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while (rs.next()) {
-                facebook = rs.getURL("facebook_link");
+                facebook = rs.getURL(EventsDBTabelle.COLUMN_FACEBOOK);
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -547,7 +554,7 @@ public class DBEventController extends DBControl {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while (rs.next()) {
-                spotify = rs.getURL("Spotify_link");
+                spotify = rs.getURL(EventsDBTabelle.COLUMN_SPOTIFY);
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -585,7 +592,7 @@ public class DBEventController extends DBControl {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while (rs.next()) {
-                google = rs.getURL("googleplus_link");
+                google = rs.getURL(EventsDBTabelle.COLUMN_GOOGLE);
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -623,7 +630,7 @@ public class DBEventController extends DBControl {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while (rs.next()) {
-                wish = rs.getURL("wishlist_link");
+                wish = rs.getURL(EventsDBTabelle.COLUMN_WISHLIST);
             }
             psEvent.close();
         } catch (SQLException ex) {

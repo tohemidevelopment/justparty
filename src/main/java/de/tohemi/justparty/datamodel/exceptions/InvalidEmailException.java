@@ -4,8 +4,9 @@ package de.tohemi.justparty.datamodel.exceptions;
  * Created by Micha Piertzik on 12.11.2015.
  */
 public class InvalidEmailException extends Exception {
-    public InvalidEmailException() {
-    }
+
+    public InvalidEmailException() {//no need of this
+         }
 
     public InvalidEmailException(String message) {
         super(message);

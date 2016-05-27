@@ -3,12 +3,11 @@ package de.tohemi.justparty.controller;
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
 import de.tohemi.justparty.datamodel.Accepted;
-import de.tohemi.justparty.view_interface.LogicalViewNames;
+import de.tohemi.justparty.viewinterface.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by Tom on 07.11.2015.
@@ -17,9 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ManageEventController extends JPController {
 
     @RequestMapping(method = RequestMethod.GET, value = MANAGE_EVENT)
-    public String printEvents(ModelMap model, @RequestParam(value = "alert_success", required = false) String alert_success) {
+    public String printEvents(ModelMap model, @RequestParam(value = "alertSucces", required = false) String alertSucces) {
 
-        setAlerts(model, null, null, alert_success, null);
+        setAlerts(model, null, null, alertSucces, null);
         String mail = getMailFromLoggedInUser();
         model.addAttribute("currentevents", EventsHandlerImpl.getCurrentEvents(mail));
         return LogicalViewNames.getNameEventManager();
@@ -30,7 +29,7 @@ public class ManageEventController extends JPController {
                                  @RequestParam(value = "generated", required = false) String generated) {
 
         String mail = getMailFromUserOrGeneratedURLParam(generated);
-        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler("");
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         Boolean failure = Boolean.valueOf(!eventsHandler.answerInvitation(id, mail,
                 Accepted.valueOf(accepted)));
         model.addAttribute("show_alert", failure);
@@ -42,7 +41,7 @@ public class ManageEventController extends JPController {
         //TODO: if generated is not null and no user is logged in --> check generated Param and return UnregisteredUser | then: need to return a diffrent LogicalView name!
 
         String mail = getMailFromLoggedInUser();
-        if (mail.equals("anonymousUser")) {
+        if ("anonymousUser".equals(mail)) {
             //Nobody is logged in
             return null;
         }

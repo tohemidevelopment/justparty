@@ -2,12 +2,10 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.datainterfaces.DBAddress;
+import de.tohemi.justparty.database.tables.UsersDBTabelle;
 import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.address.Address;
 import de.tohemi.justparty.datamodel.user.User;
-import de.tohemi.justparty.util.SystemProperties;
-import de.tohemi.justparty.util.logger.Logger;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
@@ -37,7 +35,7 @@ public class DBUserController extends DBControl {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return rs.getString("name");
+                return rs.getString(UsersDBTabelle.COLUMN_NAME);
             }
             ps.close();
         } catch (SQLException ex) {
@@ -56,7 +54,7 @@ public class DBUserController extends DBControl {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return rs.getString("Firstname");
+                return rs.getString(UsersDBTabelle.COLUMN_FIRSTNAME);
             }
             ps.close();
         } catch (SQLException ex) {
@@ -75,7 +73,7 @@ public class DBUserController extends DBControl {
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                return new DBAddress(rs.getInt("AddressID"));
+                return new DBAddress(rs.getInt(UsersDBTabelle.COLUMN_ADDRESS_ID));
             }
             ps.close();
         } catch (SQLException ex) {
@@ -96,7 +94,7 @@ public class DBUserController extends DBControl {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                bd = rs.getDate("Birthday");
+                bd = rs.getDate(UsersDBTabelle.COLUMN_BIRTHDAY);
             }
 
             ps.close();
@@ -132,8 +130,8 @@ public class DBUserController extends DBControl {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("UPDATE users SET Firstname=? WHERE Email=?");
-            ps.setString(1, firstName);
             ps.setString(2, email);
+            ps.setString(1, firstName);
             ps.executeUpdate();
             ps.close();
             c.close();
@@ -152,8 +150,8 @@ public class DBUserController extends DBControl {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("UPDATE users SET AddressID=? WHERE Email=?");
-            ps.setInt(1, address.getId());
             ps.setString(2, email);
+            ps.setInt(1, address.getID());
             ps.executeUpdate();
             ps.close();
             c.close();
@@ -241,7 +239,7 @@ public class DBUserController extends DBControl {
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                email = rs.getString("email");
+                email = rs.getString(UsersDBTabelle.COLUMN_EMAIL);
             }
             rs.close();
             ps.close();
@@ -284,7 +282,7 @@ public class DBUserController extends DBControl {
             } else {
                 rs.beforeFirst();
             }
-            if (rs.next() && rs.getString("role").equals(UserRoles.NONUSER)) {
+            if (rs.next() && rs.getString(UsersDBTabelle.COLUMN_ROLE).equals(UserRoles.NONUSER)) {
                 return false;
             }
         } catch (SQLException ex) {
@@ -296,6 +294,29 @@ public class DBUserController extends DBControl {
         return true;
     }
 
+    public boolean addUser(User user, String hash){
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+
+        try {
+            PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email, password, role) VALUE (?, ?, ?)");
+            psUser.setString(1, user.getEmail());
+            psUser.setString(2, hash);
+            psUser.setString(3, UserRoles.USER);
+            psUser.executeUpdate();
+            psUser.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+            return false;
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return true;
+    }
+    /**
+    * @deprecated USE addUser(User user, String hash) instead
+    */
+    @Deprecated
     public boolean addUser(User user, String userRole, String hash) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);

@@ -1,0 +1,54 @@
+/*Manage Events Table*/
+.header-fixed {
+  width: 100%;
+  height: 65%;
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td {
+  display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+  content: ' ';
+  display: block;
+  visibility: hidden;
+  clear: both;
+}
+
+.header-fixed > tbody > tr, .header-fixed > tbody > tr > td {
+  display: flex !important;
+}
+
+.header-fixed > tbody {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.header-fixed > tbody > tr > td {
+  float: left;
+  width: 17%;
+}
+
+.header-fixed > thead > tr > th {
+  float: left;
+  width: 100%;
+}
+
+.date {
+  text-align: right;
+  width: 33% !important;
+}
+
+.action {
+  text-align: center;
+}
+
+.name {
+  width: 50% !important;
+}

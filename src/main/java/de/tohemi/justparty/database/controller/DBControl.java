@@ -2,7 +2,6 @@ package de.tohemi.justparty.database.controller;
 
 import de.tohemi.justparty.util.SystemProperties;
 import de.tohemi.justparty.util.logger.Logger;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 

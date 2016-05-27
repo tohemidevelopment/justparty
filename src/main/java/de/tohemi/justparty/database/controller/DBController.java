@@ -1,10 +1,7 @@
 package de.tohemi.justparty.database.controller;
 
+import de.tohemi.justparty.database.tables.EventsDBTabelle;
 import de.tohemi.justparty.datamodel.user.User;
-import de.tohemi.justparty.util.SystemProperties;
-import de.tohemi.justparty.util.logger.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
@@ -19,10 +16,9 @@ import java.sql.SQLException;
 public class DBController extends DBControl {
     private static DBController instance;
 
-    private DBController() {
-    }
+    private DBController() {}
 
-    public synchronized static DBController getInstance() {
+    public static synchronized DBController getInstance() {
         if (instance == null) {
             return new DBController();
         }
@@ -39,7 +35,7 @@ public class DBController extends DBControl {
             psEvent.setString(1, u.getEmail());
             ResultSet rs = psEvent.executeQuery();
             while (rs.next())
-                exe = rs.getInt("event_id");
+                exe = rs.getInt(EventsDBTabelle.COLUMN_ID);
         } catch (SQLException ex) {
             LOGGER.logException(ex, "");
         } finally {

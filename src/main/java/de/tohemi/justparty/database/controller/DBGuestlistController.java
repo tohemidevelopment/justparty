@@ -3,14 +3,11 @@ package de.tohemi.justparty.database.controller;
 import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.event.Event;
-import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
-import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
-import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +24,7 @@ public class DBGuestlistController extends DBControl {
     private DBGuestlistController() {
     }
 
-    public synchronized static DBGuestlistController getInstance() {
+    public static synchronized DBGuestlistController getInstance() {
         if (instance == null) {
             return new DBGuestlistController();
         }
@@ -41,8 +38,8 @@ public class DBGuestlistController extends DBControl {
         try {
             PreparedStatement ps = c.prepareStatement("INSERT INTO guestlist(guest, event, status) VALUES (?, ?, ?);");
             ps.setString(1, u.getEmail());
-            ps.setInt(2, e.getId());
             ps.setInt(3, status);
+            ps.setInt(2, e.getId());
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
@@ -80,9 +77,9 @@ public class DBGuestlistController extends DBControl {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("DELETE FROM guestlist WHERE guest=? AND event=? AND status=?");
+            ps.setInt(3, status);
             ps.setString(1, u.getEmail());
             ps.setInt(2, e.getId());
-            ps.setInt(3, status);
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
@@ -95,21 +92,16 @@ public class DBGuestlistController extends DBControl {
     }
 
     public List<UserEventRelation> getInvitedUsers(int id) {
-        Event ev = null;
-        try {
-            ev = DBEventController.getInstance().getEventById(id);
-        } catch (MalformedURLException | InvalidEmailException | ZipCodeInvalidException e) {
-            LOGGER.logException(e);
-        }
+        Event ev = DBEventController.getInstance().getEventById(id);
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
-        ArrayList<UserEventRelation> gl = new ArrayList<UserEventRelation>();
+        List<UserEventRelation> gl = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = c.prepareStatement("SELECT " + GuestlistDBTabelle.COLUMN_GUEST + ", " + GuestlistDBTabelle.COLUMN_STATUS + " FROM guestlist WHERE " + GuestlistDBTabelle.COLUMN_EVENT + " = ?;");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                gl.add(new UserEventRelation(ev, UserFactory.create(resultSet.getString("guest")), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt("status"))));
+                gl.add(new UserEventRelation(ev, UserFactory.create(resultSet.getString(GuestlistDBTabelle.COLUMN_GUEST)), GuestlistDBTabelle.getAcceptedObjectForStatus(resultSet.getInt(GuestlistDBTabelle.COLUMN_STATUS))));
             }
             resultSet.close();
             preparedStatement.close();

@@ -5,6 +5,7 @@ package de.tohemi.justparty.businesslogic;
  */
 public class UserNotFoundException extends Exception {
     public UserNotFoundException() {
+        //default constructor
     }
 
     public UserNotFoundException(String message) {

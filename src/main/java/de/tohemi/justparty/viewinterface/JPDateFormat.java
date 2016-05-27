@@ -1,13 +1,13 @@
-package de.tohemi.justparty.view_interface;
+package de.tohemi.justparty.viewinterface;
 
 import java.text.SimpleDateFormat;
-import java.util.Formatter;
 
 /**
  * Created by Micha Piertzik on 30.11.2015.
  */
 public class JPDateFormat {
 
+    private JPDateFormat(){}
 
     public static SimpleDateFormat getSimpleDateFormat() {
         //TODO: check locale

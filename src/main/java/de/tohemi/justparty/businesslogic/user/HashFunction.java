@@ -6,9 +6,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * Created by Micha Piertzik on 23.11.2015.
  */
 public class HashFunction {
+
+    private HashFunction(){}
+
     public static String getHash(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(password);
-        return hashedPassword;
+        return passwordEncoder.encode(password);
     }
 }

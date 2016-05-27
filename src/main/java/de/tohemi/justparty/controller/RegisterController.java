@@ -2,7 +2,7 @@ package de.tohemi.justparty.controller;
 
 import de.tohemi.justparty.businesslogic.Error;
 import de.tohemi.justparty.businesslogic.user.UserHandler;
-import de.tohemi.justparty.view_interface.LogicalViewNames;
+import de.tohemi.justparty.viewinterface.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +18,9 @@ public class RegisterController extends JPController {
 
     @RequestMapping(method = RequestMethod.GET, value = REGISTER)
     public String printRegisterPage(ModelMap model, Principal principal) {
-        if (addInfoIfAlreadyLoggedIn(model, principal)) return LogicalViewNames.getNameInfoPage();
+        if (addInfoIfAlreadyLoggedIn(model, principal)) {
+            return LogicalViewNames.getNameInfoPage();
+        }
         return LogicalViewNames.getNameRegister();
     }
 
@@ -39,16 +41,15 @@ public class RegisterController extends JPController {
         }
         model.addAttribute(error.getType().toString(), error.getMsg());
 
-        //Diese Attribute werden benötigt, wenn Bestätigungsmail geschickt wird
-        //    model.addAttribute("info_header", "info.header.register");
-        //    model.addAttribute("info_box", "info.box.register");
-        //    return LogicalViewNames.getNameInfoPage();
         return LogicalViewNames.getNameRegister();
+        /*  Diese Attribute werden benötigt, wenn Bestätigungsmail geschickt wird
+            model.addAttribute("info_header", "info.header.register");
+            model.addAttribute("info_box", "info.box.register");
+            return LogicalViewNames.getNameInfoPage();*/
     }
 
     @RequestMapping(method = RequestMethod.GET, value = VERIFY_EMAIL)
     public String verifyEmail(ModelMap model, @RequestParam(value = "id") String verificationID) {
-        System.out.println("verifyEmail aufgerufen");
         Error error = new UserHandler().verifyEmail(verificationID);
         if (error == null) {
             setAlerts(model, null, null, "alert.success.verification", null);

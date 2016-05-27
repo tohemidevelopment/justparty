@@ -6,14 +6,8 @@ import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
-import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
-import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
-import de.tohemi.justparty.util.SystemProperties;
-import de.tohemi.justparty.util.logger.Logger;
-
-import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,7 +15,6 @@ import java.util.List;
  * Created by Micha Piertzik on 17.11.2015.
  */
 public class EventsHandlerImpl implements EventsHandler {
-    private static final Logger LOGGER = SystemProperties.getLogger();
 
     public boolean createEvent(String eventname, String mail) {
 
@@ -63,7 +56,7 @@ public class EventsHandlerImpl implements EventsHandler {
             return false;
         }
         DBGuestlistController dbController = DBGuestlistController.getInstance();
-        return dbController.addGuestToEvent(EventFactory.createEvent(eventId), UserFactory.create(mail), answer.getValue());
+        return dbController.updateGuestEventStatus(EventFactory.createEvent(eventId), UserFactory.create(mail), answer.getValue());
     }
 
     public List<UserEventRelation> getGuestlist(int id, String mail) {
@@ -75,17 +68,11 @@ public class EventsHandlerImpl implements EventsHandler {
     public Event getEvent(final int id, String mail) {
 
         //Example event to mock unimpleented DB connection
-        Event event = null;
-        try {
-            event = DBEventController.getInstance().getEventById(id);
-            event.setEventOwner(UserFactory.create(mail));
-            final List<UserEventRelation> guestlist = getGuestlist(id, mail);
-            Collections.sort(guestlist);
-            event.setGuests(guestlist);
-        } catch (MalformedURLException | InvalidEmailException | ZipCodeInvalidException e) {
-            LOGGER.logException(e, "");
-        }
-
+        Event event = DBEventController.getInstance().getEventById(id);
+        event.setEventOwner(UserFactory.create(mail));
+        final List<UserEventRelation> guestlist = getGuestlist(id, mail);
+        Collections.sort(guestlist);
+        event.setGuests(guestlist);
         return event;
     }
 
@@ -107,7 +94,22 @@ public class EventsHandlerImpl implements EventsHandler {
         if (eventChanges.getLocation() != null) {
             dbEvent.setLocation(eventChanges.getLocation());
         }
-        //TODO: add missing fields
+        if(eventChanges.getEventOwner() != null) {
+            dbEvent.setEventOwner(eventChanges.getEventOwner());
+        }
+        if(eventChanges.getFacebookLink() != null) {
+            dbEvent.setFacebookLink(eventChanges.getFacebookLink());
+        }
+        if(eventChanges.getGooglePlusLink() != null) {
+            dbEvent.setGooglePlusLink(eventChanges.getGooglePlusLink());
+        }
+        if(eventChanges.getGuests() != null)  {
+            dbEvent.setGuests(eventChanges.getGuests());
+        }
+        if(eventChanges.getId() != -1) {
+            dbEvent.setId(eventChanges.getId());
+        }
+        //TODO: add missing field eventType
 
         return true;
     }

@@ -19,111 +19,133 @@ public class ConcreteEvent implements Event {
     private Location location;
     private User eventOwner;
     private List<UserEventRelation> guests;
-    //TODO: Implement class for things to bring with to party
-    //private List<Things> things;
+    //TODO: Implement class for things to bring with to party private List<Things> things;
     private URL facebookLink;
     private URL googlePlusLink;
     private URL spotifyPlaylistLink;
     private int id;
     private URL wishlistLink;
 
-    ConcreteEvent(int id) {
+    public ConcreteEvent(int id) {
         this.id = id;
     }
 
-    ConcreteEvent() {
-    }
+    public ConcreteEvent() {}
 
+    @Override
     public String getName() {
         return eventname;
     }
 
+    @Override
     public void setName(String name) {
         this.eventname = name;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public Timestamp getBegin() {
         return begin;
     }
 
+    @Override
     public void setBegin(Timestamp begin) { this.begin = begin; }
 
+    @Override
     public Timestamp getEnd() {
         return end;
     }
 
+    @Override
     public void setEnd(Timestamp end) {
         this.end = end;
     }
 
+    @Override
     public Location getLocation() {
         return location;
     }
 
+    @Override
     public void setLocation(Location location) {
         this.location = location;
     }
 
+    @Override
     public User getEventOwner() {
         return eventOwner;
     }
 
+    @Override
     public void setEventOwner(User eventOwner) {
         this.eventOwner = eventOwner;
     }
 
+    @Override
     public List<UserEventRelation> getGuests() {
         return guests;
     }
 
+    @Override
     public void setGuests(List<UserEventRelation> guests) {
         this.guests = guests;
     }
 
+    @Override
     public URL getFacebookLink() {
         return facebookLink;
     }
 
+    @Override
     public void setFacebookLink(URL facebookLink) {
         this.facebookLink = facebookLink;
     }
 
+    @Override
     public URL getGooglePlusLink() {
         return googlePlusLink;
     }
 
+    @Override
     public void setGooglePlusLink(URL googlePlusLink) {
         this.googlePlusLink = googlePlusLink;
     }
 
+    @Override
     public URL getSpotifyPlaylistLink() {
         return spotifyPlaylistLink;
     }
 
+    @Override
     public void setSpotifyPlaylistLink(URL spotifyPlaylistLink) {
         this.spotifyPlaylistLink = spotifyPlaylistLink;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
 
+    @Override
     public URL getWishlistLink() {
         return wishlistLink;
     }
 
+    @Override
     public void setWishlistLink(URL wishlistLink) {
         this.wishlistLink = wishlistLink;
     }

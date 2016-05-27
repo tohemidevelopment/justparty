@@ -15,10 +15,11 @@
         <jstl.version>1.2</jstl.version>
         <mysql.connector.version>5.1.30</mysql.connector.version>
         <apache.commons.logging.version>1.2</apache.commons.logging.version>
-        <javax.mail.version>1.4.7</javax.mail.version>
+        <javax.mail.version>1.5.5</javax.mail.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.host.url>http://193.196.7.25</sonar.host.url>
         <sonar.language>java</sonar.language>
+        <sass.plugin.version>2.18</sass.plugin.version>
     </properties>
 
     <build>
@@ -33,7 +34,9 @@
                             <!-- this is relative to the pom.xml directory -->
                             <directory>web</directory>
                         </resource>
+
                     </webResources>
+                    <packagingExcludes>res/sass/default-theme/*.scss</packagingExcludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -52,7 +55,7 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/</path>
-                    <url>http://justparty.ml/manager/text</url>
+                    <url>http://euve99227.serverprofi24.de/manager/text</url>
                     <username>tohemi</username>
                     <password>tinf14b2</password>
                 </configuration>
@@ -85,6 +88,31 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>nl.geodienstencentrum.maven</groupId>
+                <artifactId>sass-maven-plugin</artifactId>
+                <version>${sass.plugin.version}</version>
+                <configuration>
+                    <resources>
+                        <resource>
+                            <!-- Set source and destination dirs -->
+                            <source>
+                                <directory>${project.basedir}/web/res/sass/default-theme</directory>
+                            </source>
+                            <destination>${project.basedir}/web/res/css/default-theme</destination>
+                        </resource>
+                    </resources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>sass</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>update-stylesheets</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -196,6 +224,11 @@
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>javax.mail-api</artifactId>
+            <version>${javax.mail.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
             <version>${javax.mail.version}</version>
         </dependency>
         <dependency>

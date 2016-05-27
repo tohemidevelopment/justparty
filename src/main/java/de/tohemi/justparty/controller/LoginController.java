@@ -1,6 +1,6 @@
 package de.tohemi.justparty.controller;
 
-import de.tohemi.justparty.view_interface.LogicalViewNames;
+import de.tohemi.justparty.viewinterface.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,12 +15,12 @@ import java.security.Principal;
 public class LoginController extends JPController {
 
     @RequestMapping(method = RequestMethod.GET, value = LOGIN)
-    public String printCreateEvent(Principal principal, @RequestParam(value = "error", required = false) String error, @RequestParam(value = "alert_success", required = false) String alert_success, ModelMap model) {
+    public String printCreateEvent(Principal principal, @RequestParam(value = "error", required = false) String error, @RequestParam(value = "alert_success", required = false) String alertSuccess, ModelMap model) {
         if (addInfoIfAlreadyLoggedIn(model, principal)) {
             return LogicalViewNames.getNameInfoPage();
         }
-        String alert_danger = (error != null) ? "alert.danger.login_err" : null;
-        setAlerts(model, alert_danger, null, alert_success, null);
+        String alertDanger = (error != null) ? "alert.danger.login_err" : null;
+        setAlerts(model, alertDanger, null, alertSuccess, null);
         return LogicalViewNames.getNameLogin();
     }
 }

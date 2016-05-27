@@ -1,17 +1,14 @@
-package de.tohemi.justparty.test.junit.dbtests;
+package de.tohemi.justparty.test.junit.DBTests;
 
 import de.tohemi.justparty.database.controller.*;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
-import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
 import de.tohemi.justparty.datamodel.wrapper.ZipCode;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.springframework.util.Assert;
 import java.sql.Date;
 
@@ -20,18 +17,18 @@ import java.sql.Date;
  */
 public class DBGuestlistControllerTest {
 
-    public DBEventController conE;
-    public DBUserController conU;
-    public DBLocationController conL;
-    public DBGuestlistController conG;
-    public DBController con;
-    public Event event;
-    public de.tohemi.justparty.datamodel.user.User user;
-    public EMail email;
-    public Location location;
+    public static DBEventController conE;
+    public static DBUserController conU;
+    public static DBLocationController conL;
+    public static DBGuestlistController conG;
+    public static DBController con;
+    public static Event event;
+    public static de.tohemi.justparty.datamodel.user.User user;
+    public static EMail email;
+    public static Location location;
 
-    @Before
-    public void setUp() throws Exception, ZipCodeInvalidException {
+    @BeforeClass
+    public static void setUp() throws Exception {
         conE = DBEventController.getInstance();
         conU = DBUserController.getInstance();
         conL = DBLocationController.getInstance();
@@ -53,12 +50,18 @@ public class DBGuestlistControllerTest {
         conL.addLocation(location);
     }
 
-    @After
-    public void tearDown() throws Exception {
+
+    @AfterClass
+    public static void tearDown() throws Exception {
         conG.deleteGuestFromGuestlist(event, user, 0);
         conE.deleteEvent(event, user);
         conU.removeUser(user);
         conL.deleteLocation(location);
+    }
+
+    @After
+    public void tearDownEachTest() throws Exception {
+        conG.deleteGuestFromGuestlist(event, user, 0);
     }
 
     @Test

@@ -2,7 +2,7 @@ package de.tohemi.justparty.datamodel;
 
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.event.Event;
-import de.tohemi.justparty.view_interface.JPDateFormat;
+import de.tohemi.justparty.viewinterface.JPDateFormat;
 
 
 /**
@@ -18,12 +18,13 @@ public class UserEventRelation implements Comparable<UserEventRelation> {
     }
 
     public UserEventRelation(Event event, User user, Accepted accepted) {
-        if (event.getEventOwner() != null && event.getEventOwner().equals(user)) {
-            accepted = Accepted.HOST;
-        }
         this.user = user;
         this.event = event;
-        setAccepted(accepted);
+        if (event.getEventOwner() != null && event.getEventOwner().equals(user)) {
+            setAccepted(Accepted.HOST);
+        } else {
+            setAccepted(accepted);
+        }
     }
 
     public User getUser() {
@@ -75,8 +76,14 @@ public class UserEventRelation implements Comparable<UserEventRelation> {
         return this.accepted.equals(Accepted.HOST);
     }
 
+    @Override
     public int compareTo(UserEventRelation object) {
-
         return this.accepted.ordinal() - object.accepted.ordinal();
     }
+
+    @Override
+    public boolean equals(Object obj) { return super.equals(obj); }
+
+    @Override
+    public int hashCode() {return super.hashCode();}
 }

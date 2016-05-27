@@ -1,7 +1,6 @@
 package de.tohemi.justparty.controller;
 
-import de.tohemi.justparty.view_interface.LogicalViewNames;
-import org.springframework.ui.ModelMap;
+import de.tohemi.justparty.viewinterface.LogicalViewNames;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @org.springframework.stereotype.Controller
 public class WelcomeController extends JPController{
     @RequestMapping(method = RequestMethod.GET, value = "/")
-    public String printWelcomePage(ModelMap model)
+    public String printWelcomePage()
     {
       return LogicalViewNames.getNameWelcomePage();
     }
