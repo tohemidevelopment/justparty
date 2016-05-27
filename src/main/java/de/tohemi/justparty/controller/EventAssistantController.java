@@ -4,6 +4,7 @@ import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
+import de.tohemi.justparty.datamodel.event.EventType;
 import de.tohemi.justparty.viewinterface.LogicalViewNames;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,6 +29,7 @@ public class EventAssistantController extends JPController {
         String mailFromLoggedInUser = getMailFromLoggedInUser();
         Event event = eventsHandler.getEvent(id, mailFromLoggedInUser);
         model.addAttribute("event", event);
+        model.addAttribute("types", EventType.getEventTypes());
         return LogicalViewNames.getNameEditEvent();
     }
 
