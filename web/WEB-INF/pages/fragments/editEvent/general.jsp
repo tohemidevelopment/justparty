@@ -14,14 +14,6 @@
                                value="${event.name}"></td>
     </tr>
     <tr>
-        <td><label for="eventtype"><spring:message code="editevent.general.eventtype"/></label></td>
-        <td colspan="2">
-            <select class="form-control" id="eventtype" onchange="updateEventData('eventtype');">
-
-            </select>
-        </td>
-    </tr>
-    <tr>
         <td><label for="location"><spring:message code="editevent.general.ort"/></label></td>
         <c:set var="location" value="${event.location}"/>
         <td><input type="text" class="form-control" id="location" onchange="updateEventData('location');"

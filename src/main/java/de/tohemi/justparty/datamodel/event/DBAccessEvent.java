@@ -88,8 +88,8 @@ public class DBAccessEvent implements Event {
 
     @Override
     public void setGuests(List<UserEventRelation> guests) {
-        for (int i = 0; i < guests.size(); i++) {
-            DBGuestlistController.getInstance().addGuestToEvent(guests.get(i).getEvent(), guests.get(i).getUser(), guests.get(i).getAccepted().getValue());
+        for (UserEventRelation ure : guests) {
+            DBGuestlistController.getInstance().addGuestToEvent(ure.getEvent(), ure.getUser(), ure.getAccepted().getValue());
         }
     }
 
@@ -141,5 +141,25 @@ public class DBAccessEvent implements Event {
     @Override
     public void setWishlistLink(URL wishlistLink) {
         DBEventController.getInstance().setWishlistLink(id, wishlistLink);
+    }
+
+    @Override
+    public EventType getEventType() {
+        return null;
+    }
+
+    @Override
+    public void setEventType(EventType type) {
+
+    }
+
+    @Override
+    public Object getProperty(String key) {
+        return null;
+    }
+
+    @Override
+    public void setProperty(String key, Object value) {
+
     }
 }

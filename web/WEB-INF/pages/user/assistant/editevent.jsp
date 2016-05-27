@@ -12,11 +12,11 @@
 <html>
 <head>
     <title><spring:message code="editevent.title"/></title>
-    <%@include file="../fragments/head.jsp"%>
+    <%@include file="../../fragments/head.jsp"%>
 </head>
 <body>
-<%@include file="../fragments/logoutform.jsp"%>
-<%@include file="../fragments/navbar.jsp"%>
+<%@include file="../../fragments/logoutform.jsp"%>
+<%@include file="../../fragments/navbar.jsp"%>
 
 <div class="container theme-showcase" role="main">
     <div class="page-header">
@@ -57,16 +57,16 @@
             <li id="guestlist" role="presentation"><a href="javascript:showGuestlist()"><spring:message
                     code="editevent.nav.guestlist"/></a></li>
         </ul>
-        <div id="general_text" style="display: block;"><%@include file="../fragments/editEvent/general.jsp"%></div>
-        <div id="link_text" style="display: none;"><%@include file="../fragments/editEvent/link.jsp"%></div>
-        <div id="bringwith_text" style="display: none;"><%@include file="../fragments/editEvent/bringwith.jsp"%></div>
-        <div id="guestlist_text" style="display: none;"><%@include file="../fragments/editEvent/guestlist.jsp"%></div>
+        <div id="general_text" style="display: block;"><%@include file="../../fragments/editEvent/general.jsp"%></div>
+        <div id="link_text" style="display: none;"><%@include file="../../fragments/editEvent/link.jsp"%></div>
+        <div id="bringwith_text" style="display: none;"><%@include file="../../fragments/editEvent/bringwith.jsp"%></div>
+        <div id="guestlist_text" style="display: none;"><%@include file="../../fragments/editEvent/guestlist.jsp"%></div>
     </div>
     <button type="submit" class="btn btn-primary btn-block" onclick="sendEventDataChanges(${event.id});"><spring:message code="editevent.button.save"/></button>
     <button type="button" class="btn btn-default btn-block" onclick="location.href='/manageEvent'"><spring:message code="editevent.button.back"/></button>
 </form>
 </div>
 
-<%@include file="../fragments/jslibs.jsp"%>
+<%@include file="../../fragments/jslibs.jsp"%>
 </body>
 </html>

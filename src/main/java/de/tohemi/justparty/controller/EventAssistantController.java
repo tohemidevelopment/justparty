@@ -24,12 +24,16 @@ public class EventAssistantController extends JPController {
             //TODO: Show Error String, User not host
             return REDIRECT + ERROR;
         }
-        model.addAttribute("alert_info", "alert.notimplyet");
 
         String mailFromLoggedInUser = getMailFromLoggedInUser();
         Event event = eventsHandler.getEvent(id, mailFromLoggedInUser);
         model.addAttribute("event", event);
-        model.addAttribute("types", EventType.getEventTypes());
+        if (event.getEventType() == null)
+        {
+            //display chooseEventType
+            model.addAttribute("types", EventType.getEventTypes());
+            return LogicalViewNames.getNameChooseEventType();
+        }
         return LogicalViewNames.getNameEditEvent();
     }
 

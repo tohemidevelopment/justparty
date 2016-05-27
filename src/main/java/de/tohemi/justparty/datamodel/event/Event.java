@@ -62,7 +62,11 @@ public interface Event {
 
     void setWishlistLink(URL wishlistLink);
 
-    default EventType getEventType() {
-        return EventType.DEFAULT;
-    }
+    EventType getEventType();
+
+    void setEventType(EventType type);
+
+    Object getProperty(String key);
+
+    void setProperty(String key, Object value);
 }

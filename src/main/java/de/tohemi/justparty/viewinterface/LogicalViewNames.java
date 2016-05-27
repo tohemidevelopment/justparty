@@ -11,12 +11,13 @@ public class LogicalViewNames {
     private static final String NAME_CREATE_EVENT = "user/createEvent";
     private static final String NAME_ERROR_PAGE = "error";
     private static final String NAME_INFO_PAGE = "infopage";
-    private static final String NAME_EDIT_EVENT = "user/editevent";
+    private static final String NAME_EDIT_EVENT = "user/assistant/editevent";
     private static final String NAME_EVENT_DATA = "user/eventdata";
     private static final String NAME_ALERT_ANSWER_INVITAION = "fragments/alertanswerinvite";
     private static final String NAME_SHOW_GUESTLIST ="user/showguests";
     private static final String NAME_VERIFY_EMAIL = "user/verifyEmail";
     private static final String NAME_INVITE_USER ="user/inviteUsers";
+    private static final String NAME_CHOOSE_EVENT_TYPE ="user/assistant/chooseEventType";
 
     private LogicalViewNames(){}
 
@@ -66,4 +67,8 @@ public class LogicalViewNames {
         return NAME_VERIFY_EMAIL;
     }
 
+
+    public static String getNameChooseEventType() {
+        return NAME_CHOOSE_EVENT_TYPE;
+    }
 }

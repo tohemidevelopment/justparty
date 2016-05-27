@@ -6,7 +6,9 @@ import de.tohemi.justparty.datamodel.user.User;
 
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Heiko on 04.11.2015.
@@ -25,12 +27,17 @@ public class ConcreteEvent implements Event {
     private URL spotifyPlaylistLink;
     private int id;
     private URL wishlistLink;
+    private EventType eventType;
+    private Map properties;
 
     public ConcreteEvent(int id) {
+        this();
         this.id = id;
     }
 
-    public ConcreteEvent() {}
+    public ConcreteEvent() {
+        properties = new HashMap<String, Object>();
+    }
 
     @Override
     public String getName() {
@@ -58,7 +65,9 @@ public class ConcreteEvent implements Event {
     }
 
     @Override
-    public void setBegin(Timestamp begin) { this.begin = begin; }
+    public void setBegin(Timestamp begin) {
+        this.begin = begin;
+    }
 
     @Override
     public Timestamp getEnd() {
@@ -148,5 +157,26 @@ public class ConcreteEvent implements Event {
     @Override
     public void setWishlistLink(URL wishlistLink) {
         this.wishlistLink = wishlistLink;
+    }
+
+    @Override
+    public EventType getEventType() {
+        return eventType;
+    }
+
+    @Override
+    public void setEventType(EventType eventType) {
+
+        this.eventType = eventType;
+    }
+
+    @Override
+    public Object getProperty(String key) {
+        return properties.get(key);
+    }
+
+    @Override
+    public void setProperty(String key, Object value) {
+        properties.put(key, value);
     }
 }
