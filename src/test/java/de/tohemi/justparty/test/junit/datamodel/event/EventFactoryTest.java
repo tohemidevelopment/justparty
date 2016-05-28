@@ -1,10 +1,7 @@
 package de.tohemi.justparty.test.junit.datamodel.event;
 
 import de.tohemi.justparty.datamodel.event.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.matchers.JUnitMatchers;
 import org.springframework.util.Assert;
 
 /**

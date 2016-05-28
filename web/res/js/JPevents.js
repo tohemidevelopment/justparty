@@ -35,13 +35,8 @@ function sendInvitationAnswer(id)
         if (req.readyState == 4)
         {
             var answer = req.responseText;
-            html = "";
-            if (answer != "")
-            {
-                html = answer;
-            }
 
-            document.getElementById("alerts").innerHTML = html;
+            document.getElementById("alerts").innerHTML = answer;
         }
     };
 
@@ -125,11 +120,11 @@ function sendEventDataChanges(id)
     const URL = '/eventdata';
     var data = JSON.stringify(eventDataChanges);
     $.ajax({
-        url:URL,
+        url: URL,
         type: 'POST',
         data: data,
-        headers:{id:id},
-        processData:false,
+        headers: {id: id},
+        processData: false,
         contentType: "application/json; charset=utf-8"
     });
 }

@@ -2,24 +2,16 @@ package de.tohemi.justparty.test.junit.tests;
 
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.database.controller.DBEventController;
-import de.tohemi.justparty.database.controller.DBUserController;
-import de.tohemi.justparty.datamodel.Location;
-import de.tohemi.justparty.datamodel.address.ConcreteAddress;
-import de.tohemi.justparty.datamodel.event.ConcreteEvent;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
-import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
-import de.tohemi.justparty.datamodel.wrapper.EMail;
-import de.tohemi.justparty.datamodel.wrapper.ZipCode;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.springframework.util.Assert;
 
 import java.net.URL;
-import java.sql.Date;
 import java.sql.Timestamp;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by xce35l2 on 09.05.2016.

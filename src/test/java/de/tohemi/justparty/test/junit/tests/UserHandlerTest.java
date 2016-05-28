@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  * Created by xce35l2 on 09.05.2016.
  */
 public class UserHandlerTest {
-    UserHandler uh;
+    private UserHandler uh;
 
     @Before
     public void setUp() throws Exception {
