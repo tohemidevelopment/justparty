@@ -7,7 +7,7 @@ import cucumber.api.java.en.When;
 /**
  * Created by Heiko on 21.12.2015.
  */
-public class manageEvents {
+public class ManageEvents {
     @When("^I click on \"([^\"]*)\"$")
     public void I_click_on(String arg1) throws Throwable {
         // Express the Regexp above with the code you wish you had
