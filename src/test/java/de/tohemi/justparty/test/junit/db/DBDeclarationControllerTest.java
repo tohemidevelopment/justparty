@@ -1,4 +1,4 @@
-package de.tohemi.justparty.test.junit.DBTests;
+package de.tohemi.justparty.test.junit.db;
 
 import de.tohemi.justparty.database.controller.DBDeclarationController;
 import de.tohemi.justparty.database.controller.DBEventController;
