@@ -3,13 +3,11 @@ package de.tohemi.justparty.test.junit.datamodel.event;
 import de.tohemi.justparty.database.controller.DBController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBLocationController;
-import de.tohemi.justparty.database.controller.DBUserController;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.event.DBAccessEvent;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
-import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
 import de.tohemi.justparty.datamodel.wrapper.EMail;
@@ -23,8 +21,6 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Tom on 12.05.2016.

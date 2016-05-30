@@ -76,10 +76,7 @@ public class UserHandler {
         if (password.length() < MIN_PASSWD_LENGTH) {
             return false;
         }
-        if (!password.equals(matchingPassword)) {
-            return false;
-        }
-        return true;
+        return password.equals(matchingPassword);
     }
 
     public Error verifyEmail(String verificationID) {

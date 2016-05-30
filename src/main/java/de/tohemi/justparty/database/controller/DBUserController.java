@@ -22,7 +22,7 @@ public class DBUserController extends DBControl {
 
     public static synchronized DBUserController getInstance() {
         if (instance == null) {
-            return new DBUserController();
+            instance = new DBUserController();
         }
         return instance;
     }
@@ -34,10 +34,12 @@ public class DBUserController extends DBControl {
             PreparedStatement ps = c.prepareStatement("SELECT Name FROM users WHERE Email=?");
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
+            String name = null;
             while (rs.next()) {
-                return rs.getString(UsersDBTabelle.COLUMN_NAME);
+                name = rs.getString(UsersDBTabelle.COLUMN_NAME);
             }
             ps.close();
+            return name;
         } catch (SQLException ex) {
             LOGGER.logException(ex, "");
         } finally {
@@ -53,10 +55,12 @@ public class DBUserController extends DBControl {
             PreparedStatement ps = c.prepareStatement("SELECT Firstname FROM users WHERE Email=?");
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
+            String name = null;
             while (rs.next()) {
-                return rs.getString(UsersDBTabelle.COLUMN_FIRSTNAME);
+                name = rs.getString(UsersDBTabelle.COLUMN_FIRSTNAME);
             }
             ps.close();
+            return name;
         } catch (SQLException ex) {
             LOGGER.logException(ex, "");
         } finally {
@@ -72,10 +76,12 @@ public class DBUserController extends DBControl {
             PreparedStatement ps = c.prepareStatement("SELECT AddressID FROM users WHERE Email=?");
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
+            int id = 0;
             while (rs.next()) {
-                return new DBAddress(rs.getInt(UsersDBTabelle.COLUMN_ADDRESS_ID));
+                id = rs.getInt(UsersDBTabelle.COLUMN_ADDRESS_ID);
             }
             ps.close();
+            return new DBAddress(id);
         } catch (SQLException ex) {
             LOGGER.logException(ex, "");
         } finally {
@@ -294,7 +300,7 @@ public class DBUserController extends DBControl {
         return true;
     }
 
-    public boolean addUser(User user, String hash){
+    public boolean addUser(User user, String hash) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
 
@@ -313,9 +319,10 @@ public class DBUserController extends DBControl {
         }
         return true;
     }
+
     /**
-    * @deprecated USE addUser(User user, String hash) instead
-    */
+     * @deprecated USE addUser(User user, String hash) instead
+     */
     @Deprecated
     public boolean addUser(User user, String userRole, String hash) {
         DataSource ds = getDataSource();
