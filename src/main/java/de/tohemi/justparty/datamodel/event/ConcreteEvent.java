@@ -1,14 +1,21 @@
 package de.tohemi.justparty.datamodel.event;
 
+import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
+import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.user.User;
+import de.tohemi.justparty.viewinterface.LogicalViewNames;
+import org.springframework.ui.ModelMap;
 
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static de.tohemi.justparty.controller.JPController.REDIRECT;
 
 /**
  * Created by Heiko on 04.11.2015.

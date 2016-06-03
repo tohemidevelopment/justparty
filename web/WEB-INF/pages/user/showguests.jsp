@@ -23,6 +23,63 @@
     </div>
     <%@include file="../fragments/alerts.jsp"%>
 
+    <table class="table table-hover">
+        <tr>
+            <td><label><spring:message code="editevent.general.eventname"/></label></td>
+            <td colspan="2"><p>${event.name}</p></td>
+        </tr>
+        <tr>
+            <td><label><spring:message code="editevent.general.ort"/></label></td>
+            <td><p>
+                <%@include file="../fragments/displayLocation.jsp" %>
+            </p></td>
+        </tr>
+        <tr>
+            <td><label><spring:message code="editevent.general.zeit.begin"/></label></td>
+            <td colspan="2"><p>${event.begin}</p></td>
+        </tr>
+        <tr>
+            <td><label><spring:message code="editevent.general.zeit.ende"/></label></td>
+            <td colspan="2"><p>${event.end}</p></td>
+        </tr>
+        <tr>
+            <td><label><spring:message code="editevent.general.beschreibung"/></label></td>
+            <td colspan="2"><p>${event.description}</p></td>
+        </tr>
+        <tr>
+            <td><label><spring:message code="editevent.link.spotify"/></label></td>
+            <td colspan="2"><p>${event.spotifyPlaylistLink}</p></td>
+        </tr>
+        <tr>
+            <td><label><spring:message code="editevent.link.amazon"/></label></td>
+            <td colspan="2"><p>${event.wishlistLink}</p></td>
+        </tr>
+        <tr>
+            <td><label for="jeder"><spring:message code="eventdata.everybody"/></label></td>
+            <td colspan="3">
+                <select multiple class="form-control" id="jeder">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="einer"><spring:message code="eventdata.onlyone"/></label></td>
+            <td colspan="3">
+                <select multiple class="form-control" id="einer">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </td>
+        </tr>
+
+    </table>
     <table class="table">
         <thead>
         <tr>

@@ -61,6 +61,7 @@ public class EventController extends JPController {
         List<UserEventRelation> guestlist = eventsHandler.getGuestlist(id, mailFromLoggedInUser);
         Collections.sort(guestlist);
         model.addAttribute("guests", guestlist);
-        return LogicalViewNames.getNameShowGuestlist();
+
+        return EventAssistant.getInstance().showData(model, id);
     }
 }
