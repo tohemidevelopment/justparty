@@ -111,7 +111,7 @@ var eventDataChanges = {};
 
 function invitePerson(email, message) {
     var req = new XMLHttpRequest();
-
+    //TODO: Implement that the person gets an email and that that person is save in the database
 
     // open connectiom
     req.open("GET", "invited?email=" + email + "&id=" + id, true);
