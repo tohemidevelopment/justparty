@@ -1,10 +1,12 @@
 package de.tohemi.justparty.datamodel;
 
+import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
+
 /**
  * Created by Micha Piertzik on 01.12.2015.
  */
 public enum Accepted {
-    ACCEPTED(1), NOTSURE(2), DECLINED(3), HOST(0);
+    ACCEPTED(GuestlistDBTabelle.ACCEPTED), NOTSURE(GuestlistDBTabelle.NOTSURE), DECLINED(GuestlistDBTabelle.DECLINED), HOST(0);
 
     private final int value;
 
