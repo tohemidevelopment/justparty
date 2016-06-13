@@ -25,7 +25,7 @@ public class EventAssistantController extends JPController {
     @RequestMapping(method = RequestMethod.POST, value = EVENTTYPE)
     public String setEventType(final ModelMap model, @RequestParam(value = "id") final int id, @RequestParam(value = "type") final String eventtype) {
 
-        final EventType type = EventType.valueOf(eventtype);
+        final EventType type = EventType.valueOfString(eventtype);
         EventFactory.createEvent(id, type, true);
         return EventAssistant.getInstance().getViewName(model, id);
     }

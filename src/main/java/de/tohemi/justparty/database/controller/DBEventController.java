@@ -103,7 +103,8 @@ public class DBEventController extends DBControl {
                 event.setEventOwner(UserFactory.create(new EMail(rs.getString(EventsDBTabelle.COLUMN_EMAIL))));
                 event.setName(rs.getString(EventsDBTabelle.COLUMN_NAME));
                 event.setLocation(getLocation(id));
-                event.setEventType(EventType.valueOf(rs.getString(EventsDBTabelle.COLUMN_TYPE)));
+                String eventType = rs.getString(EventsDBTabelle.COLUMN_TYPE);
+                event.setEventType(EventType.valueOfString(eventType));
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -670,7 +671,7 @@ public class DBEventController extends DBControl {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while (rs.next()) {
-                type = EventType.valueOf(rs.getString(EventsDBTabelle.COLUMN_TYPE));
+                type = EventType.valueOfString(rs.getString(EventsDBTabelle.COLUMN_TYPE));
             }
             psEvent.close();
         } catch (SQLException ex) {
