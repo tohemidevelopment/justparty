@@ -145,12 +145,12 @@ public class DBAccessEvent implements Event {
 
     @Override
     public EventType getEventType() {
-        return null;
+        return DBEventController.getInstance().getType(id);
     }
 
     @Override
     public void setEventType(EventType type) {
-        //TODO: change type in DB
+        DBEventController.getInstance().setType(id, type);
     }
 
     @Override
