@@ -24,6 +24,7 @@ public abstract class JPController {
     public static final String VERIFY_EMAIL = "/verifyEmail";
     public static final String INVITE_USER = "/inviteUser";
     public static final String EVENTDATA = "/eventdata";
+    public static final String INVITE = "invited";
     protected static final String EVENTTYPE = "/settype";
 
     protected String getMailFromLoggedInUser() {

@@ -86,4 +86,10 @@ public class UserHandler {
         }
         return new Error("Bestätigung Fehlgeschlafen", ErrorType.GENERAL);
     }
+
+    public User createPersonIfNotExisting(String email) {
+        //TODO: save Person in DB if not existing already
+        //TODO: return created/existing User
+        return null;
+    }
 }

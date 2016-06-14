@@ -109,30 +109,33 @@ function showGuestlist()
 
 var eventDataChanges = {};
 
-function invitePerson(email, message) {
-    var req = new XMLHttpRequest();
+function invitePerson(email, message)
+{
     //TODO: Implement that the person gets an email and that that person is save in the database
 
-    // open connectiom
-    req.open("GET", "invited?email=" + email + "&id=" + id, true);
+    const URL = 'invited';
+    var data = {
+        email: email,
+        message: message,
+        id: id
+    };
+    $.ajax({
+        url: URL,
+        type: 'POST',
+        data: data,
+        success: success,
+        error: error
+    });
 
-    // put handler for response
-    /*req.onreadystatechange = function receive()
-     {
-     if (req.readyState == 4)
-     {
-     var answer = req.responseText;
-     html = "";
-     if (answer != "")
-     {
-     html = answer;
-     }
+    function success(data, textStatus, jqXHR)
+    {
+        //TODO: success alert
+    }
 
-     document.getElementById("alerts").innerHTML = html;
-     }
-     };*/
-
-    req.send();
+    function error(data, textStatus, jqXHR)
+    {
+        //TODO: error alert
+    }
 }
 
 function updateEventData(id)
