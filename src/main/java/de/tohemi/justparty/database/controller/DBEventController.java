@@ -104,7 +104,7 @@ public class DBEventController extends DBControl {
                 event.setName(rs.getString(EventsDBTabelle.COLUMN_NAME));
                 event.setLocation(getLocation(id));
                 String eventType = rs.getString(EventsDBTabelle.COLUMN_TYPE);
-                event.setEventType(EventType.valueOfString(eventType));
+                event.setEventType(EventType.valueOfNullableString(eventType));
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -671,7 +671,7 @@ public class DBEventController extends DBControl {
             psEvent.setInt(1, id);
             ResultSet rs = psEvent.executeQuery();
             while (rs.next()) {
-                type = EventType.valueOfString(rs.getString(EventsDBTabelle.COLUMN_TYPE));
+                type = EventType.valueOfNullableString(rs.getString(EventsDBTabelle.COLUMN_TYPE));
             }
             psEvent.close();
         } catch (SQLException ex) {

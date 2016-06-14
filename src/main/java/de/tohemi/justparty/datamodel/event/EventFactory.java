@@ -16,7 +16,6 @@ public final class EventFactory {
         if (eventType == EventType.BIRTHDAY) {
             if (dbAccess) {
                 DBAccessEvent dbAccessEvent = new DBAccessEvent(id);
-                dbAccessEvent.setEventType(eventType);
                 return dbAccessEvent;
             }
             return new BirthdayEvent(id);

@@ -16,8 +16,8 @@
     <tr>
         <td colspan="2">
             <select multiple class="form-control">
-                <c:forEach items="${event.guests}" var="element">
-                    <option>${element.user.email}</option>
+                <c:forEach items="${event.guests}" var="guest">
+                    <option>${guest.user.email}</option>
                 </c:forEach>
             </select>
         </td>

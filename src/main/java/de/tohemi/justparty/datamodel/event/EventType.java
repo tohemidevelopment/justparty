@@ -18,7 +18,7 @@ public enum EventType {
         return eventTypes;
     }
 
-    public static EventType valueOfString(String string) {
+    public static EventType valueOfNullableString(String string) {
 
         if (string == null) {
             return null;
