@@ -5,6 +5,7 @@ import de.tohemi.justparty.businesslogic.Error;
 import de.tohemi.justparty.businesslogic.ErrorType;
 import de.tohemi.justparty.businesslogic.UserNotFoundException;
 import de.tohemi.justparty.database.controller.DBUserController;
+import de.tohemi.justparty.datamodel.UserRoles;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.user.DBAccessUser;
 import de.tohemi.justparty.datamodel.user.User;
@@ -51,7 +52,7 @@ public class UserHandler {
         } catch (UserNotFoundException e) {
             SystemProperties.getLogger().logException(e);
             //User not in DB
-            if (dbController.addUser(user, HashFunction.getHash(password))) {
+            if (dbController.addUser(user, UserRoles.USER, HashFunction.getHash(password))) {
                 //User added to DB
                 sendVerificationEmail(user.getEmail());
                 return null;
@@ -87,9 +88,14 @@ public class UserHandler {
         return new Error("Bestätigung Fehlgeschlafen", ErrorType.GENERAL);
     }
 
-    public User createPersonIfNotExisting(String email) {
-        //TODO: save Person in DB if not existing already
-        //TODO: return created/existing User
-        return null;
+    public User createPersonIfNotExisting(String email) throws UserNotFoundException {
+
+        if(DBUserController.getInstance().userIsRegistered(email)) {
+            return UserFactory.create(email);
+        }
+        else {
+            DBUserController.getInstance().addUser(UserFactory.create(email), UserRoles.NONUSER, "");
+            return UserFactory.create(email);
+        }
     }
 }
