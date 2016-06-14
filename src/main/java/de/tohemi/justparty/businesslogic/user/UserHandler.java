@@ -88,14 +88,15 @@ public class UserHandler {
         return new Error("Bestätigung Fehlgeschlafen", ErrorType.GENERAL);
     }
 
-    public User createPersonIfNotExisting(String email) throws UserNotFoundException {
+    public User createPersonIfNotExisting(String email) {
 
-        if(DBUserController.getInstance().userIsRegistered(email)) {
-            return UserFactory.create(email);
+        try {
+            if (!DBUserController.getInstance().userIsRegistered(email)) {
+                DBUserController.getInstance().addUser(UserFactory.create(email), UserRoles.NONUSER, "");
+            }
+        } catch (UserNotFoundException e) {
+            SystemProperties.getLogger().logException(e);
         }
-        else {
-            DBUserController.getInstance().addUser(UserFactory.create(email), UserRoles.NONUSER, "");
-            return UserFactory.create(email);
-        }
+        return UserFactory.create(email, true);
     }
 }
