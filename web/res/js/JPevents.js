@@ -107,17 +107,17 @@ function showGuestlist()
     $('#guestlist_text').show();
 }
 
-var eventDataChanges = {};
 
-function invitePerson(email, message)
+function invitePerson(idEmailTxtfield, idMessageField, eventid)
 {
-    //TODO: Implement that the person gets an email and that that person is save in the database
-
-    const URL = 'invited';
+    var elementById = document.getElementById(idEmailTxtfield);
+    var email = elementById.value;
+    var message = document.getElementById(idMessageField).value;
+    const URL = '/invited';
     var data = {
         email: email,
         message: message,
-        id: id
+        id: eventid
     };
     $.ajax({
         url: URL,
@@ -126,6 +126,7 @@ function invitePerson(email, message)
         success: success,
         error: error
     });
+    closeModalById('newguest');
 
     function success(data, textStatus, jqXHR)
     {
@@ -137,6 +138,12 @@ function invitePerson(email, message)
         //TODO: error alert
     }
 }
+
+function closeModalById(id){
+    $('#'+id).modal({show: false});
+}
+
+var eventDataChanges = {};
 
 function updateEventData(id)
 {

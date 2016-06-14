@@ -1,21 +1,16 @@
 package de.tohemi.justparty.datamodel.event;
 
-import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
-import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.user.User;
-import de.tohemi.justparty.viewinterface.LogicalViewNames;
-import org.springframework.ui.ModelMap;
+import de.tohemi.justparty.util.SystemProperties;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Timestamp;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static de.tohemi.justparty.controller.JPController.REDIRECT;
 
 /**
  * Created by Heiko on 04.11.2015.
@@ -29,11 +24,11 @@ public class ConcreteEvent implements Event {
     private User eventOwner;
     private List<UserEventRelation> guests;
     //TODO: Implement class for things to bring with to party private List<Things> things;
-    private URL facebookLink;
+    private String facebookLink;
     private URL googlePlusLink;
-    private URL spotifyPlaylistLink;
+    private String spotifyPlaylistLink;
     private int id;
-    private URL wishlistLink;
+    private String wishlistLink;
     private EventType eventType;
     private Map properties;
 
@@ -118,12 +113,17 @@ public class ConcreteEvent implements Event {
 
     @Override
     public URL getFacebookLink() {
-        return facebookLink;
+        try {
+            return new URL(facebookLink);
+        } catch (MalformedURLException e) {
+            SystemProperties.getLogger().logException(e);
+        }
+        return null;
     }
 
     @Override
     public void setFacebookLink(URL facebookLink) {
-        this.facebookLink = facebookLink;
+        this.facebookLink = facebookLink.toString();
     }
 
     @Override
@@ -138,12 +138,17 @@ public class ConcreteEvent implements Event {
 
     @Override
     public URL getSpotifyPlaylistLink() {
-        return spotifyPlaylistLink;
+        try {
+            return new URL(spotifyPlaylistLink);
+        } catch (MalformedURLException e) {
+            SystemProperties.getLogger().logException(e);
+        }
+        return null;
     }
 
     @Override
     public void setSpotifyPlaylistLink(URL spotifyPlaylistLink) {
-        this.spotifyPlaylistLink = spotifyPlaylistLink;
+        this.spotifyPlaylistLink = spotifyPlaylistLink.toString();
     }
 
     @Override
@@ -158,12 +163,17 @@ public class ConcreteEvent implements Event {
 
     @Override
     public URL getWishlistLink() {
-        return wishlistLink;
+        try {
+            return new URL(wishlistLink);
+        } catch (MalformedURLException e) {
+            SystemProperties.getLogger().logException(e);
+        }
+        return null;
     }
 
     @Override
     public void setWishlistLink(URL wishlistLink) {
-        this.wishlistLink = wishlistLink;
+        this.wishlistLink = wishlistLink.toString();
     }
 
     @Override

@@ -8,6 +8,7 @@ import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -94,20 +95,23 @@ public class EventsHandlerImpl implements EventsHandler {
         if (eventChanges.getLocation() != null) {
             dbEvent.setLocation(eventChanges.getLocation());
         }
-        if(eventChanges.getEventOwner() != null) {
+        if (eventChanges.getEventOwner() != null) {
             dbEvent.setEventOwner(eventChanges.getEventOwner());
         }
-        if(eventChanges.getFacebookLink() != null) {
+        if (eventChanges.getFacebookLink() != null) {
             dbEvent.setFacebookLink(eventChanges.getFacebookLink());
         }
-        if(eventChanges.getGooglePlusLink() != null) {
+        if (eventChanges.getGooglePlusLink() != null) {
             dbEvent.setGooglePlusLink(eventChanges.getGooglePlusLink());
         }
-        if(eventChanges.getGuests() != null)  {
+        if (eventChanges.getGuests() != null) {
             dbEvent.setGuests(eventChanges.getGuests());
         }
-        if(eventChanges.getId() != -1) {
-            dbEvent.setId(eventChanges.getId());
+        if (eventChanges.getSpotifyPlaylistLink() != null) {
+            dbEvent.setSpotifyPlaylistLink(eventChanges.getSpotifyPlaylistLink());
+        }
+        if (eventChanges.getWishlistLink() != null) {
+            dbEvent.setWishlistLink(eventChanges.getWishlistLink());
         }
         //TODO: add missing field eventType
 

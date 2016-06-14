@@ -8,10 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <table class="table table-hover">
     <tr>
-        <td><label for="spotify"><spring:message code="editevent.link.spotify"/></label></td>
+        <td><label for="spotifyPlaylistLink"><spring:message code="editevent.link.spotify"/></label></td>
         <td colspan="2"><input type="text" class="form-control"
-                               id="spotify"
-                               onchange="updateEventData('spotify');"
+                               id="spotifyPlaylistLink"
+                               onchange="updateEventData('spotifyPlaylistLink');"
                                value="${event.spotifyPlaylistLink}"
         ></td>
         <td><button type="button" class="btn btn-default btn-block" onclick="window.open('http://play.spotify.com', '_blank');">Spotify</button></td>

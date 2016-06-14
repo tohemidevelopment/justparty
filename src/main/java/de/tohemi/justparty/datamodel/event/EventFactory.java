@@ -48,6 +48,7 @@ public final class EventFactory {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm").create();
         Event event = gson.fromJson(jsonString, ConcreteEvent.class);
         event.setId(id);
+
         return event;
     }
 }
