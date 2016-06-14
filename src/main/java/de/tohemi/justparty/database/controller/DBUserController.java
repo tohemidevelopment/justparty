@@ -300,6 +300,7 @@ public class DBUserController extends DBControl {
         return true;
     }
 
+
     public boolean addUser(User user, String hash) {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
@@ -320,28 +321,24 @@ public class DBUserController extends DBControl {
         return true;
     }
 
-    /**
-     * @deprecated USE addUser(User user, String hash) instead
-     */
-    @Deprecated
     public boolean addUser(User user, String userRole, String hash) {
-        DataSource ds = getDataSource();
-        Connection c = DataSourceUtils.getConnection(ds);
+            DataSource ds = getDataSource();
+            Connection c = DataSourceUtils.getConnection(ds);
 
-        try {
-            PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email, password, role, Birthday, Name, Firstname, AddressID) VALUE (?, ?, ?, ?, ?, ?, ?)");
-            psUser.setString(1, user.getEmail());
-            psUser.setString(2, hash);
-            psUser.setString(3, UserRoles.USER);
-            psUser.setDate(4, user.getBirthday());
-            psUser.setString(5, user.getLastName());
-            psUser.setString(6, user.getFirstName());
-            psUser.setInt(7, user.getAddress().getID());
-            psUser.executeUpdate();
-            psUser.close();
-        } catch (SQLException ex) {
-            LOGGER.logException(ex, "");
-            return false;
+            try {
+                PreparedStatement psUser = c.prepareStatement("INSERT INTO users (email, password, role, Birthday, Name, Firstname, AddressID) VALUE (?, ?, ?, ?, ?, ?, ?)");
+                psUser.setString(1, user.getEmail());
+                psUser.setString(2, hash);
+                psUser.setString(3, userRole);
+                psUser.setDate(4, user.getBirthday());
+                psUser.setString(5, user.getLastName());
+                psUser.setString(6, user.getFirstName());
+                psUser.setInt(7, user.getAddress().getID());
+                psUser.executeUpdate();
+                psUser.close();
+            } catch (SQLException ex) {
+                LOGGER.logException(ex, "");
+                return false;
         } finally {
             releaseConnection(ds, c);
         }
