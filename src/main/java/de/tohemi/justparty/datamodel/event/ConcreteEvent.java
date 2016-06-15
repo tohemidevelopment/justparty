@@ -1,5 +1,6 @@
 package de.tohemi.justparty.datamodel.event;
 
+import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.user.User;
@@ -30,6 +31,7 @@ public class ConcreteEvent implements Event {
     private int id;
     private String wishlistLink;
     private EventType eventType;
+    private List<Declaration> declarations;
     private Map properties;
 
     public ConcreteEvent(int id) {
@@ -200,6 +202,17 @@ public class ConcreteEvent implements Event {
     public void setEventType(EventType eventType) {
 
         this.eventType = eventType;
+    }
+
+
+    @Override
+    public List<Declaration> getDeclaration(Event e) {
+        return declarations;
+    }
+
+    @Override
+    public void setDeclaration(List<Declaration> declaration) {
+        this.declarations = declaration;
     }
 
     @Override

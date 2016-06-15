@@ -1,5 +1,6 @@
 package de.tohemi.justparty.datamodel.event;
 
+import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 
@@ -65,6 +66,10 @@ public interface Event {
     EventType getEventType();
 
     void setEventType(EventType type);
+
+    List<Declaration> getDeclaration(Event e);
+
+    void setDeclaration(List<Declaration> declaration);
 
     Object getProperty(String key);
 
