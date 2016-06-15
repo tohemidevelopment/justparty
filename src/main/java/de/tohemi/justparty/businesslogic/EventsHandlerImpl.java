@@ -50,6 +50,16 @@ public class EventsHandlerImpl implements EventsHandler {
         return dbController.userIsHostOfRequestedEvent(UserFactory.create(mailFromLoggedInUser), EventFactory.createEvent(id));
     }
 
+    public boolean userIsInvitedToEvent(int id, String mailFromLoggedInUser){
+        DBEventController dbController = DBEventController.getInstance();
+        List<UserEventRelation> uerList = dbController.getInvitedUERs(UserFactory.create(mailFromLoggedInUser));
+        for (UserEventRelation uer:uerList) {
+            if(uer.getEvent().getId()==id)
+                return true;
+        }
+        return false;
+    }
+
     public boolean answerInvitation(int eventId, String mail, Accepted answer) {
 
         if (answer == null) {
@@ -59,18 +69,16 @@ public class EventsHandlerImpl implements EventsHandler {
         return dbController.updateGuestEventStatus(EventFactory.createEvent(eventId), UserFactory.create(mail), answer.getValue());
     }
 
-    public List<UserEventRelation> getGuestlist(int id, String mail) {
+    public List<UserEventRelation> getGuestlist(int id) {
         Event event = EventFactory.createEvent(id);
-        event.setEventOwner(UserFactory.create(mail));
         return DBGuestlistController.getInstance().getInvitedUsers(event.getId());
     }
 
-    public Event getEvent(final int id, String mail) {
+    public Event getEvent(final int id) {
 
         //Example event to mock unimpleented DB connection
         Event event = DBEventController.getInstance().getEventById(id);
-        event.setEventOwner(UserFactory.create(mail));
-        final List<UserEventRelation> guestlist = getGuestlist(id, mail);
+        final List<UserEventRelation> guestlist = getGuestlist(id);
         Collections.sort(guestlist);
         event.setGuests(guestlist);
         return event;
