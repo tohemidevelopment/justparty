@@ -156,15 +156,20 @@ public class DBAccessEvent implements Event {
     }
 
     @Override
-    public List<Declaration> getDeclaration(Event e) {
-        return DBDeclarationController.getInstance().getDeclarations(e);
+    public List<Declaration> getDeclaration() {
+        return DBDeclarationController.getInstance().getDeclarations(this);
     }
 
     @Override
     public void setDeclaration(List<Declaration> declarations) {
-        for (Declaration declaration: declarations) {
-            DBDeclarationController.getInstance().addDeclaration(declaration);
+        for (Declaration declaration : declarations) {
+            addDeclaration(declaration);
         }
+    }
+
+    @Override
+    public void addDeclaration(Declaration declaration) {
+        DBDeclarationController.getInstance().addDeclaration(declaration);
     }
 
     @Override

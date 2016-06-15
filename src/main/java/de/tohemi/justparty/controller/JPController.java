@@ -26,6 +26,7 @@ public abstract class JPController {
     public static final String EVENTDATA = "/eventdata";
     public static final String INVITE = "invited";
     protected static final String EVENTTYPE = "/settype";
+    public static final String ADD_PREP = "/addprep";
 
     protected String getMailFromLoggedInUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

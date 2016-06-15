@@ -24,7 +24,6 @@ public class ConcreteEvent implements Event {
     private Location location;
     private User eventOwner;
     private List<UserEventRelation> guests;
-    //TODO: Implement class for things to bring with to party private List<Things> things;
     private String facebookLink;
     private URL googlePlusLink;
     private String spotifyPlaylistLink;
@@ -125,8 +124,7 @@ public class ConcreteEvent implements Event {
 
     @Override
     public void setFacebookLink(URL facebookLink) {
-        if(facebookLink== null)
-        {
+        if (facebookLink == null) {
             this.facebookLink = null;
             return;
         }
@@ -155,8 +153,7 @@ public class ConcreteEvent implements Event {
 
     @Override
     public void setSpotifyPlaylistLink(URL spotifyPlaylistLink) {
-        if(spotifyPlaylistLink== null)
-        {
+        if (spotifyPlaylistLink == null) {
             this.spotifyPlaylistLink = null;
             return;
         }
@@ -185,8 +182,7 @@ public class ConcreteEvent implements Event {
 
     @Override
     public void setWishlistLink(URL wishlistLink) {
-        if(wishlistLink== null)
-        {
+        if (wishlistLink == null) {
             this.wishlistLink = null;
             return;
         }
@@ -206,13 +202,18 @@ public class ConcreteEvent implements Event {
 
 
     @Override
-    public List<Declaration> getDeclaration(Event e) {
+    public List<Declaration> getDeclaration() {
         return declarations;
     }
 
     @Override
     public void setDeclaration(List<Declaration> declaration) {
         this.declarations = declaration;
+    }
+
+    @Override
+    public void addDeclaration(Declaration declaration) {
+        this.declarations.add(declaration);
     }
 
     @Override

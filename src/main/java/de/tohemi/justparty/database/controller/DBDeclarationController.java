@@ -3,6 +3,7 @@ package de.tohemi.justparty.database.controller;
 import de.tohemi.justparty.database.tables.DeclarationDBTabelle;
 import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.event.Event;
+import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
@@ -36,7 +37,12 @@ public class DBDeclarationController extends DBControl {
         Connection c = DataSourceUtils.getConnection(ds);
         try {
             PreparedStatement ps = c.prepareStatement("INSERT INTO declaration(name, usertobringwith, bringwithbyall, event_id) VALUES (?, ?, ?, ?);");
-            ps.setString(2, d.getUser().getEmail());
+            final User user = d.getUser();
+            String email = "";
+            if (user != null) {
+                email = user.getEmail();
+            }
+            ps.setString(2, email);
             ps.setBoolean(3, d.getBringWithByAll());
             ps.setString(1, d.getName());
             ps.setInt(4, d.getEventId());

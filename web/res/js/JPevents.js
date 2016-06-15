@@ -139,8 +139,9 @@ function invitePerson(idEmailTxtfield, idMessageField, eventid)
     }
 }
 
-function closeModalById(id){
-    $('#'+id).modal({show: false});
+function closeModalById(id)
+{
+    $('#' + id).modal('hide');
 }
 
 var eventDataChanges = {};
@@ -149,6 +150,31 @@ function updateEventData(id)
 {
     var newValue = document.getElementById(id).value;
     eventDataChanges[id] = newValue;
+}
+
+function updatePreparations(id, eventid)
+{
+    var addedItem = document.getElementById(id + 'add').value;
+    const URL = '/addprep';
+    var byall = false;
+    if (id == 'byall')
+    {
+        byall = true;
+    }
+    $.ajax({
+        url: URL,
+        type: 'POST',
+        data:{},
+        headers: {
+            id: eventid,
+            add: addedItem,
+            byall: byall
+        }
+    });
+    var option = document.createElement("option");
+    option.text = addedItem;
+    document.getElementById(id).add(option);
+    closeModalById(id + 'modal');
 }
 
 function sendEventDataChanges(id)

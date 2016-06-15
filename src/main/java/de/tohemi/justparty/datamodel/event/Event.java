@@ -67,9 +67,11 @@ public interface Event {
 
     void setEventType(EventType type);
 
-    List<Declaration> getDeclaration(Event e);
+    List<Declaration> getDeclaration();
 
     void setDeclaration(List<Declaration> declaration);
+
+    void addDeclaration(Declaration declaration);
 
     Object getProperty(String key);
 

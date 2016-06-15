@@ -1,8 +1,10 @@
 package de.tohemi.justparty.businesslogic;
 
+import de.tohemi.justparty.database.controller.DBDeclarationController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBGuestlistController;
 import de.tohemi.justparty.datamodel.Accepted;
+import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
@@ -74,6 +76,8 @@ public class EventsHandlerImpl implements EventsHandler {
         final List<UserEventRelation> guestlist = getGuestlist(id, mail);
         Collections.sort(guestlist);
         event.setGuests(guestlist);
+        final List<Declaration> declarations = DBDeclarationController.getInstance().getDeclarations(event);
+        event.setDeclaration(declarations);
         return event;
     }
 

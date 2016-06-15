@@ -2,6 +2,7 @@ package de.tohemi.justparty.controller;
 
 import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
+import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.event.EventType;
@@ -48,7 +49,7 @@ public class EventAssistantController extends JPController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = EVENTDATA)
-    public String getEventData(@RequestBody final String jsonString, @RequestHeader(value = "id") final int id) {
+    public String changeEventData(@RequestBody final String jsonString, @RequestHeader(value = "id") final int id) {
 
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         if (userIsNotHost(id, eventsHandler)) {
@@ -57,6 +58,21 @@ public class EventAssistantController extends JPController {
         }
         final Event eventChanges = EventFactory.createEventFromJson(id, jsonString);
         eventsHandler.updateEvent(eventChanges);
+        return null;
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = ADD_PREP)
+    public String addPreparation(@RequestHeader(value = "id") final int id,
+                                 @RequestHeader(value = "add") final String item,
+                                 @RequestHeader(value = "byall") final boolean byall) {
+
+        EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
+        if (userIsNotHost(id, eventsHandler)) {
+            //TODO: Show Error String, User not host
+            return REDIRECT + ERROR;
+        }
+        final Event event = EventFactory.createEvent(id, true);
+        event.addDeclaration(new Declaration(item, null, byall, id));
         return null;
     }
 
