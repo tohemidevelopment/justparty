@@ -18,6 +18,7 @@ public class LogicalViewNames {
     private static final String NAME_VERIFY_EMAIL = "user/verifyEmail";
     private static final String NAME_INVITE_USER ="user/inviteUsers";
     private static final String NAME_CHOOSE_EVENT_TYPE ="user/assistant/chooseEventType";
+    private static final String NAME_VIEW_EVENT = "user/viewEvent";
 
     private LogicalViewNames(){}
 
@@ -70,5 +71,9 @@ public class LogicalViewNames {
 
     public static String getNameChooseEventType() {
         return NAME_CHOOSE_EVENT_TYPE;
+    }
+
+    public static String getNameViewEvent() {
+        return NAME_VIEW_EVENT;
     }
 }

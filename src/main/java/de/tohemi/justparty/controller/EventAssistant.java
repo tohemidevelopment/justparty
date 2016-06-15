@@ -51,6 +51,6 @@ public class EventAssistant extends JPController {
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
         Event event = eventsHandler.getEvent(id);
         model.addAttribute("event", event);
-        return LogicalViewNames.getNameShowGuestlist();
+        return LogicalViewNames.getNameViewEvent();
     }
 }
