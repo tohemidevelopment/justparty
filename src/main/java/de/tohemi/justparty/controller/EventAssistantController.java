@@ -41,7 +41,7 @@ public class EventAssistantController extends JPController {
         model.addAttribute("alert_info", "alert.notimplyet");
 
         String mailFromLoggedInUser = getMailFromLoggedInUser();
-        Event event = eventsHandler.getEvent(id, mailFromLoggedInUser);
+        Event event = eventsHandler.getEvent(id);
         model.addAttribute("event", event);
         return LogicalViewNames.getNameEventData();
     }

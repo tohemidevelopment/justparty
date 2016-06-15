@@ -37,7 +37,7 @@ public class EventAssistant extends JPController {
         }
 
         String mailFromLoggedInUser = getMailFromLoggedInUser();
-        Event event = eventsHandler.getEvent(id, mailFromLoggedInUser);
+        Event event = eventsHandler.getEvent(id);
         model.addAttribute("event", event);
         if (event.getEventType() == null) {
             //display chooseEventType
@@ -49,7 +49,7 @@ public class EventAssistant extends JPController {
 
     public String showData(ModelMap model, int id) {
         EventsHandlerImpl eventsHandler = (EventsHandlerImpl) new EventsHandlerFactory().getEventsHandler();
-        Event event = eventsHandler.getEvent(id, "tester@test.de");
+        Event event = eventsHandler.getEvent(id);
         model.addAttribute("event", event);
         return LogicalViewNames.getNameShowGuestlist();
     }

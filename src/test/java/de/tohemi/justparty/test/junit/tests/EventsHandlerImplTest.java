@@ -75,7 +75,7 @@ public class EventsHandlerImplTest {
 
     @Test
     public void getEvent() throws Exception {
-        Assert.isInstanceOf(Event.class, ehi.getEvent(event.getId(), "junit@testemail.tv"));
+        Assert.isInstanceOf(Event.class, ehi.getEvent(event.getId()));
     }
 
     @Test
