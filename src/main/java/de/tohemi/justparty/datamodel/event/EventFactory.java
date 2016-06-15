@@ -16,7 +16,6 @@ public final class EventFactory {
         if (eventType == EventType.BIRTHDAY) {
             if (dbAccess) {
                 DBAccessEvent dbAccessEvent = new DBAccessEvent(id);
-                dbAccessEvent.setEventType(eventType);
                 return dbAccessEvent;
             }
             return new BirthdayEvent(id);
@@ -49,6 +48,7 @@ public final class EventFactory {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm").create();
         Event event = gson.fromJson(jsonString, ConcreteEvent.class);
         event.setId(id);
+
         return event;
     }
 }

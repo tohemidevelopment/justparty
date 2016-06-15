@@ -16,6 +16,7 @@ public class EventsDBTabelle {
     public static final String COLUMN_SPOTIFY = "Spotify_link";
     public static final String COLUMN_GOOGLE = "googleplus_link";
     public static final String COLUMN_ID = "event_id";
+    public static final String COLUMN_TYPE = "type";
 
     private EventsDBTabelle(){}
 }

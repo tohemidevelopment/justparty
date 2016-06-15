@@ -9,6 +9,7 @@ import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.address.ConcreteAddress;
 import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
+import de.tohemi.justparty.datamodel.event.EventType;
 import de.tohemi.justparty.datamodel.exceptions.InvalidEmailException;
 import de.tohemi.justparty.datamodel.exceptions.ZipCodeInvalidException;
 import de.tohemi.justparty.datamodel.user.User;
@@ -82,8 +83,6 @@ public class DBEventController extends DBControl {
 
     public Event getEventById(int id) {
 
-        //TODO: eventtype abfragen und in event speichern
-
         final Event event = EventFactory.createEvent(id);
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
@@ -100,11 +99,12 @@ public class DBEventController extends DBControl {
                 event.setBegin(rs.getTimestamp(EventsDBTabelle.COLUMN_BEGIN));
                 event.setEnd(rs.getTimestamp(EventsDBTabelle.COLUMN_END));
                 event.setDescription(rs.getString(EventsDBTabelle.COLUMN_DESCRIPTION));
-
-                    event.setEventOwner(UserFactory.create(new EMail(rs.getString(EventsDBTabelle.COLUMN_EMAIL))));
-
+                event.setWishlistLink(rs.getURL(EventsDBTabelle.COLUMN_WISHLIST));
+                event.setEventOwner(UserFactory.create(new EMail(rs.getString(EventsDBTabelle.COLUMN_EMAIL))));
                 event.setName(rs.getString(EventsDBTabelle.COLUMN_NAME));
                 event.setLocation(getLocation(id));
+                String eventType = rs.getString(EventsDBTabelle.COLUMN_TYPE);
+                event.setEventType(EventType.valueOfNullableString(eventType));
             }
             psEvent.close();
         } catch (SQLException ex) {
@@ -132,7 +132,7 @@ public class DBEventController extends DBControl {
             rs.close();
             pS1.close();
 
-            PreparedStatement pS = c.prepareStatement("UPDATE events SET name=?, description=?, begin=?, end=?, address_id=?, facebook_link=?, wishlist_link=?, googleplus_link=?, Spotify_link=? WHERE event_id=?;");
+            PreparedStatement pS = c.prepareStatement("UPDATE events SET name=?, description=?, begin=?, end=?, address_id=?, facebook_link=?, wishlist_link=?, googleplus_link=?, Spotify_link=?, type=? WHERE event_id=?;");
             pS.setString(1, event.getName());
             pS.setString(2, event.getDescription());
             pS.setTimestamp(3, event.getBegin());
@@ -142,7 +142,8 @@ public class DBEventController extends DBControl {
             pS.setURL(7, event.getGooglePlusLink());
             pS.setURL(8, event.getWishlistLink());
             pS.setURL(9, event.getSpotifyPlaylistLink());
-            pS.setInt(10, event.getId());
+            pS.setString(10, event.getEventType().name());
+            pS.setInt(11, event.getId());
 
             if (email.equals(user.getEmail())) {
                 pS.executeUpdate();
@@ -650,6 +651,44 @@ public class DBEventController extends DBControl {
         try {
             PreparedStatement psEvent = c.prepareStatement("UPDATE events SET wishlist_link=? WHERE event_id=?;");
             psEvent.setURL(1, wishlist);
+            psEvent.setInt(2, id);
+            psEvent.execute();
+            psEvent.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+    }
+
+    public EventType getType(int id) {
+
+        EventType type = null;
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT type FROM events WHERE event_id=?;");
+            psEvent.setInt(1, id);
+            ResultSet rs = psEvent.executeQuery();
+            while (rs.next()) {
+                type = EventType.valueOfNullableString(rs.getString(EventsDBTabelle.COLUMN_TYPE));
+            }
+            psEvent.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return type;
+    }
+
+    public void setType(int id, EventType type) {
+
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("UPDATE events SET type=? WHERE event_id=?;");
+            psEvent.setString(1, type.name());
             psEvent.setInt(2, id);
             psEvent.execute();
             psEvent.close();

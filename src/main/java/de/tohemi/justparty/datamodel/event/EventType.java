@@ -17,4 +17,12 @@ public enum EventType {
         }
         return eventTypes;
     }
+
+    public static EventType valueOfNullableString(String string) {
+
+        if (string == null) {
+            return null;
+        }
+        return EventType.valueOf(string);
+    }
 }

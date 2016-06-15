@@ -107,38 +107,74 @@ function showGuestlist()
     $('#guestlist_text').show();
 }
 
-var eventDataChanges = {};
 
-function invitePerson(email, message) {
-    var req = new XMLHttpRequest();
+function invitePerson(idEmailTxtfield, idMessageField, eventid)
+{
+    var elementById = document.getElementById(idEmailTxtfield);
+    var email = elementById.value;
+    var message = document.getElementById(idMessageField).value;
+    const URL = '/invited';
+    var data = {
+        email: email,
+        message: message,
+        id: eventid
+    };
+    $.ajax({
+        url: URL,
+        type: 'POST',
+        data: data,
+        success: success,
+        error: error
+    });
+    closeModalById('newguest');
 
+    function success(data, textStatus, jqXHR)
+    {
+        //TODO: success alert
+    }
 
-    // open connectiom
-    req.open("GET", "invited?email=" + email + "&id=" + id, true);
-
-    // put handler for response
-    /*req.onreadystatechange = function receive()
-     {
-     if (req.readyState == 4)
-     {
-     var answer = req.responseText;
-     html = "";
-     if (answer != "")
-     {
-     html = answer;
-     }
-
-     document.getElementById("alerts").innerHTML = html;
-     }
-     };*/
-
-    req.send();
+    function error(data, textStatus, jqXHR)
+    {
+        //TODO: error alert
+    }
 }
+
+function closeModalById(id)
+{
+    $('#' + id).modal('hide');
+}
+
+var eventDataChanges = {};
 
 function updateEventData(id)
 {
     var newValue = document.getElementById(id).value;
     eventDataChanges[id] = newValue;
+}
+
+function updatePreparations(id, eventid)
+{
+    var addedItem = document.getElementById(id + 'add').value;
+    const URL = '/addprep';
+    var byall = false;
+    if (id == 'byall')
+    {
+        byall = true;
+    }
+    $.ajax({
+        url: URL,
+        type: 'POST',
+        data:{},
+        headers: {
+            id: eventid,
+            add: addedItem,
+            byall: byall
+        }
+    });
+    var option = document.createElement("option");
+    option.text = addedItem;
+    document.getElementById(id).add(option);
+    closeModalById(id + 'modal');
 }
 
 function sendEventDataChanges(id)

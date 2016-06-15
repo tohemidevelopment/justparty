@@ -1,7 +1,9 @@
 package de.tohemi.justparty.datamodel.event;
 
+import de.tohemi.justparty.database.controller.DBDeclarationController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBGuestlistController;
+import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.UserEventRelation;
 import de.tohemi.justparty.datamodel.user.User;
@@ -145,12 +147,29 @@ public class DBAccessEvent implements Event {
 
     @Override
     public EventType getEventType() {
-        return null;
+        return DBEventController.getInstance().getType(id);
     }
 
     @Override
     public void setEventType(EventType type) {
-        //TODO: change type in DB
+        DBEventController.getInstance().setType(id, type);
+    }
+
+    @Override
+    public List<Declaration> getDeclaration() {
+        return DBDeclarationController.getInstance().getDeclarations(this);
+    }
+
+    @Override
+    public void setDeclaration(List<Declaration> declarations) {
+        for (Declaration declaration : declarations) {
+            addDeclaration(declaration);
+        }
+    }
+
+    @Override
+    public void addDeclaration(Declaration declaration) {
+        DBDeclarationController.getInstance().addDeclaration(declaration);
     }
 
     @Override

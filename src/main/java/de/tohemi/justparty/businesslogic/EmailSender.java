@@ -1,6 +1,7 @@
 package de.tohemi.justparty.businesslogic;
 
 import de.tohemi.justparty.datamodel.event.Event;
+import de.tohemi.justparty.datamodel.user.UnregisteredUser;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.util.SystemProperties;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -80,6 +81,13 @@ public class EmailSender {
         return sendEmail(address, firstName, subject, emailContent);
     }
 
+    public boolean sendInvitation(User invitedUser, User host, Event event) {
+        if (invitedUser instanceof UnregisteredUser) {
+            return sendInvitationToNonUser(invitedUser, host, event);
+        }
+        return sendInvitationToUser(invitedUser, host, event);
+    }
+
     private boolean sendEmail(String address, String firstName, String subject, String emailContent) {
         htmlFormat(emailContent, firstName);
         MimeMessage message = mailSender.createMimeMessage();
@@ -119,5 +127,4 @@ public class EmailSender {
                 "    </tr>\n" +
                 "</table>";
     }
-
 }
