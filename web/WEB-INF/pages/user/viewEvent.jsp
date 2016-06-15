@@ -79,7 +79,7 @@
             <td colspan="2">
                 <div align="center">
                     <h1>${event.name}</h1>
-                    <p></p>
+                    <p>${event.begin} - ${event.end}</p>
                     <p>${event.eventOwner.name}</p>
                 </div>
             </td>
