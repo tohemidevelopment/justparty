@@ -142,7 +142,12 @@ public class DBEventController extends DBControl {
             pS.setURL(7, event.getGooglePlusLink());
             pS.setURL(8, event.getWishlistLink());
             pS.setURL(9, event.getSpotifyPlaylistLink());
-            pS.setString(10, event.getEventType().name());
+            final EventType eventType = event.getEventType();
+            String eventTypeString = null;
+            if (eventType != null) {
+                eventTypeString = eventType.name();
+            }
+            pS.setString(10, eventTypeString);
             pS.setInt(11, event.getId());
 
             if (email.equals(user.getEmail())) {
