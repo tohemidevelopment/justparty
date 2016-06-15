@@ -43,6 +43,8 @@ public interface Event {
 
     void setGuests(List<UserEventRelation> guests);
 
+    void addGuest(User guest);
+
     URL getFacebookLink();
 
     void setFacebookLink(URL facebookLink);

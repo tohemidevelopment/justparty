@@ -113,6 +113,11 @@ public class ConcreteEvent implements Event {
     }
 
     @Override
+    public void addGuest(User guest) {
+        guests.add(new UserEventRelation(this, guest));
+    }
+
+    @Override
     public URL getFacebookLink() {
         try {
             return new URL(facebookLink);

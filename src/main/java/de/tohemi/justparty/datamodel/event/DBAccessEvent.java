@@ -3,6 +3,8 @@ package de.tohemi.justparty.datamodel.event;
 import de.tohemi.justparty.database.controller.DBDeclarationController;
 import de.tohemi.justparty.database.controller.DBEventController;
 import de.tohemi.justparty.database.controller.DBGuestlistController;
+import de.tohemi.justparty.database.tables.GuestlistDBTabelle;
+import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.Declaration;
 import de.tohemi.justparty.datamodel.Location;
 import de.tohemi.justparty.datamodel.UserEventRelation;
@@ -93,6 +95,11 @@ public class DBAccessEvent implements Event {
         for (UserEventRelation ure : guests) {
             DBGuestlistController.getInstance().addGuestToEvent(ure.getEvent(), ure.getUser(), ure.getAccepted().getValue());
         }
+    }
+
+    @Override
+    public void addGuest(User guest) {
+        DBGuestlistController.getInstance().addGuestToEvent(this, guest, GuestlistDBTabelle.NOTSURE);
     }
 
     @Override

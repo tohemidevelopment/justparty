@@ -5,6 +5,7 @@ import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
 import de.tohemi.justparty.businesslogic.user.UserHandler;
 import de.tohemi.justparty.database.controller.DBUserController;
+import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.datamodel.event.EventFactory;
 import de.tohemi.justparty.datamodel.user.User;
 import de.tohemi.justparty.datamodel.user.UserFactory;
@@ -37,9 +38,11 @@ public class InvitationController extends JPController {
             //TODO: Show Error String, User not host
             return REDIRECT + ERROR;
         }
+        final Event event = EventFactory.createEvent(id, true);
         User invitedUser = new UserHandler().createPersonIfNotExisting(email);
+        event.addGuest(invitedUser);
         User host = UserFactory.create(getMailFromLoggedInUser(), true);
-        new EmailSender().sendInvitation(invitedUser, host, EventFactory.createEvent(id, true));
+        new EmailSender().sendInvitation(invitedUser, host, event);
         return null;
     }
 }
