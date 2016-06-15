@@ -123,6 +123,11 @@ public class ConcreteEvent implements Event {
 
     @Override
     public void setFacebookLink(URL facebookLink) {
+        if(facebookLink== null)
+        {
+            this.facebookLink = null;
+            return;
+        }
         this.facebookLink = facebookLink.toString();
     }
 
@@ -148,6 +153,11 @@ public class ConcreteEvent implements Event {
 
     @Override
     public void setSpotifyPlaylistLink(URL spotifyPlaylistLink) {
+        if(spotifyPlaylistLink== null)
+        {
+            this.spotifyPlaylistLink = null;
+            return;
+        }
         this.spotifyPlaylistLink = spotifyPlaylistLink.toString();
     }
 
@@ -173,6 +183,11 @@ public class ConcreteEvent implements Event {
 
     @Override
     public void setWishlistLink(URL wishlistLink) {
+        if(wishlistLink== null)
+        {
+            this.wishlistLink = null;
+            return;
+        }
         this.wishlistLink = wishlistLink.toString();
     }
 
