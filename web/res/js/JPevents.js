@@ -110,9 +110,8 @@ function showGuestlist()
 
 function invitePerson(idEmailTxtfield, idMessageField, eventid)
 {
-    var elementById = document.getElementById(idEmailTxtfield);
-    var email = elementById.value;
-    var message = document.getElementById(idMessageField).value;
+    var email = document.getElementById('recipient-name').value;
+    var message = "";
     const URL = '/invited';
     var data = {
         email: email,
@@ -126,6 +125,9 @@ function invitePerson(idEmailTxtfield, idMessageField, eventid)
         success: success,
         error: error
     });
+    var option = document.createElement("option");
+    option.text = email;
+    document.getElementById('guestlistselect').add(option);
     closeModalById('newguest');
 
     function success(data, textStatus, jqXHR)

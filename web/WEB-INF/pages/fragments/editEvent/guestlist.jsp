@@ -15,7 +15,7 @@
     <tbody>
     <tr>
         <td colspan="2">
-            <select multiple class="form-control">
+            <select id="guestlistselect" multiple class="form-control">
                 <c:forEach items="${event.guests}" var="guest">
                     <option>${guest.user.email}</option>
                 </c:forEach>
@@ -34,7 +34,6 @@
     </tr>
     </tbody>
 </table>
-<input type="text" class="form-control" id="recipient-name" value="df">
 
 <!-- Modal -->
 <div class="modal fade" id="newguest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -50,6 +49,7 @@
                 <div class="form-group">
                     <label for="recipient-name" class="control-label"><spring:message
                             code="editevent.guestlist.modal.email"/></label>
+                    <input type="text" class="form-control" id="recipient-name">
                 </div>
             </div>
             <div class="modal-footer">
