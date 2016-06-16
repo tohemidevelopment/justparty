@@ -6,6 +6,7 @@ import de.tohemi.justparty.datamodel.user.User;
  * Created by xce35l2 on 25.04.2016.
  */
 public class Declaration {
+    private int id;
     private String name;
     private User user;
     private boolean bringWithByAll;
@@ -17,7 +18,17 @@ public class Declaration {
         this.name = name;
         this.user = user;
     }
+    public Declaration(int id,String name, User user, boolean bringWithByAll, int eventID){
+        this.id=id;
+        this.bringWithByAll = bringWithByAll;
+        this.eventID = eventID;
+        this.name = name;
+        this.user = user;
+    }
 
+    public int getId() {
+        return id;
+    }
     public int getEventId() {
         return eventID;
     }

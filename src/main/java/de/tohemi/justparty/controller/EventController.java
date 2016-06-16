@@ -4,6 +4,7 @@ import de.tohemi.justparty.businesslogic.EventsHandlerImpl;
 import de.tohemi.justparty.businesslogic.factories.EventsHandlerFactory;
 import de.tohemi.justparty.datamodel.Accepted;
 import de.tohemi.justparty.datamodel.UserEventRelation;
+import de.tohemi.justparty.datamodel.event.Event;
 import de.tohemi.justparty.viewinterface.LogicalViewNames;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,7 @@ public class EventController extends JPController {
         String mail = getMailFromLoggedInUser();
         if(eventsHandler.createEvent(HtmlUtils.htmlEscape(eventname), mail))
         {
-            return REDIRECT + MANAGE_EVENT;
+            return REDIRECT + EDITEVENT+"?id="+eventsHandler.getNewestEventIdOfUser(mail);
         }
         return REDIRECT + ERROR;
     }
@@ -93,13 +94,15 @@ public class EventController extends JPController {
             }
 
         }
+        Event event = eventsHandler.getEvent(id);
         model.addAttribute("acceptedStatus", acceptedStatus);
         model.addAttribute("currentUser", mailFromLoggedInUser);
         model.addAttribute("guests", guestlist);
         model.addAttribute("numberAccepted", numberAccepted);
         model.addAttribute("numberNotSure", numberNotSure);
         model.addAttribute("numberInvited", guestlist.size());
-        model.addAttribute("event", eventsHandler.getEvent(id));
+        model.addAttribute("event", event);
+        model.addAttribute("eventType", event.getEventType().name());
         return EventAssistant.getInstance().showData(model, id);
     }
 }

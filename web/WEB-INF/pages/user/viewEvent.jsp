@@ -14,7 +14,7 @@
     <title><spring:message code="showguests.title"/></title>
     <%@include file="../fragments/head.jsp"%>
 </head>
-<body>
+<body style="background-color: lightgray;">
 <%@include file="../fragments/logoutform.jsp"%>
 <%@include file="../fragments/navbar.jsp"%>
 <div class="modal fade" id="acceptedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -57,60 +57,76 @@
                     </tbody>
                 </table>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
         </div>
     </div>
 </div>
-<div class="container theme-showcase" role="main">
-    <div class="page-header">
-        <h1><spring:message code="showguests.header"/></h1>
-    </div>
+<div class="container theme-showcase" role="main" >
     <%@include file="../fragments/alerts.jsp"%>
-    <table class="table table-hover" width="800px">
+    <table width="800px" align="center" style="background-color: white;">
         <tr>
             <td colspan="2">
-                <img src="/resources/img/eventHeaders/${event.eventType}.jpg">
+                <img src="img/eventHeaders/${eventType}.jpg">
             </td>
         </tr>
         <tr>
             <td colspan="2">
                 <div align="center">
                     <h1>${event.name}</h1>
-                    <p>${event.begin} - ${event.end}</p>
-                    <p>${event.eventOwner.name}</p>
+                    <p>
+                        <c:if test="${not empty event.begin}">
+                            ${event.begin}
+                            <c:if test="${not empty event.end}">
+                                - ${event.end}
+                            </c:if>
+                        </c:if>
+                    </p>
+                    <p>
+                        <c:choose>
+                            <c:when test="${not empty event.eventOwner.firstName}">
+                                ${event.eventOwner.firstName}
+                                <c:if test="${not empty event.eventOwner.lastName}">
+                                    ${event.eventOwner.lastName}
+                                </c:if>
+                            </c:when>
+                            <c:otherwise>
+                                ${event.eventOwner.email}
+                            </c:otherwise>
+                        </c:choose>
+                    </p>
+                    <%--<p>${event.begin} - ${event.end}</p>--%>
+                    <%--<p>${event.eventOwner.name}</p>--%>
                 </div>
             </td>
         </tr>
         <tr>
-            <td>
-                <select class="form-control" id="select_${event.id}" onchange="sendInvitationAnswer(${event.id})">
-                    <c:if test="${empty acceptedStatus}">
-                        <option name="nothingselected" selected="selected">
-                            <spring:message code="manager.table.select.nothingselected"/>
+            <td width="50%">
+                <c:if test="${event.eventOwner.email != currentUser}">
+                    <select class="form-control" id="select_${event.id}" onchange="sendInvitationAnswer(${event.id})" style="width: 200px; margin: auto;">
+                        <c:if test="${empty acceptedStatus}">
+                            <option name="nothingselected" selected="selected">
+                                <spring:message code="manager.table.select.nothingselected"/>
+                            </option>
+                        </c:if>
+                        <option ${acceptedStatus == "ACCEPTED" ? "selected='selected'": "" }
+                                name="ACCEPTED">
+                            <spring:message code="manager.table.select.accept"/>
                         </option>
-                    </c:if>
-                    <option ${acceptedStatus == "ACCEPTED" ? "selected='selected'": "" }
-                            name="ACCEPTED">
-                        <spring:message code="manager.table.select.accept"/>
-                    </option>
-                    <option ${acceptedStatus == "DECLINED" ? "selected='selected'": "" }
-                            name="DECLINED">
-                        <spring:message code="manager.table.select.cancel"/>
-                    </option>
-                    <option ${acceptedStatus == "NOTSURE" ? "selected='selected'": "" }
-                            name="NOTSURE">
-                        <spring:message code="manager.table.select.notsure"/>
-                    </option>
-                </select>
+                        <option ${acceptedStatus == "DECLINED" ? "selected='selected'": "" }
+                                name="DECLINED">
+                            <spring:message code="manager.table.select.cancel"/>
+                        </option>
+                        <option ${acceptedStatus == "NOTSURE" ? "selected='selected'": "" }
+                                name="NOTSURE">
+                            <spring:message code="manager.table.select.notsure"/>
+                        </option>
+                    </select>
+                </c:if>
             </td>
-            <td></td>
+            <td width="50%"></td>
         </tr>
         <tr>
-            <td><p>${event.description}</p></td>
-            <td>
+            <td style="padding: 20px"><p>${event.description}</p></td>
+            <td style="padding: 20px">
                 <a href="#" data-toggle="modal" data-target="#acceptedModal">
                     <h2> ${numberAccepted} Zusagen</h2>
                     <h2>${numberNotSure} unsicher</h2>
@@ -118,17 +134,67 @@
                 </a>
             </td>
         </tr>
+        <c:if test="${not empty event.location.city}">
+            <tr>
+                <td colspan="2">
+                    <iframe width="800" height="200" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=${event.location.name}%20${event.location.address.street}%20${event.location.address.houseNumber}%20${event.location.address.zipCode}%20${event.location.address.city}%20${event.location.address.country}&key=AIzaSyC8Yejo3tt37xpLBUz5pMAtbStrRJSHso0" allowfullscreen></iframe>
+                </td>
+            </tr>
+        </c:if>
         <tr>
-            <td colspan="2">
-                <iframe width="800" height="200" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=${event.location.name}%20${event.location.address.street}%20${event.location.address.houseNumber}%20${event.location.address.zipCode}%20${event.location.address.city}%20${event.location.address.country}&key=AIzaSyC8Yejo3tt37xpLBUz5pMAtbStrRJSHso0" allowfullscreen></iframe>
+            <td style="text-align: center; padding:20px">
+                <c:if test="${not empty event.spotifyPlaylistLink}">
+                    <a href="${event.spotifyPlaylistLink}"><img src="img/logos/spotify.png"></a>
+                </c:if>
+            </td>
+            <td style="text-align: center; padding:20px">
+                <c:if test="${not empty event.amazonWishlistLink}">
+                    <a href="${event.amazonWishlistLink}" class="btn btn-default"><spring:message code="editevent.link.amazon"/></a>
+                </c:if>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="${event.spotifyPlaylistLink}"><img src="/resources/img/eventHeaders/spotify.png"></a>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Dinge, die du mitbringen musst:</div>
+                    <div class="panel-body" style="min-height:400px; max-height:400px;overflow-y: scroll;">
+                        <table class="table table-hover">
+                            <c:forEach items="${event.declaration}" var="element">
+                                <c:choose>
+                                    <c:when test="${element.bringWithByAll}">
+                                        <tr>
+                                            <td colspan="2">${element.name}</td>
+                                        </tr>
+                                    </c:when>
+                                    <c:when test="${element.user.email == currentUser}">
+                                        <tr>
+                                            <td>${element.name}</td>
+                                            <td><a href="/freePrep?id=${element.id}" class ="btn btn-default">Freigeben</a></td>
+                                        </tr>
+                                    </c:when>
+                                </c:choose>
+
+                            </c:forEach>
+                        </table>
+                    </div>
+                </div>
             </td>
             <td>
-                <a href="${event.amazonWishlistLink}" class="btn btn-default"><spring:message code="editevent.link.amazon"/></a>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Dinge, die einer mitbringen muss:</div>
+                    <div class="panel-body" style="min-height:400px; max-height:400px;overflow-y: scroll;">
+                        <table class="table table-hover">
+                            <c:forEach items="${event.declaration}" var="element">
+                                <c:if test="${not element.bringWithByAll && empty element.user.email}">
+                                    <tr>
+                                        <td>${element.name}</td>
+                                        <td><a href="/bringPrep?id=${element.id}" class ="btn btn-default">Mitbringen</a></td>
+                                    </tr>
+                                </c:if>
+                            </c:forEach>
+                        </table>
+                    </div>
+                </div>
             </td>
         </tr>
     </table>

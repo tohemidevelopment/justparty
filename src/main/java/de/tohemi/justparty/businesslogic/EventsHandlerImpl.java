@@ -129,4 +129,9 @@ public class EventsHandlerImpl implements EventsHandler {
 
         return true;
     }
+
+    public int getNewestEventIdOfUser(String mailFromHost) {
+        List<Integer> event_ids =DBEventController.getInstance().getEventIDsOfUser(mailFromHost);
+        return Collections.max(event_ids);
+    }
 }
