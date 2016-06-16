@@ -134,10 +134,21 @@
                 </a>
             </td>
         </tr>
-        <c:if test="${not empty event.location.city}">
+
+        <c:if test="${not empty event.location.address.city}">
             <tr>
-                <td colspan="2">
-                    <iframe width="800" height="200" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=${event.location.name}%20${event.location.address.street}%20${event.location.address.houseNumber}%20${event.location.address.zipCode}%20${event.location.address.city}%20${event.location.address.country}&key=AIzaSyC8Yejo3tt37xpLBUz5pMAtbStrRJSHso0" allowfullscreen></iframe>
+                <td colspan="2" text-align="center">
+                    <c:choose>
+                        <c:when test="${not empty event.location.address.city}">
+                            <iframe width="800" height="200" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=${event.location.address.street}%20${event.location.address.houseNumber}%20${event.location.address.zipCode}%20${event.location.address.city}%20${event.location.address.country}&key=AIzaSyC8Yejo3tt37xpLBUz5pMAtbStrRJSHso0" allowfullscreen></iframe>
+                        </c:when>
+                        <c:otherwise>
+                            <b>${event.location.name}</b><br>
+                            ${event.location.address.street} ${event.location.address.houseNumber} <br>
+                            ${event.location.address.zipCode.zipInt} ${event.location.address.city} <br>
+                            ${event.location.address.country} <br>
+                        </c:otherwise>
+                    </c:choose>
                 </td>
             </tr>
         </c:if>
