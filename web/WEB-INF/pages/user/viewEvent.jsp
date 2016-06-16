@@ -148,8 +148,20 @@
                 </c:if>
             </td>
             <td style="text-align: center; padding:20px">
-                <c:if test="${not empty event.amazonWishlistLink}">
-                    <a href="${event.amazonWishlistLink}" class="btn btn-default"><spring:message code="editevent.link.amazon"/></a>
+                <c:if test="${not empty event.wishlistLink}">
+                    <a href="${event.wishlistLink}" class="btn btn-default"><spring:message code="editevent.link.amazon"/></a>
+                </c:if>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center; padding:20px">
+                <c:if test="${not empty event.facebookLink}">
+                    <a href="${event.facebookLink}"><img src="img/logos/fb.png"></a>
+                </c:if>
+            </td>
+            <td style="text-align: center; padding:20px">
+                <c:if test="${not empty event.googlePlusLink}">
+                    <a href="${event.googlePlusLink}"><img src="img/logos/gp.png"></a>
                 </c:if>
             </td>
         </tr>
