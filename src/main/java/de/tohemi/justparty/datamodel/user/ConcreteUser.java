@@ -20,8 +20,7 @@ public class ConcreteUser implements User {
     }
 
     /**
-     *
-     * @deprecated  use other instead
+     * @deprecated use other instead
      */
     @Deprecated
     public ConcreteUser(EMail email) {
@@ -81,5 +80,10 @@ public class ConcreteUser implements User {
     @Override
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String getName() {
+        return getFirstName() + " " + getLastName();
     }
 }

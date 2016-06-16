@@ -13,7 +13,6 @@ public interface User {
     String getEmail();
 
     /**
-     *
      * @deprecated Use setEmail(String email) instead
      */
     @Deprecated
@@ -28,6 +27,10 @@ public interface User {
     String getFirstName();
 
     void setFirstName(String firstName);
+
+    default String getName() {
+        return getFirstName() + " " + getLastName();
+    }
 
     Address getAddress();
 

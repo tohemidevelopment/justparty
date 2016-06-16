@@ -83,7 +83,7 @@
                     </c:choose>
                 </td>
                 <td class="name">
-                        ${element.name}
+                        <a href="/viewEvent?id=${element.id}">${element.name}</a>
                 </td>
                 <td class="date">
                         ${element.date}

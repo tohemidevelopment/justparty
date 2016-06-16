@@ -32,6 +32,7 @@ public class ConcreteEvent implements Event {
     private EventType eventType;
     private List<Declaration> declarations;
     private Map properties;
+    private URL amazonWishlistLink;
 
     public ConcreteEvent(int id) {
         this();
@@ -229,5 +230,14 @@ public class ConcreteEvent implements Event {
     @Override
     public void setProperty(String key, Object value) {
         properties.put(key, value);
+    }
+
+
+    public URL getAmazonWishlistLink() {
+        return amazonWishlistLink;
+    }
+
+    public void setAmazonWishlistLink(URL amazonWishlistLink) {
+        this.amazonWishlistLink = amazonWishlistLink;
     }
 }

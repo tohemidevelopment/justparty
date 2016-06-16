@@ -83,11 +83,12 @@ public class DBDeclarationController extends DBControl {
         DataSource ds = getDataSource();
         Connection c = DataSourceUtils.getConnection(ds);
         try {
-            PreparedStatement ps = c.prepareStatement("UPDATE declaration SET name=?, usertobringwith=?, bringwithbyall=? WHERE id=?;");
+            PreparedStatement ps = c.prepareStatement("UPDATE declaration SET name=?, usertobringwith=?, bringwithbyall=?, event_id=? WHERE id=?;");
             ps.setString(1, d.getName());
             ps.setString(2, d.getUser().getEmail());
-            ps.setInt(4, d.getEventId());
             ps.setBoolean(3, d.getBringWithByAll());
+            ps.setInt(4, d.getEventId());
+            ps.setInt(5, d.getId());
             ps.execute();
             ps.close();
         } catch (SQLException ex) {
@@ -108,7 +109,28 @@ public class DBDeclarationController extends DBControl {
             ps.setInt(1, e.getId());
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                declaration.add(new Declaration(rs.getString(DeclarationDBTabelle.COLUMN_NAME), UserFactory.create(rs.getString(DeclarationDBTabelle.COLUMN_USER_TO_BRING_WITH)), rs.getBoolean(DeclarationDBTabelle.COLUMN_BRING_WITH_BY_ALL), rs.getInt(DeclarationDBTabelle.COLUMN_EVENT_ID)));
+                declaration.add(new Declaration(rs.getInt(DeclarationDBTabelle.COLUMN_ID),rs.getString(DeclarationDBTabelle.COLUMN_NAME), UserFactory.create(rs.getString(DeclarationDBTabelle.COLUMN_USER_TO_BRING_WITH)), rs.getBoolean(DeclarationDBTabelle.COLUMN_BRING_WITH_BY_ALL), rs.getInt(DeclarationDBTabelle.COLUMN_EVENT_ID)));
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return declaration;
+    }
+
+    public Declaration getDeclarationWithId(int id) {
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        Declaration declaration = null;
+        try {
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM declaration WHERE id=?;");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                declaration = new Declaration(rs.getInt(DeclarationDBTabelle.COLUMN_ID),rs.getString(DeclarationDBTabelle.COLUMN_NAME), UserFactory.create(rs.getString(DeclarationDBTabelle.COLUMN_USER_TO_BRING_WITH)), rs.getBoolean(DeclarationDBTabelle.COLUMN_BRING_WITH_BY_ALL), rs.getInt(DeclarationDBTabelle.COLUMN_EVENT_ID));
             }
             ps.close();
 

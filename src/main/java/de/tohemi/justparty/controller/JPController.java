@@ -24,9 +24,12 @@ public abstract class JPController {
     public static final String VERIFY_EMAIL = "/verifyEmail";
     public static final String INVITE_USER = "/inviteUser";
     public static final String EVENTDATA = "/eventdata";
+    public static final String VIEW_EVENT = "/viewEvent";
     public static final String INVITE = "invited";
     protected static final String EVENTTYPE = "/settype";
     public static final String ADD_PREP = "/addprep";
+    public static final String BRING_PREP = "/bringPrep";
+    public static final String FREE_PREP = "/freePrep";
 
     protected String getMailFromLoggedInUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

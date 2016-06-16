@@ -52,7 +52,7 @@ public class UserHandler {
         } catch (UserNotFoundException e) {
             SystemProperties.getLogger().logException(e);
             //User not in DB
-            if (dbController.addUser(user, UserRoles.USER, HashFunction.getHash(password))) {
+            if (dbController.addUser(user, HashFunction.getHash(password))) {
                 //User added to DB
                 sendVerificationEmail(user.getEmail());
                 return null;

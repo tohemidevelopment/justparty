@@ -44,6 +44,7 @@ function sendInvitationAnswer(id)
 
 }
 
+
 function showCurrentEvents()
 {
 //TODO: implement

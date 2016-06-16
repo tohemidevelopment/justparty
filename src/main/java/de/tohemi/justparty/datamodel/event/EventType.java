@@ -7,7 +7,7 @@ import java.util.List;
  * Created by Micha Piertzik on 05.05.2016.
  */
 public enum EventType {
-    DEFAULT, BIRTHDAY;
+    DEFAULT, BIRTHDAY, WEDDING;
 
     public static List<String> getEventTypes() {
         final List<String> eventTypes;

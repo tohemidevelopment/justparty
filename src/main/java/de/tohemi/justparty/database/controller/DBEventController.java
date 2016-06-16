@@ -703,4 +703,24 @@ public class DBEventController extends DBControl {
             releaseConnection(ds, c);
         }
     }
+
+    public List<Integer> getEventIDsOfUser(String mailFromHost) {
+        List<Integer> event_ids = new ArrayList<Integer>();
+        DataSource ds = getDataSource();
+        Connection c = DataSourceUtils.getConnection(ds);
+        try {
+            PreparedStatement psEvent = c.prepareStatement("SELECT event_id FROM events WHERE email=?;");
+            psEvent.setString(1, mailFromHost);
+            ResultSet rs = psEvent.executeQuery();
+            while (rs.next()) {
+               event_ids.add(rs.getInt(EventsDBTabelle.COLUMN_ID));
+            }
+            psEvent.close();
+        } catch (SQLException ex) {
+            LOGGER.logException(ex, "");
+        } finally {
+            releaseConnection(ds, c);
+        }
+        return event_ids;
+    }
 }
