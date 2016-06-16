@@ -15,9 +15,9 @@
     <tbody>
     <tr>
         <td colspan="2">
-            <select multiple class="form-control">
-                <c:forEach items="${event.guests}" var="element">
-                    <option>${element.user.email}</option>
+            <select id="guestlistselect" multiple class="form-control">
+                <c:forEach items="${event.guests}" var="guest">
+                    <option>${guest.user.email}</option>
                 </c:forEach>
             </select>
         </td>
@@ -46,26 +46,19 @@
                         code="editevent.guestlist.modal.title"/></h4>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label"><spring:message
-                                code="editevent.guestlist.modal.email"/></label>
-                        <input type="text" class="form-control" id="recipient-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="control-label"><spring:message
-                                code="editevent.guestlist.modal.nachricht"/></label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                    </div>
-                </form>
+                <div class="form-group">
+                    <label for="recipient-name" class="control-label"><spring:message
+                            code="editevent.guestlist.modal.email"/></label>
+                    <input type="text" class="form-control" id="recipient-name">
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><spring:message
                         code="editevent.guestlist.modal.button1"/></button>
                 <button type="button" class="btn btn-primary"
-                        onclick="invitePerson(document.getElementById('#recipient-name').valueOf(), document.getElementById('#message-text').valueOf())">
+                        onclick="invitePerson('recipient-name', 'message-text',${event.id})">
                     <spring:message
-                        code="editevent.guestlist.modal.button2"/></button>
+                            code="editevent.guestlist.modal.button2"/></button>
             </div>
         </div>
     </div>
